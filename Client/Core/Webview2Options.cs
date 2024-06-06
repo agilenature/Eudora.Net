@@ -9,8 +9,8 @@ namespace Eudora.Net.Core
     /// </summary>
     internal static class Webview2Options
     {
-        public static CoreWebView2EnvironmentOptions Options = default;
-        public static CoreWebView2Environment Environment = default;
+        public static CoreWebView2EnvironmentOptions? Options;
+        public static CoreWebView2Environment? Environment;
         static string DataRoot = string.Empty;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Eudora.Net.Core
         /// Because the app has a queue of preallocated and initialized WV2,
         /// the creation of the WV2 environment has to come first, and early
         /// </summary>
-        public static async Task Startup()
+        public static void Startup()
         {
             DataRoot = Path.Combine(
                 Eudora.Net.Properties.Settings.Default.DataStoreRoot,

@@ -19,7 +19,7 @@ namespace Eudora.Net.GUI
         /////////////////////////////
 
         public ExclusiveCollection SearchEngines { get; set; } = [];
-        public BrowserBookmark ActiveEditBookmark { get; set; } = null;
+        public BrowserBookmark ActiveEditBookmark { get; set; }
         
 
         /////////////////////////////

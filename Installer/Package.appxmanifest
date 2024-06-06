@@ -8,12 +8,12 @@
 
   <Identity
     Name="988f6b12-7d97-4ce8-b37b-9d9c9d20e484"
-    Publisher="CN=ispee"
-    Version="1.0.0.0" />
+    Publisher="CN=Eudora.Net"
+    Version="1.0.13.0" />
 
   <Properties>
-    <DisplayName>Installer</DisplayName>
-    <PublisherDisplayName>ispee</PublisherDisplayName>
+    <DisplayName>Eudora.Net</DisplayName>
+    <PublisherDisplayName>Eudora.Net Project</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,12 +31,18 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Installer"
-        Description="Installer"
+        DisplayName="Eudora.Net"
+        Description="Install package for Eudora.Net"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  ShortName="Eudora.Net" Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
     </Application>

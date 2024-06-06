@@ -491,16 +491,15 @@ namespace Eudora.Net.Core
         // Explicit resampling of body.innerHTML
         public async Task ResampleDocument()
         {
-            return;
-            JsonDocument doc = await ExecuteScriptAsync(JsDepot.js_GetBodyInnerHTML);
-            //if(doc.RootElement.GetString() TryGetProperty("innerHTML", out JsonElement jsel))
-            {
-                string? innerHTML = doc.RootElement.GetString();
-                if(innerHTML is not null && !string.IsNullOrEmpty(innerHTML))
-                {
-                    BodyInnerHTML = innerHTML;
-                }
-            }
+            //JsonDocument doc = await ExecuteScriptAsync(JsDepot.js_GetBodyInnerHTML);
+            ////if(doc.RootElement.GetString() TryGetProperty("innerHTML", out JsonElement jsel))
+            //{
+            //    string? innerHTML = doc.RootElement.GetString();
+            //    if(innerHTML is not null && !string.IsNullOrEmpty(innerHTML))
+            //    {
+            //        BodyInnerHTML = innerHTML;
+            //    }
+            //}
         }
 
         //

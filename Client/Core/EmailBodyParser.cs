@@ -88,7 +88,7 @@ namespace Eudora.Net.Core
             }
             catch
             {
-                image = null;
+                image = new();
                 return false;
             }
 
@@ -103,7 +103,7 @@ namespace Eudora.Net.Core
                 return image != null;
             }
 
-            image = null;
+            image = new();
 
             return false;
         }

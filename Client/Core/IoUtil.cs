@@ -33,11 +33,6 @@ namespace Eudora.Net.Core
             {
                 string path = Path.GetFullPath(fullPath);
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                int breaker = 1;
-                //if (Directory.Exists(path) == false)
-                //{
-                //    Directory.CreateDirectory(path);
-                //}
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
 ﻿using Eudora.Net.Core;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Eudora.Net.Data;
-
+using Windows.UI.Notifications;
 
 namespace Eudora.Net.GUI
 {

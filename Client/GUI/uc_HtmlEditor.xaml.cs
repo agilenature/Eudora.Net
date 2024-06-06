@@ -204,27 +204,26 @@ namespace Eudora.Net.GUI
 
         private void CursorElementStyle_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            return;
-            // This has to run on the GUI thread
-            if (!App.Current.Dispatcher.CheckAccess())
-            {
-                App.Current.Dispatcher.BeginInvoke(new Action(() => CursorElementStyle_PropertyChanged(sender, e)));
-                return;
-            }
+            //// This has to run on the GUI thread
+            //if (!App.Current.Dispatcher.CheckAccess())
+            //{
+            //    App.Current.Dispatcher.BeginInvoke(new Action(() => CursorElementStyle_PropertyChanged(sender, e)));
+            //    return;
+            //}
 
-            StyleAttribute style = Document.CursorElementStyle;
+            //StyleAttribute style = Document.CursorElementStyle;
 
-            //cb_Font.SelectedItem = style.Font;
-            //cb_FontSize.SelectedItem = style.FontSize;
-            //cp_Font.SelectedColor = style.FontColor;
+            ////cb_Font.SelectedItem = style.Font;
+            ////cb_FontSize.SelectedItem = style.FontSize;
+            ////cp_Font.SelectedColor = style.FontColor;
             
-            btn_Bold.IsChecked = style.FontWeight.Equals(StyleAttribute.value_bold, StringComparison.CurrentCultureIgnoreCase);
-            btn_Italic.IsChecked = style.FontStyle.Equals(StyleAttribute.value_italic, StringComparison.CurrentCultureIgnoreCase);
-            btn_Underlined.IsChecked = style.TextDecoration.Equals(StyleAttribute.value_underline, StringComparison.CurrentCultureIgnoreCase);
+            //btn_Bold.IsChecked = style.FontWeight.Equals(StyleAttribute.value_bold, StringComparison.CurrentCultureIgnoreCase);
+            //btn_Italic.IsChecked = style.FontStyle.Equals(StyleAttribute.value_italic, StringComparison.CurrentCultureIgnoreCase);
+            //btn_Underlined.IsChecked = style.TextDecoration.Equals(StyleAttribute.value_underline, StringComparison.CurrentCultureIgnoreCase);
 
-            btn_AlignLeft.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignLeft, StringComparison.CurrentCultureIgnoreCase);
-            btn_AlignCenter.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignCenter, StringComparison.CurrentCultureIgnoreCase);
-            btn_AlignRight.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignRight, StringComparison.CurrentCultureIgnoreCase);
+            //btn_AlignLeft.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignLeft, StringComparison.CurrentCultureIgnoreCase);
+            //btn_AlignCenter.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignCenter, StringComparison.CurrentCultureIgnoreCase);
+            //btn_AlignRight.IsChecked = style.TextAlignment.Equals(StyleAttribute.alignRight, StringComparison.CurrentCultureIgnoreCase);
         }
 
         private void Uc_HtmlEditor_GotFocus(object sender, RoutedEventArgs e)

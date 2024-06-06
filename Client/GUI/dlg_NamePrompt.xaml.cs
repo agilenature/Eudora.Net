@@ -80,7 +80,7 @@ namespace Eudora.Net.GUI
             if(e.Key == Key.Enter)
             {
                 ItemName = tb_Name.Text;
-                btn_OK_Click(sender, null);
+                btn_OK_Click(sender, new());
             }
         }
     }

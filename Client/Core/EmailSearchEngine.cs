@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using Eudora.Net.Data;
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
 namespace Eudora.Net.Core
 {
     /// <summary>
@@ -773,3 +775,5 @@ namespace Eudora.Net.Core
         ///////////////////////////////////////////////////////////
     }
 }
+
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

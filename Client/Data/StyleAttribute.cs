@@ -112,7 +112,7 @@ namespace Eudora.Net.Data
 
         private string _Value = string.Empty;
         private Color _BackgroundColor = Colors.White;
-        private object _BackgroundImage = null;
+        private object _BackgroundImage;
         private string _BackgroundRepeat = string.Empty;
         private FontFamily _Font = Fonts.SystemFontFamilies.First();
         private Color _FontColor = Colors.Black;
@@ -220,7 +220,7 @@ namespace Eudora.Net.Data
         {
             //_Value = string.Empty;
             BackgroundColor = Colors.White;
-            BackgroundImage = null;
+            //BackgroundImage = null;
             BackgroundRepeat = string.Empty;
             Font = Fonts.SystemFontFamilies.Where(
                 font => font.Source.Equals("arial", StringComparison.CurrentCultureIgnoreCase)).First();
