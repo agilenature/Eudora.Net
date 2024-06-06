@@ -1,0 +1,369 @@
+﻿<Window x:Class="Eudora.Net.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        xmlns:core="clr-namespace:Eudora.Net.Core"
+        xmlns:extensions="clr-namespace:Eudora.Net.ExtensionMethods"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+        xmlns:mdi="clr-namespace:mdilib;assembly=MdiLib"
+        xmlns:Properties="clr-namespace:Eudora.Net.Properties"
+        mc:Ignorable="d"
+        Title="Eudora.Net" Width="1024" Height="768" 
+        WindowStartupLocation="CenterScreen">
+
+    <Grid x:Name="MainLayout">
+
+        <Grid.Resources>
+            <core:GridLengthConverter x:Key="gridLengthConverter"/>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="128"/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+
+            <!--Main Menu Bar-->
+        <Menu x:Name="MainMenu"
+              Grid.Row="0"
+              x:FieldModifier="public">
+
+            <!-- FILE menu -->
+            <MenuItem x:Name="Menu_File" Header="_File">
+                <MenuItem x:Name="Menu_File_Print" Header="Print"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_File_Exit" Header="Exit" Click="Menu_File_Exit_Click"/>
+            </MenuItem>
+
+            <!-- EDIT Menu -->
+            <MenuItem x:Name="Menu_Edit" Header="_Edit">
+                <MenuItem x:Name="Menu_Edit_Undo" Header="Undo"/>
+                <MenuItem x:Name="Menu_Edit_Redo" Header="Redo"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Edit_Cut" Header="Cut"/>
+                <MenuItem x:Name="Menu_Edit_Copy" Header="Copy"/>
+                <MenuItem x:Name="Menu_Edit_Paste" Header="Paste"/>
+                <MenuItem x:Name="Menu_Edit_Clear" Header="Clear"/>
+                <Separator/>
+            </MenuItem>
+
+            <!-- MAILBOX menu -->
+            <MenuItem x:Name="Menu_Mailboxes" Header="_Mailbox">
+            </MenuItem>
+
+            <!-- MESSAGE menu -->
+            <MenuItem x:Name="Menu_Message" Header="_Message">
+                <MenuItem x:Name="Menu_Message_New" Header="New Message" Click="Menu_Message_New_Click"/>
+                <MenuItem x:Name="Menu_Message_Reply" Header="Reply"/>
+                <MenuItem x:Name="Menu_Message_ReplyAll" Header="Reply To All"/>
+                <MenuItem x:Name="Menu_Message_Forward" Header="Forward"/>
+            </MenuItem>
+
+            <!-- TRANSFER menu -->
+            <MenuItem x:Name="Menu_Transfer" Header="_Transfer" x:FieldModifier="public"/>
+
+            <!-- TOOLS menu -->
+            <MenuItem x:Name="Menu_Tools" Header="_Tools">
+                <MenuItem x:Name="Menu_Tools_Filters" Header="Filters" Click="Menu_Tools_Filters_Click"/>
+                <MenuItem x:Name="Menu_Tools_Report" Header="Filter Report" Click="Menu_Tools_Report_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_Mailboxes" Header="Mailboxes" Click="Menu_Tools_Mailboxes_Click"/>
+                <MenuItem x:Name="Menu_Tools_FileBrowser" Header="File Browser" Click="Menu_Tools_FileBrowser_Click"/>
+                <MenuItem x:Name="Menu_Tools_Stationery" Header="Stationery" Click="Menu_Tools_Stationery_Click"/>
+                <MenuItem x:Name="Menu_Tools_Signatures" Header="Signatures" Click="Menu_Tools_Signatures_Click"/>
+                <MenuItem x:Name="Menu_Tools_Personalities" Header="Personalities" Click="Menu_Tools_Personalities_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_AddressBook" Header="Address Book" Click="Menu_Tools_AddressBook_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_LinkHistory" Header="Link History" Click="Menu_Tools_LinkHistory_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_Statistics" Header="Statistics" Click="Menu_Tools_Statistics_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_Options" Header="Options" Click="Menu_Tools_Options_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_EventLog" Header="Event Log" Click="Menu_Tools_EventLog_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_Browser" Header="Browser" Click="Menu_Tools_Browser_Click"/>
+            </MenuItem>
+
+            <!-- WINDOW menu -->
+            <!--<MenuItem x:Name="Menu_Window" Header="_Window">
+                <MenuItem x:Name="Menu_Window_Cascade" Header="Cascade" Click="Menu_Window_Cascade_Click"/>
+                <MenuItem x:Name="Menu_Window_TileHorizontal" Header="Tile Horizontal" Click="Menu_Window_TileHorizontal_Click"/>
+                <MenuItem x:Name="Menu_Window_TileVertical" Header="Tile Vertical" Click="Menu_Window_TileVertical_Click"/>
+            </MenuItem>-->
+
+            <!-- HELP menu -->
+            <MenuItem x:Name="Menu_Help" Header="_Help">
+                <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
+            </MenuItem>
+           
+        </Menu>
+
+        <!--Main Toolbar-->
+        <Grid   x:Name="MainToolBar"
+                Grid.Row="1"
+                x:FieldModifier="public"
+                Height="40"
+                Background="{DynamicResource Control}">
+
+            <!--Styling that applies to all controls of indicated types in this panel-->
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}" 
+                       BasedOn="{StaticResource ButtonStyle1}">
+                    <Setter Property="Control.Margin" Value="3,3,3,3"/>
+                </Style>
+                <Style TargetType="{x:Type Separator}" 
+                       BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+                    <Setter Property="Margin" Value="5,1,5,1"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False" Grid.Column="0">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_10.png"/>
+            </Button>
+
+            <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click" Grid.Column="1">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_21.png"/>
+            </Button>
+
+            <Button x:Name="btn_Outbox" ToolTip="Outbox" Click="btn_Outbox_Click" Grid.Column="2">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_32.png"/>
+            </Button>
+
+            <Button x:Name="btn_CheckMail" ToolTip="Check Mail" Click="btn_CheckMail_Click" Grid.Column="3">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_43.png"/>
+            </Button>
+
+            <Button x:Name="btn_NewMsg" ToolTip="New Message" Click="btn_NewMsg_Click" Grid.Column="4">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_54.png"/>
+            </Button>
+
+            <Button x:Name="btn_Reply" x:FieldModifier="public" ToolTip="Reply" IsEnabled="False" Grid.Column="5">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_61.png"/>
+            </Button>
+
+            <Button x:Name="btn_ReplyAll" x:FieldModifier="public" ToolTip="Reply To All" IsEnabled="False" Grid.Column="6">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_0.png"/>
+            </Button>
+
+            <Button x:Name="btn_Forward" x:FieldModifier="public" ToolTip="Forward" IsEnabled="False" Grid.Column="7">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_1.png"/>
+            </Button>
+
+            <Button x:Name="btn_Prev" x:FieldModifier="public" ToolTip="Previous Message" IsEnabled="False" Grid.Column="8">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_7.png"/>
+            </Button>
+
+            <Button x:Name="btn_Next" x:FieldModifier="public" ToolTip="Next Message" IsEnabled="False" Grid.Column="9">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_8.png"/>
+            </Button>
+
+            <Button x:Name="btn_Attach" x:FieldModifier="public" ToolTip="Attach File" IsEnabled="False" Grid.Column="10">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_9.png"/>
+            </Button>
+
+            <Button x:Name="btn_FindMsg" ToolTip="Find Messages" Click="btn_FindMsg_Click" Grid.Column="11">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_56.png"/>
+            </Button>
+
+            <Button x:Name="btn_AddressBook" ToolTip="Address Book" Click="btn_AddressBook_Click" Grid.Column="12">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_12.png"/>
+            </Button>
+
+            <Button x:Name="btn_Browser" ToolTip="Browser" Click="btn_Browser_Click" Grid.Column="13">
+                <Image Source="pack://application:,,,/GUI/res/images/new/browser.png"/>
+            </Button>
+
+            <!--<Button x:Name="btn_Help" ToolTip="Help" Click="btn_Help_Click" Grid.Column="14">
+                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_14.png"/>
+            </Button>-->
+
+            <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click"  Grid.Column="14">
+                <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+            </Button>
+            
+        </Grid>  
+
+        <!--Main content view-->
+        <Grid x:Name="MainView" Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4" MaxHeight="4"/>
+                <RowDefinition x:Name="LoggerPanel" 
+                               MinHeight="128" MaxHeight="256"
+                               Height="{Binding MainViewRowBHeight,
+                                        Source={x:Static Properties:Settings.Default},
+                                        Mode=TwoWay,
+                                        Converter={StaticResource gridLengthConverter}}"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="64" MaxWidth="512" 
+                                  Width="{Binding MainViewColumnLWidth, 
+                                          Source={x:Static Properties:Settings.Default}, 
+                                          Mode=TwoWay,
+                                          Converter={StaticResource gridLengthConverter}}"/>
+                <ColumnDefinition Width="6" MinWidth="6" MaxWidth="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!--Left pane: Tools Pane-->
+            <TabControl x:Name="tabControl_Left"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        TabStripPlacement="Bottom">
+
+                <TabControl.Resources>
+                    <Style x:Key="{x:Type Image}" TargetType="{x:Type Image}">
+                        <Setter Property="Width" Value="20"/>
+                        <Setter Property="Height" Value="20"/>
+                    </Style>
+                </TabControl.Resources>
+
+                <!--Mailboxes tab-->
+                <TabItem x:Name="ToolTab_Mailboxes" ToolTip="Mailboxes">
+                    <TabItem.Header>
+                        <Image Source="pack://application:,,,/GUI/res/icons/mboxes.ico"/>
+                    </TabItem.Header>
+                    <local:uc_MailboxesTab></local:uc_MailboxesTab>
+                </TabItem>
+
+                <!--File browser tab-->
+                <TabItem x:Name="ToolTab_FileBrowser" ToolTip="File/Attachment Browser">
+                    <TabItem.Header>
+                        <Image Source="pack://application:,,,/GUI/res/icons/search.ico"/>
+                    </TabItem.Header>
+                    <local:uc_FileBrowserTab></local:uc_FileBrowserTab>
+                </TabItem>
+
+                <!--Signatures tab-->
+                <TabItem x:Name="ToolTab_Signatures" ToolTip="Signatures">
+                    <TabItem.Header>
+                        <Image Source="pack://application:,,,/GUI/res/icons/signatur.ico"/>
+                    </TabItem.Header>
+                    <local:uc_SignaturesTab></local:uc_SignaturesTab>
+                </TabItem>
+
+                <!--Stationery tab-->
+                <TabItem x:Name="ToolTabStationery" ToolTip="Stationery">
+                    <TabItem.Header>
+                        <Image Source="pack://application:,,,/GUI/res/icons/stationery.ico"/>
+                    </TabItem.Header>
+                    <local:uc_StationeryTab></local:uc_StationeryTab>
+                </TabItem>
+
+                <!--Personalities tab-->
+                <TabItem x:Name="ToolTab_Personalties" ToolTip="Personalities">
+                    <TabItem.Header>
+                        <Image Source="pack://application:,,,/GUI/res/icons/persona.ico"/>
+                    </TabItem.Header>
+                    <local:uc_PersonalitiesTab></local:uc_PersonalitiesTab>
+                </TabItem>
+            </TabControl>
+
+            <!--Vertical Splitter-->
+            <GridSplitter x:Name="gridSplitter1"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          Grid.RowSpan="2"                                                    
+                          ResizeDirection="Columns"
+                          HorizontalAlignment="Stretch"
+                          Width="4">
+            </GridSplitter>
+
+
+            <!--MDI client area-->
+            <mdi:MdiContainerTabbed x:Name="MDI" 
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    x:FieldModifier="public"/>
+
+
+            <!--Horizontal splitter-->
+            <GridSplitter   x:Name="gridSplitter2"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            ResizeDirection="Rows"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Height="Auto"/>
+
+
+
+            <!--Event Log-->
+            <local:uc_EventLogger   x:Name="EventLog" 
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"/>
+
+        </Grid>
+
+
+
+
+
+        <!--Status Bar-->
+        <StatusBar  x:Name="StatusBar"  
+                    Grid.Row="3"
+                    Height="24"
+                    MaxHeight="24">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <!--<StatusBarItem Grid.Column="0" Background="{DynamicResource Control}" HorizontalContentAlignment="Left">
+                <TextBlock Text="Column 0" Margin="5,0,0,0"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1" Background="{DynamicResource Control}" HorizontalContentAlignment="Center">
+                <TextBlock Text="Column 1"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="2" Background="{DynamicResource Control}" HorizontalContentAlignment="Stretch">
+                <TextBlock Text="Column 2"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="3" Background="{DynamicResource Control}" HorizontalContentAlignment="Right">
+                <TextBlock Text="Column 3" Margin="0,0,5,0"/>
+            </StatusBarItem>-->
+        </StatusBar>
+
+    </Grid>
+
+</Window>

@@ -1,0 +1,254 @@
+﻿<local:SubviewBase  x:Class="Eudora.Net.GUI.uc_MailFilters"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:local="clr-namespace:Eudora.Net.GUI"
+                    xmlns:core="clr-namespace:Eudora.Net.Core"
+                    xmlns:data="clr-namespace:Eudora.Net.Data"
+                    mc:Ignorable="d" 
+                    d:DesignHeight="450" d:DesignWidth="800"
+                    Background="{DynamicResource Control}"
+                    d:DataContext="{d:DesignInstance Type=local:uc_MailFilters}">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="6"/> <!--Spacer-->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Left panel upper: filter list-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{DynamicResource ActiveBorder}">
+            <Label Padding="0,0,0,0" Margin="2,2,2,2" Content="Filters"/>    
+        </StackPanel>
+        <DataGrid x:Name="dg_Filters"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  d:DataContext="{d:DesignInstance Type=data:EmailFilter}"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  GridLinesVisibility="None"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  SelectionChanged="dg_Filters_SelectionChanged">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Path=Priority}" Header="Priority" SortDirection="Descending" SortMemberPath="Priority"/>
+            </DataGrid.Columns>
+                    
+        </DataGrid>
+        
+        <!--Left panel lower: Datagrid control panel-->
+        <DockPanel Grid.Row="2"
+                   Grid.Column="0" 
+                   HorizontalAlignment="Stretch" 
+                   VerticalAlignment="Stretch" 
+                   LastChildFill="False"
+                   Background="{DynamicResource Control}">
+            
+            <!--For uniformity in the control button dimensions-->
+            <DockPanel.Resources>
+                <Style x:Key="{x:Type Button}">
+                    <Style.Setters>
+                        <Setter Property="Control.Width" Value="90"/>
+                    </Style.Setters>
+                </Style>
+            </DockPanel.Resources>
+            
+            <!--Left buttons-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" DockPanel.Dock="Left">                
+                <Button x:Name="btn_MoveUp" Click="btn_MoveUp_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Source="pack://application:,,,/GUI/res/images/tb32/tb32_7.png">
+                            </Image>
+                            <TextBlock>
+                                <TextBlock.Text>Move Up</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btn_MoveDown" Click="btn_MoveDown_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Source="pack://application:,,,/GUI/res/images/tb32/tb32_8.png">
+                            </Image>
+                            <TextBlock>
+                                <TextBlock.Text>Move Down</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+
+            <!--Right buttons-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                <Button x:Name="btn_New" Click="btn_New_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Source="pack://application:,,,/GUI/res/images/tb32/tb32_172.png">
+                            </Image>
+                            <TextBlock>
+                                <TextBlock.Text>New Filter</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btn_Remove" Click="btn_Remove_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Source="pack://application:,,,/GUI/res/images/tb32/tb32_10.png">
+                            </Image>
+                            <TextBlock>
+                                <TextBlock.Text>Delete Filter</TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+  
+
+        <!--Right panel: Filter settings-->
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{DynamicResource ActiveBorder}">
+            <Label Padding="0,0,0,0" Margin="2,2,2,2" Content="Filter Settings"/>
+        </StackPanel>
+        
+        <Grid   x:Name="SettingsPanel"
+                Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
+                IsEnabled="False">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Styling overrides for this panel-->
+            <Grid.Resources>
+                <Style x:Key="{x:Type StackPanel}" TargetType="StackPanel">
+                    <Style.Setters>
+                        <Setter Property="Background" Value="{DynamicResource Control}"/>
+                    </Style.Setters>
+                </Style>
+                <Style x:Key="{x:Type Label}" TargetType="Label">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="2,2,2,2"/>
+                        <Setter Property="Width" Value="65"/>
+                    </Style.Setters>
+                </Style>
+                <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="2,2,2,2"/>
+                    </Style.Setters>
+                </Style>
+                <Style x:Key="{x:Type TextBox}" TargetType="TextBox">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="2,2,2,2"/>
+                    </Style.Setters>
+                </Style>
+                <Style x:Key="{x:Type CheckBox}" TargetType="CheckBox">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="2,2,2,2"/>
+                    </Style.Setters>
+                </Style>
+                <Style x:Key="{x:Type TextBlock}" TargetType="TextBlock">
+                    <Style.Setters>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style.Setters>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Filter Name:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Path=Filter.Name}"/>
+
+            <TextBlock  Grid.Row="1" Grid.Column="0" Text="Search field:"/>
+            <ComboBox   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                        x:Name="cb_Query"
+                        ItemsSource="{x:Static core:EmailSearchEngine.QueryKeys}"
+                        DisplayMemberPath="DisplayName"
+                        SelectedValuePath="Key"
+                        SelectedValue="{Binding Path=Filter.Atom.QueryKey.Key}"
+                        SelectionChanged="cb_Query_SelectionChanged"/>
+
+            <TextBlock  Grid.Row="2" Grid.Column="0" Text="Search operand:"/>
+            <ComboBox   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                        x:Name="cb_Operand" 
+                        ItemsSource="{x:Static core:EmailSearchEngine.SearchOperands}"
+                        DisplayMemberPath="DisplayName"
+                        SelectedValuePath="Operand"
+                        SelectedValue="{Binding Path=Filter.Atom.Operand.Operand}"
+                        SelectionChanged="cb_Operand_SelectionChanged"/>
+
+            <!--Search Parameters-->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Search term:"/>
+            <TextBox    x:Name="sval_String" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" 
+                        Text="{Binding Path=Filter.Atom.StringValue}"/>
+
+            <DatePicker x:Name="sval_Date" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden" 
+                        SelectedDate="{Binding Path=Filter.Atom.DateTimeValue}"/>
+
+            <ComboBox   x:Name="sval_Priority" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden"
+                        SelectedItem="{Binding Path=Filter.Atom.PriorityValue}"/>
+
+            <!--Action Parameters-->
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Filter action:"/>
+            <ComboBox x:Name="cb_Action"
+                      Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                      DisplayMemberPath="DisplayName"
+                      SelectedValuePath="ActionKey"
+                      SelectedValue="{Binding Path=Filter.Action.ActionKey}"
+                      SelectionChanged="cb_Action_SelectionChanged"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Action parameter:"/>
+            <TextBox x:Name="apar_StringParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" 
+                     Text="{Binding Path=Filter.Action.StringValue}"/>
+            
+            <ComboBox x:Name="apar_MailboxParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden"
+                      DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Path=Filter.Action.MailboxName}"/>
+            
+            <ComboBox x:Name="apar_PriorityParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden" 
+                      SelectedValue="{Binding Path=Filter.Action.Priority}"/>
+            
+            <ComboBox x:Name="apar_PersonalityParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden"
+                      DisplayMemberPath="PersonalityName" SelectedValuePath="Id" SelectedValue="{Binding Path=Filter.Action.PersonalityValue}"/>
+            
+            <ComboBox x:Name="apar_LabelParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden"
+                      DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Path=Filter.Action.StringValue}"/>
+            
+            <ComboBox x:Name="apar_SoundParam" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden"
+                      DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Path=Filter.Action.StringValue}"/>
+        </Grid>
+        
+    </Grid>
+</local:SubviewBase>

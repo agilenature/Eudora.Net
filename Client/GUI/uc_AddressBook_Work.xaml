@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Eudora.Net.GUI.uc_AddressBook_Work"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eudora.Net.GUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--Import some custom UX style overrides-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Styles_CommonForms.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Title"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="tb_Title"
+                 Text="{Binding Path=Title_Work}"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Organization"/>
+        <TextBox Grid.Row="0" Grid.Column="3" x:Name="tb_Org"
+                 Text="{Binding Path=Organization_Work}"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlDark}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Street Address"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tb_StreetAddress"
+                 Text="{Binding Path=StreetAddress_Work}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="City"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="tb_City"
+                 Text="{Binding Path=City_Work}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="State / Province"/>
+        <TextBox Grid.Row="3" Grid.Column="3" x:Name="tb_State"
+                 Text="{Binding Path=State_Work}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Country"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="tb_Country"
+                 Text="{Binding Path=Country_Work}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="2" Text="Zip / Postal Code"/>
+        <TextBox Grid.Row="4" Grid.Column="3" x:Name="tb_PostalCode"
+                 Text="{Binding Path=PostalCode_Work}"/>
+
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlDark}"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Phone"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="tb_Phone"
+                 Text="{Binding Path=Phone1_Work}"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="2" Text="Fax"/>
+        <TextBox Grid.Row="6" Grid.Column="3" x:Name="tb_Fax"
+                 Text="{Binding Path=Fax_Work}"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Mobile"/>
+        <TextBox Grid.Row="7" Grid.Column="1" x:Name="tb_Mobile"
+                 Text="{Binding Path=Phone2_Work}"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Web"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tb_Web"
+                 Text="{Binding Path=Url_Work}"/>
+
+        <Button Grid.Row="9" Grid.Column="1" x:Name="btn_Swap" Content="Swap with Home" IsEnabled="False"/>
+
+        <CheckBox Grid.Row="9" Grid.Column="3" x:Name="chb_Primary" Content="Primary information" IsEnabled="False"/>
+        
+    </Grid>
+</UserControl>

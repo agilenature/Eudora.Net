@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="Eudora.Net.GUI.uc_AddressBook_Other"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eudora.Net.GUI"
+             xmlns:core="clr-namespace:Eudora.Net.Core"
+             xmlns:data="clr-namespace:Eudora.Net.Data"
+             d:DataContext="{d:DesignInstance Type=data:Contact}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--Import some custom UX style overrides-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="{x:Type DockPanel}" TargetType="{x:Type DockPanel}">
+                <Style.Setters>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                    <Setter Property="LastChildFill" Value="False"/>
+                    <Setter Property="Background" Value="{DynamicResource Control}"/>
+                </Style.Setters>
+            </Style>
+            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                <Style.Setters>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style.Setters>
+            </Style>
+            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                <Style.Setters>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style.Setters>
+            </Style>
+            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+                <Style.Setters>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style.Setters>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <TextBlock DockPanel.Dock="Left" Text="Other Email"/>
+            <!--<Button x:Name="btn_DelEmail" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="Delete" Click="btn_DelEmail_Click"/>
+            <Button x:Name="btn_NewEmail" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="New" Click="btn_NewEmail_Click"/>-->
+        </DockPanel>
+
+        <TextBox x:Name="tb_Email" Grid.Row="1" AcceptsReturn="True" Text="{Binding Path=OtherEmails}"/>
+
+        <DockPanel Grid.Row="2">
+            <TextBlock DockPanel.Dock="Left" Text="Other Phone"/>
+            <!--<Button x:Name="btn_DelPhone" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="Delete" Click="btn_DelPhone_Click"/>
+            <Button x:Name="btn_NewPhone" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="New" Click="btn_NewPhone_Click"/>-->
+        </DockPanel>
+        <TextBox x:Name="tb_Phone" Grid.Row="3" AcceptsReturn="True" Text="{Binding Path=OtherPhones}"/>
+        
+        <DockPanel Grid.Row="4">
+            <TextBlock DockPanel.Dock="Left" Text="Other Web"/>
+            <!--<Button x:Name="btn_DelWeb" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="Delete" Click="btn_DelWeb_Click"/>
+            <Button x:Name="btn_NewWeb" DockPanel.Dock="Right" Margin="0,0,5,0" Width="50" Content="New" Click="btn_NewWeb_Click"/>-->
+        </DockPanel>
+        <TextBox x:Name="tb_Web" Grid.Row="5" AcceptsReturn="True" Text="{Binding Path=OtherUrls}"/>
+    </Grid>
+
+</UserControl>

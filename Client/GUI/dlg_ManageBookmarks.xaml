@@ -1,0 +1,70 @@
+﻿<Window x:Class="Eudora.Net.GUI.dlg_ManageBookmarks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        mc:Ignorable="d"
+        Title="Eudora.Net: Bookmark Manager" 
+        Width="800"
+        Height="450"
+        WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{DynamicResource ControlDark}">
+
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="Margin" Value="0,0,12,0"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="MaxHeight" Value="18"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="32"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Display Name:"/>
+            <TextBox x:Name="tb_DisplayName" Grid.Row="0" Grid.Column="2" Text="{Binding Path=DisplayString}"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="URL:"/>
+            <TextBox x:Name="tb_URL" Grid.Row="1" Grid.Column="2" Text="{Binding Path=Url}"/>
+
+
+        </Grid>
+
+        <DataGrid x:Name="datagrid"
+                  Grid.Row="1"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  CanUserAddRows="False"
+                  CanUserResizeRows="False"
+                  IsReadOnly="True">
+
+        </DataGrid>
+
+    </Grid>
+
+</Window>

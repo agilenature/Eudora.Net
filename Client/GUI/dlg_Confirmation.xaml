@@ -1,0 +1,76 @@
+﻿<Window x:Class="Eudora.Net.GUI.dlg_Confirmation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        mc:Ignorable="d"
+        Title="Eudora.Net: Please Confirm" 
+        Width="350"
+        Height="200"  
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize" 
+        ShowInTaskbar="False">
+    
+    <Grid>
+                
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <!--Message panel-->
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Path=Message}"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Margin="10"/>
+
+        <Border Grid.Row="1" Height="5" VerticalAlignment="Center" Background="{DynamicResource ActiveBorder}"/>
+
+        <!--Buttons Panel-->
+        <DockPanel Grid.Row="2" LastChildFill="False" Margin="0,0,10,0">
+
+            <Button x:Name="btn_OK"
+                    DockPanel.Dock="Right"
+                    Width="75"
+                    Height="32"
+                    IsDefault="True" 
+                    Click="btn_Confirm_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="22" Height="22" VerticalAlignment="Center" 
+                               Source="pack://application:,,,/GUI/res/images/new/done.png"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <!--Spacer-->
+            <Canvas DockPanel.Dock="Right" Width="10"/>
+
+            <Button x:Name="btn_Cancel" 
+                    DockPanel.Dock="Right"
+                    Width="75"
+                    Height="32"
+                    IsCancel="True" 
+                    Click="btn_Cancel_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="22" Height="22" VerticalAlignment="Center" 
+                               Source="pack://application:,,,/GUI/res/images/new/cancel.png"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            
+            
+        </DockPanel>
+        
+    </Grid>
+</Window>

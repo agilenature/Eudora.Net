@@ -1,0 +1,52 @@
+﻿<Window x:Class="Eudora.Net.GUI.dlg_NewSignature"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        mc:Ignorable="d"
+        Title="Eudora.Net: Create Signature" 
+        Height="200" Width="350" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" 
+        ShowInTaskbar="False" 
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        BorderThickness="2">
+    
+    <Grid>
+        
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Themes/Styles_Dialog.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!--Controls-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0">
+            <TextBlock Text="Type the name for this signature:"/>
+            <TextBox x:Name="tb_Name" Text="{Binding Path=SignatureName}"/>
+            <StackPanel Orientation="Vertical" x:Name="ErrorPanel" Visibility="Hidden">
+                <TextBlock Foreground="Red" Text="INVALID NAME"/>
+                <TextBlock x:Name="tb_Error" Foreground="Red" Text="{Binding Path=ErrorText}"/>
+            </StackPanel>
+        </StackPanel>
+
+
+
+        <!--Main dialog button panel-->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
+            <Button x:Name="btn_OK" Content="OK" Click="btn_OK_Click"/>
+            <Button x:Name="btn_Cancel" Content="Cancel" Click="btn_Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+
+</Window>

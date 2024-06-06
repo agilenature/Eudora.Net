@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Eudora.Net.GUI.uc_HtmlEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eudora.Net.GUI"
+             xmlns:data="clr-namespace:Eudora.Net.Data"
+             xmlns:core="clr-namespace:Eudora.Net.Core"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=core:Webview2Document}"
+             Keyboard.PreviewKeyUp="UserControl_PreviewKeyUp">
+
+    <Grid x:Name="MainGrid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" x:Name="RowToolbars"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70" x:Name="RowDebug"/>
+        </Grid.RowDefinitions>
+
+
+        <!--Editor Toolbars-->
+        <ToolBarTray x:Name="Toolbars" Grid.Row="0" Focusable="False">
+
+            <!--Font toolbar-->
+            <ToolBar x:Name="ToolbarFont" Band="0" BandIndex="0" Focusable="False">
+
+                <ToolBar.Header>Font</ToolBar.Header>
+
+                <ComboBox x:Name="cb_Font"
+                          Width="100"
+                          ToolTip="Select Font"
+                          SelectedItem="{Binding ActiveFont}">
+                </ComboBox>
+
+                <ComboBox x:Name="cb_FontSize"
+                          Focusable="False"
+                          Width="100"
+                          Margin="5,0,0,0"
+                          ToolTip="Font Size"
+                          SelectedItem="{Binding ActiveFontSize}">
+                </ComboBox>
+
+                <xctk:ColorPicker x:Name="cp_Font" Focusable="False"
+                                  x:FieldModifier="public"
+                                  Width="40"
+                                  ToolTip="Text Color"
+                                  SelectedColor="{Binding ActiveFontColor}">
+                </xctk:ColorPicker>
+            </ToolBar>
+
+            <!--Text style toolbar-->
+            <ToolBar x:Name="ToolbarTextStyle" Band="0" BandIndex="1" Focusable="False">
+
+                <ToolBar.Header>Text Style</ToolBar.Header>
+
+                <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text" Focusable="False"
+                              IsChecked="{Binding ActiveFontBold}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_bold.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+                <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" Focusable="False"
+                              IsChecked="{Binding ActiveFontItalic}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_italic.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+                <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" Focusable="False"
+                              IsChecked="{Binding ActiveFontUnderline}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_underlined.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </ToolBar>
+
+            <!--Alignment toolbar-->
+            <ToolBar x:Name="ToolbarAlignment" Band="0" BandIndex="1" Focusable="False">
+
+                <ToolBar.Header>Alignment</ToolBar.Header>
+
+                <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" Focusable="False"
+                              IsChecked="{Binding ActiveAlignmentLeft}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_left.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+                <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" Focusable="False"
+                              IsChecked="{Binding ActiveAlignmentCenter}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_center.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+                <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" Focusable="False"
+                              IsChecked="{Binding ActiveAlignmentRight}">
+                    <ToggleButton.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_right.png"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+            </ToolBar>
+
+            <!--Document-wide formatting toolbar-->
+            <ToolBar x:Name="ToolbarBackground" Band="1" BandIndex="0" Focusable="False">
+
+                <ToolBar.Header>Background</ToolBar.Header>
+
+                <xctk:ColorPicker x:Name="cp_Background" Focusable="False"
+                                  Width="40"
+                                  ToolTip="Background Color"
+                                  SelectedColor="{Binding ActiveBackgroundColor}">
+                </xctk:ColorPicker>
+            </ToolBar>
+
+            <!--Image toolbar-->
+            <ToolBar x:Name="ToolbarEmbedImage" Band="1" BandIndex="1" Focusable="False">
+                <ToolBar.Header>Embed Image</ToolBar.Header>
+                <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Focusable="False"
+                        Click="btn_InsertImage_Click">
+                    <Button.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/image.png"/>
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+
+            <!--Attachment toolbar-->
+            <ToolBar x:Name="ToolbarAttachments" Band="1" BandIndex="2" Focusable="False">
+                <ToolBar.Header>Attach File</ToolBar.Header>
+                <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment" Focusable="False"
+                        Click="btn_InsertAttachment_Click">
+                    <Button.Content>
+                        <Image Source="pack://application:,,,/GUI/res/images/new/add_attachment.png"/>
+                    </Button.Content>
+                </Button>
+
+            </ToolBar>
+
+
+        </ToolBarTray>
+
+        <Grid Grid.Row="2" Background="{DynamicResource Control}" x:Name="debugGrid">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=BrowserCursorPosition}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+                <TextBlock Text="Element Type"/>
+                <TextBlock Text="{Binding Path=CursorElementType}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="Element ID"/>
+                <TextBlock Text="{Binding Path=CursorElementId}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Vertical">
+                <TextBlock Text="Element Style"/>
+                <TextBlock Text="{Binding Path=CursorElementStyle.Value}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Vertical">
+                <TextBlock Text="Active Font"/>
+                <TextBlock Text="{Binding Path=ActiveFont}"/>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+
+</UserControl>

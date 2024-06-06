@@ -1,0 +1,178 @@
+﻿<local:ChildWindowBase  x:Class="Eudora.Net.GUI.uc_EmailView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:local="clr-namespace:Eudora.Net.GUI"
+                        xmlns:core="clr-namespace:Eudora.Net.Core"
+                        xmlns:data="clr-namespace:Eudora.Net.Data"
+                        d:DataContext="{d:DesignInstance Type=data:EmailMessage}"
+                        mc:Ignorable="d"
+                        d:DesignHeight="450"
+                        d:DesignWidth="800"
+                        Background="{DynamicResource Control}"
+                        Title="New Message">
+
+    <local:ChildWindowBase.Resources>
+        <core:EmailListToStringConverter x:Key="EmailListToStringConverter"/>
+    </local:ChildWindowBase.Resources>
+
+    <!--Command Bindings-->
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="row_Toolbar" Height="30"/>
+            <RowDefinition x:Name="row_Header" Height="125"/>
+            <RowDefinition x:Name="row_Attachments" Height="24"/>
+            <RowDefinition x:Name="row_Editor" Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <!--Mail toolbar section-->
+        <ToolBarTray Grid.Row="0" Focusable="False">
+
+            <!--GUI styling for this tray region and its contents-->
+            <ToolBarTray.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary>
+
+                            <!--Style rules: Toolbar button-->
+                            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                                <Style.Setters>
+                                    <Setter Property="Control.BorderThickness" Value="1"/>
+                                    <Setter Property="Control.BorderBrush" Value="{DynamicResource ActiveBorder}"/>
+                                    <Setter Property="Control.Margin" Value="1,0,1,0"/>
+                                </Style.Setters>
+                            </Style>
+
+                            <!--Style rules: Toolbar button image-->
+                            <Style x:Key="{x:Type Image}" TargetType="Image">
+                                <Style.Setters>
+                                    <Setter Property="Control.Width" Value="16"/>
+                                    <Setter Property="Control.Height" Value="16"/>
+                                </Style.Setters>
+                            </Style>
+                        </ResourceDictionary>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ToolBarTray.Resources>
+
+            <!--Mail toolbar-->
+            <ToolBar x:Name="MainToolbar" IsEnabled="False" BandIndex="0" Band="0">
+
+                <Label Content="Priority:"/>
+                <ComboBox x:Name="cb_Priority"
+                          Width="100"
+                          ToolTip="Message priority"
+                          SelectionChanged="cb_Priority_SelectionChanged">
+                </ComboBox>
+
+                <Label Content="Signature:"/>
+                <ComboBox x:Name="cb_Signature"
+                          Width="150"
+                          ToolTip="Select signature"
+                          DisplayMemberPath="Name"
+                          SelectionChanged="cb_Signature_SelectionChanged">
+                </ComboBox>
+
+                <Label Content="Stationery:"/>
+                <ComboBox x:Name="cb_Stationery"
+                          Width="150"
+                          ToolTip="Select stationery"
+                          DisplayMemberPath="Name"
+                          SelectionChanged="cb_Stationery_SelectionChanged">
+                </ComboBox>
+
+            </ToolBar>
+
+            
+
+            <ToolBar x:Name="ToolbarSend" BandIndex="1" Band="0">
+                
+                <Button x:Name="btn_Send" Click="btn_Send_Click" ToolTip="Send">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/GUI/res/images/tb18/image26x1.png"/>
+                            <TextBlock Text="Send"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                
+            </ToolBar>
+        </ToolBarTray>
+
+
+
+        <!--Mail header section-->
+        <Grid Grid.Row="1" x:Name="HeaderPanel" IsEnabled="False" Focusable="False">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="5"/>
+                <!--Margin, leave empty-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Define some styling here so it doesn't have to be repeated for individual controls-->
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary>
+                            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+                                <Setter Property="MinHeight" Value="20"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="2,2,2,2"/>
+                            </Style>
+                            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                                <Setter Property="MinHeight" Value="20"/>
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="2,2,2,2"/>
+                                <Setter Property="Padding" Value="2,1,2,2"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <!--Field Labels-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="To"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="From"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Cc"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Bcc"/>
+
+            <!--Field Controls-->
+            <TextBox Grid.Row="0" Grid.Column="2" x:Name="tb_To"
+                     Text="{Binding Path=Addresses_To,Converter={StaticResource EmailListToStringConverter}}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" x:Name="tb_From"
+                     Text="{Binding Path=SenderAddress.Address}"/>
+            <TextBox Grid.Row="2" Grid.Column="2" x:Name="tb_Subject"
+                     Text="{Binding Path=Subject}"
+                     TextChanged="tb_Subject_TextChanged"/>
+            <TextBox Grid.Row="3" Grid.Column="2" x:Name="tb_CC"
+                     Text="{Binding Path=Addresses_CC,Converter={StaticResource EmailListToStringConverter}}"/>
+            <TextBox Grid.Row="4" Grid.Column="2" x:Name="tb_BCC"
+                     Text="{Binding Path=Addresses_BCC,Converter={StaticResource EmailListToStringConverter}}"/>
+        </Grid>
+
+        <local:uc_AttachmentsBar x:Name="AttachmentsBar" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                         DataContext="{Binding Path=Attachments}"></local:uc_AttachmentsBar>
+
+
+        <!--Mail editor / viewer section-->
+        <local:uc_HtmlEditor x:Name="Editor" Grid.Row="3" Focusable="True"/>
+
+    </Grid>
+</local:ChildWindowBase>

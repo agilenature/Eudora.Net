@@ -1,0 +1,147 @@
+﻿<local:ChildWindowBase  x:Class="Eudora.Net.GUI.uc_EudoraStatisticsView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                        xmlns:local="clr-namespace:Eudora.Net.GUI"
+                        xmlns:core="clr-namespace:Eudora.Net.Core"
+                        d:DataContext="core:EudoraStatistics"
+                        mc:Ignorable="d" 
+                        d:DesignHeight="450" d:DesignWidth="800"
+                        Background="{DynamicResource Control}"
+                        Title="Eudora.Net Statistics">
+
+    <Grid Margin="10">
+
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource ControlDark}"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Height" Value="5"/>
+                <Setter Property="Grid.ColumnSpan" Value="3"/>
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Control / Settings bar-->
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="Show statistics for:"/>
+            <ComboBox   x:Name="cb_Period" DockPanel.Dock="Left" VerticalAlignment="Center" MinWidth="100" Margin="5,0,0,0"
+                        SelectedItem="{Binding Path=StatsPeriod}">
+            </ComboBox>
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="Show statistics for:"/>
+        </DockPanel>
+
+        <TabControl Grid.Row="1">
+
+            <TabItem Header="Usage">
+                <Grid Margin="10">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Eudora Uptime:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path=MinutesUsage}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Time Authoring Emails:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=MinutesWriting}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Time Reading Emails:"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=MinutesReading}"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Incoming Mail">
+
+                <Grid Margin="10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Emails Received:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path=EmailsIn}"/>
+                    
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Attachments Received:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=AttachmentsIn}"/>
+                    
+                </Grid>
+                
+            </TabItem>
+
+            <TabItem Header="Outgoing Mail">
+
+                <Grid Margin="10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Emails Sent:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path=EmailsOut}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Attachments Sent:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=AttachmentsOut}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Emails Replied to:"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Path=Replies}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Emails Forwarded:"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Path=Forwards}"/>
+
+                </Grid>
+                
+            </TabItem>
+
+            <TabItem Header="Email Statistics - Raw Data">
+                <DataGrid   x:Name="dg_Email" 
+                            AutoGenerateColumns="True"
+                            IsReadOnly="True" 
+                            CanUserSortColumns="True"
+                            ItemsSource="{Binding}"/>
+            </TabItem>
+
+            <TabItem Header="Eudora Statistics - Raw Data">
+                <DataGrid   x:Name="dg_Eudora"
+                            AutoGenerateColumns="True" 
+                            IsReadOnly="True" 
+                            CanUserSortColumns="True"
+                            ItemsSource="{Binding}"/>
+            </TabItem>
+
+        </TabControl>
+        
+    </Grid>
+
+</local:ChildWindowBase>

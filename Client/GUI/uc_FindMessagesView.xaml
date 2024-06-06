@@ -1,0 +1,150 @@
+﻿<local:ChildWindowBase  x:Class="Eudora.Net.GUI.uc_FindMessagesView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                        xmlns:local="clr-namespace:Eudora.Net.GUI"
+                        xmlns:core="clr-namespace:Eudora.Net.Core"
+                        xmlns:data="clr-namespace:Eudora.Net.Data"
+                        xmlns:email="clr-namespace:Eudora.Net.EmailSearch"
+                        d:DataContext="{d:DesignInstance Type=local:uc_FindMessagesView}"
+                        mc:Ignorable="d" 
+                        d:DesignHeight="450" d:DesignWidth="800">
+    
+    <!--Main layout grid: upper & lower sections-->
+    <Grid Background="{DynamicResource Control}">
+        
+        <Grid.Resources>
+            <Style x:Key="{x:Type StackPanel}">
+                <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="{x:Type ComboBox}">
+                <Setter Property="Control.Margin" Value="0"/>
+            </Style>
+            <Style x:Key="{x:Type TextBox}">
+                <Setter Property="Control.Margin" Value="0"/>
+            </Style>
+            <Style x:Key="{x:Type Button}">
+                <Setter Property="Control.Margin" Value="0"/>
+                <Setter Property="Control.Width" Value="50"/>
+                <Setter Property="Control.VerticalAlignment" Value="Center"/>
+                <Setter Property="Control.HorizontalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="{x:Type RadioButton}">
+                <Setter Property="Control.Margin" Value="3,0,3,0"/>
+                <Setter Property="Control.Width" Value="100"/>
+            </Style>
+            <Style x:Key="{x:Type TextBlock}">
+                <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"/> <!--Spacer-->
+            <RowDefinition Height="74"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Search criteria panel-->
+        <Grid x:Name="SearchPanel" Grid.Row="1" Margin="5,5,5,5" 
+              d:DataContext="{d:DesignInstance Type=email:EmailSearchAtom}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="4"/> <!--Spacer-->
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+             <!--Labels-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Field to search"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Search operand"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Search data"/>
+
+            <!--Search Settings-->
+            <ComboBox x:Name="cb_Field" Grid.Row="1" Grid.Column="0" SelectionChanged="cb_Field_SelectionChanged"/>
+            <ComboBox x:Name="cb_Operand" Grid.Row="1" Grid.Column="1" SelectionChanged="cb_Operand_SelectionChanged"/>
+
+            <!--Search Term: The active control changes in response to the selection of cb_Field,
+                             so that an appropriate data type can be entered by the user-->
+            <TextBox x:Name="sval_String" Grid.Row="1" Grid.Column="2" 
+                     Text="{Binding Path=StringValue}"/>
+
+            <DatePicker x:Name="sval_Date" Grid.Row="1" Grid.Column="2" Visibility="Hidden" 
+                        SelectedDate="{Binding Path=DateTimeValue}"/>
+            
+            <ComboBox x:Name="sval_Priority" Grid.Row="1" Grid.Column="2" Visibility="Hidden"
+                      SelectedItem="{Binding Path=PriorityValue}"/>
+
+            <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btn_Search" Content="Search" IsDefault="True" Click="btn_Search_Click"/>
+            </StackPanel>
+            
+        </Grid>
+
+        <!--Main area grid-->
+        <Grid Grid.Row="2" Margin="5,5,5,5" Background="{DynamicResource ActiveBorder}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4"/> <!--Separator-->
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Mailbox selection-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Mailboxes"/>
+            <ListBox x:Name="lb_Mailboxes"
+                     Grid.Row="1"
+                     Grid.Column="0"
+                     d:DataContext="{d:DesignInstance Type=email:EmailSearchAtom}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <CheckBox IsChecked="{Binding Path=IsChecked}"/>
+                            <Image Source="{Binding ImageSource}" Width="16" Height="16"/>
+                            <Separator Width="5" Background="Transparent" Foreground="Transparent"/>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <!--Splitter-->
+            
+            
+            <!--Search Results pane-->
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Search results"/>
+            <ListView x:Name="lv_Results"
+                      Grid.Row="1"
+                      Grid.Column="2" 
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.CanContentScroll="True"
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      d:DataContext="{d:DesignInstance Type=data:EmailMessage}">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Mailbox" Width="Auto" DisplayMemberBinding="{Binding MailboxName}"/>
+                            <GridViewColumn Header="Who" Width="Auto" DisplayMemberBinding="{Binding SenderAddress.DisplayString}"/>
+                            <GridViewColumn Header="Date" Width="Auto" DisplayMemberBinding="{Binding Date}"/>
+                            <GridViewColumn Header="Subject" Width="Auto" DisplayMemberBinding="{Binding Subject}"/>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+                
+            </ListView>
+            
+        </Grid>
+        
+    </Grid>
+</local:ChildWindowBase>

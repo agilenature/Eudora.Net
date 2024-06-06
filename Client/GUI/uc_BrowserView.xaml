@@ -1,0 +1,213 @@
+﻿<local:ChildWindowBase  x:Class="Eudora.Net.GUI.uc_BrowserView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:wtf="Microsoft.UI.Xaml.Controls"
+                        xmlns:local="clr-namespace:Eudora.Net.GUI"
+                        xmlns:core="clr-namespace:Eudora.Net.Core"
+                        xmlns:Properties="clr-namespace:Eudora.Net.Properties"
+                        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+                        d:DataContext="{d:DesignInstance Type=local:uc_BrowserView}"
+                        mc:Ignorable="d"
+                        d:DesignWidth="800"
+                        d:DesignHeight="450"
+                        Title="{Binding Path=Source, ElementName=Browser}"
+                        ToolTip="{Binding Path=Source, ElementName=Browser}"
+                        Loaded="BrowserView_Loaded">
+
+    <Grid x:Name="BrowserGrid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Browser Toolbar area-->
+        <Button x:Name="btn_Back" Grid.Row="0" Grid.Column="0"
+                    Width="24" Height="24"
+                    ToolTip="Go Back"
+                    Click="btn_Back_Click"
+                    IsEnabled="{Binding CanGoBack, ElementName=Browser}">
+            <Button.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/leftback.png"/>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btn_Forward" Grid.Row="0" Grid.Column="1"
+                    Width="24" Height="24"
+                    ToolTip="Go Forward"
+                    Click="btn_Forward_Click"
+                    IsEnabled="{Binding CanGoForward, ElementName=Browser}">
+            <Button.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/rightnext.png"/>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btn_Refresh" Grid.Row="0" Grid.Column="2"
+                    Width="24" Height="24"
+                    ToolTip="Refresh"
+                    Click="btn_Refresh_Click">
+            <Button.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/refresh.png"/>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <TextBox x:Name="tb_Address" Grid.Row="0" Grid.Column="3" Height="24" 
+                     KeyUp="tb_Address_KeyUp"
+                     Text="{Binding Source, ElementName=Browser}"
+                     TextAlignment="Left"
+                     VerticalAlignment="Center"
+                     FontSize="14">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </TextBox.Resources>
+
+        </TextBox>
+
+        <Button x:Name="btn_Bookmark" Grid.Row="0" Grid.Column="4" 
+                    Width="24" Height="24"
+                    ToolTip="Add Bookmark"
+                    Click="btn_Bookmark_Click">
+            <Button.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/star.png"/>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <ToggleButton x:Name="btn_ManageBookmarks" Grid.Row="0" Grid.Column="5"
+                      Width="24" Height="24"
+                      ToolTip="Manage Bookmarks"
+                      Checked="btn_ManageBookmarks_Checked"
+                      Unchecked="btn_ManageBookmarks_Unchecked">
+            <ToggleButton.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/bookmarks.png"/>
+            </ToggleButton.Content>
+            <ToggleButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </ToggleButton.Resources>
+        </ToggleButton>
+
+        <Button x:Name="btn_Settings" Grid.Row="0" Grid.Column="6"
+                Width="24" Height="24"
+                ToolTip="Settings"
+                Click="btn_Settings_Click">
+            <Button.Content>
+                <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+            </Button.Content>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <!--Bookmarks Bar-->
+        <local:uc_BrowserBookmarksBar x:Name="BookmarksBar" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7"/>
+
+        <!--Browser control-->
+        <wv2:WebView2 x:Name="Browser" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Panel.ZIndex="1"
+                      CoreWebView2InitializationCompleted="Browser_CoreWebView2InitializationCompleted"/>
+
+        <!--Bookmark Manager panel-->
+        <Grid x:Name="BookmarksManager" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Panel.ZIndex="22" 
+              Background="{DynamicResource ControlDark}" Visibility="Hidden">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,0,0,0" VerticalAlignment="Center"
+                       FontSize="16" FontWeight="Bold" Text="Manage Bookmarks"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="Title:"/>
+            <TextBox x:Name="tb_BMTitle" Grid.Row="2" Grid.Column="1" Margin="50,0,5,0" VerticalAlignment="Center"
+                     Text="{Binding Path=DisplayString}"/>
+            
+            <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="URL:"/>
+            <TextBox x:Name="tb_BMURL" Grid.Row="3" Grid.Column="1" Margin="50,0,5,0" VerticalAlignment="Center"
+                     Text="{Binding Path=Url}"/>
+
+            <DataGrid x:Name="datagrid" Grid.Row="4" Grid.Column="1" Panel.ZIndex="3" ItemsSource="{Binding}"
+                      IsReadOnly="True" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"
+                      SelectionMode="Single" SelectionChanged="datagrid_SelectionChanged"
+                      GridLinesVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding DisplayString}" x:Name="Column_Title" Width="Auto">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Bookmark"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn x:Name="Column_Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btn_DeleteBookmark" Click="btn_DeleteBookmark_Click">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="pack://application:,,,/GUI/res/images/new/delete.png" Width="16" Height="16"/>
+                                            <TextBlock Text="Delete" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </Grid>
+
+        <!--Status Bar-->
+        <TextBlock x:Name="StatusBarText" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Stretch" 
+                   Background="{DynamicResource Control}"/>
+
+    </Grid>
+
+</local:ChildWindowBase>

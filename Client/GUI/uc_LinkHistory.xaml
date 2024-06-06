@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Eudora.Net.GUI.uc_LinkHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eudora.Net.GUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--Listview-->
+        <ListView Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="100"/>
+                    <GridViewColumn Header="Name" Width="200"/>
+                    <GridViewColumn Header="Date Visited" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--Button panel-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="btn_View" Content="View" Margin="3,3,3,3" Width="64"
+                Click="btn_View_Click"></Button>
+            <Button x:Name="btn_Remove" Content="Remove" Margin="3,3,3,3" Width="64"
+                Click="btn_Remove_Click"></Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
