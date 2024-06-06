@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eudora.Net", "Client\Eudora.Net.csproj", "{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}"
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Installer", "Installer\Installer.wapproj", "{A76BAFD6-3151-4859-A1DE-469A2FBFE305}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Eudora.Net.Installer", "Installer\Eudora.Net.Installer.wapproj", "{A76BAFD6-3151-4859-A1DE-469A2FBFE305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +39,8 @@ Global
 		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|ARM64.Build.0 = Release|Any CPU
 		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x64.ActiveCfg = Release|Any CPU
 		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x64.Build.0 = Release|Any CPU
-		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x86.ActiveCfg = Release|Any CPU
-		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x86.Build.0 = Release|Any CPU
+		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x86.ActiveCfg = Release|x86
+		{FA41B876-1D62-4CC5-B3F2-5E67F22D4CCD}.Release|x86.Build.0 = Release|x86
 		{A76BAFD6-3151-4859-A1DE-469A2FBFE305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A76BAFD6-3151-4859-A1DE-469A2FBFE305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A76BAFD6-3151-4859-A1DE-469A2FBFE305}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

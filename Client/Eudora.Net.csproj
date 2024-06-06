@@ -8,15 +8,520 @@
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <PlatformTarget>x86</PlatformTarget>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;8769;8617;8625;1998;8618;</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <NoWarn>1701;1702;8769;8617;8625;1998;8618;</NoWarn>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;8769;8617;8625;1998;8618;</NoWarn>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <NoWarn>1701;1702;8769;8617;8625;1998;8618;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="GUI\res\icons\mboxes.ico" />
+    <None Remove="GUI\res\icons\persona.ico" />
+    <None Remove="GUI\res\icons\search.ico" />
+    <None Remove="GUI\res\icons\signatur.ico" />
+    <None Remove="GUI\res\icons\stationery.ico" />
+    <None Remove="GUI\res\images\logos\BigIcon.png" />
+    <None Remove="GUI\res\images\logos\MainLogo.png" />
+    <None Remove="GUI\res\images\new\add.png" />
+    <None Remove="GUI\res\images\new\add_attachment.png" />
+    <None Remove="GUI\res\images\new\add_image.png" />
+    <None Remove="GUI\res\images\new\bing.png" />
+    <None Remove="GUI\res\images\new\bookmark.png" />
+    <None Remove="GUI\res\images\new\bookmarks.png" />
+    <None Remove="GUI\res\images\new\browser.png" />
+    <None Remove="GUI\res\images\new\cancel.png" />
+    <None Remove="GUI\res\images\new\close.png" />
+    <None Remove="GUI\res\images\new\copy.png" />
+    <None Remove="GUI\res\images\new\delete.png" />
+    <None Remove="GUI\res\images\new\done.png" />
+    <None Remove="GUI\res\images\new\duckduckgo.png" />
+    <None Remove="GUI\res\images\new\edit.png" />
+    <None Remove="GUI\res\images\new\format_align_center.png" />
+    <None Remove="GUI\res\images\new\format_align_left.png" />
+    <None Remove="GUI\res\images\new\format_align_right.png" />
+    <None Remove="GUI\res\images\new\format_bold.png" />
+    <None Remove="GUI\res\images\new\format_italic.png" />
+    <None Remove="GUI\res\images\new\format_size.png" />
+    <None Remove="GUI\res\images\new\format_underlined.png" />
+    <None Remove="GUI\res\images\new\google.png" />
+    <None Remove="GUI\res\images\new\image.png" />
+    <None Remove="GUI\res\images\new\leftback.png" />
+    <None Remove="GUI\res\images\new\menu.png" />
+    <None Remove="GUI\res\images\new\refresh.png" />
+    <None Remove="GUI\res\images\new\rightnext.png" />
+    <None Remove="GUI\res\images\new\settings.png" />
+    <None Remove="GUI\res\images\new\splash.png" />
+    <None Remove="GUI\res\images\new\star.png" />
+    <None Remove="GUI\res\images\source\comptbar.png" />
+    <None Remove="GUI\res\images\source\il_common16.png" />
+    <None Remove="GUI\res\images\source\tbar16.png" />
+    <None Remove="GUI\res\images\source\tbar16a.png" />
+    <None Remove="GUI\res\images\source\tbar16b.png" />
+    <None Remove="GUI\res\images\source\tbar32.png" />
+    <None Remove="GUI\res\images\source\tbar32a.png" />
+    <None Remove="GUI\res\images\source\tbar32b.png" />
+    <None Remove="GUI\res\images\source\toolbar32.png" />
+    <None Remove="GUI\res\images\tb16b\image10x1.png" />
+    <None Remove="GUI\res\images\tb16b\image11x1.png" />
+    <None Remove="GUI\res\images\tb16b\image13x1.png" />
+    <None Remove="GUI\res\images\tb16b\image14x1.png" />
+    <None Remove="GUI\res\images\tb16b\image15x1.png" />
+    <None Remove="GUI\res\images\tb16b\image16x1.png" />
+    <None Remove="GUI\res\images\tb16b\image17x1.png" />
+    <None Remove="GUI\res\images\tb16b\image18x1.png" />
+    <None Remove="GUI\res\images\tb16b\image19x1.png" />
+    <None Remove="GUI\res\images\tb16b\image1x1.png" />
+    <None Remove="GUI\res\images\tb16b\image20x1.png" />
+    <None Remove="GUI\res\images\tb16b\image21x1.png" />
+    <None Remove="GUI\res\images\tb16b\image22x1.png" />
+    <None Remove="GUI\res\images\tb16b\image23x1.png" />
+    <None Remove="GUI\res\images\tb16b\image2x1.png" />
+    <None Remove="GUI\res\images\tb16b\image3x1.png" />
+    <None Remove="GUI\res\images\tb16b\image4x1.png" />
+    <None Remove="GUI\res\images\tb16b\image5x1.png" />
+    <None Remove="GUI\res\images\tb16b\image6x1.png" />
+    <None Remove="GUI\res\images\tb16b\image7x1.png" />
+    <None Remove="GUI\res\images\tb16b\image8x1.png" />
+    <None Remove="GUI\res\images\tb16b\image9x1.png" />
+    <None Remove="GUI\res\images\tb16\tb16_0.png" />
+    <None Remove="GUI\res\images\tb16\tb16_1.png" />
+    <None Remove="GUI\res\images\tb16\tb16_10.png" />
+    <None Remove="GUI\res\images\tb16\tb16_100.png" />
+    <None Remove="GUI\res\images\tb16\tb16_101.png" />
+    <None Remove="GUI\res\images\tb16\tb16_102.png" />
+    <None Remove="GUI\res\images\tb16\tb16_103.png" />
+    <None Remove="GUI\res\images\tb16\tb16_104.png" />
+    <None Remove="GUI\res\images\tb16\tb16_105.png" />
+    <None Remove="GUI\res\images\tb16\tb16_106.png" />
+    <None Remove="GUI\res\images\tb16\tb16_107.png" />
+    <None Remove="GUI\res\images\tb16\tb16_108.png" />
+    <None Remove="GUI\res\images\tb16\tb16_109.png" />
+    <None Remove="GUI\res\images\tb16\tb16_11.png" />
+    <None Remove="GUI\res\images\tb16\tb16_110.png" />
+    <None Remove="GUI\res\images\tb16\tb16_111.png" />
+    <None Remove="GUI\res\images\tb16\tb16_112.png" />
+    <None Remove="GUI\res\images\tb16\tb16_113.png" />
+    <None Remove="GUI\res\images\tb16\tb16_114.png" />
+    <None Remove="GUI\res\images\tb16\tb16_115.png" />
+    <None Remove="GUI\res\images\tb16\tb16_116.png" />
+    <None Remove="GUI\res\images\tb16\tb16_117.png" />
+    <None Remove="GUI\res\images\tb16\tb16_118.png" />
+    <None Remove="GUI\res\images\tb16\tb16_119.png" />
+    <None Remove="GUI\res\images\tb16\tb16_12.png" />
+    <None Remove="GUI\res\images\tb16\tb16_120.png" />
+    <None Remove="GUI\res\images\tb16\tb16_121.png" />
+    <None Remove="GUI\res\images\tb16\tb16_122.png" />
+    <None Remove="GUI\res\images\tb16\tb16_123.png" />
+    <None Remove="GUI\res\images\tb16\tb16_124.png" />
+    <None Remove="GUI\res\images\tb16\tb16_125.png" />
+    <None Remove="GUI\res\images\tb16\tb16_126.png" />
+    <None Remove="GUI\res\images\tb16\tb16_127.png" />
+    <None Remove="GUI\res\images\tb16\tb16_128.png" />
+    <None Remove="GUI\res\images\tb16\tb16_129.png" />
+    <None Remove="GUI\res\images\tb16\tb16_13.png" />
+    <None Remove="GUI\res\images\tb16\tb16_130.png" />
+    <None Remove="GUI\res\images\tb16\tb16_131.png" />
+    <None Remove="GUI\res\images\tb16\tb16_132.png" />
+    <None Remove="GUI\res\images\tb16\tb16_133.png" />
+    <None Remove="GUI\res\images\tb16\tb16_134.png" />
+    <None Remove="GUI\res\images\tb16\tb16_135.png" />
+    <None Remove="GUI\res\images\tb16\tb16_136.png" />
+    <None Remove="GUI\res\images\tb16\tb16_137.png" />
+    <None Remove="GUI\res\images\tb16\tb16_138.png" />
+    <None Remove="GUI\res\images\tb16\tb16_139.png" />
+    <None Remove="GUI\res\images\tb16\tb16_14.png" />
+    <None Remove="GUI\res\images\tb16\tb16_140.png" />
+    <None Remove="GUI\res\images\tb16\tb16_141.png" />
+    <None Remove="GUI\res\images\tb16\tb16_142.png" />
+    <None Remove="GUI\res\images\tb16\tb16_143.png" />
+    <None Remove="GUI\res\images\tb16\tb16_144.png" />
+    <None Remove="GUI\res\images\tb16\tb16_145.png" />
+    <None Remove="GUI\res\images\tb16\tb16_146.png" />
+    <None Remove="GUI\res\images\tb16\tb16_147.png" />
+    <None Remove="GUI\res\images\tb16\tb16_148.png" />
+    <None Remove="GUI\res\images\tb16\tb16_149.png" />
+    <None Remove="GUI\res\images\tb16\tb16_15.png" />
+    <None Remove="GUI\res\images\tb16\tb16_150.png" />
+    <None Remove="GUI\res\images\tb16\tb16_151.png" />
+    <None Remove="GUI\res\images\tb16\tb16_152.png" />
+    <None Remove="GUI\res\images\tb16\tb16_153.png" />
+    <None Remove="GUI\res\images\tb16\tb16_154.png" />
+    <None Remove="GUI\res\images\tb16\tb16_155.png" />
+    <None Remove="GUI\res\images\tb16\tb16_156.png" />
+    <None Remove="GUI\res\images\tb16\tb16_157.png" />
+    <None Remove="GUI\res\images\tb16\tb16_158.png" />
+    <None Remove="GUI\res\images\tb16\tb16_159.png" />
+    <None Remove="GUI\res\images\tb16\tb16_16.png" />
+    <None Remove="GUI\res\images\tb16\tb16_160.png" />
+    <None Remove="GUI\res\images\tb16\tb16_161.png" />
+    <None Remove="GUI\res\images\tb16\tb16_162.png" />
+    <None Remove="GUI\res\images\tb16\tb16_163.png" />
+    <None Remove="GUI\res\images\tb16\tb16_164.png" />
+    <None Remove="GUI\res\images\tb16\tb16_165.png" />
+    <None Remove="GUI\res\images\tb16\tb16_166.png" />
+    <None Remove="GUI\res\images\tb16\tb16_167.png" />
+    <None Remove="GUI\res\images\tb16\tb16_168.png" />
+    <None Remove="GUI\res\images\tb16\tb16_169.png" />
+    <None Remove="GUI\res\images\tb16\tb16_17.png" />
+    <None Remove="GUI\res\images\tb16\tb16_170.png" />
+    <None Remove="GUI\res\images\tb16\tb16_171.png" />
+    <None Remove="GUI\res\images\tb16\tb16_172.png" />
+    <None Remove="GUI\res\images\tb16\tb16_173.png" />
+    <None Remove="GUI\res\images\tb16\tb16_174.png" />
+    <None Remove="GUI\res\images\tb16\tb16_175.png" />
+    <None Remove="GUI\res\images\tb16\tb16_18.png" />
+    <None Remove="GUI\res\images\tb16\tb16_19.png" />
+    <None Remove="GUI\res\images\tb16\tb16_2.png" />
+    <None Remove="GUI\res\images\tb16\tb16_20.png" />
+    <None Remove="GUI\res\images\tb16\tb16_21.png" />
+    <None Remove="GUI\res\images\tb16\tb16_22.png" />
+    <None Remove="GUI\res\images\tb16\tb16_23.png" />
+    <None Remove="GUI\res\images\tb16\tb16_24.png" />
+    <None Remove="GUI\res\images\tb16\tb16_25.png" />
+    <None Remove="GUI\res\images\tb16\tb16_26.png" />
+    <None Remove="GUI\res\images\tb16\tb16_27.png" />
+    <None Remove="GUI\res\images\tb16\tb16_28.png" />
+    <None Remove="GUI\res\images\tb16\tb16_29.png" />
+    <None Remove="GUI\res\images\tb16\tb16_3.png" />
+    <None Remove="GUI\res\images\tb16\tb16_30.png" />
+    <None Remove="GUI\res\images\tb16\tb16_31.png" />
+    <None Remove="GUI\res\images\tb16\tb16_32.png" />
+    <None Remove="GUI\res\images\tb16\tb16_33.png" />
+    <None Remove="GUI\res\images\tb16\tb16_34.png" />
+    <None Remove="GUI\res\images\tb16\tb16_35.png" />
+    <None Remove="GUI\res\images\tb16\tb16_36.png" />
+    <None Remove="GUI\res\images\tb16\tb16_37.png" />
+    <None Remove="GUI\res\images\tb16\tb16_38.png" />
+    <None Remove="GUI\res\images\tb16\tb16_39.png" />
+    <None Remove="GUI\res\images\tb16\tb16_4.png" />
+    <None Remove="GUI\res\images\tb16\tb16_40.png" />
+    <None Remove="GUI\res\images\tb16\tb16_41.png" />
+    <None Remove="GUI\res\images\tb16\tb16_42.png" />
+    <None Remove="GUI\res\images\tb16\tb16_43.png" />
+    <None Remove="GUI\res\images\tb16\tb16_44.png" />
+    <None Remove="GUI\res\images\tb16\tb16_45.png" />
+    <None Remove="GUI\res\images\tb16\tb16_46.png" />
+    <None Remove="GUI\res\images\tb16\tb16_47.png" />
+    <None Remove="GUI\res\images\tb16\tb16_48.png" />
+    <None Remove="GUI\res\images\tb16\tb16_49.png" />
+    <None Remove="GUI\res\images\tb16\tb16_5.png" />
+    <None Remove="GUI\res\images\tb16\tb16_50.png" />
+    <None Remove="GUI\res\images\tb16\tb16_51.png" />
+    <None Remove="GUI\res\images\tb16\tb16_52.png" />
+    <None Remove="GUI\res\images\tb16\tb16_53.png" />
+    <None Remove="GUI\res\images\tb16\tb16_54.png" />
+    <None Remove="GUI\res\images\tb16\tb16_55.png" />
+    <None Remove="GUI\res\images\tb16\tb16_56.png" />
+    <None Remove="GUI\res\images\tb16\tb16_57.png" />
+    <None Remove="GUI\res\images\tb16\tb16_58.png" />
+    <None Remove="GUI\res\images\tb16\tb16_59.png" />
+    <None Remove="GUI\res\images\tb16\tb16_6.png" />
+    <None Remove="GUI\res\images\tb16\tb16_60.png" />
+    <None Remove="GUI\res\images\tb16\tb16_61.png" />
+    <None Remove="GUI\res\images\tb16\tb16_62.png" />
+    <None Remove="GUI\res\images\tb16\tb16_63.png" />
+    <None Remove="GUI\res\images\tb16\tb16_64.png" />
+    <None Remove="GUI\res\images\tb16\tb16_65.png" />
+    <None Remove="GUI\res\images\tb16\tb16_66.png" />
+    <None Remove="GUI\res\images\tb16\tb16_67.png" />
+    <None Remove="GUI\res\images\tb16\tb16_68.png" />
+    <None Remove="GUI\res\images\tb16\tb16_69.png" />
+    <None Remove="GUI\res\images\tb16\tb16_7.png" />
+    <None Remove="GUI\res\images\tb16\tb16_70.png" />
+    <None Remove="GUI\res\images\tb16\tb16_71.png" />
+    <None Remove="GUI\res\images\tb16\tb16_72.png" />
+    <None Remove="GUI\res\images\tb16\tb16_73.png" />
+    <None Remove="GUI\res\images\tb16\tb16_74.png" />
+    <None Remove="GUI\res\images\tb16\tb16_75.png" />
+    <None Remove="GUI\res\images\tb16\tb16_76.png" />
+    <None Remove="GUI\res\images\tb16\tb16_77.png" />
+    <None Remove="GUI\res\images\tb16\tb16_78.png" />
+    <None Remove="GUI\res\images\tb16\tb16_79.png" />
+    <None Remove="GUI\res\images\tb16\tb16_8.png" />
+    <None Remove="GUI\res\images\tb16\tb16_80.png" />
+    <None Remove="GUI\res\images\tb16\tb16_81.png" />
+    <None Remove="GUI\res\images\tb16\tb16_82.png" />
+    <None Remove="GUI\res\images\tb16\tb16_83.png" />
+    <None Remove="GUI\res\images\tb16\tb16_84.png" />
+    <None Remove="GUI\res\images\tb16\tb16_85.png" />
+    <None Remove="GUI\res\images\tb16\tb16_86.png" />
+    <None Remove="GUI\res\images\tb16\tb16_87.png" />
+    <None Remove="GUI\res\images\tb16\tb16_88.png" />
+    <None Remove="GUI\res\images\tb16\tb16_89.png" />
+    <None Remove="GUI\res\images\tb16\tb16_9.png" />
+    <None Remove="GUI\res\images\tb16\tb16_90.png" />
+    <None Remove="GUI\res\images\tb16\tb16_91.png" />
+    <None Remove="GUI\res\images\tb16\tb16_92.png" />
+    <None Remove="GUI\res\images\tb16\tb16_93.png" />
+    <None Remove="GUI\res\images\tb16\tb16_94.png" />
+    <None Remove="GUI\res\images\tb16\tb16_95.png" />
+    <None Remove="GUI\res\images\tb16\tb16_96.png" />
+    <None Remove="GUI\res\images\tb16\tb16_97.png" />
+    <None Remove="GUI\res\images\tb16\tb16_98.png" />
+    <None Remove="GUI\res\images\tb16\tb16_99.png" />
+    <None Remove="GUI\res\images\tb18\image10x1.png" />
+    <None Remove="GUI\res\images\tb18\image11x1.png" />
+    <None Remove="GUI\res\images\tb18\image12x1.png" />
+    <None Remove="GUI\res\images\tb18\image13x1.png" />
+    <None Remove="GUI\res\images\tb18\image14x1.png" />
+    <None Remove="GUI\res\images\tb18\image15x1.png" />
+    <None Remove="GUI\res\images\tb18\image16x1.png" />
+    <None Remove="GUI\res\images\tb18\image17x1.png" />
+    <None Remove="GUI\res\images\tb18\image18x1.png" />
+    <None Remove="GUI\res\images\tb18\image19x1.png" />
+    <None Remove="GUI\res\images\tb18\image1x1.png" />
+    <None Remove="GUI\res\images\tb18\image20x1.png" />
+    <None Remove="GUI\res\images\tb18\image22x1.png" />
+    <None Remove="GUI\res\images\tb18\image23x1.png" />
+    <None Remove="GUI\res\images\tb18\image26x1.png" />
+    <None Remove="GUI\res\images\tb18\image27x1.png" />
+    <None Remove="GUI\res\images\tb18\image28x1.png" />
+    <None Remove="GUI\res\images\tb18\image29x1.png" />
+    <None Remove="GUI\res\images\tb18\image2x1.png" />
+    <None Remove="GUI\res\images\tb18\image30x1.png" />
+    <None Remove="GUI\res\images\tb18\image31x1.png" />
+    <None Remove="GUI\res\images\tb18\image32x1.png" />
+    <None Remove="GUI\res\images\tb18\image33x1.png" />
+    <None Remove="GUI\res\images\tb18\image35x1.png" />
+    <None Remove="GUI\res\images\tb18\image36x1.png" />
+    <None Remove="GUI\res\images\tb18\image37x1.png" />
+    <None Remove="GUI\res\images\tb18\image3x1.png" />
+    <None Remove="GUI\res\images\tb18\image4x1.png" />
+    <None Remove="GUI\res\images\tb18\image5x1.png" />
+    <None Remove="GUI\res\images\tb18\image6x1.png" />
+    <None Remove="GUI\res\images\tb18\image7x1.png" />
+    <None Remove="GUI\res\images\tb18\image8x1.png" />
+    <None Remove="GUI\res\images\tb18\image9x1.png" />
+    <None Remove="GUI\res\images\tb32\tb32_0.png" />
+    <None Remove="GUI\res\images\tb32\tb32_1.png" />
+    <None Remove="GUI\res\images\tb32\tb32_10.png" />
+    <None Remove="GUI\res\images\tb32\tb32_100.png" />
+    <None Remove="GUI\res\images\tb32\tb32_101.png" />
+    <None Remove="GUI\res\images\tb32\tb32_102.png" />
+    <None Remove="GUI\res\images\tb32\tb32_103.png" />
+    <None Remove="GUI\res\images\tb32\tb32_104.png" />
+    <None Remove="GUI\res\images\tb32\tb32_105.png" />
+    <None Remove="GUI\res\images\tb32\tb32_106.png" />
+    <None Remove="GUI\res\images\tb32\tb32_107.png" />
+    <None Remove="GUI\res\images\tb32\tb32_108.png" />
+    <None Remove="GUI\res\images\tb32\tb32_109.png" />
+    <None Remove="GUI\res\images\tb32\tb32_11.png" />
+    <None Remove="GUI\res\images\tb32\tb32_110.png" />
+    <None Remove="GUI\res\images\tb32\tb32_111.png" />
+    <None Remove="GUI\res\images\tb32\tb32_112.png" />
+    <None Remove="GUI\res\images\tb32\tb32_113.png" />
+    <None Remove="GUI\res\images\tb32\tb32_114.png" />
+    <None Remove="GUI\res\images\tb32\tb32_115.png" />
+    <None Remove="GUI\res\images\tb32\tb32_116.png" />
+    <None Remove="GUI\res\images\tb32\tb32_117.png" />
+    <None Remove="GUI\res\images\tb32\tb32_118.png" />
+    <None Remove="GUI\res\images\tb32\tb32_119.png" />
+    <None Remove="GUI\res\images\tb32\tb32_12.png" />
+    <None Remove="GUI\res\images\tb32\tb32_120.png" />
+    <None Remove="GUI\res\images\tb32\tb32_121.png" />
+    <None Remove="GUI\res\images\tb32\tb32_122.png" />
+    <None Remove="GUI\res\images\tb32\tb32_123.png" />
+    <None Remove="GUI\res\images\tb32\tb32_124.png" />
+    <None Remove="GUI\res\images\tb32\tb32_125.png" />
+    <None Remove="GUI\res\images\tb32\tb32_126.png" />
+    <None Remove="GUI\res\images\tb32\tb32_127.png" />
+    <None Remove="GUI\res\images\tb32\tb32_128.png" />
+    <None Remove="GUI\res\images\tb32\tb32_129.png" />
+    <None Remove="GUI\res\images\tb32\tb32_13.png" />
+    <None Remove="GUI\res\images\tb32\tb32_130.png" />
+    <None Remove="GUI\res\images\tb32\tb32_131.png" />
+    <None Remove="GUI\res\images\tb32\tb32_132.png" />
+    <None Remove="GUI\res\images\tb32\tb32_133.png" />
+    <None Remove="GUI\res\images\tb32\tb32_134.png" />
+    <None Remove="GUI\res\images\tb32\tb32_135.png" />
+    <None Remove="GUI\res\images\tb32\tb32_136.png" />
+    <None Remove="GUI\res\images\tb32\tb32_137.png" />
+    <None Remove="GUI\res\images\tb32\tb32_138.png" />
+    <None Remove="GUI\res\images\tb32\tb32_139.png" />
+    <None Remove="GUI\res\images\tb32\tb32_14.png" />
+    <None Remove="GUI\res\images\tb32\tb32_140.png" />
+    <None Remove="GUI\res\images\tb32\tb32_141.png" />
+    <None Remove="GUI\res\images\tb32\tb32_142.png" />
+    <None Remove="GUI\res\images\tb32\tb32_143.png" />
+    <None Remove="GUI\res\images\tb32\tb32_144.png" />
+    <None Remove="GUI\res\images\tb32\tb32_145.png" />
+    <None Remove="GUI\res\images\tb32\tb32_146.png" />
+    <None Remove="GUI\res\images\tb32\tb32_147.png" />
+    <None Remove="GUI\res\images\tb32\tb32_148.png" />
+    <None Remove="GUI\res\images\tb32\tb32_149.png" />
+    <None Remove="GUI\res\images\tb32\tb32_15.png" />
+    <None Remove="GUI\res\images\tb32\tb32_150.png" />
+    <None Remove="GUI\res\images\tb32\tb32_151.png" />
+    <None Remove="GUI\res\images\tb32\tb32_152.png" />
+    <None Remove="GUI\res\images\tb32\tb32_153.png" />
+    <None Remove="GUI\res\images\tb32\tb32_154.png" />
+    <None Remove="GUI\res\images\tb32\tb32_155.png" />
+    <None Remove="GUI\res\images\tb32\tb32_156.png" />
+    <None Remove="GUI\res\images\tb32\tb32_157.png" />
+    <None Remove="GUI\res\images\tb32\tb32_158.png" />
+    <None Remove="GUI\res\images\tb32\tb32_159.png" />
+    <None Remove="GUI\res\images\tb32\tb32_16.png" />
+    <None Remove="GUI\res\images\tb32\tb32_160.png" />
+    <None Remove="GUI\res\images\tb32\tb32_161.png" />
+    <None Remove="GUI\res\images\tb32\tb32_162.png" />
+    <None Remove="GUI\res\images\tb32\tb32_163.png" />
+    <None Remove="GUI\res\images\tb32\tb32_164.png" />
+    <None Remove="GUI\res\images\tb32\tb32_165.png" />
+    <None Remove="GUI\res\images\tb32\tb32_166.png" />
+    <None Remove="GUI\res\images\tb32\tb32_167.png" />
+    <None Remove="GUI\res\images\tb32\tb32_168.png" />
+    <None Remove="GUI\res\images\tb32\tb32_169.png" />
+    <None Remove="GUI\res\images\tb32\tb32_17.png" />
+    <None Remove="GUI\res\images\tb32\tb32_170.png" />
+    <None Remove="GUI\res\images\tb32\tb32_171.png" />
+    <None Remove="GUI\res\images\tb32\tb32_172.png" />
+    <None Remove="GUI\res\images\tb32\tb32_173.png" />
+    <None Remove="GUI\res\images\tb32\tb32_174.png" />
+    <None Remove="GUI\res\images\tb32\tb32_175.png" />
+    <None Remove="GUI\res\images\tb32\tb32_18.png" />
+    <None Remove="GUI\res\images\tb32\tb32_19.png" />
+    <None Remove="GUI\res\images\tb32\tb32_2.png" />
+    <None Remove="GUI\res\images\tb32\tb32_20.png" />
+    <None Remove="GUI\res\images\tb32\tb32_21.png" />
+    <None Remove="GUI\res\images\tb32\tb32_22.png" />
+    <None Remove="GUI\res\images\tb32\tb32_23.png" />
+    <None Remove="GUI\res\images\tb32\tb32_24.png" />
+    <None Remove="GUI\res\images\tb32\tb32_25.png" />
+    <None Remove="GUI\res\images\tb32\tb32_26.png" />
+    <None Remove="GUI\res\images\tb32\tb32_27.png" />
+    <None Remove="GUI\res\images\tb32\tb32_28.png" />
+    <None Remove="GUI\res\images\tb32\tb32_29.png" />
+    <None Remove="GUI\res\images\tb32\tb32_3.png" />
+    <None Remove="GUI\res\images\tb32\tb32_30.png" />
+    <None Remove="GUI\res\images\tb32\tb32_31.png" />
+    <None Remove="GUI\res\images\tb32\tb32_32.png" />
+    <None Remove="GUI\res\images\tb32\tb32_33.png" />
+    <None Remove="GUI\res\images\tb32\tb32_34.png" />
+    <None Remove="GUI\res\images\tb32\tb32_35.png" />
+    <None Remove="GUI\res\images\tb32\tb32_36.png" />
+    <None Remove="GUI\res\images\tb32\tb32_37.png" />
+    <None Remove="GUI\res\images\tb32\tb32_38.png" />
+    <None Remove="GUI\res\images\tb32\tb32_39.png" />
+    <None Remove="GUI\res\images\tb32\tb32_4.png" />
+    <None Remove="GUI\res\images\tb32\tb32_40.png" />
+    <None Remove="GUI\res\images\tb32\tb32_41.png" />
+    <None Remove="GUI\res\images\tb32\tb32_42.png" />
+    <None Remove="GUI\res\images\tb32\tb32_43.png" />
+    <None Remove="GUI\res\images\tb32\tb32_44.png" />
+    <None Remove="GUI\res\images\tb32\tb32_45.png" />
+    <None Remove="GUI\res\images\tb32\tb32_46.png" />
+    <None Remove="GUI\res\images\tb32\tb32_47.png" />
+    <None Remove="GUI\res\images\tb32\tb32_48.png" />
+    <None Remove="GUI\res\images\tb32\tb32_49.png" />
+    <None Remove="GUI\res\images\tb32\tb32_5.png" />
+    <None Remove="GUI\res\images\tb32\tb32_50.png" />
+    <None Remove="GUI\res\images\tb32\tb32_51.png" />
+    <None Remove="GUI\res\images\tb32\tb32_52.png" />
+    <None Remove="GUI\res\images\tb32\tb32_53.png" />
+    <None Remove="GUI\res\images\tb32\tb32_54.png" />
+    <None Remove="GUI\res\images\tb32\tb32_55.png" />
+    <None Remove="GUI\res\images\tb32\tb32_56.png" />
+    <None Remove="GUI\res\images\tb32\tb32_57.png" />
+    <None Remove="GUI\res\images\tb32\tb32_58.png" />
+    <None Remove="GUI\res\images\tb32\tb32_59.png" />
+    <None Remove="GUI\res\images\tb32\tb32_6.png" />
+    <None Remove="GUI\res\images\tb32\tb32_60.png" />
+    <None Remove="GUI\res\images\tb32\tb32_61.png" />
+    <None Remove="GUI\res\images\tb32\tb32_62.png" />
+    <None Remove="GUI\res\images\tb32\tb32_63.png" />
+    <None Remove="GUI\res\images\tb32\tb32_64.png" />
+    <None Remove="GUI\res\images\tb32\tb32_65.png" />
+    <None Remove="GUI\res\images\tb32\tb32_66.png" />
+    <None Remove="GUI\res\images\tb32\tb32_67.png" />
+    <None Remove="GUI\res\images\tb32\tb32_68.png" />
+    <None Remove="GUI\res\images\tb32\tb32_69.png" />
+    <None Remove="GUI\res\images\tb32\tb32_7.png" />
+    <None Remove="GUI\res\images\tb32\tb32_70.png" />
+    <None Remove="GUI\res\images\tb32\tb32_71.png" />
+    <None Remove="GUI\res\images\tb32\tb32_72.png" />
+    <None Remove="GUI\res\images\tb32\tb32_73.png" />
+    <None Remove="GUI\res\images\tb32\tb32_74.png" />
+    <None Remove="GUI\res\images\tb32\tb32_75.png" />
+    <None Remove="GUI\res\images\tb32\tb32_76.png" />
+    <None Remove="GUI\res\images\tb32\tb32_77.png" />
+    <None Remove="GUI\res\images\tb32\tb32_78.png" />
+    <None Remove="GUI\res\images\tb32\tb32_79.png" />
+    <None Remove="GUI\res\images\tb32\tb32_8.png" />
+    <None Remove="GUI\res\images\tb32\tb32_80.png" />
+    <None Remove="GUI\res\images\tb32\tb32_81.png" />
+    <None Remove="GUI\res\images\tb32\tb32_82.png" />
+    <None Remove="GUI\res\images\tb32\tb32_83.png" />
+    <None Remove="GUI\res\images\tb32\tb32_84.png" />
+    <None Remove="GUI\res\images\tb32\tb32_85.png" />
+    <None Remove="GUI\res\images\tb32\tb32_86.png" />
+    <None Remove="GUI\res\images\tb32\tb32_87.png" />
+    <None Remove="GUI\res\images\tb32\tb32_88.png" />
+    <None Remove="GUI\res\images\tb32\tb32_89.png" />
+    <None Remove="GUI\res\images\tb32\tb32_9.png" />
+    <None Remove="GUI\res\images\tb32\tb32_90.png" />
+    <None Remove="GUI\res\images\tb32\tb32_91.png" />
+    <None Remove="GUI\res\images\tb32\tb32_92.png" />
+    <None Remove="GUI\res\images\tb32\tb32_93.png" />
+    <None Remove="GUI\res\images\tb32\tb32_94.png" />
+    <None Remove="GUI\res\images\tb32\tb32_95.png" />
+    <None Remove="GUI\res\images\tb32\tb32_96.png" />
+    <None Remove="GUI\res\images\tb32\tb32_97.png" />
+    <None Remove="GUI\res\images\tb32\tb32_98.png" />
+    <None Remove="GUI\res\images\tb32\tb32_99.png" />
+    <None Remove="HtmlTemplates\Email.html" />
+    <None Remove="HtmlTemplates\EmailForward.html" />
+    <None Remove="HtmlTemplates\EmailReply.html" />
+    <None Remove="HtmlTemplates\HtmlDocument.html" />
+    <None Remove="HtmlTemplates\Signature.html" />
+    <None Remove="HtmlTemplates\Stationery.html" />
+    <None Remove="Javascript\BodyObserver.js" />
+    <None Remove="Javascript\CheckForTextSelection.js" />
+    <None Remove="Javascript\CreateDivForSelection.js" />
+    <None Remove="Javascript\CreateSpanForSelection.js" />
+    <None Remove="Javascript\CursorMovedListener.js" />
+    <None Remove="Javascript\DesignMode.js" />
+    <None Remove="Javascript\GetBodyAttribute.js" />
+    <None Remove="Javascript\GetBodyInnerHTML.js" />
+    <None Remove="Javascript\GetBodyOuterHTML.js" />
+    <None Remove="Javascript\GetBodyStyle.js" />
+    <None Remove="Javascript\GetElementAttribute.js" />
+    <None Remove="Javascript\GetElementInnerHTML.js" />
+    <None Remove="Javascript\GetElementOuterHTML.js" />
+    <None Remove="Javascript\InsertElement.js" />
+    <None Remove="Javascript\InsertInlineImage.js" />
+    <None Remove="Javascript\InstallEnterKeyOverride.js" />
+    <None Remove="Javascript\InstallKeyboardListener.js" />
+    <None Remove="Javascript\InstallMouseListener.js" />
+    <None Remove="Javascript\ResampleBody.js" />
+    <None Remove="Javascript\SetActiveElementAttribute.js" />
+    <None Remove="Javascript\SetBodyAttribute.js" />
+    <None Remove="Javascript\SetBodyInnerHTML.js" />
+    <None Remove="Javascript\SetBodyOuterHTML.js" />
+    <None Remove="Javascript\SetBodyStyle.js" />
+    <None Remove="Javascript\SetBodyStyleProperty.js" />
+    <None Remove="Javascript\SetElementAttribute.js" />
+    <None Remove="Javascript\SetElementId.js" />
+    <None Remove="Javascript\SetElementInnerHTML.js" />
+    <None Remove="Javascript\SetElementOuterHTML.js" />
+    <None Remove="Javascript\SetElementStyleProperty.js" />
+    <None Remove="Javascript\SetEmailSignature.js" />
+    <None Remove="Javascript\SetInitialCursorPosition.js" />
+    <None Remove="Javascript\StandardTextEditCall.js" />
+    <None Remove="Javascript\WriteBodyElement.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <COMReference Include="Shell32">
@@ -31,6 +536,43 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Javascript\BodyObserver.js" />
+    <EmbeddedResource Include="Javascript\CheckForTextSelection.js" />
+    <EmbeddedResource Include="Javascript\CreateDivForSelection.js" />
+    <EmbeddedResource Include="Javascript\CreateSpanForSelection.js" />
+    <EmbeddedResource Include="Javascript\CursorMovedListener.js" />
+    <EmbeddedResource Include="Javascript\DesignMode.js" />
+    <EmbeddedResource Include="Javascript\GetBodyAttribute.js" />
+    <EmbeddedResource Include="Javascript\GetBodyInnerHTML.js" />
+    <EmbeddedResource Include="Javascript\GetBodyOuterHTML.js" />
+    <EmbeddedResource Include="Javascript\GetBodyStyle.js" />
+    <EmbeddedResource Include="Javascript\GetElementAttribute.js" />
+    <EmbeddedResource Include="Javascript\GetElementInnerHTML.js" />
+    <EmbeddedResource Include="Javascript\GetElementOuterHTML.js" />
+    <EmbeddedResource Include="Javascript\InsertElement.js" />
+    <EmbeddedResource Include="Javascript\InsertInlineImage.js" />
+    <EmbeddedResource Include="Javascript\InstallEnterKeyOverride.js" />
+    <EmbeddedResource Include="Javascript\InstallKeyboardListener.js" />
+    <EmbeddedResource Include="Javascript\InstallMouseListener.js" />
+    <EmbeddedResource Include="Javascript\ResampleBody.js" />
+    <EmbeddedResource Include="Javascript\SetActiveElementAttribute.js" />
+    <EmbeddedResource Include="Javascript\SetBodyAttribute.js" />
+    <EmbeddedResource Include="Javascript\SetBodyInnerHTML.js" />
+    <EmbeddedResource Include="Javascript\SetBodyOuterHTML.js" />
+    <EmbeddedResource Include="Javascript\SetBodyStyle.js" />
+    <EmbeddedResource Include="Javascript\SetBodyStyleProperty.js" />
+    <EmbeddedResource Include="Javascript\SetElementAttribute.js" />
+    <EmbeddedResource Include="Javascript\SetElementId.js" />
+    <EmbeddedResource Include="Javascript\SetElementInnerHTML.js" />
+    <EmbeddedResource Include="Javascript\SetElementOuterHTML.js" />
+    <EmbeddedResource Include="Javascript\SetElementStyleProperty.js" />
+    <EmbeddedResource Include="Javascript\SetEmailSignature.js" />
+    <EmbeddedResource Include="Javascript\SetInitialCursorPosition.js" />
+    <EmbeddedResource Include="Javascript\StandardTextEditCall.js" />
+    <EmbeddedResource Include="Javascript\WriteBodyElement.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
     <PackageReference Include="MailKit" Version="4.6.0" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
@@ -42,6 +584,1386 @@
     <Reference Include="MdiLib">
       <HintPath>MdiLib.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="GUI\res\icons\mboxes.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\icons\persona.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\icons\search.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\icons\signatur.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\icons\stationery.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\logos\BigIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <SplashScreen Include="GUI\res\images\logos\MainLogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </SplashScreen>
+    <Resource Include="GUI\res\images\new\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\add_attachment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\add_image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\bing.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\bookmark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\bookmarks.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\browser.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\done.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\duckduckgo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_align_center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_align_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_align_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_size.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\format_underlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\google.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\leftback.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\rightnext.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\splash.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\star.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\comptbar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\il_common16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar16a.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar16b.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar32.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar32a.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\tbar32b.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\source\toolbar32.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image10x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image11x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image13x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image14x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image15x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image16x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image17x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image18x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image19x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image1x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image20x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image21x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image22x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image23x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image2x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image3x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image4x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image5x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image6x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image7x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image8x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16b\image9x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_0.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_100.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_101.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_102.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_103.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_104.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_105.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_106.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_107.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_108.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_109.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_11.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_110.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_111.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_112.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_113.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_114.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_115.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_116.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_117.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_118.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_119.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_120.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_121.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_122.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_123.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_124.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_125.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_126.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_127.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_128.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_129.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_13.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_130.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_131.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_132.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_133.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_134.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_135.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_136.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_137.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_138.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_139.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_14.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_140.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_141.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_142.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_143.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_144.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_145.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_146.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_147.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_148.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_149.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_15.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_150.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_151.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_152.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_153.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_154.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_155.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_156.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_157.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_158.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_159.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_160.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_161.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_162.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_163.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_164.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_165.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_166.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_167.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_168.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_169.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_17.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_170.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_171.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_172.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_173.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_174.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_175.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_18.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_19.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_20.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_21.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_22.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_23.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_24.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_25.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_26.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_27.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_28.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_29.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_31.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_32.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_33.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_34.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_35.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_36.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_37.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_38.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_39.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_40.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_41.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_42.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_43.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_44.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_45.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_46.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_47.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_48.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_49.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_51.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_52.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_53.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_54.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_55.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_56.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_57.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_58.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_59.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_60.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_61.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_62.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_63.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_64.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_65.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_66.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_67.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_68.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_69.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_70.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_71.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_72.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_73.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_74.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_75.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_76.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_77.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_78.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_79.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_80.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_81.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_82.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_83.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_84.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_85.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_86.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_87.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_88.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_89.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_90.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_91.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_92.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_93.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_94.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_95.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_96.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_97.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_98.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb16\tb16_99.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image10x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image11x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image12x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image13x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image14x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image15x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image16x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image17x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image18x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image19x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image1x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image20x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image22x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image23x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image26x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image27x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image28x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image29x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image2x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image30x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image31x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image32x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image33x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image35x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image36x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image37x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image3x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image4x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image5x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image6x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image7x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image8x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb18\image9x1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_0.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_100.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_101.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_102.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_103.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_104.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_105.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_106.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_107.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_108.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_109.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_11.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_110.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_111.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_112.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_113.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_114.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_115.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_116.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_117.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_118.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_119.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_120.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_121.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_122.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_123.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_124.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_125.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_126.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_127.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_128.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_129.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_13.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_130.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_131.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_132.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_133.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_134.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_135.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_136.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_137.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_138.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_139.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_14.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_140.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_141.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_142.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_143.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_144.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_145.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_146.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_147.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_148.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_149.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_15.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_150.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_151.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_152.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_153.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_154.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_155.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_156.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_157.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_158.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_159.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_160.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_161.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_162.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_163.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_164.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_165.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_166.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_167.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_168.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_169.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_17.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_170.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_171.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_172.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_173.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_174.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_175.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_18.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_19.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_20.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_21.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_22.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_23.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_24.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_25.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_26.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_27.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_28.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_29.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_31.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_32.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_33.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_34.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_35.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_36.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_37.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_38.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_39.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_40.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_41.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_42.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_43.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_44.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_45.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_46.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_47.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_48.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_49.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_51.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_52.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_53.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_54.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_55.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_56.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_57.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_58.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_59.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_60.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_61.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_62.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_63.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_64.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_65.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_66.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_67.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_68.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_69.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_70.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_71.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_72.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_73.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_74.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_75.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_76.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_77.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_78.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_79.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_80.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_81.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_82.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_83.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_84.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_85.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_86.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_87.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_88.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_89.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_9.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_90.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_91.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_92.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_93.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_94.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_95.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_96.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_97.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_98.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\tb32\tb32_99.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <EmbeddedResource Include="HtmlTemplates\Email.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTemplates\EmailForward.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTemplates\EmailReply.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTemplates\HtmlDocument.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTemplates\Signature.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HtmlTemplates\Stationery.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
