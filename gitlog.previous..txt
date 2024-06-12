@@ -1,0 +1,2444 @@
+This is the commit log from the original project repo
+======================================
+
+commit 734eed84c717c146d3d608712178201598cb3152
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu May 23 19:44:11 2024 -0700
+
+    1.0.12
+
+commit e076f3457648502579d3a2ca907dec1ec4184a21
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Sun May 19 19:42:20 2024 -0700
+
+    Fix: property getters and setters relating to the Other category now set to the correct fields
+
+commit 24bff71b49e8183cf959da6da18c6579a745556b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 15 16:37:10 2024 -0700
+
+    Build 1.0.11
+
+commit 73e4de7fc5fc6b02904a3110a58d52dca3a3b96b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 8 21:11:03 2024 -0700
+
+    Build 1.0.10: Found a way to get around the fact that Microsofts build of Chromium (WebView2) disables the clipboard API. Thus, cut, copy, and paste now work
+
+commit 8bdf455e8e5183628e4e9fdf6f7349751c670170
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 8 21:06:48 2024 -0700
+
+    Removed old build
+
+commit 4dc3c1dfff0639e8b71f429c258b62821c2d7af3
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 8 21:06:20 2024 -0700
+
+    Tweak to the WV2 environment
+
+commit f2f62d7d897f08e1d05e66ff7a2b99111f97528b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 8 21:05:52 2024 -0700
+
+    Re-enabled BodyObserver
+
+commit ba08143d4eb430a7adb883a171d28d9e276a746b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed May 8 21:05:04 2024 -0700
+
+    Finally figured out how to get around the fact that the clipboard API is disabled in the Microsoft build of Chromium (WebView2). Cut, Copy, Paste now work
+
+commit c91cbeef9ef53bed2bc91dabecdf6cee91563f2c
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue May 7 12:45:04 2024 -0700
+
+    Build 1.0.9
+
+commit bf662a95d7821ebc6766e5cfeb0bad4ab7b6b894
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue May 7 12:36:33 2024 -0700
+
+    Fix: Hopefully the last of the fixes needed to keep the app process UX in sync with the browser process content
+
+commit 0f6bf9d22f3c245e87863a2451df4b782e52f740
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 30 05:45:52 2024 -0700
+
+    WIP: Attempting to work around the fact that the clipboard API is not exposed in Chromium as WebView2 for security reasons (i.e no cut, copy, paste)
+
+commit 62d54aebe719ea51d16b9dfeac29408c5996486b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:46:28 2024 -0700
+
+    Fix: buggy thinking that resulted in style changes being applied to the wrong elements
+
+commit b2ecd889d406b872a376c6445c739e33b1a3f485
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:45:23 2024 -0700
+
+    Updated build number
+
+commit 0c6b8d276304bbf590e62a176b3983f86e83191a
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:44:59 2024 -0700
+
+    Fix: window focus issues related to email view
+
+commit 5651dc078b36ff2156c8050843f78bf379534fa4
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:44:02 2024 -0700
+
+    Code cleanup
+
+commit fc41240def4a69dda1d2c837f23de74775d562fa
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:41:43 2024 -0700
+
+    Code cleanup
+
+commit 4c7d196e85a568aea6743604799a6e5c53c667a5
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:39:35 2024 -0700
+
+    Fix: OK button enabled/disabled now tracks correctly with mailbox name validation
+
+commit 84499af52134a02737cb9a48f0ddb913b648a4de
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 29 23:39:04 2024 -0700
+
+    Fix: Focus issues for email window
+
+commit af6bbb8d58b18fcf9436ec9f6f9d278e5dc8a815
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 24 18:44:12 2024 -0700
+
+    Build 1.0.7
+
+commit 69cceb686317151c918d6ad3a63a20fccc692474
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:11:35 2024 -0700
+
+    Added data validation error template to default app theme
+
+commit dac520565369a181a435e61d568eba17bdecbfdc
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:10:40 2024 -0700
+
+    Tweak to confirmation dialog
+
+commit a556609d74f583614762340bc32c7fdffff0ebf7
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:09:52 2024 -0700
+
+    Fix: Print dialog no longer reappears after being canceled
+
+commit fc341a6479d568cb54b990852b8c583b1a617256
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:09:21 2024 -0700
+
+    Print now correctly enabled in email view
+
+commit 716d9c407bafaeeb42c117aede097cf4bed084be
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:08:53 2024 -0700
+
+    Tweaks to email templates'
+
+commit 522d3da3b0cbaa6f1f7ab9c82a36d7a4c4f0c1bb
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:08:13 2024 -0700
+
+    Fix: HTML editor toolbar region is now collapsed if the document is not editable
+
+commit 3e113b28f642abfc2e0ab7ca8c30155cac617b64
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:07:30 2024 -0700
+
+    Fix: User cannot create a new mailbox that shares a name with an existing mailbox
+
+commit f3b0c825c3b7ee28ac68ead5ee2e393fc91f8183
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Apr 23 00:06:05 2024 -0700
+
+    Fixes: 1. Browser bookmarks are now editable, including deletion. 2. Browser button images redone
+
+commit d8b8e2fa2c7488016eea2525ca3c86853f4e1dd6
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 15 13:51:25 2024 -0700
+
+    Build 1.0.6
+
+commit d1a2f0b8eb2e0441297207924b6be8ece6c93f78
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 15 13:36:13 2024 -0700
+
+    Edit menu is hooked up, with caveats: modern browsers don't expose clipboard for security reasons, so the browser control doesn't allow paste. Still have to figure that out. Content styling works now but the ux->content connection is bound to be a bit buggy
+
+commit 935756c7ffa92e138b867d5076ad789966a3b844
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 15 13:34:04 2024 -0700
+
+    Mailbox delete works properly now
+
+commit c1676a9c15f93d1421b2405aae81934fb5a37a5e
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Mon Apr 15 08:17:26 2024 -0700
+
+    WIP: Now that the app process and browser process are in sync, with regard to the active or selected HTML content, the last step is to make sure the individual UX components are also in sync
+
+commit ae05a3b72c3f6f7a9f4481c75b4f42df662990a6
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Sat Apr 13 10:51:50 2024 -0700
+
+    Code cleanup; simplification of DesignMode property
+
+commit b29ecf44a62bef1d57e980b19777e8f81c401d5b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Sat Apr 13 10:50:56 2024 -0700
+
+    Make sure Mailbox view scrolls as the selected message changes (buttons or arrow keys)
+
+commit 6b9035096911de4ec217b1026041b8810b2defb7
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Sat Apr 13 10:49:25 2024 -0700
+
+    Update build number to 1.0.6 for next release
+
+commit ab112a978e1414cf5de5f17ae32671e8f23b88d2
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Fri Apr 12 07:19:59 2024 -0700
+
+    Build 1.0.5 addresses numerous issues reported by QA
+
+commit f58127db395e2205b565b68fdd956bbc58f8ed10
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 23:29:36 2024 -0700
+
+    Image asset overhaul, part 2
+
+commit 0ff1ffc7ec90de03edbd8e15ef4c0b82b4062800
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 23:15:17 2024 -0700
+
+    Better appearance for installer & app presence
+
+commit 101b7050eab9b5781acd7f0fe9969996bcbf8329
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 23:07:26 2024 -0700
+
+    Less atrocious logo & about box imagery
+
+commit c63612010fab0f89a7c088f8786ae6710f3ad80c
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 22:54:30 2024 -0700
+
+    Better looking splash screen
+
+commit 2f3960010ca23fe93fd1b2e48feca10bc64f42c0
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 22:53:51 2024 -0700
+
+    Added new & delete buttons to the mailbox tab. Only user-created mailboxes can be deleted
+
+commit 4b18d6ac583abb59cc386a0906629c689cd64db1
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 21:41:05 2024 -0700
+
+    Removed min/max buttons since that doesn't work correctly in a tabbed environment
+
+commit 1e0fe0be014bd0bd9b28308735242b427996ad96
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 21:40:46 2024 -0700
+
+    Removed min/max buttons since that doesn't work correctly in a tabbed environment
+
+commit 8c47dd9c4184317804d863d8d152897b03cb29b4
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 21:40:06 2024 -0700
+
+    Fixes: 1. Discrepancy between delete key and delete toolbar button is now fixed. 2. Message menu is now updated as the selection changes
+
+commit bcd9719921d6a506d5c98c76fce2de5425ef149a
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 20:48:29 2024 -0700
+
+    Fix: a crash that would occur if the demand for preallocated WebView2 controls exceeded the allocator's capacity. Refactored the allocator to include separate lists for ready/unready browser controls, and introduced thread synchronization control. As of the current dev build I am no longer able to reproduce the crash
+
+commit 8d0d8a9569065acd306f065f79e102b76bfaeead
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:37:29 2024 -0700
+
+    New build: 1.0.4 should address most of the current bug list
+
+commit c0b020c5be7f8c4015dd69b9f306ea5bab960c72
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:36:40 2024 -0700
+
+    Removed references to Help button
+
+commit 1da83613bf093ba3d804d175b60fc5417d0ae6f2
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:36:12 2024 -0700
+
+    Fixes: 1. Settings button now has the correct tooltip. 2. Help topics button removed
+
+commit b308fa6e1b53641492ffbee6ad658256273ec892
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:35:25 2024 -0700
+
+    Removed Help buttons from dialogs
+
+commit 27937a6c4f7a85821fb42e5163c905c43d9f62af
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:34:49 2024 -0700
+
+    Removed Theme/Gui page from options
+
+commit 8ec2b992817589df61b13974e50036969963e634
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:17:27 2024 -0700
+
+    Added a splash/loading screen to pass the startup/loading time
+
+commit f11cf253301d1b5f341ae8d9106be1d417730004
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 16:01:03 2024 -0700
+
+    Fix: printing now works from the email and email preview
+
+commit 346ba39a10bbc37f7ac3d1850f9626f815492843
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 15:50:14 2024 -0700
+
+    Fixed datagrid sorting in Mailbox view
+
+commit 49f6a37797c49119d4a5dd4d0e4ead7812ce2662
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 15:48:40 2024 -0700
+
+    Fixed datagrid sorting in Mailbox view
+
+commit 8a1d4c3421edde1cd5b5fb92a7ec160e8e2fb24e
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:32:28 2024 -0700
+
+    Adding print support
+
+commit b73c42dec778d93fbd500825faa08430ff81416a
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:30:45 2024 -0700
+
+    Fix: more fault-tolerant parsing of the JSON that comes from a browser message
+
+commit acce2d3bdf507455657974b091a13060d043dccb
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:29:46 2024 -0700
+
+    WIP: Working on a sane and maintainable way to deal with making sure all the right menu items and buttons are enabled or disabled as the active view changes
+
+commit 65ea091b7f49b0293884e4ef2feaf6af06c0cc04
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:28:08 2024 -0700
+
+    Added some new extensions to facilitate enabling & disabling bits of UX as the active view changes
+
+commit b6b9128d6c99465862078b01c09af03c2f6787f5
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:27:20 2024 -0700
+
+    Updated version of the MDI dll
+
+commit 8bafc7542f86e2a39e0988c7630d5809410efa58
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:26:55 2024 -0700
+
+    Added print call to the HTML editor view
+
+commit a5c79b11d01e2dd549c57af8de0bfc9ef1d9c57f
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:26:27 2024 -0700
+
+    Added print call to the Message Preview
+
+commit 974dbc9b6cdfb4922e3e68a0831accf209427bcf
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Apr 11 07:25:58 2024 -0700
+
+    During startup, the windows that host the preallocated browser controls are now effectively invisible
+
+commit 753cc20ebcc648606576c6800aeee3634e4862e8
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 08:31:02 2024 -0700
+
+    Removed old build
+
+commit d882c5628fb3c8f20e0a0e3fc157a85d4e5fc7e6
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 08:30:37 2024 -0700
+
+    Fix: HTML editor views now handle focus and content changes correctly
+
+commit cc3c83a4f4e57b353cd5a819395425df853a93db
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 08:28:57 2024 -0700
+
+    HTML/CSS/JS editor problem related to keeping track of the current element has been fixed.
+
+commit 3f23c7dd12b003626931c9f302363c4da3037f56
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 08:26:24 2024 -0700
+
+    Email templates changed. Upon focus, the text/edit cursor should now display properly.
+
+commit a2e4d40acf54f2b3b0964d1a3decc7710966d912
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 08:21:53 2024 -0700
+
+    Fixes: 1. Mail Transfer menu is now dynamically created as the mailbox view changes. 2. Mail preview window contents clear when the message is moved or deleted. 3. Email view is closed when the relevant message is moved or deleted
+
+commit fc7c47e9f0d1198af1123888fd0c4bc2a9883bb5
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 10 07:13:53 2024 -0700
+
+    Fix: Improper formatting for EmailAddress.DisplayString was causing the email address portion to not display in HTML
+
+commit e823e38f375bedeaa890b92359254c3afc251b52
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 3 18:14:36 2024 -0700
+
+    Installer manifest update
+
+commit d20fa8ddec3095cac26e5003317088e915bbefc6
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 3 18:13:59 2024 -0700
+
+    Visual CSS editing to support the modern version of Stationery. Also did a bit of refactoring re: signature and CSS insertion into email
+
+commit 25a0f7f1acd4e6ff8f42b8432e91a6eb8d9875c8
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Wed Apr 3 17:11:43 2024 -0700
+
+    Build 1.0.3
+
+commit f52e759571a003d9cfd0364ce9711af3e1752c53
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 21:18:50 2024 -0700
+
+    WIP, CSS designer aspects of WV2 editor
+
+commit 2dd4a9f203cd771f8c08430322e1d9a405513049
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 21:18:14 2024 -0700
+
+    Experimenting with the email template
+
+commit 7ff958b1f0ccf8a062caa62b4cc0a045fb717067
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 21:17:53 2024 -0700
+
+    1. Code formatting. 2. Fixed InstallKeyboardListener so that the C# side is kept updated about the active (focused) element in the Webview document
+
+commit af36ae3bf78715a3815cefb85e83adcbc7348393
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 21:16:16 2024 -0700
+
+    Fix: bug in Color.FromJavascriptRGB
+
+commit 23a4b890c3fcb83703cdf1d70c5c567e7435fe66
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 09:07:50 2024 -0700
+
+    Minor cleanup of XAML comments
+
+commit 7cc834dd8c32b974f2682f7e52d13956eb4efe7b
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 09:07:05 2024 -0700
+
+    Remove unnecessary auto-set of CID property
+
+commit 29a26f8bdf6a9157589ff006db3a06441d90ffc1
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 08:32:37 2024 -0700
+
+    New build
+
+commit d0d66d20dd5f02a6584b79581389559e1dc47150
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 08:00:03 2024 -0700
+
+    Tweaked the HTML templates for all email types (new, reply, forward)
+
+commit 45dd56784efc5651c7aa4287a066ab1d90ddfdf3
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 07:59:17 2024 -0700
+
+    Fix: column auto-resize to fit message
+
+commit 87ef9c3a7332a454944b9b2dc4b9cfba0c63a920
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 07:58:49 2024 -0700
+
+    MIME-encoding of inline images now makes gmail happy
+
+commit e01c89c47cf885443a6175119c781533b32fc0fd
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Thu Mar 28 07:56:21 2024 -0700
+
+    Image converter, input format to PNG
+
+commit 2276b92b0d0b33e33b21a27751ea88219120f8f7
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Mar 26 19:29:41 2024 -0700
+
+    Rearranged the event hooking to work with the new preallocated WebView2 controls
+
+commit 461b424c33b7ae11a254bd2a033243e72d40b991
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Mar 26 19:28:21 2024 -0700
+
+    Modifying email templates to constrain new content to the correct div
+
+commit 815c46ffedd5f54fdb3fb35843a52d1d949486ee
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Mar 26 19:27:28 2024 -0700
+
+    Fix: Substring extraction when converting a color from javascript syntax to RGB bytes for C#
+
+commit 09bad120b4205cd1b4ed6079692751e536d18bf2
+Author: ispeedonthe405 <ispeedonthe405@gmail.com>
+Date:   Tue Mar 26 12:08:46 2024 -0700
+
+    Added early preallocator for MS WebView2 controls, which are used in all rich content viewing and editing. By preallocating and preinitializing a queue of WebView2, the various views can be simplified in their timing and logic
+
+commit 2f01360cc8f5057df07b6116b9c3fc87ac8dc944
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 25 07:57:16 2024 -0700
+
+    WIP: CSS designer ditor capabilities of HTML designer, for email, signature, and stationery
+
+commit aaae18944cf78353736fdb5084da9df5830a4ff3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 25 07:54:46 2024 -0700
+
+    Temp file manager. Allocates, tracks, and deletes temp files created per session
+
+commit 8b074cbc4dc29467cf64486c89f2d0ebbfc7a9a1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 21 22:30:18 2024 -0700
+
+    Namespace reorg part two: update the XAML files with the new namespace
+
+commit 423226f4b458cfbdfceb77c99c3ce9f7d56d7e41
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 21 22:16:19 2024 -0700
+
+    Namespace reorganization. Classes that are Eudora data or content types have been moved to the new Data namespace. Core is now reserved for core components and subsystems
+
+commit 204ef207c83ea2fc770ca5255547f028dd740097
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 21 21:22:49 2024 -0700
+
+    In preparation for more specialization in the toolbars
+
+commit 686aabe184d25deff1b0a262f4295e33b63afcd4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 13:01:11 2024 -0700
+
+    New build: 1) Email and Signature content are created and edited with the new Chromium-based HTML designer. 2) A handful of bugs involved in that. See Gitlog. 3) Code cleanup. 4) Making ready to ativate the Stationery editor as a CSS editor, using the new designer.
+
+commit 05ff124ed377f4b95b07ababc50f5f9ce1150602
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 07:57:43 2024 -0700
+
+    Exception logging now unwinds the stack to get the calling frame. It is therefore no longer necessary to pass the calling method metadata
+
+commit 42a38c3cc645cd59646c5121dcca8ecd4ab7ec52
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:57:40 2024 -0700
+
+    In 2024, 'stationery' would be best defined as CSS, either internal or inline. Making ready to leverage the new HTML designer as a CSS designer, to serve as the stationery editor
+
+commit a826578782d4443e282fd9f8470c46a575150910
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:54:09 2024 -0700
+
+    Remove unused string token
+
+commit 7bb390c14ebe01c4bf3f7ba68d5cb0a957ba6469
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:53:35 2024 -0700
+
+    Document interaction
+
+commit 7367e200a8fbef36365a0646a3070279158f7f91
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:50:22 2024 -0700
+
+    Comment out unused string tokens to make the preprocessor happy
+
+commit dd0a4c995b191927e57bd5176d7bfb80e40111c1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:49:26 2024 -0700
+
+    Disable background-image button when HTML designer is in Signature mode
+
+commit a2328a5308b45fd393c37d1c36c9c24a801f2f46
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:48:31 2024 -0700
+
+    Functionality and new items for email item context menu
+
+commit 1d4686c665d7bd56cdd263c1ce8f7aaeeae6fb42
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:46:32 2024 -0700
+
+    1) Namespace cleanup 2) Deal with the unlikely possibility that one of the special system folders doesn't return a path string
+
+commit 875126eebb9fd814bc210e18849ed4c2349d9de0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:44:54 2024 -0700
+
+    Updated version of my MDI workspace lib
+
+commit 3f2f4e78aa2c0fd719d27d644ea13564af65a639
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:44:14 2024 -0700
+
+    Disabled the cache portion of IconCache since System.Media.Imaging.BitmapSource doesn't serialize anyway
+
+commit 583e4ed8740e12d457d6fd4ca3b355459c5a4086
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:42:44 2024 -0700
+
+    Better async initialization of the common WebView2 environment & options
+
+commit fa0fbab51de5a82816f460729f698216b1d562b9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 20 05:41:42 2024 -0700
+
+    Fix: possible null dereference
+
+commit cd03af7c3f3c32f84d7a7706bddaab5f767a427e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 19 13:12:48 2024 -0700
+
+    Signature editing & insertion now work with the new designer
+
+commit b6ca8848f0b08a80b8b1beb87d676575fd0c7f2d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 19 07:47:42 2024 -0700
+
+    Email editor now nicely integrated with HTML designer
+
+commit 33c400167ce150b79442c93bdecf5b36157d0007
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 16 06:26:38 2024 -0700
+
+    New build: fix for read-only bug when reopening signature editor
+
+commit d35dd11d3ec6736a0b0b1212b7be182b5884923e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 16 05:25:52 2024 -0700
+
+    Expanding the range of what can be done via the designer's Document interface
+
+commit 600d194a360313fcd444e9a6139ce55cde2b1944
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 15 06:09:32 2024 -0700
+
+    1. Fix: Reconnect AttachmentsBar control to message.Attachments after DataContext change. 2. Code cleanup
+
+commit 8ac55a1847e58e91c81870a2b48dca23117fb90e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 15 05:51:37 2024 -0700
+
+    Bugfix: designer reload of certain editable content types now works correctly
+
+commit 3ceea96c9cdd41f6afd220b8253607b87edebf73
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 15 05:49:45 2024 -0700
+
+    Code cleanup
+
+commit 8d0f39050823d33d59302bff84de713e0d259b3f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 14 13:21:27 2024 -0700
+
+    New build, incorporating the new HTML designer based on Chromium/WebView2. All rich content (signature, stationery, email) is now fully HTML5/CSS3 compliant, along with the view & editor
+
+commit 16e492470426928464db0b721b56bb33be64df93
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 14 13:14:01 2024 -0700
+
+    Integration of new HTML designer/editor
+
+commit 54b0451eceeb678a8ae37c21af3b762e7f073667
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:26:49 2024 -0700
+
+    Uniformity in Signature and Stationery tab and window behavior
+
+commit e720f0eee7d307f37a55d2e2d97d156fc29b46db
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:25:29 2024 -0700
+
+    Textbox only updates a bound dependency property when it loses focus. Must therefore explicitly copy the tetbox contents to the property when textbox handles Enter key as if clicking the OK button
+
+commit e2b3beb3346089c49c1fc1e36a4d5b96da300ae4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:06:32 2024 -0700
+
+    HTML designer integration, part 1
+
+commit 26fa4c822eb9e84a38135359bafc627adea1c0a5
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:05:36 2024 -0700
+
+    Javascript files used internally by the HTML designer
+
+commit a6a0041794089ab81b17c84e7b11fd1b5e72284c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:04:40 2024 -0700
+
+    Dialog overhaul, part 1
+
+commit 78fb90f959ca8356951ccdda795ace994e6d192e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 13 22:03:09 2024 -0700
+
+    New images used by buttons
+
+commit c56358a4e066ff9d73ed1513883531569a561680
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 12 10:09:32 2024 -0700
+
+    WIP: New WebView2 viewer/designer to replace MSHTML and WebView
+
+commit a564ff027f6853249e0f31b38f63099279dbf0e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 12 10:07:53 2024 -0700
+
+    Removed lingering references to MSHTML and System.Web
+
+commit d2e201f2a23cf079017edcc4b5dfeb902bee69f0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 12 10:00:15 2024 -0700
+
+    Added images source for new buttons
+
+commit 6e7fe0a781c846331b26876f62120935ce4f2a8d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 12 09:59:25 2024 -0700
+
+    Removed all references to MSHTML
+
+commit 3029e74a6654eaa5aab4757c8185b7dd547e1bed
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 12 09:57:41 2024 -0700
+
+    Fix: typo in inline image generation format string
+
+commit 4a688f0ea5ad0fb15fffa3e32cbb66d75d690941
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 11 06:57:42 2024 -0700
+
+    New build: File-browser tool/window is ready. Doubleclick launches the selected file. Also increased the max width of the tools pane to better accomodate the file list colunns
+
+commit 5aaa92d448a901bd887e7e1f7d5459cdb96a8d86
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Mar 10 23:35:12 2024 -0700
+
+    File Browser tool window is ready. Double-click launches the selected file. Also expanded the max width of the tool pane
+
+commit 084febd4fd896d18bacd375fbf3b4b1563c2734a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 9 09:48:28 2024 -0800
+
+    Bugfix: primary key value (date) for statistics table is now set correctly upon new session (day)
+
+commit bacc94d9a18db0b7eb6642652a60c68ef3a99794
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 9 09:25:16 2024 -0800
+
+    Eudora statistics are now ready
+
+commit ddc755e751a761b459ddfadcf44b6022203ed1d8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 9 09:24:39 2024 -0800
+
+    Eudora statistics: counters are now updated upon the relevant stimuli
+
+commit 0b3d301ad67dd2158d1dd76a47955af0f0d8198f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 9 07:25:52 2024 -0800
+
+    New build: 1. Email filter reporting and screen are ready. 2. Eudora statistics: The UX is done. The reporting is split across tabs which categorize and display the data. The underlying database and db persistence are done. The query mechanism is done. All that remains is to add the stimuli that increment the various counters which drive the query results.
+
+commit cbe8f2634191556099ef8f30d0bd32adce2a93b1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 9 07:13:47 2024 -0800
+
+    WIP: Eudora statistics
+
+commit c0963c5bb2bb87921f92d17c48a6c0a95a6c88d9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 8 16:36:46 2024 -0800
+
+    WIP: Eudora Statistics. Datastore, query, display are done. All that remains is to increment the trackers and counters as various app functions are called
+
+commit 64ffe5383f7b197a6563295e037d397d3340faf5
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 8 16:06:43 2024 -0800
+
+    WIP: Eudora statistics
+
+commit 820c9ad7de8d69c26a0ecd9a9de5c16c1548be57
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 8 16:05:51 2024 -0800
+
+    New namespace, in preparation for moving some files that belong there
+
+commit f438cfd504298f15ccfc40985957cd7e8f8a8afc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 8 16:05:04 2024 -0800
+
+    Code cleanup: string interpolation
+
+commit 588f246ac39d9aa9f0645456a89b08a7569066b6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 8 16:04:18 2024 -0800
+
+    Fix: possible null dereference when forming an address bar search query
+
+commit f143bc64c6bb9132824b289a8839296bb13063bd
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 7 20:15:10 2024 -0800
+
+    Creating Eudora email and usage statistics as database tables; one row per day. Reporting based on longer time periods will be done with db math
+
+commit f482e649bb89897903905de1a5da7603bcb34646
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 7 20:12:39 2024 -0800
+
+    Fix a possible null deref in options view during databinding
+
+commit fb36fe74bb4c59fe12a7fae23d43e6194cbd9f87
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 7 17:46:59 2024 -0800
+
+    Code cleanup: culled unreferenced classes and namespaces
+
+commit 78618800164fae073785bb4fa04ea1fe06b06c04
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 7 17:45:21 2024 -0800
+
+    Code cleanup: culled unreferenced classes and namespaces
+
+commit 5cad433389da20588682154cf28da48552e7a841
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Mar 7 17:33:56 2024 -0800
+
+    Filter Reporting is now active. Like Eudora 7.1, this data is not saved between sessions
+
+commit 7be7791ca3aac411f9db4599ade07091890a44f8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 6 19:29:17 2024 -0800
+
+    Added use of the Windows Notification system, with options for switching on/off notifications for email and other types
+
+commit d4332133dae5e19b1db12d72879650b79a3ba32d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Mar 6 19:27:37 2024 -0800
+
+    Added browser settings to option screen
+
+commit bf7ac0e189404b6c31a1502de30232b91548393a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 21:51:29 2024 -0800
+
+    New build: 1. Added strict email server certificate checking. 2. IMAP retrieval now sets the server-side seen/read flag on messages as they're downloaded from the server. 3. Various acts of UX cleaning and prettying.
+
+commit 10372e0c8514a325aa04da16683ea3c5bcbc866b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 21:41:16 2024 -0800
+
+    1. Added strict email server certificate checks, with reporting. 2. IMAP retrieval now sets the seen/read flag on messages Eudora has already downloaded
+
+commit 81369f849f0a22714c6b6e4b4a2faa45f17a3ce4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 20:01:43 2024 -0800
+
+    Project file changes that go along with new image assets
+
+commit 1c78a1f84a5fe0900d4eab2575677845b2206dbc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 20:01:03 2024 -0800
+
+    Removed GDataStore in favor of more granular and localized IO controls
+
+commit 5dfe562af3421bab1d8d2e5a9092208cb546bfdb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 19:59:07 2024 -0800
+
+    Added a Copy button to the event logger. Produces a dump of the event log to a text file, which opens in notepad
+
+commit 6151e66cc1edbc3d0b772fdb27bf0ff39070bd5b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 17:39:35 2024 -0800
+
+    New build: 1. Fixed bug in Address Book 2. Better exception reporting details in the event logger 3. A quick pass on UI neatness
+
+commit e9393b196f1ba2d58fcd91f8f9ae267f9b91daa9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 17:31:00 2024 -0800
+
+    More informative exception reporting
+
+commit 37fe2010d67636645949139c643afef9764073b8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 15:28:41 2024 -0800
+
+    Added new image glyphs for common buttons (add, edit, delete)
+
+commit 21f5e8e46fb18b218a18f9e1f476bf554c40f8b9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 15:27:38 2024 -0800
+
+    Fix: Bug in address book serializer
+
+commit fbb2355171b2afda4434ee0b89baa8bfaa36a322
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 15:26:27 2024 -0800
+
+    Changed the color of Warning-level messages so that it's actually readable
+
+commit 3a370c7f9fbc039578c33c865c9c5533bba1e038
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 12:34:22 2024 -0800
+
+    Cleaned up CurrentBuild folder so it only contains the distributables
+
+commit d8b743d3cb66af8c40ca2b8a956809ba1cc02ece
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 12:31:00 2024 -0800
+
+    New build: Now in msix installer form. Please read the readme to successfully install the key or installation will fail
+
+commit 1d60403b5e742712042300102663ea1bc7d3e400
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 12:29:42 2024 -0800
+
+    Edited gitignore to allow msix packages and key files
+
+commit 480adf20dbc08e9f1216b71d3e99408410acee9c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 12:27:04 2024 -0800
+
+    Added MSIX installer package for distribution
+
+commit 3fadf8e7020fcd8c917f40f82785c57ea514d5c8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 10:01:07 2024 -0800
+
+    Datastore spends more cycles in memory ops than in disk ops
+
+commit eedecd4d34ae101b8f900cbd47fdb6770dd48dac
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 09:41:21 2024 -0800
+
+    Renamed MailMessage to EmailMessage to prevent Intellisense from accidentally selecting System.MailMessage
+
+commit 3e06b84e5b2a48f03973fb49c6b8434dafc7703f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 09:39:44 2024 -0800
+
+    New collection class, supports thread synch
+
+commit 89f5b91bba8f729a3cf4fa2b2de409a480749c65
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Mar 5 09:38:47 2024 -0800
+
+    Datastore changes, in preparation for virtualized loading of large mailboxes
+
+commit 042dd417a656df6d3aa6d63ca6f52c0a803028f4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 4 11:12:41 2024 -0800
+
+    Event log window collapses properly when hidden
+
+commit d294a1b9aa6a59481e272101e07ace8b831320d3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 4 07:11:39 2024 -0800
+
+    Implemented textbox behavior, select all on focus or double-click. This is standard UX behavior which for some reason is missing by default in WPF textbox control
+
+commit 11f973f7b08cd557d3a9a6d1ea84be5249467f70
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Mar 4 06:30:46 2024 -0800
+
+    Renamed project from EudoraNet to Eudora.Net
+
+commit e06d6c84ac42699276ba6d19618e038850d8c1be
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 2 21:52:39 2024 -0800
+
+    Datastore overhaul. WIP
+
+commit 8fdf3e19688387e3e10b96dd1d764575f70687b7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 2 16:15:05 2024 -0800
+
+    Search query string formats for different search engines
+
+commit 9530b9c51d2f0f0144ee134fc849bea8c595d6a8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 2 10:15:25 2024 -0800
+
+    Cleaned up compiler warnings
+
+commit 109656da6deb219cc3e34af67d9b34cf7f810a53
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Mar 2 09:01:42 2024 -0800
+
+    Browser settings: WIP
+
+commit bc6811e8cfde96c45dad48395dae975451f5760a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 21:13:48 2024 -0800
+
+    Browser settings, WIP
+
+commit 276656ff4132941a6c514bd201eee17402d57094
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 19:29:09 2024 -0800
+
+    Bookmarks now work in the integrated browser
+
+commit a9ff200d75f6ada123c0bad40a1d6f4c2639e56d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 14:57:16 2024 -0800
+
+    Updated build with all the latest changes
+
+commit bedac6755afb4467be51b9230ccb9e7a436efed9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 14:56:35 2024 -0800
+
+    Internal browser window is now usable, incluing address-bar searching. Bookmarks and settings are still WIP
+
+commit c5f730bb49f28dad56c2878275ab18e74e557e4a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 12:25:35 2024 -0800
+
+    Exception handling when opening attachments
+
+commit acdf1d652a0970ee6ff76a7b4fce56c0a379ba8e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 08:28:59 2024 -0800
+
+    WIP: Eudora statistics data and screen
+
+commit 2b76783097201b7df51fcc103a5ac0cfd991a650
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Mar 1 08:28:03 2024 -0800
+
+    Make sure file access mode is compatible with file open mode
+
+commit f91ffcd4df3ac337807f71ce2a9856f2e8129483
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Feb 29 18:00:05 2024 -0800
+
+    Added integrated browser to take the place of old DirectoryServices
+
+commit 190f11b405ba8f8f263fc23c56b8f7c25d1a9a99
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Feb 27 11:25:54 2024 -0800
+
+    New combined mailbox view, replaces previous unique types. Includes datarow (mail) context menu
+
+commit 436f7931ec5783d6e5a34e2258e130ee982a7e1a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 21:30:35 2024 -0800
+
+    1. Cleaned up IconCache class. 2. Activated save/restore for IconCache
+
+commit 0f8fe82baf976371f7ee3cb416bdcc815c2884b6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 21:09:10 2024 -0800
+
+    Updated build: 1. New UX controls for displaying and interacting with mail attachments. 2. Fixed horrendous pane-sizing bug in MainWindow.
+
+commit e2f8f38c5924dfbcaf0d5a9eefaf68063b879dd8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 21:07:48 2024 -0800
+
+    Increased max size of tool pane in MainWindow
+
+commit 0b4b59864f312208a9f82a33ddc58e2c4b651f34
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 21:07:09 2024 -0800
+
+    New UX control types, AttachmentsBar and AttachmentsButton. Essentially a customized ToolBar for showing and launching mail attachments
+
+commit 83cda5e500db1007bda4ca6da0e195d39b30951d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 09:15:20 2024 -0800
+
+    Utility class for extracting shell (file type) icons as WPF-compatible ImageSource
+
+commit 53e41a2a0e17c8964b6f7883b2c30ca66848c529
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 26 08:01:51 2024 -0800
+
+    New extension method, allows System.Drawing.Icon to convert itself into a WPF-compatible ImageSource
+
+commit db3c4b52cd3007ee09d9bb553e597f79089fcd79
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 25 21:06:59 2024 -0800
+
+    Began work on alternate color scheme
+
+commit 9e6cf8b14e0ff07a75d4108ce1179f5ea2472124
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 25 21:05:18 2024 -0800
+
+    Changes to property access control
+
+commit 97eb4b9aca390f02f37a55c1527738da0c68e3a8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 25 21:03:52 2024 -0800
+
+    Groundwork for adding color scheme selection to Options screen
+
+commit 5f44394cc1d1769d050ff1d18826e856245e454e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 25 21:02:59 2024 -0800
+
+    Tweaks to MainWindow panes size, position, scrolling
+
+commit 7a23744a2531068eb13e7c16fa5387d27bb2c4d1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 25 20:19:54 2024 -0800
+
+    Small change, class renamed for clarity
+
+commit 0e2e718e21c8123340dbab936f9161043f2231c9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 23 22:10:01 2024 -0800
+
+    MainWindow changes. 1. Added horizontal splitter 2. Save & restore main viewdrag & size settings
+
+commit 482ce8693e6a43f127cdcb573103d53f42ddb18b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 23 10:16:17 2024 -0800
+
+    Updated build with fix for datastore issue
+
+commit 00d607cc33e8ace353f0db53e9dd2d3fd337eeb3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 23 10:15:45 2024 -0800
+
+    Fix for datstore issue; allow autosave options to block the user/UX from changing data during certain operations. Additionally, renamed some classes to avoid usurping the .Net naming conventions
+
+commit 1559913ce7fb6e1db50b53324dbf5b0155d607f1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 23 10:14:34 2024 -0800
+
+    Fix for datstore issue; allow autosave options to block the user/UX from changing data during certain operations. Additionally, renamed some classes to avoid usurping the .Net naming conventions
+
+commit 43d7f291a73a7b3dc72d70e129826fdc1fd90a2d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Feb 20 16:55:03 2024 -0800
+
+    Mail filters redone, making use of new email search engine
+
+commit 99e47313095c69d2846f2ccd235fe9f15867f44a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Feb 20 16:37:03 2024 -0800
+
+    Updated build: Mailbox filters now use the unified mail search engine. Also updated the filters UX to go along with that change.
+
+commit 6e3833ae266e9d26ab0b18eaafccdb5a95a53804
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 11:00:10 2024 -0800
+
+    Updated new Mailbox screen
+
+commit af90ff2905826c9e794ff6df0791c857dfeb858c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:59:16 2024 -0800
+
+    Newly-extracted toolbar/control images from the old Eudora
+
+commit 33b71588c34ff8797191ac91266da5500092a246
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:58:35 2024 -0800
+
+    Updated mailbox view screen
+
+commit abb0c332efa2f92dba13511a5ea777ec90090fe1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:58:01 2024 -0800
+
+    Updated first-time run dialog UX to be consistent with the options screen
+
+commit 12449cb55eeb80b7f9b00c10ba9990cd0b6c8049
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:57:17 2024 -0800
+
+    Updated default theme styling; better-looking main toolbar buttons in disbled state
+
+commit d56d6bf304c954a32800c80665cad77090f42ace
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:56:20 2024 -0800
+
+    Unified email search engine; new find messages screen
+
+commit d38dcfd71605d681238d9f5830a70f3f8b596415
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Feb 18 10:50:48 2024 -0800
+
+    New build: Email search engine; email search screen
+
+commit 44cce3fe2093e0204a8441351f8a8bb325595efc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 16 15:56:05 2024 -0800
+
+    New build: Window behavior and styling; window buttons and tabs
+
+commit 4378bae6bb74d20f0d7f24370d03801dad014033
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Feb 14 11:56:55 2024 -0800
+
+    Updated build: Mailbox view
+
+commit 19f6b0289fde6d3ab28034f7eb7ae4ffe4507e73
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 13:41:12 2024 -0800
+
+    Update build: prompt user to create a personality if none exist
+
+commit 71113825b4a8f9fd62ab551bd8242846deb9b115
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 13:40:10 2024 -0800
+
+    Inform and prompt user to create a Personality if none exist
+
+commit 0c8d6fb8fb2cfa1bf8a5ea2110d1fc2024eb2903
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:57:20 2024 -0800
+
+    Changed ctor
+
+commit 7554f47d5476a0c1245b4309083e2de4c631e48f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:56:28 2024 -0800
+
+    Added attributes to make json serializer ignore properties that don't need to persist; those that are strictly runtime constructs
+
+commit ca021d2efb37664194f2969cbd7c6a1364b0edb3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:55:24 2024 -0800
+
+    Removed checkbox for option to delete mail from server. These days POP and IMAP access tend to have their own rules; pop for delete, imap for leave.
+
+commit 296339c880cea5a691be86de4629caafa4f74da6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:54:15 2024 -0800
+
+    Minor changes to email view
+
+commit 335aa9f352e8e5045c9f818d7a7b51c8b72e4158
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:52:56 2024 -0800
+
+    Small change, additional property in the general helpers class
+
+commit 1018d023e2437f40c7b29b0b457819990a9e7126
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:52:05 2024 -0800
+
+    Small changes to build config
+
+commit 61cf884e54de5c33e0971827e9d01e73284a3f14
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:51:08 2024 -0800
+
+    New class, centralized container for common data validation checks
+
+commit 118513c0af16abaafe73a0d9dd8e5ff43d51f99b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:50:13 2024 -0800
+
+    Fixed issues relating to incoming malformed attachments
+
+commit 5f6240a7849e436f5aee66fc6f7051ff6675aa27
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:47:47 2024 -0800
+
+    Rename extension method
+
+commit a1287bdfbb4a03845abdc764ff98420c3632b3ba
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:47:11 2024 -0800
+
+    App settings / options
+
+commit 4c44d272281496e469b4727e9015f3c542298d38
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:44:27 2024 -0800
+
+    Changed startup logic to accomodate first-run options screen
+
+commit 19bda3fea45d80c63d17cf959f5c2a6bbc8dd3c4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:43:54 2024 -0800
+
+    Updated MDI lib
+
+commit caed5d0aea40e2341120fe0431fd5fbc1b7f457d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 12 12:39:58 2024 -0800
+
+    New build. Startup options presented to user on first-run. MDIChildWindow control buttons now function
+
+commit c612e8af1c724454dfcaad53eb673810b594d99d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 9 13:50:25 2024 -0800
+
+    Updated the signed release build
+
+commit 0eda9fb5e2f35d40f52cd4a028c88d0785205e8b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Feb 5 16:44:16 2024 -0800
+
+    Updated build
+
+commit 7f870de6cfc76b3dcc5b3c5233060ee5422b1788
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 12:07:34 2024 -0800
+
+    Digitally signed the build
+
+commit b34c469915eacce3b2fe4dd6ac7d5cf9647e6168
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:41:16 2024 -0800
+
+    Latest version of formatted mime encode/decode
+
+commit 3bc0b76d1ba473a04c9254d75acd7ffb25be2e76
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:40:01 2024 -0800
+
+    Helper / Utility functions
+
+commit 1b9b4d7f50978014e7405f9d8bc3d65ee417cd8a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:39:35 2024 -0800
+
+    Various project file changes
+
+commit 3937bc7df41f567b53af7d207557bdb6f781162b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:39:06 2024 -0800
+
+    Cleanup: broke out the subcomponents of a filter to individual cs modules
+
+commit b21e7839d5581ddd45c36506dd235e5c278dfe68
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:37:47 2024 -0800
+
+    Dialog class associated with creating attachments.
+
+commit bee87afb855be0902c5ee6393ca306022a4967d9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:36:46 2024 -0800
+
+    New GUI type, for views that are not primary MDI children but rather the content and subviews of a main child window. Propagates activation/deactivation to the subviews so that UX hooks can install and uninstall as the active window changes.
+
+commit 60dea0a782438d558ea92bafac744138350612a9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:35:01 2024 -0800
+
+    HTML templates for outgoing message types
+
+commit a7eab9d26607d4bff97c3402ff5dac33ed5d5588
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:34:22 2024 -0800
+
+    New core type representing inline image content. Makes crafting the mime simpler and cleaner
+
+commit c7ec4b5b7da3ba705f40142bb07befd05f3a81df
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:32:41 2024 -0800
+
+    Various helpful extension methods
+
+commit 11f344679b293733a96e803bdcc96c21ba75778f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:32:09 2024 -0800
+
+    Core and GUI basis of app options
+
+commit 3317a15874277a91fbd2e4d4650eb13566e70a83
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:31:25 2024 -0800
+
+    New core type that serves as an easy wrapper for C# function pointers
+
+commit 44046deb3ae126860b38a6bb3ccdac829d6d2b9c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Feb 2 10:30:27 2024 -0800
+
+    Update current build with latest changes
+
+commit c890f689e0c4860f94ebf0581a307ac0bc9144c2
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Jan 28 12:13:03 2024 -0800
+
+    Using reflection to connect the MS web browser to .Net events, such that the message instance can be updated when the html content is edited. updated build to include this
+
+commit cf7076e2ac1fbb0f4b577703c5c6d1b53d5b9c2b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Jan 28 11:48:21 2024 -0800
+
+    Workaround for buggy MS HTML implementation whereby setting designmode clears the document body
+
+commit a01971f01f9c788db0da1731da9e64e5dafb6a3d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Jan 28 10:45:36 2024 -0800
+
+    Email parsing, building, formatting, editing.
+
+commit c5ac8a2a10a0a0071097829eece427008696c7ba
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 22 07:59:31 2024 -0800
+
+    Major push. New multiple document system to replace the bugy 3rd party lib
+
+commit dda14c63ad45099250122a4890d390cf7f573f45
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 22 07:57:34 2024 -0800
+
+    Helpful utility interfaces
+
+commit 2095d453f8f6c5cacf9e1f19f3453d8fcb78483b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 15 18:44:56 2024 -0800
+
+    IMAP retrieval changes to sync with core/EmailAccount changes
+
+commit 281c083234689a93f19f035ae0ccb723c95652a0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 15 18:44:06 2024 -0800
+
+    Build updated
+
+commit d94638bfc762e551a91da1e891fc707992df877b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 15 18:39:52 2024 -0800
+
+    Make sure the Event Logger scrolls the last item into view on control loaded
+
+commit 89f8da4ed74423b01366c3b7fd959c424e438366
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 15 18:38:56 2024 -0800
+
+    Check needed for differences between design-time and runtime instantiation of the app and its components
+
+commit 788454f780cc841fc6f1fe339eca9f59c60c2a50
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 15 18:37:40 2024 -0800
+
+    New UX for Personality / Email Account and supporting core component changes
+
+commit 29987e538c1992b01202259cab1074163f3918af
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 11:07:49 2024 -0800
+
+    1. Implement INotifyPropertyChanged on control. 2. Cleanup of property names, making them less cumbersome
+
+commit 1339e269d396c08ce955a2a409566492a2d437ca
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 11:06:34 2024 -0800
+
+    Small changes to account for 1. MainWindow interface and 2. Relocation of emal priority field
+
+commit 7dd675d554066e9f7f045e1b70bf62deea8c1170
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 11:05:14 2024 -0800
+
+    Datbinding UX to the updated, self-saving MailMessage
+
+commit 35e706fee03cc4edf7d63be277b2b429fdb90f0c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 11:00:58 2024 -0800
+
+    Minor cleanup of app/window startup
+
+commit 54d8687ac3c903b17e4cb96ce7cee569ba744dce
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 11:00:17 2024 -0800
+
+    Fixed irritating issues with the EventLogger. Also made logging events multi-thread compliant
+
+commit 3e984371813b939cd3f2f8003b5c2ccfb168b750
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:59:01 2024 -0800
+
+    Implementing INotifyPropertyChanged on MailMessage. Facilitates auto-save of draft messages
+
+commit 287bc6fbeb905dd6d82e2e46dc29c2af8196b064
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:56:57 2024 -0800
+
+    Making Mailbox add/remove message invokable from other thread contexts
+
+commit fe3093ba77e7c3a1c044066e539ea07454a0aa5d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:55:53 2024 -0800
+
+    Minor cleanup of MainWindow class
+
+commit 04761c5c813d16b62bf73e7bfdfb0f64040fa1e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:53:25 2024 -0800
+
+    More extension methods
+
+commit fc6c69c79132692f5f4be21c1e3d5aa9b264373f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:52:49 2024 -0800
+
+    Remove files no longer needed
+
+commit 886f09424677c53f5c3b91392de512c916df855e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Jan 11 10:51:56 2024 -0800
+
+    Email send & receive, POP and SMTP.  Still have to add IMAP and per-account settings (pop vs imap, port, etc - data entry form)
+
+commit 3f5a61eb0d4c3a6d42fd3583146f751cb2b64f1d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 12:00:57 2024 -0800
+
+    FIX: Unintential double initialization of PostOffice at app startup
+
+commit b5d7859baafd79cee39876fe9d049d1e1baf01ab
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:45:26 2024 -0800
+
+    Updated release build
+
+commit 27cc13b40cf36922935a3bae416544eaaef76524
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:42:19 2024 -0800
+
+    Updated dependencies in CurrentBuild
+
+commit 48f64651ef04150d03d348a31bb97f8cc20cff9e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:38:19 2024 -0800
+
+    Cleanup of unused namespaces
+
+commit 16af9593b3f5bef39759e86ea2064b3c66ad5532
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:37:58 2024 -0800
+
+    Small changes to account for core system access changes
+
+commit b604b5f2f9a87f8f9067df17c1bab758bd8ddf41
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:37:16 2024 -0800
+
+    Custom control like the numeric updown from Windows Forms
+
+commit 235f239dad5bbed549ddf98ec9f2f7fa0174838e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:36:45 2024 -0800
+
+    Redesigned Email View / Edit screens that remove dependence on deprecated mshtml
+
+commit 2f57adaa4b7164f0a5632dea8954c373308c1a6d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:34:50 2024 -0800
+
+    Small changes to how core systems are invoked
+
+commit 5172a4d24dba0fcff965d7911bd8c45c938c6f14
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:33:54 2024 -0800
+
+    Small changes related to PostOffice accessor
+
+commit 6edaaa9226a86b5ffbbd16de57fb6e41d1217b6d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:32:51 2024 -0800
+
+    Small changes related to PostOffice accessor
+
+commit 794ed42075a80bca2de2499597cb4208b14ce125
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:31:54 2024 -0800
+
+    Changes to utility dialogs that go along with core changes
+
+commit efed4e7e5699def86322f0717dab2ee2da88ccd1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:30:45 2024 -0800
+
+    PostOffice now looks over its own folder(s) at startup
+
+commit f0c17b1305d8cadb69d8e15da1f5bdb2cc49997a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:29:57 2024 -0800
+
+    SoundPlayer now has its own, internal static getter
+
+commit c945e3dba829fd239382dbcd532d8c56b06c1bce
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:29:14 2024 -0800
+
+    Got rid of the unfortunately buggy NuGet package for MDI-like client view
+
+commit 79385856c640e12efb2e84f328932e65f7815b3c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:27:57 2024 -0800
+
+    Generic confirmation dialog. 7.1 is missing that on certain operations, suchas deleting a contact with no Undo in the buffer!
+
+commit 1ef713e4e1b470b50e38be0dc4c813dce772f315
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:26:58 2024 -0800
+
+    Core container for useful extension methods applied to framework types
+
+commit faa993a5dcefe7047aed0f6534d16b848fb1a59a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:26:20 2024 -0800
+
+    Commonly applied control template styling now exists as resource dictionaries
+
+commit 8c3eb1f23a3eb5eefa6628e62f7f03936cbf9029
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:25:01 2024 -0800
+
+    Address Book & Contacts. Somewhat different presentation and structure than 7.1 but more sensible IMO
+
+commit d2dd2963e2279597d151c48cb15832919a9879ee
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:21:22 2024 -0800
+
+    App startup changes. MainWindow is instantiated on Application.Startup rather than implicitly in a hidden framework ctor. This makes deterministic startup order more sensible
+
+commit 9fc6eba70fa50e5c3c69190db4ab3c42f867743b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:19:30 2024 -0800
+
+    Event logger text is now colored according to event category
+
+commit fb9357673375f3115e1323bb8b4a92e5ee459bcc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:18:33 2024 -0800
+
+    Removed exception dialog in favor of the event viewer
+
+commit bfef0ccffa9402b1d90261b609f9b7873fce043a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Jan 8 11:17:47 2024 -0800
+
+    Build configuration changes
+
+commit bd8723123bac3aa3e0debc154afc1550bd7d4828
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Jan 2 07:41:54 2024 -0800
+
+    Updated 3rd party MDI lib with my fixes pertaining to keyboard input, focus, and navigation in WPF WebView2
+
+commit 4a0b8470899b681a1405bb462dd65732098edda3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Jan 2 07:40:44 2024 -0800
+
+    Changes in support of making in-document keyboard navigation work properly for WebView2
+
+commit af40e10b42d768195d4ea1a721af03d472c7015b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Jan 2 07:38:20 2024 -0800
+
+    Cleanup: MainWindow, some leftovers from earlier code
+
+commit 31f423c01e1163be84ec6524c61ce1728abe335d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Jan 2 07:36:28 2024 -0800
+
+    FIX: Had to dig into the source of this 3rd party lib and get rid of the ScrollViewer in the MdiContainer. It was stealing keyboard navigation away from the WebView2 document
+
+commit f29880ebdb5793cbc54a201751deda2ac9139fab
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Dec 31 10:30:15 2023 -0800
+
+    FIX: WebView2 control does not properly respect Z-order under certain layout conditions. Added explicit management of Visibility property corresponding with which MDI Tab is visible. This wouldn't normally be necessary but it does solve the MS web control problem.
+
+commit e8e74da5b3c144f814bb445e23b5d404dfe33770
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Dec 31 10:19:21 2023 -0800
+
+    FIX: Layout issues for the WPF version of WebView2 are now fixed:
+
+commit 2ddcbc6572da75343a6190055b493bf35284eb8c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Dec 31 10:17:43 2023 -0800
+
+    FIX: WebView2 no longer extends beyond host window bounds. It turns out the control bleeds out of the bounds when the parent container is nested in a DockPanel.
+
+commit 853b22384d7b897e2c8a1558bbf459528d3be960
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Dec 31 10:16:17 2023 -0800
+
+    Moved app theme into MergedDictionaries, thus other styling can be applied globally without issue
+
+commit 48c297aceb043c4a51df55250a546a1205317254
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Dec 31 09:59:33 2023 -0800
+
+    WIP: 1. HTML Designer based on WebView2, for rendering and editing HTML email. 2. Plain-text email editor. 3. Email message view that can switch between text and html.
+
+commit a93b5c5561d86b9072b059799723ec052b33e2f6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Dec 23 18:39:38 2023 -0800
+
+    Update build. Address Book and other tabs in that combo view are now in. HTML Editor for email viewing and editing is a WIP
+
+commit b70fdcb994a86a6c2f134e3cb13466e5cf94ce31
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Dec 23 18:38:10 2023 -0800
+
+    WIP: HTML Editor view/control, since Microsoft (inexplicably) doesn't include one of these outside of their own dev tools
+
+commit ea1b0042ae7f9066ce113450a05c92fbeefa5a7a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Dec 23 18:34:18 2023 -0800
+
+    New Help:About box
+
+commit c1d1f633dfc22a29be2b6660101d6d484a42cddf
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Dec 23 18:32:14 2023 -0800
+
+    Services view: Address book, directory services, etc.
+
+commit c4a7184d9e24ff011a05e68e7971743099a464f9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sat Dec 23 09:18:32 2023 -0800
+
+    Pre-ribbon commit
+
+commit e3a9687ee0b021e5de464006ec5e1b6c306ce361
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:35:07 2023 -0800
+
+    Updating release build to reflect current dev state
+
+commit 34297dd14b32c63413deab2efd8ecaa1a6978ddc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:34:26 2023 -0800
+
+    Created a sortable extension to ObservableCollection<T>
+
+commit 5ce57c69f7b54012e6107506e407040a47f93af2
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:33:34 2023 -0800
+
+    Added a new category to the event logger
+
+commit f54ab3769f040de78a16a37feef0aea966668b8c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:32:50 2023 -0800
+
+    WIP mail filter actions; additonal, touched up the main window look, got rid of the uncolored bars around the toolbar
+
+commit ad0e2c2600ca5e6c1807b9e4b85ccf1525d8ec45
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:31:18 2023 -0800
+
+    WIP: Mail filters & associated UX
+
+commit d4f7bb69d76d1394cd9bf8f5ce425aecc56229fe
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:30:54 2023 -0800
+
+    Added a sound player for notification events
+
+commit ee263e448e26197272951c998b608d371ad86cdb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:30:02 2023 -0800
+
+    WIP: Mail filters & associated UX
+
+commit 5eefccd29d15c7f4657af78a49057e671949428d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:29:00 2023 -0800
+
+    Touch-up of tool tab visuals. Added a header bar to the top
+
+commit ac7972258901bf0c31fd53ce1a1d4c85680168f3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 21 17:27:35 2023 -0800
+
+    Added support for user-defined labels
+
+commit 3f2bd0aca0b91e06b2cb230921816f835bb128ca
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 17:28:10 2023 -0800
+
+    Cleanup of Filter structure
+
+commit 8a6664ff42d4711cad07821109237f2b4a7d1aac
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 17:00:58 2023 -0800
+
+    Bugfix: MDI Tab text now updates correctly in Message view windows
+
+commit 4f1898a7ca4b65accacead5f65387985277af720
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 16:59:50 2023 -0800
+
+    WIP: Email filters
+
+commit d6c61d8e01235c62470787d707d84b67f09f2f86
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 16:59:07 2023 -0800
+
+    WIP: Email filters
+
+commit b7761d57077e91a504c31c37a30ab9976406c437
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 08:11:56 2023 -0800
+
+    Some tweaks to message edit and preview views
+
+commit d872861587c4aaa42b2688bd97a31be5c62ffedb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 08:10:19 2023 -0800
+
+    MDI tabs now have a max width so they don't become huge when the message subject line is long
+
+commit 6420b56c2ba04dafbbbfc556b6b67250f6746e36
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 08:08:56 2023 -0800
+
+    More image assets transferred over from 7.1 to .net
+
+commit b1c8ffce17933d84074c7b4622ac4d0f88338e81
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Dec 20 08:07:28 2023 -0800
+
+    GUI styling tweaks; main toolbar button
+
+commit 0c4ef78adf37e209eb20f7876dc0880367d6593d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 20:39:28 2023 -0800
+
+    Added a preview pane to the Mailbox view. Double-click still opens a full message view, editable if the message is in draft
+
+commit 40748730c4db9526da1b503de9c6edeb9161b9e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 20:38:17 2023 -0800
+
+    User-defined mailboxes. New mailbox creation dialog hooked up
+
+commit cf5c18f06f4513e16d9a4eb5a82f528c30e3e2f8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 20:37:01 2023 -0800
+
+    Fix: file access mode for serializing mailbox tokens
+
+commit 8042f3ca484ef68298d40b5b5791241909832e3a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 19:03:27 2023 -0800
+
+    Updating release build with today's commit log of changes
+
+commit e47e9d7fc3fa5041f1eb236d8969570aa0e9c3eb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 19:02:47 2023 -0800
+
+    New Event Logger, displays information, warnings, and errors
+
+commit ffc7b0a46bb92d05e46c0c5f8bc77d5882d56c6b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 19:00:56 2023 -0800
+
+    Change to account for new PostOffice interface when creating a new email
+
+commit 1fbebefbdd64252aa02e5a795636ceee090e8ba9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:59:42 2023 -0800
+
+    Changes in accordance with the new mailbox ID method
+
+commit 547d3db1d3e34c74118069b11eecf0287e00558e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:58:11 2023 -0800
+
+    Mailboxes tab no longer rejects a click to activate if the mailbox is already the selected item
+
+commit 01c8b562f7b690fb35df704075bab941ebc0ccf6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:57:06 2023 -0800
+
+    Project file changes related to the image file reorganization
+
+commit 377069c1c532015a626e08c5ac01eeffe0e1358d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:56:12 2023 -0800
+
+    Tweak to app theming; button background colors during mouse events
+
+commit 36927fc6c9294da28b8606ae667487c8a0984f45
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:55:19 2023 -0800
+
+    Got rid of the ViewType enum; no longer necessary
+
+commit 770c7670f3596e46ade9ee41d1bef307a307e60e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:53:29 2023 -0800
+
+    Fix: adding the mbx file extension twice. Change: Malbox icon stored along with name in the idx
+
+commit 978187f5a102c1206b26ca4a27c16a4d31a5f70c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:51:14 2023 -0800
+
+    Minor tweaks related to creation & serialization of core types
+
+commit 476b6f169168dc32d94a7e0d748343ea8505761d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:50:43 2023 -0800
+
+    Minor tweaks related to creation & serialization of core types
+
+commit 459f648b2cc80ac6d8c6ba380d4ad1529149ee38
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 19 18:49:08 2023 -0800
+
+    Fixed the gray background on button images; reorganized GUI assets
+
+commit 0126b67705b74de2366086926710fe6b34673be4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 20:04:55 2023 -0800
+
+    View management refactor
+
+commit 1f7f4d043a476861393dd9cb70612c14f5385223
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 20:03:32 2023 -0800
+
+    Clean up MailMessage class
+
+commit 9f7b844a939ab0214933b864b9ac78c73929dcc0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 20:02:49 2023 -0800
+
+    Basic edit views for Stationery and Signature
+
+commit 7f479a515d22835c67b43dc17a02061927aea6f0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 20:00:57 2023 -0800
+
+    User-defined mailboxes and a bit of refactoring for mail and mailbox operations
+
+commit b20b25c29c4f20132e2fcdef2efd17637d078bb7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 19:58:22 2023 -0800
+
+    Updated current build
+
+commit 2a016ffbd83288ddd73cb89554b922b84183ff6e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 19:56:31 2023 -0800
+
+    Logging and exception reporting
+
+commit 966215a34201499ef9e9541e411d610a32922039
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 15 18:21:08 2023 -0800
+
+    Updated build
+
+commit 99ecdf3b121935af31a7d6878c8a5a668f614fe1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 14 05:50:38 2023 -0800
+
+    Confirmation dialog when deleting a Personality
+
+commit 308dba63ada998bbd6d424c8da974fc99e3daf3d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Dec 14 05:49:54 2023 -0800
+
+    Event handler for response to Check Mail gui elements
+
+commit 4f2510513a370e7c964d6d3d509c6817bf1edb3a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:55:24 2023 -0800
+
+    Current build: Create and edit personalities
+
+commit 239a7615741b7f3a0f7ff8986e9b5edcccb6befa
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:54:47 2023 -0800
+
+    Personalities tool pane (tab) now has a button to create new Personality. Listview items (personalities) now have a context menu with edit & delete options
+
+commit e8b0d87c55ab01e36ca83b9b3b2dde95763e1a8f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:53:45 2023 -0800
+
+    Changes to MessageView to support editable or static viewing
+
+commit fb5216ac7d930961f64829fff4d2b4557e260024
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:52:48 2023 -0800
+
+    Amended IDataStore collections to type ObservableCollection for databinding
+
+commit 8b3e699eb84c4d4de022dcb3df46b080553f0526
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:51:49 2023 -0800
+
+    Modified MailMessage so that it no longer nests the EmailAccount
+
+commit ab721ecad5d8ce908ac3e8f17cc0491c9d58a08f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:50:48 2023 -0800
+
+    Modified Personality construction
+
+commit 5959270cf4b997057be1874b6ad3d0b13b9ee0e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:49:56 2023 -0800
+
+    Core:EmailAccount now compatible with Eudora Personality
+
+commit 03954198dda5a5a41b01b8f84b7318c609a471da
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:49:08 2023 -0800
+
+    WIP: Receive mail via POP
+
+commit cf1bbaa608d345038f61468e9cdd7d7cb38cc6eb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 12 15:48:20 2023 -0800
+
+    New dialog window for creating & editing Personality (account)
+
+commit 14fecb17136b6d3eb56820c5d844fea6ffb5afd6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 16:38:54 2023 -0800
+
+    Updated build. Eudora.net can now send email -- presently only with the default account. Must now add GUI to create new accounts
+
+commit 1e35c339c1f8abd4cf85ec02cc86e17b7389ff42
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 16:37:27 2023 -0800
+
+    Some tweaks to the Datastore
+
+commit 7cae0e8f8ca3f14758ca73f22c8289f8100bbc3d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 16:36:57 2023 -0800
+
+    Email sending!
+
+commit 6f265bdbb3087813fc14e11faa861b60ddc14ca6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 16:35:39 2023 -0800
+
+    Updated release build. Mail can be sent with the default account
+
+commit 8548e246e29f9dfd831bd1abf2f64069cacdc0bc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 13:16:27 2023 -0800
+
+    Updated release build
+
+commit 573fe789dd75bdc734904cb50db404978fca480b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 11:31:26 2023 -0800
+
+    Fix for databinding issue
+
+commit 7d41e728a7151a4d380741d252bd50f38d025741
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:27:55 2023 -0800
+
+    Current release build after GUI and Core changes
+
+commit 3c7ba138e265bdf9ae31723d42e1c1f838fa5a72
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:26:45 2023 -0800
+
+    Removal of older View-based GUI in favor of new MDI User-Control system
+
+commit 34bea37b735f43041baad2863f35cc41ae3454b7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:22:36 2023 -0800
+
+    MVVM stubs of the older GUI structure, in the process of becoming obsolete but not ready for deletion
+
+commit 76f91553ef50037e05635f87315ff2a2201fb282
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:20:46 2023 -0800
+
+    Current state of mail message class and related changes
+
+commit 6774c11db6a9e821fead4fa9eb68106b3a7b9145
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:19:34 2023 -0800
+
+    Current state of main window after UI remodeling
+
+commit ed71be5c0485135a880fdf7b8076e85ba75b798d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:18:30 2023 -0800
+
+    Better design of account, contact, personality
+
+commit 9e6c4afccf289ccd40443b83da57a3a879d77a28
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:16:23 2023 -0800
+
+    Supporting new async json serialization
+
+commit b3fd4197100c5b14d0dea17b67900b480763fa3e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:15:10 2023 -0800
+
+    Core mailbox functionality
+
+commit e5cda64b41f0b3a2ed1e02ad87e0f20f4fa58dfc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:13:30 2023 -0800
+
+    New converter, List<string> to delimited string. Used for databinding a list of email addresses to the GUI
+
+commit 29a0798531ee458bd97781fa0cfe8b16faf79ed7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:10:42 2023 -0800
+
+    Incorporation of MDI lib
+
+commit c9ff04849ba35e0ec7f525c9397c5c2af720d1fc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:08:27 2023 -0800
+
+    GUI update, step 2: New UserControl-based system
+
+commit e44dbe029c4b2b416907fd3d0e2bcf7a9245fa2f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Dec 11 06:02:21 2023 -0800
+
+    GUI update, step 1: Old UI conventions (files) removed
+
+commit 71d64ddaa96ffd9ee2cddc3abbc6ef6201b702f3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 5 21:03:53 2023 -0800
+
+    Viewmodel connecting Main View to tool panes.
+
+commit c6b0b2aa2b914851276d8456820cbec4a966b501
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 5 17:50:37 2023 -0800
+
+    Core mail features and associated GUI
+
+commit 584a0f483fc8ad38c8509c76d0194ab922780f33
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Dec 5 17:49:17 2023 -0800
+
+    Update current build and assets
+
+commit 6fc83022d8b5c4470110fc962b43522b8f407874
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 1 18:00:56 2023 -0800
+
+    Multiple views and toolpanes
+
+commit 9b2f5bfc9fcb531b2ee05a55973461fa32e132bb
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Dec 1 18:00:21 2023 -0800
+
+    Update current build
+
+commit a6fd7e0e438d762356a9045304ee708e4a3fae2d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 30 20:36:21 2023 -0800
+
+    Update current build
+
+commit fc7cc7e7766fda18d118f3ddbbf8ceadbf87d98a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 30 20:35:56 2023 -0800
+
+    new build event: Automatic deployment of successful release build to CurrentBuild folder
+
+commit 151db6d80e8b8fea8950d43d3cc3185d3a842a6d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 30 20:31:23 2023 -0800
+
+    WIP: Main View
+
+commit a7284791913cd4b6749e35aaba934d6bed51e30e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 30 16:01:48 2023 -0800
+
+    Updated build under new CurrentBuild folder
+
+commit 711a50a5a98882964dce7dc63fcba4eb511a82d1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 29 14:26:50 2023 -0800
+
+    Added page for tool windows (left pane)
+
+commit 49d5032ad287ff79b966f0dab7418305ade0cfed
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 29 14:26:19 2023 -0800
+
+    WIP: Signatures pane
+
+commit 08227a20073d502005de0ff63a0252ba0b318fce
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 29 14:25:58 2023 -0800
+
+    WIP: File Browser pane
+
+commit 54b0e66a976452ce9393fe4f2dea000fe70beea0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 29 14:25:04 2023 -0800
+
+    Interface for native windows API to .Networld
+
+commit 409f45a2a56eac052692be2afa484c3b6c63ff35
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 29 14:24:12 2023 -0800
+
+    Core data types & storage interface
+
+commit 33d33835b3a2ec29f8496caa719a1c193df8705a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Nov 28 18:36:30 2023 -0800
+
+    Transfer more image assets into the new shell
+
+commit a22fe37a34316053791cc4890e91c271c2b014e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Nov 28 13:17:46 2023 -0800
+
+    Minor tweaks to main toolbar styling
+
+commit d01113d2ba250eac5a8638c3e2816ed128c45d43
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Tue Nov 28 09:59:53 2023 -0800
+
+    Success: Integration of MailKit. test message can now be sent
+
+commit f6bd6ae8e15bcff4e596132ddddf377f627a1594
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Nov 27 16:35:54 2023 -0800
+
+    GUI: main toolbar and menus, subwindows, other controls
+
+commit 1d953d1d4447b36b39ced5dd8683db93f891cd0e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 21:30:29 2023 -0800
+
+    WIP: More work on supporting themes; minor layout changes
+
+commit f7bce328f27f1da4124693e4d7ba6319e03bf3cc
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 19:00:59 2023 -0800
+
+    WIP: tab page content for main view
+
+commit aae0ae7afaa5ad1240f0751074b1cb6dcaf1e0e9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 19:00:09 2023 -0800
+
+    Fine-tuning layout and theme template
+
+commit 2b3edc17a413113e085e63f1b6a3353a1ba8d065
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 18:15:32 2023 -0800
+
+    Adding support for runtime-switchable color themes
+
+commit ae879b82e149ef722f7d22e58f8616a22d32eab7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 17:13:55 2023 -0800
+
+    Fixed grid splitter control margin & visibility
+
+commit a0a7e64009213109fe611f28a95046487e643567
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 13:19:15 2023 -0800
+
+    Added About dialog to help menu
+
+commit 85497560319496da31d9c309e9abf3da31ce8fea
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 12:41:57 2023 -0800
+
+    Created the new .Net app shell/UX
+
+commit 1216da78ae7602bece3f9bb21c9a3fdd3b897ef5
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 26 09:12:26 2023 -0800
+
+    In progress: conversion from OT to stock
+
+commit f34a024abe3a48fdb78f55a5e567bfb70c78be6d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Mon Nov 20 10:56:43 2023 -0800
+
+    Fixed some more const/volatile errors
+
+commit 580b11363ebb27805ae5c357af5de819f0c94d38
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Sun Nov 19 17:44:29 2023 -0800
+
+    The last of the build errors that are not directly from Objective Toolkit
+
+commit beb80a677dce4b124914b2eadfba4298ecde351c
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 11:30:02 2023 -0800
+
+    Futher cleanup of old security cookie code
+
+commit 23eb3b8e61fbe540c0ac10e760e4022c9f56da30
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 11:28:15 2023 -0800
+
+    gitignore cleanup
+
+commit 5e5287746e8e995cb7fa78a71cd0ace1cf3dbd5a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 11:25:46 2023 -0800
+
+    openssl linkage with QCSSL
+
+commit 3d9480435b8da047aab10f9ff224c4648889c9e7
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 09:58:29 2023 -0800
+
+    openssl
+
+commit 142bacd2cc24d28ed1898b7a3e4268d2832f4fe4
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 09:45:55 2023 -0800
+
+    Fix: undefined _MAX macro replaced with std::max
+
+commit ce63fb4ded2dd3e405942c45c407f32af70ac755
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 09:41:18 2023 -0800
+
+    openssl build products
+
+commit 78ea6f9ac20c004974e11b9a70e0272478d4dea9
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 09:40:03 2023 -0800
+
+    Fixing another batch of sloppy-code compile errors
+
+commit 4eb667dec3c192de6e1207ce6c1f4a6a9295d34d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 09:38:12 2023 -0800
+
+    Reintegration of MAPI
+
+commit 7204e86e25225149ad356462f8bfcba6894c18b3
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Fri Nov 17 08:42:07 2023 -0800
+
+    Fixed erroneous const/volatile template code in SearchEngine
+
+commit 70b6540a1c28be2b3fd760d09f54fbb3a21e7069
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 21:21:45 2023 -0800
+
+    Removed dubious security_cookie code that resulted in symbol multiply defined errors
+
+commit 81f556f065b69b25876ddab8a7c8d8c12f764c03
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:51:02 2023 -0800
+
+    Fixed function pointer declaration missing type specifier
+
+commit eb54c1517cb71ca04aabf8060c071c85cb2bc59e
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:47:11 2023 -0800
+
+    Cleanup of some GUI objects that aren't actually part of the source distro
+
+commit b4d528ae3ce30d2b6ae41c59db00cc72aa6ff86d
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:38:02 2023 -0800
+
+    More sloppy-code compile errors, in a TU that didn't get built before
+
+commit 9dc1188d7f1e2e5374a91386dfec32c14253ea9b
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:35:08 2023 -0800
+
+    Remove ssce spellcheck engine
+
+commit 4dec91186945516f2b4d66d62e66ae4b5c8a997a
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:18:44 2023 -0800
+
+    openssl build products
+
+commit ffbcb0fc6a1d09347a7a8791a353be1fd4fbaca0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:17:21 2023 -0800
+
+    Temp workaround for QCSSL incompatibile with openssl after 1.0
+
+commit edca2390d3ee67c39f6978742d3a32439cc38af0
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Thu Nov 16 20:15:59 2023 -0800
+
+    Remove ssce spellcheck engine
+
+commit 477395c7c37597a1c85e3facf0c44c76603403b6
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 15 16:41:47 2023 -0800
+
+    Include paths to openssl
+
+commit 5ed350e37ea42e69d788b3076556ef0e39f01fb1
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 15 16:38:55 2023 -0800
+
+    Compile errors in Qualcomm SSL
+
+commit b84d49d193f9f56d670344388059590b0f8bf6c8
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 15 16:38:04 2023 -0800
+
+    Updating Qualcomm SSL to be compatible with post-1.0 openssl
+
+commit aef3a46a51054b36680c21a7143fa8872f2a3bfd
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 15 14:25:56 2023 -0800
+
+    Update OpenSSL to 3.1.4 (latest stable at this time)
+
+commit 8f2c927d213a30adeb5723a9f5440aa426177b9f
+Author: ispeedonthe405 <ispeedonthe405@yahoo.com>
+Date:   Wed Nov 15 09:39:43 2023 -0800
+
+    Initial push
