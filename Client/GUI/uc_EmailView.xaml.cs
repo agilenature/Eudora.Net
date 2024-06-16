@@ -9,6 +9,7 @@ using Eudora.Net.Javascript;
 using Eudora.Net.ExtensionMethods;
 using System.Windows.Input;
 using System.Text.Encodings.Web;
+using System.Reflection.Metadata;
 
 namespace Eudora.Net.GUI
 {
@@ -47,7 +48,80 @@ namespace Eudora.Net.GUI
             Editor.Webview.NavigationCompleted += Webview_NavigationCompleted;
             UpdateTitle();
 
-            
+            Editor.btn_InsertImage.Click += Btn_InsertImage_Click;
+            Editor.btn_InsertAttachment.Click += Btn_InsertAttachment_Click;
+        }
+
+        private void Btn_InsertAttachment_Click(object sender, RoutedEventArgs e)
+        {
+            EmailMessage? message = DataContext as EmailMessage;
+            if (message is null)
+            {
+                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
+                return;
+            }
+
+            try
+            {
+                OpenFileDialog ofd = new();
+                ofd.Filter = "All files (*.*)|*.*";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ofd.ValidateNames = true;
+                ofd.CheckFileExists = true;
+                ofd.CheckPathExists = true;
+                ofd.Multiselect = false;
+                var result = ofd.ShowDialog();
+                if (result is null || result == false)
+                {
+                    return;
+                }
+
+                message.Attachments.Add(new EmailAttachment(ofd.SafeFileName, ofd.FileName));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void Btn_InsertImage_Click(object sender, RoutedEventArgs e)
+        {
+            EmailMessage? message = DataContext as EmailMessage;
+            if (message is null)
+            {
+                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
+                return;
+            }
+
+            try
+            {
+                OpenFileDialog ofd = new();
+                ofd.Filter = GHelpers.MakeImageFilterString();
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var result = ofd.ShowDialog();
+                ofd.ValidateNames = true;
+                ofd.CheckFileExists = true;
+                ofd.CheckPathExists = true;
+                ofd.Multiselect = false;
+                if (result is null || result == false)
+                {
+                    return;
+                }
+
+                EmbeddedImage img = new()
+                {
+                    Alt = ofd.SafeFileName,
+                    Source = ofd.FileName,
+                    CIDSource = $@"cid:{ofd.SafeFileName}",
+                    HTMLSource = ofd.FileName.Replace("\\", "/")
+                };
+                message.InlineImages.Add(img);
+                Editor.Document.InsertInlineImage(img);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         private void Webview_NavigationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)

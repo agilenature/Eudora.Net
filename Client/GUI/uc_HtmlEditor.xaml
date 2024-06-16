@@ -123,7 +123,7 @@
             <ToolBar x:Name="ToolbarEmbedImage" Band="1" BandIndex="1" Focusable="False">
                 <ToolBar.Header>Embed Image</ToolBar.Header>
                 <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Focusable="False"
-                        Click="btn_InsertImage_Click">
+                        Click="btn_InsertImage_Click" x:FieldModifier="public">
                     <Button.Content>
                         <Image Source="pack://application:,,,/GUI/res/images/new/image.png"/>
                     </Button.Content>
@@ -134,7 +134,7 @@
             <ToolBar x:Name="ToolbarAttachments" Band="1" BandIndex="2" Focusable="False">
                 <ToolBar.Header>Attach File</ToolBar.Header>
                 <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment" Focusable="False"
-                        Click="btn_InsertAttachment_Click">
+                        Click="btn_InsertAttachment_Click" x:FieldModifier="public">
                     <Button.Content>
                         <Image Source="pack://application:,,,/GUI/res/images/new/add_attachment.png"/>
                     </Button.Content>

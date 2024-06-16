@@ -417,74 +417,12 @@ namespace Eudora.Net.GUI
 
         private void btn_InsertImage_Click(object sender, RoutedEventArgs e)
         {
-            EmailMessage? message = DataContext as EmailMessage;
-            if (message is null)
-            {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
-                return;
-            }
-
-            try
-            {
-                OpenFileDialog ofd = new();
-                ofd.Filter = GHelpers.MakeImageFilterString();
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var result = ofd.ShowDialog();
-                ofd.ValidateNames = true;
-                ofd.CheckFileExists = true;
-                ofd.CheckPathExists = true;
-                ofd.Multiselect = false;
-                if (result is null || result == false)
-                {
-                    return;
-                }
-
-                EmbeddedImage img = new()
-                {
-                    Alt = ofd.SafeFileName,
-                    Source = ofd.FileName,
-                    CIDSource = $@"cid:{ofd.SafeFileName}",
-                    HTMLSource = ofd.FileName.Replace("\\", "/")
-                };
-                message.InlineImages.Add(img);
-                Document.InsertInlineImage(img);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+            
         }
 
         private void btn_InsertAttachment_Click(object sender, RoutedEventArgs e)
         {
-            EmailMessage? message = DataContext as EmailMessage;
-            if (message is null)
-            {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
-                return;
-            }
-
-            try
-            {
-                OpenFileDialog ofd = new();
-                ofd.Filter = "All files (*.*)|*.*";
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                ofd.ValidateNames = true;
-                ofd.CheckFileExists = true;
-                ofd.CheckPathExists = true;
-                ofd.Multiselect = false;
-                var result = ofd.ShowDialog();
-                if (result is null || result == false)
-                {
-                    return;
-                }
-
-                message.Attachments.Add(new EmailAttachment(ofd.SafeFileName, ofd.FileName));
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+            
         }
 
         /////////////////////////////
