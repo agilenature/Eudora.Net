@@ -338,6 +338,11 @@ namespace Eudora.Net.Data
 
         public EmailMessage() 
         {
+            ConnectCollectionsToChangeEvents();
+        }
+
+        public void ConnectCollectionsToChangeEvents()
+        {
             Addresses_To.CollectionChanged += Addresses_To_CollectionChanged;
             Addresses_CC.CollectionChanged += Addresses_CC_CollectionChanged;
             Addresses_BCC.CollectionChanged += Addresses_BCC_CollectionChanged;

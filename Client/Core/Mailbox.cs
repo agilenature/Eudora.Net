@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -91,8 +92,13 @@ namespace Eudora.Net.Core
 
         private void Message_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == nameof(EmailMessage.Attachments))
+            {
+                Debug.WriteLine("Attachments changed");
+            }
             if (sender is EmailMessage message)
             {
+                Debug.WriteLine("Message saved");
                 SaveMessage(message);
             }
         }
@@ -118,6 +124,7 @@ namespace Eudora.Net.Core
                         if (message is not null)
                         {
                             message.PropertyChanged += Message_PropertyChanged;
+                            message.ConnectCollectionsToChangeEvents();
                             Messages.Add(message);
                         }
                     }

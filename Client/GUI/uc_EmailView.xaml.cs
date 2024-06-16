@@ -77,6 +77,7 @@ namespace Eudora.Net.GUI
                 }
 
                 message.Attachments.Add(new EmailAttachment(ofd.SafeFileName, ofd.FileName));
+                AttachmentsBar.DataContext = message.Attachments;
             }
             catch (Exception ex)
             {
@@ -181,7 +182,6 @@ namespace Eudora.Net.GUI
 
             var wnd = MainWindow.Instance;
             if(wnd is null) return;
-            wnd.btn_Attach.Click += Btn_Attach_Click;
             wnd.btn_Reply.Click += Btn_Reply_Click;
             wnd.btn_ReplyAll.Click += Btn_ReplyAll_Click;
             wnd.btn_Forward.Click += Btn_Forward_Click;
@@ -225,7 +225,6 @@ namespace Eudora.Net.GUI
             var wnd = MainWindow.Instance;
             if (wnd is null) return;
 
-            wnd.btn_Attach.Click -= Btn_Attach_Click;
             wnd.btn_Reply.Click -= Btn_Reply_Click;
             wnd.btn_ReplyAll.Click -= Btn_ReplyAll_Click;
             wnd.btn_Forward.Click -= Btn_Forward_Click;
@@ -400,24 +399,6 @@ namespace Eudora.Net.GUI
             MainWindow.Instance?.ShowMailMessage(messageOut);
         }
 
-        private void Btn_Attach_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog ofd = new();
-            ofd.Filter = "All files (*.*)|*.*";
-            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            ofd.ValidateNames = true;
-            ofd.CheckFileExists = true;
-            ofd.CheckPathExists = true;
-            ofd.Multiselect = false;
-            var result = ofd.ShowDialog();
-            if (result is null || result == false)
-            {
-                return;
-            }
-
-            Message.Attachments.Add(new EmailAttachment(ofd.SafeFileName, ofd.FileName));
-        }
-
         private void tb_Subject_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateTitle();
@@ -481,6 +462,7 @@ namespace Eudora.Net.GUI
         private void UpdateDataContext()
         {
             Editor.DataContext = DataContext;
+            AttachmentsBar.DataContext = DataContext;
         }
 
         /// <summary>
