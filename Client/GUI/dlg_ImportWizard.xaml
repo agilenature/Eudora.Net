@@ -1,0 +1,88 @@
+﻿<Window x:Class="Eudora.Net.GUI.dlg_ImportWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        mc:Ignorable="d"
+        Title="Import Wizard" 
+        Width="600"
+        Height="300"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource ControlDark}">
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="36"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Vertical divider-->
+        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Background="{DynamicResource ControlDark}"/>
+
+        <!--Top section-->
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlLight}">
+            <TextBlock TextWrapping="Wrap" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            This wizard will allow you to import data from legacy Eudora.
+            Mailboxes, emails, accounts (personalities), address books, and contacts will be imported.
+            Click the "Start" button to begin the import process.
+            </TextBlock>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlDark}"/>
+        
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlDark}"/>
+
+        <DockPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" LastChildFill="False">
+            <Button x:Name="btn_Start" IsDefault="True" Content="Start" DockPanel.Dock="Right" Margin="5"
+                    MinWidth="44" MaxHeight="22" Click="btn_Start_Click" IsEnabled="True"/>
+            <Button x:Name="btn_Cancel" IsCancel="True" Content="Cancel" DockPanel.Dock="Right" Margin="5"
+                    MinWidth="44" MaxHeight="22" Click="btn_Cancel_Click" IsEnabled="True"/>
+        </DockPanel>
+
+        
+        <!--Status panel (left)-->
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+            <Border Background="{DynamicResource ControlLight}" Height="18">
+                <TextBlock Text="Steps:" Margin="5,0,0,0"/>    
+            </Border>
+            
+            <CheckBox x:Name="cb_FindData" IsEnabled="False" IsChecked="False" Content="Locate Eudora data"/>
+            <CheckBox x:Name="cb_Accounts" IsEnabled="False" IsChecked="False" Content="Import personalities"/>
+            <CheckBox x:Name="cb_Mailboxes" IsEnabled="False" IsChecked="False" Content="Import mailboxes"/>
+        </StackPanel>
+        
+        <!--Panels for each step of the import process-->
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Height="18" Background="{DynamicResource ControlLight}">
+                <TextBlock Text="Import Process:" Margin="5,0,0,0"/>
+            </Border>
+
+            <TextBlock x:Name="tb_Status" Grid.Row="1" TextWrapping="Wrap" Margin="5,5,5,5"
+                       Text="{Binding StatusText}"/>
+
+        </Grid>
+        
+        
+        
+    </Grid>
+
+</Window>

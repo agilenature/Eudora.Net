@@ -146,6 +146,10 @@ namespace Eudora.Net.GUI
             MainMenu.DisableAllItems();
             MainToolBar.DisableAllControls();
 
+            // Enable the main menu items that are always active
+            Menu_Import.IsEnabled = true;
+            Menu_Import.EnableAllSubitems();
+
 
             // Now selectively enable based on active view type
             
@@ -1131,7 +1135,17 @@ namespace Eudora.Net.GUI
             ShowBrowserView();
         }
 
-        
+        //
+        // MENU: IMPORT
+        private void Menu_Import_Test_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            var dlg = new dlg_ImportWizard();
+            dlg.Owner = this;
+            dlg.ShowDialog();
+        }
+
+
 
 
 

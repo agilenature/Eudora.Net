@@ -105,7 +105,12 @@
             <MenuItem x:Name="Menu_Help" Header="_Help">
                 <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
             </MenuItem>
-           
+            
+            <!--Import/Export-->
+            <MenuItem x:Name="Menu_Import" Header="_Import" IsEnabled="True">
+                <MenuItem x:Name="Menu_Import_Test" Header="test" Click="Menu_Import_Test_Click"/>
+            </MenuItem>
+
         </Menu>
 
         <!--Main Toolbar-->
