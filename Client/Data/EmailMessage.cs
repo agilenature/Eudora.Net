@@ -97,7 +97,7 @@ namespace Eudora.Net.Data
         private string _InReplyToId = string.Empty;
         public string InReplyToId
         {
-            get => _MessageId;
+            get => _InReplyToId;
             set => SetField(ref _InReplyToId, value, nameof(InReplyToId));
         }
 
