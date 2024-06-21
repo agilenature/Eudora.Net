@@ -11,7 +11,9 @@
         xmlns:Properties="clr-namespace:Eudora.Net.Properties"
         mc:Ignorable="d"
         Title="Eudora.Net" Width="1024" Height="768" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="4">
 
     <Grid x:Name="MainLayout">
 
@@ -92,6 +94,8 @@
                 <MenuItem x:Name="Menu_Tools_EventLog" Header="Event Log" Click="Menu_Tools_EventLog_Click"/>
                 <Separator/>
                 <MenuItem x:Name="Menu_Tools_Browser" Header="Browser" Click="Menu_Tools_Browser_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Tools_Import" Header="Import from Qualcomm Eudora" Click="Menu_Tools_Import_Click"/>
             </MenuItem>
 
             <!-- WINDOW menu -->
@@ -106,11 +110,6 @@
                 <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
             </MenuItem>
             
-            <!--Import/Export-->
-            <MenuItem x:Name="Menu_Import" Header="_Import" IsEnabled="True">
-                <MenuItem x:Name="Menu_Import_Test" Header="test" Click="Menu_Import_Test_Click"/>
-            </MenuItem>
-
         </Menu>
 
         <!--Main Toolbar-->
