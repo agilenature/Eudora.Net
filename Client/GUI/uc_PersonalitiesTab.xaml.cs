@@ -43,6 +43,7 @@ namespace Eudora.Net.GUI
         private void btn_New_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new dlg_NamePrompt(nameof(Personality));
+            dlg.Owner = MainWindow.Instance;
             bool? result = dlg.ShowDialog();
             if (result is null || result is false) return;
             var personality = PersonalityManager.New(dlg.ItemName);

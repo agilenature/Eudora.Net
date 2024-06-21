@@ -51,6 +51,7 @@ namespace Eudora.Net.GUI
         private void btn_New_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new dlg_NamePrompt(nameof(Stationery));
+            dlg.Owner = MainWindow.Instance;
             if (dlg.ShowDialog() == false) return;
 
             var stationery = StationeryManager.New(dlg.ItemName);

@@ -74,7 +74,8 @@ namespace Eudora.Net.GUI
         {
             dlg_NewAddressBook dlg = new dlg_NewAddressBook();
             dlg.ShowDialog();
-            if(dlg.DialogResult == true)
+            dlg.Owner = MainWindow.Instance;
+            if (dlg.DialogResult == true)
             {
                 AddressBookManager.New(dlg.BookName);
             }
@@ -93,6 +94,7 @@ namespace Eudora.Net.GUI
                                 "Doing so will also delete all contacts within that book.";
 
                 dlg_Confirmation dlg = new dlg_Confirmation(prompt);
+                dlg.Owner = MainWindow.Instance;
                 var result = dlg.ShowDialog();
                 if (result == true)
                 {
@@ -128,6 +130,7 @@ namespace Eudora.Net.GUI
                     string prompt = "Are you certain you want to delete this Contact?";
 
                     dlg_Confirmation dlg = new dlg_Confirmation(prompt);
+                    dlg.Owner = MainWindow.Instance;
                     var result = dlg.ShowDialog();
                     if (result == true)
                     {

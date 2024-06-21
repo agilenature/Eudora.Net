@@ -252,7 +252,8 @@ namespace Eudora.Net.GUI
 
             string prompt = "Are you sure you want to delete this filter?";
             var dlg = new dlg_Confirmation(prompt);
-            if(dlg.ShowDialog() is true)
+            dlg.Owner = MainWindow.Instance;
+            if (dlg.ShowDialog() is true)
             {
                 FilterManager.Remove(filter);
             }

@@ -46,6 +46,7 @@ namespace Eudora.Net.GUI
             if(PersonalityManager.Collection.Count == 0)
             {
                 var dlg = new dlg_PromptCreatePersonality();
+                dlg.Owner = this;
                 if(dlg.ShowDialog() is true)
                 {
                     ShowPersonalitiesTab();
