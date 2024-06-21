@@ -41,6 +41,7 @@ namespace Eudora.Net.Core
         #endregion PROPERTIES
 
 
+        // STEP 0: Locate Eudora Data
         public bool LocateEudoraData()
         {
             try
@@ -57,14 +58,75 @@ namespace Eudora.Net.Core
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+                return false;
             }
 
             return false;
         }
 
+        // STEP 1: Import Email Accounts
         public bool ImportAccounts()
         {
+            try
+            {
+                string iniFilePath = Path.Combine(EudoraDataPath, "eudora.ini");
+                if (!File.Exists(iniFilePath))
+                {
+                    return false;
+                }
+
+                string[] lines = File.ReadAllLines(iniFilePath);
+                if (lines.Length == 0)
+                {
+                    return false;
+                }
+
+                // The default or "dominant" account is the first one listed in the eudora.ini file,
+                // not found in the "personalities" section
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return false;
+            }
+
             return false;
+        }
+
+        // STEP 2: Import Mailboxes & Mail
+        private Mailbox? GetMailboxFromFilename(string filename)
+        {
+            try
+            {
+                string name = Path.GetFileNameWithoutExtension(filename);
+                
+                // default mailboxes
+                if(name.Equals("in", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return Mailbox.Inbox;
+                }
+                else if(name.Equals("out", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return Mailbox.Outbox;
+                }
+                else if(name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return Mailbox.Junk;
+                }
+                else if(name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return Mailbox.Trash;
+                }
+
+                // CreateImportedMailbox handles the case where the mailbox already exists
+                return PostOffice.Instance.CreateImportedMailbox(name);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return null;
+            }
         }
 
         public bool ImportMailboxes()
@@ -79,12 +141,17 @@ namespace Eudora.Net.Core
                     return false;
                 }
 
-                foreach (var mailbox in files)
+                foreach (var mailboxFile in files)
                 {
-                    if (File.Exists(mailbox.FullName))
+                    if (File.Exists(mailboxFile.FullName))
                     {
-                        string mbtext = File.ReadAllText(mailbox.FullName);
-                        ParseMailbox(mbtext);
+                        Mailbox? mailbox = GetMailboxFromFilename(mailboxFile.Name);
+                        if(mailbox is null)
+                        {
+                            continue;
+                        }
+                        string mbtext = File.ReadAllText(mailboxFile.FullName);
+                        ParseMailbox(mbtext, mailbox);
                     }
                 }
             }
@@ -96,14 +163,14 @@ namespace Eudora.Net.Core
             return true;
         }
 
-        private void ParseMailbox(string mailbox)
+        private void ParseMailbox(string mailboxString, Mailbox mailbox)
         {
             try
             {
-                var messages = mailbox.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
+                var messages = mailboxString.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var message in messages)
                 {
-                    ParseMessage(message);
+                    ParseMessage(message, mailbox);
                 }
             }
             catch (Exception ex)
@@ -125,7 +192,7 @@ namespace Eudora.Net.Core
             }
         }
 
-        private void ParseMessage(string message)
+        private void ParseMessage(string message, Mailbox mailbox)
         {
             try
             {
@@ -273,13 +340,19 @@ namespace Eudora.Net.Core
                     {
                         ++prunable;
                     }
-                    else if (line.StartsWith("Message-Id: "))
-                    {
-                        ++prunable;
-                    }
                     else if (line.StartsWith("X-EmbeddedContent: "))
                     {
                         ++prunable;
+                    }
+                }
+
+                // Now that we've parsed the headers, skip this message if it already exists
+                // here in the corresponding Eudora.Net mailbox
+                foreach (var msg in mailbox.Messages)
+                {
+                    if (msg.MessageId == email.MessageId)
+                    {
+                        return;
                     }
                 }
 
@@ -329,6 +402,9 @@ namespace Eudora.Net.Core
                 {
                     email.Body += line;// + "\r\n";
                 }
+
+                // Finally, save this email to the mailbox
+                mailbox.AddMessage(email);
             }
             catch (Exception ex)
             {

@@ -181,6 +181,27 @@ namespace Eudora.Net.Core
             }
         }
 
+        public Mailbox? CreateImportedMailbox(string name)
+        {
+            try
+            {
+                Mailbox? box = GetMailboxByName(name);
+                if (box is not null)
+                {
+                    return box;
+                }
+
+                Mailbox mailbox = new(name, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png");
+                Mailboxes.Add(mailbox);
+                return mailbox;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return null;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
