@@ -43,13 +43,20 @@ namespace Eudora.Net.Core
 
         public bool LocateEudoraData()
         {
-            string user = Environment.UserName;
-            string defaultEudoraDataPath = DefaultEudoraDataPath.Replace("{0}", user);
-
-            if (Directory.Exists(defaultEudoraDataPath))
+            try
             {
-                EudoraDataPath = defaultEudoraDataPath;
-                return true;
+                string user = Environment.UserName;
+                string defaultEudoraDataPath = DefaultEudoraDataPath.Replace("{0}", user);
+
+                if (Directory.Exists(defaultEudoraDataPath))
+                {
+                    EudoraDataPath = defaultEudoraDataPath;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
 
             return false;
@@ -62,186 +69,271 @@ namespace Eudora.Net.Core
 
         public bool ImportMailboxes()
         {
-            DirectoryInfo di = new(EudoraDataPath);
-            string searchQuery = string.Format("*{0}", mailboxExtension);
-            var files = di.GetFiles(searchQuery);
-            if (files.Length == 0)
+            try
             {
+                DirectoryInfo di = new(EudoraDataPath);
+                string searchQuery = string.Format("*{0}", mailboxExtension);
+                var files = di.GetFiles(searchQuery);
+                if (files.Length == 0)
+                {
+                    return false;
+                }
+
+                foreach (var mailbox in files)
+                {
+                    if (File.Exists(mailbox.FullName))
+                    {
+                        string mbtext = File.ReadAllText(mailbox.FullName);
+                        ParseMailbox(mbtext);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
                 return false;
             }
-
-            foreach (var mailbox in files)
-            {
-                //using (StreamReader sr = new(mailbox.FullName))
-                //{
-                //    List<string> lines = [];
-                //    string? line;
-                //    while ((line = sr.ReadLine()) != null)
-                //    {
-                //        lines.Add(line);
-                //    }
-
-                //    //Parallel.Invoke(() => ParseMailbox(lines));
-                //    ParseMailbox(lines);
-                //}
-
-                string mbtext = File.ReadAllText(mailbox.FullName);
-                ParseMailbox(mbtext);
-            }
-
             return true;
         }
 
         private void ParseMailbox(string mailbox)
         {
-            var messages = mailbox.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var message in messages)
+            try
             {
-                ParseMessage(message);
+                var messages = mailbox.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var message in messages)
+                {
+                    ParseMessage(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
-        //private void ParseMailbox(List<string> lines)
-        //{
-        //    var messages = string.Join(emailDelimiter, lines).Split(emailDelimiter);
-        //    //var messages = string.Split(emailDelimiter);
-        //    foreach (var message in messages)
-        //    {
-        //        ParseMessage(message);
-        //    }
-        //}
-
         private string[] SplitHeaderLine(string line)
         {
-            return line.Split(": ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            try
+            {
+                return line.Split(": ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return new string[] { };
+            }
         }
 
         private void ParseMessage(string message)
         {
-            Data.EmailMessage email = new();
-
-            var lines = message.Split("\r\n");
-            if (lines.Length == 0)
+            try
             {
-                return;
+                Data.EmailMessage email = new();
+
+                var lines = message.Split("\r\n").ToList();
+                if (lines.Count == 0)
+                {
+                    return;
+                }
+
+                // The first line in a Qualcomm Eudora email message is the "From " line,
+                // which is an abomination of a string that contains sender address and
+                // the timestamp, in a rather funky format with day of week in two forms.
+                // We need to parse this line to extract the date and time of the email.
+
+                string qualcommMess = lines.First();
+                qualcommMess = qualcommMess.Replace("From ", "");
+                var chars = qualcommMess.ToCharArray();
+                int spaceCount = 0;
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    if (chars[i] == ' ')
+                    {
+                        spaceCount++;
+                        if (spaceCount == 2)
+                        {
+                            string format = "MMM dd HH:mm:ss yyyy";
+                            DateTime.TryParseExact(qualcommMess.Substring(i + 1), format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
+                            email.Date = date;
+                            break;
+                        }
+                    }
+                }
+                // Prune this line once we're done parsing it.
+                lines.RemoveAt(0);
+
+
+                // Now we loop through the lines of the email message to extract the headers
+                // At the same time, we count the lines comprising the header section.
+                // Later we'll prune that chunk of the message so we can focus on the body,
+                // which can exist in either plain text or HTML.
+                int prunable = 0;
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    string line = lines[i];
+                    if (line.Length == 0)
+                    {
+                        // NOTE: don't count the blank lines as prunable;
+                        // these are part of the email message body.
+                        continue;
+                    }
+
+                    else if (line.StartsWith("To: "))
+                    {
+                        ++prunable;
+                        var to = SplitHeaderLine(line);
+                        if (to.Length == 2)
+                        {
+                            var recipients = to[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                            if (recipients.Length > 0)
+                            {
+                                foreach (var recipient in recipients)
+                                {
+                                    email.Addresses_To.Add(new(string.Empty, recipient));
+                                }
+                            }
+                        }
+                    }
+                    else if (line.StartsWith("From: "))
+                    {
+                        ++prunable;
+                        var from = SplitHeaderLine(line);
+                        if (from.Length == 2)
+                        {
+                            string displayAddress = from[1];
+                            var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                            EmailAddress sender = new();
+                            foreach (var component in components)
+                            {
+                                if (component.Contains("@"))
+                                {
+                                    sender.Address = component.Replace("<", "").Replace(">", "");
+                                }
+                                else
+                                {
+                                    sender.Name = component;
+                                }
+                            }
+                            email.SenderAddress = sender;
+                        }
+                    }
+                    else if (line.StartsWith("Cc: "))
+                    {
+                        ++prunable;
+                        var cc = SplitHeaderLine(line);
+                        if (cc.Length == 2)
+                        {
+                            var ccs = cc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                            if (ccs.Length > 0)
+                            {
+                                foreach (var c in ccs)
+                                {
+                                    email.Addresses_CC.Add(new(string.Empty, c));
+                                }
+                            }
+                        }
+                    }
+                    else if (line.StartsWith("Bcc: "))
+                    {
+                        ++prunable;
+                        var bcc = SplitHeaderLine(line);
+                        if (bcc.Length == 2)
+                        {
+                            var bccs = bcc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                            if (bccs.Length > 0)
+                            {
+                                foreach (var b in bccs)
+                                {
+                                    email.Addresses_BCC.Add(new(string.Empty, b));
+                                }
+                            }
+                        }
+                    }
+                    else if (line.StartsWith("Subject: "))
+                    {
+                        ++prunable;
+                        email.Subject = line.Replace("Subject: ", "");
+                    }
+                    else if (line.StartsWith("Message-Id: "))
+                    {
+                        ++prunable;
+                        string messageId = line.Replace("Message-Id: ", "").Replace("<", "").Replace(">", "");
+                        email.MessageId = messageId;
+                    }
+                    else if (line.StartsWith("X-Attachments: "))
+                    {
+                        ++prunable;
+                    }
+                    else if (line.StartsWith("In-Reply-To: "))
+                    {
+                        ++prunable;
+                    }
+                    else if (line.StartsWith("References: "))
+                    {
+                        ++prunable;
+                    }
+                    else if (line.StartsWith("Message-Id: "))
+                    {
+                        ++prunable;
+                    }
+                    else if (line.StartsWith("X-EmbeddedContent: "))
+                    {
+                        ++prunable;
+                    }
+                }
+
+                // Trimming out the lines that constitute the variable-length header,
+                // what's left should be the body of the email message.
+                if (prunable > 0)
+                {
+                    lines.RemoveRange(0, prunable);
+                }
+
+                // Now we have the body of the email message, which may be in HTML format.
+                // Prune out the markup that we don't need or want.
+                List<string> toPrune = [];
+                foreach (var line in lines)
+                {
+                    if (line.StartsWith("<html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                    else if (line.StartsWith("<head>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                    else if (line.StartsWith("</head>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                    else if (line.StartsWith("<body>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                    else if (line.StartsWith("</body>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                    else if (line.StartsWith("</html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        toPrune.Add(line);
+                    }
+                }
+                foreach (var prune in toPrune)
+                {
+                    lines.Remove(prune);
+                }
+
+                foreach (var line in lines)
+                {
+                    email.Body += line;// + "\r\n";
+                }
             }
-
-            // The first line in a Qualcomm Eudora email message is the "From " line,
-            // which is an abomination of a string which contains sender address and
-            // the timestamp, in a rather funky format with redundant day of week.
-            // We need to parse this line to extract the date and time of the email.
-
-            string qualcommMess = lines.First();
-            qualcommMess = qualcommMess.Replace("From ", "");
-            var chars = qualcommMess.ToCharArray();
-            int spaceCount = 0;
-            for (int i = 0; i < chars.Length; i++)
+            catch (Exception ex)
             {
-                if (chars[i] == ' ')
-                {
-                    spaceCount++;
-                    if (spaceCount == 2)
-                    {
-                        string format = "MMM dd HH:mm:ss yyyy";
-                        DateTime.TryParseExact(qualcommMess.Substring(i + 1), format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
-                        email.Date = date;
-                        break;
-                    }
-                }
+                Logger.LogException(ex);
             }
-
-
-            foreach (var line in lines)
-            {
-                if (line.Length == 0)
-                {
-                    continue;
-                }
-
-                else if (line.StartsWith("To: "))
-                {
-                    var to = SplitHeaderLine(line);
-                    if (to.Length == 2)
-                    {
-                        var recipients = to[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (recipients.Length > 0)
-                        {
-                            foreach (var recipient in recipients)
-                            {
-                                email.Addresses_To.Add(new(string.Empty, recipient));
-                            }
-                        }
-                    }
-                }
-                else if (line.StartsWith("From: "))
-                {
-                    var from = SplitHeaderLine(line);
-                    if (from.Length == 2)
-                    {
-                        string displayAddress = from[1];
-                        var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        EmailAddress sender = new();
-                        foreach (var component in components)
-                        {
-                            if (component.Contains("@"))
-                            {
-                                sender.Address = component.Replace("<", "").Replace(">", "");
-                            }
-                            else
-                            {
-                                sender.Name = component;
-                            }
-                        }
-                        email.SenderAddress = sender;
-                    }
-                }
-                else if (line.StartsWith("Cc: "))
-                {
-                    var cc = SplitHeaderLine(line);
-                    if (cc.Length == 2)
-                    {
-                        var ccs = cc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (ccs.Length > 0)
-                        {
-                            foreach (var c in ccs)
-                            {
-                                email.Addresses_CC.Add(new(string.Empty, c));
-                            }
-                        }
-                    }
-                }
-                else if (line.StartsWith("Bcc"))
-                {
-                    var bcc = SplitHeaderLine(line);
-                    if (bcc.Length == 2)
-                    {
-                        var bccs = bcc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (bccs.Length > 0)
-                        {
-                            foreach (var b in bccs)
-                            {
-                                email.Addresses_BCC.Add(new(string.Empty, b));
-                            }
-                        }
-                    }
-                }
-                else if (line.StartsWith("Subject: "))
-                {
-                    email.Subject = line.Replace("Subject: ", "");
-                }
-                //else if (line.StartsWith("Date: "))
-                //{
-                //    DateTime.TryParse(line.Replace("Date: ", ""), out DateTime date);
-                //    email.Date = date;
-                //}
-                else if (line.StartsWith("Message-Id: "))
-                {
-                    email.MessageId = line.Replace("Message-Id: ", "");
-                }
-            }
-
-            int breakhere = 0;
         }
-
     }
 }
