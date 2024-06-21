@@ -9,7 +9,9 @@
         Width="800"
         Height="450"
         WindowStyle="ToolWindow"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="2">
 
     <Grid>
 

@@ -11,7 +11,9 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow"
         ResizeMode="NoResize" 
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="2">
     
     <Grid>
 

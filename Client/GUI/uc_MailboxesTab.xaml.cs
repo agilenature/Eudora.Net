@@ -87,6 +87,7 @@ namespace Eudora.Net.GUI
         {
             e.Handled = true;
             dlg_NewMailbox dlg = new();
+            dlg.Owner = MainWindow.Instance;
             dlg.ShowDialog();
         }
 

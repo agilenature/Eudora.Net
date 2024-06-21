@@ -11,7 +11,9 @@
         ShowInTaskbar="False"
         Width="640"
         Height="240"
-        Title="Eudora.Net: Create Personality (Email Account)" Topmost="True">
+        Title="Eudora.Net: Create Personality (Email Account)" Topmost="True"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="2">
     
     <Grid>
 

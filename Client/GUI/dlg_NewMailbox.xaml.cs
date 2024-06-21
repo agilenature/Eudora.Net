@@ -89,42 +89,20 @@ namespace Eudora.Net.GUI
             Mouse.OverrideCursor = Cursors.Wait;
 
             InitializeComponent();
-
-            BuildImageList();
-            lb_Image.ItemsSource = Images;
-            lb_Image.SelectedIndex = 0;
             DataContext = this;
             Mouse.OverrideCursor = null;
-        }
-
-        private void BuildImageList()
-        {
-            for (UInt32 index = 0; index < 128; index++)
-            {
-                string uri = String.Format("pack://application:,,,/GUI/res/images/tb32/tb32_{0}.png", index);
-                //Images.Add(new BitmapImage(new Uri(uri)));
-                Image img = new Image();
-                BitmapImage source = new BitmapImage(new Uri(uri));
-                img.Source = source;
-                Images.Add(img);
-            }
+            tb_Mailbox.Focus();
         }
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
-            var img = lb_Image.SelectedItem as Image;
-            if(img == null)
-            {
-                return;
-            }
-
-            if(!MailboxValidationRule.Validate(tb_Mailbox.Text))
+            if (!MailboxValidationRule.Validate(tb_Mailbox.Text))
             {
                 return;
             }
 
             string name = tb_Mailbox.Text;
-            PostOffice.Instance.AddUserMailbox(tb_Mailbox.Text, img.Source.ToString());
+            PostOffice.Instance.AddUserMailbox(tb_Mailbox.Text, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png");
             Close();
         }
 
@@ -141,6 +119,14 @@ namespace Eudora.Net.GUI
         private void tb_Mailbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidationPassed = MailboxValidationRule.Validate(tb_Mailbox.Text);
+        }
+
+        private void tb_Mailbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                btn_OK_Click(sender, null);
+            }
         }
     }
 }

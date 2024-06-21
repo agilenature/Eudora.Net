@@ -13,7 +13,9 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
         ShowInTaskbar="False"
-        Background="#FF336799">
+        Background="#FF336799"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="2">
     
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>

@@ -11,7 +11,9 @@
         WindowStyle="ToolWindow" 
         ResizeMode="NoResize"
         ShowInTaskbar="False"
-        Title="Eudora.Net: Initial Setup">
+        Title="Eudora.Net: Initial Setup"
+        BorderBrush="{DynamicResource ControlDark}"
+        BorderThickness="2">
     
     <Grid>
 

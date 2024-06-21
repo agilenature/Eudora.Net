@@ -7,11 +7,12 @@
         d:DataContext="{d:DesignInstance Type=local:dlg_NewMailbox}"
         mc:Ignorable="d"
         Title="Eudora.Net: Create Mailbox" 
-        Height="250" Width="350" 
+        Height="150" Width="350" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize" 
         ShowInTaskbar="False" 
         HorizontalAlignment="Center" VerticalAlignment="Center"
+        BorderBrush="{DynamicResource ControlDark}"
         BorderThickness="2">
     
     <Grid>
@@ -19,8 +20,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -35,12 +36,13 @@
         
         <!--Row 1: Controls-->
 
-        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Mailbox Name:"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Mailbox Name:  "/>
 
         <TextBox x:Name="tb_Mailbox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
                  Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"
                  LostFocus="tb_Mailbox_LostFocus"
-                 TextChanged="tb_Mailbox_TextChanged">
+                 TextChanged="tb_Mailbox_TextChanged"
+                 KeyUp="tb_Mailbox_KeyUp">
                 <TextBox.Text>
                     <Binding Path="MailboxName" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
@@ -50,16 +52,8 @@
                 </TextBox.Text>
             </TextBox>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,10,0,0" Text="Mailbox Image:"/>
-
-        <ListBox x:Name="lb_Image" Grid.Row="2" Grid.Column="1"
-                 Height="110"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-
-
-
         <!--Row 2: Main dialog button panel-->
-        <DockPanel Grid.Row="3" Grid.Column="1" LastChildFill="False" Margin="0,0,10,0">
+        <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="False" Margin="0,0,0,0" VerticalAlignment="Bottom">
 
             <Button x:Name="btn_OK" 
                     DockPanel.Dock="Right"

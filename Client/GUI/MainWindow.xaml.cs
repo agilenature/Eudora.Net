@@ -992,6 +992,7 @@ namespace Eudora.Net.GUI
         {
             e.Handled = true;
             dlg_NewMailbox dlg = new dlg_NewMailbox();
+            dlg.Owner = this;
             dlg.ShowDialog();
         }
 

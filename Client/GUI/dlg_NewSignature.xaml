@@ -11,6 +11,7 @@
         ResizeMode="NoResize" 
         ShowInTaskbar="False" 
         HorizontalAlignment="Center" VerticalAlignment="Center"
+        BorderBrush="{DynamicResource ControlDark}"
         BorderThickness="2">
     
     <Grid>
