@@ -126,6 +126,9 @@ namespace Eudora.Net.GUI
             {
                 AddStatusText("Eudora data not found. Please specify the folder");
                 OpenFolderDialog ofd = new();
+                ofd.Multiselect = false;
+                ofd.Title = "Select the folder containing Eudora data";
+                ofd.ValidateNames = true;
                 if (ofd.ShowDialog() == true)
                 {
                     TheWiz.EudoraDataPath = ofd.FolderName;

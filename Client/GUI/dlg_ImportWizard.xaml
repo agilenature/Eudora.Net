@@ -77,7 +77,10 @@
             </Border>
 
             <TextBlock x:Name="tb_Status" Grid.Row="1" TextWrapping="Wrap" Margin="5,5,5,5"
-                       Text="{Binding StatusText}"/>
+                       Text="{Binding StatusText}" 
+                       ScrollViewer.CanContentScroll="True"
+                       ScrollViewer.VerticalScrollBarVisibility="Visible"
+                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
 
         </Grid>
         
