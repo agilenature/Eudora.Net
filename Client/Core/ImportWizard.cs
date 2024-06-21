@@ -29,6 +29,7 @@ namespace Eudora.Net.Core
         static string DefaultEudoraDataPath = @"C:\Users\{0}\AppData\Roaming\Qualcomm\Eudora";
         private static string mailboxExtension = ".mbx";
         private static string emailDelimiter = "\r\nFrom ";
+        private List<ImportedEmbeddedContent> EmbeddedImages = [];
         #endregion FIELDS
 
 
@@ -196,7 +197,9 @@ namespace Eudora.Net.Core
         {
             try
             {
+                EmbeddedImages.Clear();
                 Data.EmailMessage email = new();
+                email.MailboxName = mailbox.Name;
 
                 var lines = message.Split("\r\n").ToList();
                 if (lines.Count == 0)
@@ -343,6 +346,37 @@ namespace Eudora.Net.Core
                     else if (line.StartsWith("X-EmbeddedContent: "))
                     {
                         ++prunable;
+
+                        // Embedded content
+                        var embeddings = SplitHeaderLine(line);
+                        if (embeddings.Length == 2)
+                        {
+                            embeddings[1] = embeddings[1].Replace("\n", "").Replace("\r\n", "");
+                            var cids = embeddings[1].Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                            if (cids.Length > 0)
+                            {
+                                foreach (var cid in cids)
+                                {
+                                    var parts = cid.Split("=", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                                    if (parts.Length == 2)
+                                    {
+                                        string id = parts[0].Replace(">", "").Replace("<", "");
+                                        string src = parts[1].Replace(">", "").Replace("<", "");
+
+                                        if (!id.StartsWith("cid:"))
+                                        {
+                                            id = "cid:." + parts[0];
+                                        }
+                                        ImportedEmbeddedContent content = new()
+                                        {
+                                            ID = id,
+                                            Source = src                                            
+                                        };
+                                        EmbeddedImages.Add(content);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -401,6 +435,12 @@ namespace Eudora.Net.Core
                 foreach (var line in lines)
                 {
                     email.Body += line;// + "\r\n";
+
+                    // Now replace the CID references with the actual paths to the embedded content
+                    foreach (var embedding in EmbeddedImages)
+                    {
+                        email.Body = email.Body.Replace(embedding.ID, embedding.Source);
+                    }
                 }
 
                 // Finally, save this email to the mailbox
