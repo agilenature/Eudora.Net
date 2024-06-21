@@ -11,25 +11,58 @@ namespace Eudora.Net.Core
     public class Mailbox
     {
         ///////////////////////////////////////////////////////////
-        #region Properties
+        #region Fields
         /////////////////////////////
 
         public static readonly string extension = ".mbx";
         private string DataRoot = string.Empty;
         private object FileLocker = new();
         private object CollectionLocker = new();
+        private string _Name = string.Empty;
+        private string _ImageSource = string.Empty;
+
+        /////////////////////////////
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
+
+        ///////////////////////////////////////////////////////////
+        #region Properties
+        /////////////////////////////
 
         [JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
 
-        private string _Name = string.Empty;
+        [JsonIgnore]
+        public static Mailbox? Inbox
+        {
+            get => PostOffice.Instance.GetMailboxByName("Inbox");
+        }
+
+        [JsonIgnore]
+        public static Mailbox? Outbox
+        {
+            get => PostOffice.Instance.GetMailboxByName("Outbox");
+        }
+
+        [JsonIgnore]
+        public static Mailbox? Junk
+        {
+            get => PostOffice.Instance.GetMailboxByName("Junk");
+        }
+
+        [JsonIgnore]
+        public static Mailbox? Trash
+        {
+            get => PostOffice.Instance.GetMailboxByName("Trash");
+        }
+        
         public string Name
         {
             get => _Name;
             set { if (_Name != value) { _Name = value; InitializeForIO(); } }
         }
-
-        private string _ImageSource = string.Empty;
+        
         public string ImageSource
         {
             get => _ImageSource;
