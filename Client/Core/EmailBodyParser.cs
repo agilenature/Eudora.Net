@@ -50,16 +50,27 @@ namespace Eudora.Net.Core
 
         protected override void VisitMultipartRelated(MultipartRelated related)
         {
-            var root = related.Root;
+            try
+            {
+                var root = related.Root;
+                if (root is null)
+                {
+                    throw new Exception("The root of a multipart/related item is missing.");
+                }
 
-            // push this multipart/related onto our stack
-            stack.Add(related);
+                // push this multipart/related onto our stack
+                stack.Add(related);
 
-            // visit the root document
-            root.Accept(this);
+                // visit the root document
+                root.Accept(this);
 
-            // pop this multipart/related off our stack
-            stack.RemoveAt(stack.Count - 1);
+                // pop this multipart/related off our stack
+                stack.RemoveAt(stack.Count - 1);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         // look up the image based on the img src url within our multipart/related stack

@@ -30,6 +30,24 @@ namespace Eudora.Net.Core
             return tempPath;
         }
 
+        public static string CreateTempFileFromStringContent2(string content)
+        {
+            string tempPath = Path.GetTempFileName();
+            tempPath = $@"{tempPath}.tmp";
+            TempFilesThisSession.Add(tempPath);
+
+            try
+            {
+                File.WriteAllText(tempPath, content);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return tempPath;
+        }
+
         public static void Shutdown()
         {
             try

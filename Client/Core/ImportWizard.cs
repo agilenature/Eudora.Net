@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Windows.ApplicationModel.Email;
 
 namespace Eudora.Net.Core
@@ -28,8 +29,9 @@ namespace Eudora.Net.Core
         static string DefaultEudoraPath = @"C:\Program Files (x86)\Qualcomm\Eudora";
         static string DefaultEudoraDataPath = @"C:\Users\{0}\AppData\Roaming\Qualcomm\Eudora";
         private static string mailboxExtension = ".mbx";
-        private static string emailDelimiter = "\r\nFrom ";
+        private static string emailDelimiter = "From ???@???";
         private List<ImportedEmbeddedContent> EmbeddedImages = [];
+        MimeKit.ParserOptions mkParserOptions;
         #endregion FIELDS
 
 
@@ -41,6 +43,19 @@ namespace Eudora.Net.Core
         }
         #endregion PROPERTIES
 
+
+        public ImportWizard()
+        {
+            mkParserOptions = new()
+            {
+                ParameterComplianceMode = MimeKit.RfcComplianceMode.Looser,
+                AddressParserComplianceMode = MimeKit.RfcComplianceMode.Looser,
+                AllowAddressesWithoutDomain = true,
+                RespectContentLength = false,
+                AllowUnquotedCommasInAddresses = true,
+                Rfc2047ComplianceMode = MimeKit.RfcComplianceMode.Looser
+            };
+        }
 
         // STEP 0: Locate Eudora Data
         public bool LocateEudoraData()
@@ -66,6 +81,7 @@ namespace Eudora.Net.Core
         }
 
         // STEP 1: Import Email Accounts
+        // Also known as, "An example of how derpy the ini file format can be"
         public bool ImportAccounts()
         {
             try
@@ -76,15 +92,58 @@ namespace Eudora.Net.Core
                     return false;
                 }
 
-                string[] lines = File.ReadAllLines(iniFilePath);
-                if (lines.Length == 0)
+                List<string> lines = File.ReadAllLines(iniFilePath).ToList();
+                if (lines.Count == 0)
                 {
                     return false;
                 }
+                
 
                 // The default or "dominant" account is the first one listed in the eudora.ini file,
-                // not found in the "personalities" section
+                // not found in the "personalities" section but loose in the "settings" section. Sigh.
+                List<string> account = [];
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    if (lines[i].StartsWith("POPAccount"))
+                    {
+                        account.Add(lines[i]);
+                        for (int j = i + 1; j < lines.Count; j++)
+                        {
+                            account.Add(lines[j]);
+                            if (lines[j].StartsWith("SavePassword"))
+                            {
+                                break;
+                            }
+                        }
+                        ImportAccount(account);
+                        break;
+                    }
+                }
 
+                account.Clear();
+
+                // Now we move on through the ini file to the "personalities" section,
+                // there to find the other accounts
+                List<string> AccountTokens = [];
+                int index = lines.IndexOf("[Personalities]");
+                for(int i = index + 1; i < lines.Count; i++)
+                {
+                    if(lines[i].StartsWith("["))
+                    {
+                        break;
+                    }
+                    AccountTokens.Add(lines[i]);
+                }
+
+                foreach (var token in AccountTokens)
+                {
+                    index = lines.IndexOf(token);
+                    if (token.StartsWith("SavePassword"))
+                    {
+                        ImportAccount(account);
+                        account.Clear();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -95,27 +154,34 @@ namespace Eudora.Net.Core
             return false;
         }
 
+        private void ImportAccount(List<string> lines)
+        {
+
+        }
+
         // STEP 2: Import Mailboxes & Mail
         private Mailbox? GetMailboxFromFilename(string filename)
         {
             try
             {
                 string name = Path.GetFileNameWithoutExtension(filename);
-                
+
                 // default mailboxes
-                if(name.Equals("in", StringComparison.CurrentCultureIgnoreCase))
+                if (name.Equals("in", StringComparison.CurrentCultureIgnoreCase) ||
+                    name.Equals("inbox", StringComparison.CurrentCultureIgnoreCase))
                 {
                     return Mailbox.Inbox;
                 }
-                else if(name.Equals("out", StringComparison.CurrentCultureIgnoreCase))
+                else if (name.Equals("out", StringComparison.CurrentCultureIgnoreCase) ||
+                         name.Equals("outbox", StringComparison.CurrentCultureIgnoreCase))
                 {
                     return Mailbox.Outbox;
                 }
-                else if(name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
+                else if (name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
                 {
                     return Mailbox.Junk;
                 }
-                else if(name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
+                else if (name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
                 {
                     return Mailbox.Trash;
                 }
@@ -134,34 +200,310 @@ namespace Eudora.Net.Core
         {
             try
             {
-                DirectoryInfo di = new(EudoraDataPath);
-                string searchQuery = string.Format("*{0}", mailboxExtension);
-                var files = di.GetFiles(searchQuery);
-                if (files.Length == 0)
+                if (Directory.Exists(EudoraDataPath))
                 {
-                    return false;
-                }
-
-                foreach (var mailboxFile in files)
-                {
-                    if (File.Exists(mailboxFile.FullName))
+                    var files = Directory.GetFiles(EudoraDataPath, "*" + mailboxExtension, SearchOption.AllDirectories);
+                    foreach (var file in files)
                     {
-                        Mailbox? mailbox = GetMailboxFromFilename(mailboxFile.Name);
-                        if(mailbox is null)
+                        if (File.Exists(file))
                         {
-                            continue;
+                            Mailbox? mailbox = GetMailboxFromFilename(file);
+                            if (mailbox is null)
+                            {
+                                continue;
+                            }
+                            string mbtext = File.ReadAllText(file);
+                            ParseMailbox3(mbtext, mailbox);
                         }
-                        string mbtext = File.ReadAllText(mailboxFile.FullName);
-                        ParseMailbox(mbtext, mailbox);
                     }
                 }
             }
+
             catch (Exception ex)
             {
                 Logger.LogException(ex);
                 return false;
             }
             return true;
+        }
+
+        // Split the blob into individual email messages
+        private void ParseMailbox3(string mailboxBlob, Mailbox mailbox)
+        {
+            try
+            {
+                var messages = mailboxBlob.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var message in messages)
+                {
+                    ParseMessage3(message, mailbox);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void ParseMessage3(string message, Mailbox mailbox)
+        {
+            try
+            {
+                List<string> lines = message.Split("\r\n").ToList();
+                int break1 = 1;
+
+                var index = lines.IndexOf(string.Empty);
+                List<string> headers = lines.Take(index).ToList();
+                List<string> body = lines.Skip(index).ToList();
+                int break2 = 1;
+
+                Data.EmailMessage email = new();
+                email.MailboxName = mailbox.Name;
+
+                ParseEudoraHeaders3(headers, ref email);
+                ParseEudoraBody3(body, ref email);
+                mailbox.AddMessage(email);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private string[] SplitHeader(string header)
+        {
+            string[] parts = [string.Empty, string.Empty];
+
+            try
+            {
+                var index = header.IndexOf(":");
+                if (index > 0)
+                {
+                    parts[0] = header.Substring(0, index);
+                    parts[1] = header.Substring(index + 1);
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return parts;
+        }
+
+        private Data.EmailAddress ParseEmailAddress(string displayAddress)
+        {
+            EmailAddress address = new();
+            
+            // Format 0: Name <address>
+            if (displayAddress.Contains("<") && displayAddress.Contains(">"))
+            {
+                var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                if (components.Length == 2)
+                {
+                    string name = components[0];
+                    string addy = components[1].Replace(">", "");
+                    address.Name = name;
+                    address.Address = addy;
+                }
+            }
+
+            // Format 1: address
+            else
+            {
+                address.Address = displayAddress;
+            }
+
+            return address;
+        }
+
+        private List<Data.EmailAddress> SplitAddressList(string addresses)
+        {
+            List<Data.EmailAddress> list = new();
+
+            try
+            {
+                var parts = addresses.Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length > 0)
+                {
+                    foreach (var part in parts)
+                    {
+                        list.Add(ParseEmailAddress(part));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return list;
+        }
+
+        private void ParseEudoraHeaders3(List<string> headers, ref Data.EmailMessage email)
+        {
+            // Line 0 - date (and possibly the funky Qualcomm mail msg delimiter)
+            string line0 = headers.First();
+            line0 = line0.Replace("From ???@???", "").Trim();
+            line0 = line0.Substring(4);
+            string format = "MMM dd HH:mm:ss yyyy";
+            DateTime.TryParseExact(line0, format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
+            email.Date = date;
+
+            // Remainder of headers; order and content may vary
+            foreach (string header in headers)
+            {
+                var parts = SplitHeader(header);
+
+                if (header.StartsWith("From:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    email.SenderAddress = ParseEmailAddress(parts[1]);
+                }
+
+                else if (header.StartsWith("To:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    foreach (var address in SplitAddressList(parts[1]))
+                    {
+                        email.Addresses_To.Add(address);
+                    }
+                }
+
+                else if(header.StartsWith("Cc:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    foreach (var address in SplitAddressList(parts[1]))
+                    {
+                        email.Addresses_CC.Add(address);
+                    }
+                }
+
+                else if (header.StartsWith("Bcc:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    foreach (var address in SplitAddressList(parts[1]))
+                    {
+                        email.Addresses_BCC.Add(address);
+                    }
+                }
+
+                else if (header.StartsWith("Subject:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    email.Subject = parts[1];
+                }
+                
+                else if (header.StartsWith("Message-Id:", StringComparison.CurrentCultureIgnoreCase))
+                {
+                }
+            }
+        }
+
+        private void ParseEudoraBody3(List<string> body, ref Data.EmailMessage email)
+        {
+            try
+            {
+                foreach (var line in body)
+                {
+                    // filter out markup we don't need
+                    if (line.Contains("<html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("<x-html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("<head>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("</head>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("<body>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("</body>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("</html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.Contains("</x-html>", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        email.Body += line;
+                    }                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+
+
+
+        private void ParseMailbox2(string mailboxString, Mailbox mailbox)
+        {
+            try
+            {
+                var messages = mailboxString.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var message in messages)
+                {
+                    ParseMessage2(message, mailbox);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void ParseMessage2(string message, Mailbox mailbox)
+        {
+            try
+            {
+                //message = message.Replace("???@???", "").Trim();
+                //message = message.Replace("\r\n", "\n").Trim();
+                if (!message.StartsWith(emailDelimiter))
+                {
+                    message = emailDelimiter + message;
+                }
+                message = message.Trim();
+
+                //string tempFile = TempFileManager.CreateTempFileFromStringContent2(message);
+                //MimeKit.MimeMessage mime = MimeKit.MimeMessage.Load(mkParserOptions, tempFile);
+                using MemoryStream stream = new(Encoding.UTF8.GetBytes(message));
+                stream.Position = 0;
+                var mime = MimeKit.MimeMessage.Load(mkParserOptions, stream);
+                
+                var converter = new Core.MimeToMessage(mime);
+                converter.Convert();
+                var email = converter.Message;
+                
+                // Now that we've parsed the headers, skip this message if it already exists
+                // here in the corresponding Eudora.Net mailbox
+                foreach (var msg in mailbox.Messages)
+                {
+                    if (msg.MessageId == email.MessageId)
+                    {
+                        return;
+                    }
+                }
+                
+                // Otherwise, save this email to the mailbox
+                email.MailboxName = mailbox.Name;
+                mailbox.AddMessage(email);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         private void ParseMailbox(string mailboxString, Mailbox mailbox)
@@ -184,7 +526,7 @@ namespace Eudora.Net.Core
         {
             try
             {
-                return line.Split(": ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                return line.Split(":", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
             }
             catch (Exception ex)
             {
@@ -334,6 +676,11 @@ namespace Eudora.Net.Core
                     else if (line.StartsWith("X-Attachments: "))
                     {
                         ++prunable;
+                        string attachments = line.Replace("X-Attachments:", "").Trim();
+                        if(attachments.Length > 0)
+                        {
+                            int breakhere = 90;
+                        }
                     }
                     else if (line.StartsWith("In-Reply-To: "))
                     {
