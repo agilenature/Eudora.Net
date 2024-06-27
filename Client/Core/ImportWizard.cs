@@ -392,8 +392,24 @@ namespace Eudora.Net.Core
                 
                 else if (header.StartsWith("Message-Id:", StringComparison.CurrentCultureIgnoreCase))
                 {
+                    email.MessageId = parts[1].Replace("<", "").Replace(">", "").Trim();
                 }
             }
+        }
+
+        private void ParseAttachment(string line, Data.EmailMessage email)
+        {
+            string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, email.MailboxName, email.InternalId.ToString());
+            IoUtil.EnsureFolder(attachmentFolder);
+
+            string srcPath = line.Replace("Attachment Converted:", "").Replace("\"", "").Trim();
+            string destPath = Path.Combine(attachmentFolder, Path.GetFileName(srcPath));
+            File.Copy(srcPath, destPath);
+
+            Data.EmailAttachment attachment = new();
+            attachment.Path = destPath;
+            attachment.Name = Path.GetFileName(attachment.Path);
+            email.Attachments.Add(attachment);
         }
 
         private void ParseEudoraBody3(List<string> body, ref Data.EmailMessage email)
@@ -435,365 +451,15 @@ namespace Eudora.Net.Core
                     {
                         continue;
                     }
+                    else if(line.StartsWith("Attachment Converted:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        ParseAttachment(line, email);
+                    }
                     else
                     {
                         email.Body += line;
                     }                    
                 }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-
-
-
-        private void ParseMailbox2(string mailboxString, Mailbox mailbox)
-        {
-            try
-            {
-                var messages = mailboxString.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var message in messages)
-                {
-                    ParseMessage2(message, mailbox);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        private void ParseMessage2(string message, Mailbox mailbox)
-        {
-            try
-            {
-                //message = message.Replace("???@???", "").Trim();
-                //message = message.Replace("\r\n", "\n").Trim();
-                if (!message.StartsWith(emailDelimiter))
-                {
-                    message = emailDelimiter + message;
-                }
-                message = message.Trim();
-
-                //string tempFile = TempFileManager.CreateTempFileFromStringContent2(message);
-                //MimeKit.MimeMessage mime = MimeKit.MimeMessage.Load(mkParserOptions, tempFile);
-                using MemoryStream stream = new(Encoding.UTF8.GetBytes(message));
-                stream.Position = 0;
-                var mime = MimeKit.MimeMessage.Load(mkParserOptions, stream);
-                
-                var converter = new Core.MimeToMessage(mime);
-                converter.Convert();
-                var email = converter.Message;
-                
-                // Now that we've parsed the headers, skip this message if it already exists
-                // here in the corresponding Eudora.Net mailbox
-                foreach (var msg in mailbox.Messages)
-                {
-                    if (msg.MessageId == email.MessageId)
-                    {
-                        return;
-                    }
-                }
-                
-                // Otherwise, save this email to the mailbox
-                email.MailboxName = mailbox.Name;
-                mailbox.AddMessage(email);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        private void ParseMailbox(string mailboxString, Mailbox mailbox)
-        {
-            try
-            {
-                var messages = mailboxString.Split(emailDelimiter, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var message in messages)
-                {
-                    ParseMessage(message, mailbox);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        private string[] SplitHeaderLine(string line)
-        {
-            try
-            {
-                return line.Split(":", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                return new string[] { };
-            }
-        }
-
-        private void ParseMessage(string message, Mailbox mailbox)
-        {
-            try
-            {
-                EmbeddedImages.Clear();
-                Data.EmailMessage email = new();
-                email.MailboxName = mailbox.Name;
-
-                var lines = message.Split("\r\n").ToList();
-                if (lines.Count == 0)
-                {
-                    return;
-                }
-
-                // The first line in a Qualcomm Eudora email message is the "From " line,
-                // which is an abomination of a string that contains sender address and
-                // the timestamp, in a rather funky format with day of week in two forms.
-                // We need to parse this line to extract the date and time of the email.
-
-                string qualcommMess = lines.First();
-                qualcommMess = qualcommMess.Replace("From ", "");
-                var chars = qualcommMess.ToCharArray();
-                int spaceCount = 0;
-                for (int i = 0; i < chars.Length; i++)
-                {
-                    if (chars[i] == ' ')
-                    {
-                        spaceCount++;
-                        if (spaceCount == 2)
-                        {
-                            string format = "MMM dd HH:mm:ss yyyy";
-                            DateTime.TryParseExact(qualcommMess.Substring(i + 1), format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
-                            email.Date = date;
-                            break;
-                        }
-                    }
-                }
-                // Prune this line once we're done parsing it.
-                lines.RemoveAt(0);
-
-
-                // Now we loop through the lines of the email message to extract the headers
-                // At the same time, we count the lines comprising the header section.
-                // Later we'll prune that chunk of the message so we can focus on the body,
-                // which can exist in either plain text or HTML.
-                int prunable = 0;
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    string line = lines[i];
-                    if (line.Length == 0)
-                    {
-                        // NOTE: don't count the blank lines as prunable;
-                        // these are part of the email message body.
-                        continue;
-                    }
-
-                    else if (line.StartsWith("To: "))
-                    {
-                        ++prunable;
-                        var to = SplitHeaderLine(line);
-                        if (to.Length == 2)
-                        {
-                            var recipients = to[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                            if (recipients.Length > 0)
-                            {
-                                foreach (var recipient in recipients)
-                                {
-                                    email.Addresses_To.Add(new(string.Empty, recipient));
-                                }
-                            }
-                        }
-                    }
-                    else if (line.StartsWith("From: "))
-                    {
-                        ++prunable;
-                        var from = SplitHeaderLine(line);
-                        if (from.Length == 2)
-                        {
-                            string displayAddress = from[1];
-                            var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                            EmailAddress sender = new();
-                            foreach (var component in components)
-                            {
-                                if (component.Contains("@"))
-                                {
-                                    sender.Address = component.Replace("<", "").Replace(">", "");
-                                }
-                                else
-                                {
-                                    sender.Name = component;
-                                }
-                            }
-                            email.SenderAddress = sender;
-                        }
-                    }
-                    else if (line.StartsWith("Cc: "))
-                    {
-                        ++prunable;
-                        var cc = SplitHeaderLine(line);
-                        if (cc.Length == 2)
-                        {
-                            var ccs = cc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                            if (ccs.Length > 0)
-                            {
-                                foreach (var c in ccs)
-                                {
-                                    email.Addresses_CC.Add(new(string.Empty, c));
-                                }
-                            }
-                        }
-                    }
-                    else if (line.StartsWith("Bcc: "))
-                    {
-                        ++prunable;
-                        var bcc = SplitHeaderLine(line);
-                        if (bcc.Length == 2)
-                        {
-                            var bccs = bcc[1].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                            if (bccs.Length > 0)
-                            {
-                                foreach (var b in bccs)
-                                {
-                                    email.Addresses_BCC.Add(new(string.Empty, b));
-                                }
-                            }
-                        }
-                    }
-                    else if (line.StartsWith("Subject: "))
-                    {
-                        ++prunable;
-                        email.Subject = line.Replace("Subject: ", "");
-                    }
-                    else if (line.StartsWith("Message-Id: "))
-                    {
-                        ++prunable;
-                        string messageId = line.Replace("Message-Id: ", "").Replace("<", "").Replace(">", "");
-                        email.MessageId = messageId;
-                    }
-                    else if (line.StartsWith("X-Attachments: "))
-                    {
-                        ++prunable;
-                        string attachments = line.Replace("X-Attachments:", "").Trim();
-                        if(attachments.Length > 0)
-                        {
-                            int breakhere = 90;
-                        }
-                    }
-                    else if (line.StartsWith("In-Reply-To: "))
-                    {
-                        ++prunable;
-                    }
-                    else if (line.StartsWith("References: "))
-                    {
-                        ++prunable;
-                    }
-                    else if (line.StartsWith("X-EmbeddedContent: "))
-                    {
-                        ++prunable;
-
-                        // Embedded content
-                        var embeddings = SplitHeaderLine(line);
-                        if (embeddings.Length == 2)
-                        {
-                            embeddings[1] = embeddings[1].Replace("\n", "").Replace("\r\n", "");
-                            var cids = embeddings[1].Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                            if (cids.Length > 0)
-                            {
-                                foreach (var cid in cids)
-                                {
-                                    var parts = cid.Split("=", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                                    if (parts.Length == 2)
-                                    {
-                                        string id = parts[0].Replace(">", "").Replace("<", "");
-                                        string src = parts[1].Replace(">", "").Replace("<", "");
-
-                                        if (!id.StartsWith("cid:"))
-                                        {
-                                            id = "cid:." + parts[0];
-                                        }
-                                        ImportedEmbeddedContent content = new()
-                                        {
-                                            ID = id,
-                                            Source = src                                            
-                                        };
-                                        EmbeddedImages.Add(content);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Now that we've parsed the headers, skip this message if it already exists
-                // here in the corresponding Eudora.Net mailbox
-                foreach (var msg in mailbox.Messages)
-                {
-                    if (msg.MessageId == email.MessageId)
-                    {
-                        return;
-                    }
-                }
-
-                // Trimming out the lines that constitute the variable-length header,
-                // what's left should be the body of the email message.
-                if (prunable > 0)
-                {
-                    lines.RemoveRange(0, prunable);
-                }
-
-                // Now we have the body of the email message, which may be in HTML format.
-                // Prune out the markup that we don't need or want.
-                List<string> toPrune = [];
-                foreach (var line in lines)
-                {
-                    if (line.StartsWith("<html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                    else if (line.StartsWith("<head>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                    else if (line.StartsWith("</head>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                    else if (line.StartsWith("<body>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                    else if (line.StartsWith("</body>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                    else if (line.StartsWith("</html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        toPrune.Add(line);
-                    }
-                }
-                foreach (var prune in toPrune)
-                {
-                    lines.Remove(prune);
-                }
-
-                foreach (var line in lines)
-                {
-                    email.Body += line;// + "\r\n";
-
-                    // Now replace the CID references with the actual paths to the embedded content
-                    foreach (var embedding in EmbeddedImages)
-                    {
-                        email.Body = email.Body.Replace(embedding.ID, embedding.Source);
-                    }
-                }
-
-                // Finally, save this email to the mailbox
-                mailbox.AddMessage(email);
             }
             catch (Exception ex)
             {
