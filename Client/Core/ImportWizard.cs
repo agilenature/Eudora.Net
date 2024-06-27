@@ -295,24 +295,30 @@ namespace Eudora.Net.Core
         private Data.EmailAddress ParseEmailAddress(string displayAddress)
         {
             EmailAddress address = new();
-            
-            // Format 0: Name <address>
-            if (displayAddress.Contains("<") && displayAddress.Contains(">"))
-            {
-                var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                if (components.Length == 2)
+
+            try
+            {// Format 0: Name <address>
+                if (displayAddress.Contains("<") && displayAddress.Contains(">"))
                 {
-                    string name = components[0];
-                    string addy = components[1].Replace(">", "");
-                    address.Name = name;
-                    address.Address = addy;
+                    var components = displayAddress.Split("<", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                    if (components.Length == 2)
+                    {
+                        string name = components[0];
+                        string addy = components[1].Replace(">", "");
+                        address.Name = name;
+                        address.Address = addy;
+                    }
+                }
+
+                // Format 1: address
+                else
+                {
+                    address.Address = displayAddress;
                 }
             }
-
-            // Format 1: address
-            else
+            catch(Exception ex)
             {
-                address.Address = displayAddress;
+                Logger.LogException(ex);
             }
 
             return address;
@@ -343,73 +349,86 @@ namespace Eudora.Net.Core
 
         private void ParseEudoraHeaders3(List<string> headers, ref Data.EmailMessage email)
         {
-            // Line 0 - date (and possibly the funky Qualcomm mail msg delimiter)
-            string line0 = headers.First();
-            line0 = line0.Replace("From ???@???", "").Trim();
-            line0 = line0.Substring(4);
-            string format = "MMM dd HH:mm:ss yyyy";
-            DateTime.TryParseExact(line0, format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
-            email.Date = date;
+            try
+            {// Line 0 - date (and possibly the funky Qualcomm mail msg delimiter)
+                string line0 = headers.First();
+                line0 = line0.Replace("From ???@???", "").Trim();
+                line0 = line0.Substring(4);
+                string format = "MMM dd HH:mm:ss yyyy";
+                DateTime.TryParseExact(line0, format, null, System.Globalization.DateTimeStyles.None, out DateTime date);
+                email.Date = date;
 
-            // Remainder of headers; order and content may vary
-            foreach (string header in headers)
+                // Remainder of headers; order and content may vary
+                foreach (string header in headers)
+                {
+                    var parts = SplitHeader(header);
+
+                    if (header.StartsWith("From:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        email.SenderAddress = ParseEmailAddress(parts[1]);
+                    }
+
+                    else if (header.StartsWith("To:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        foreach (var address in SplitAddressList(parts[1]))
+                        {
+                            email.Addresses_To.Add(address);
+                        }
+                    }
+
+                    else if (header.StartsWith("Cc:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        foreach (var address in SplitAddressList(parts[1]))
+                        {
+                            email.Addresses_CC.Add(address);
+                        }
+                    }
+
+                    else if (header.StartsWith("Bcc:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        foreach (var address in SplitAddressList(parts[1]))
+                        {
+                            email.Addresses_BCC.Add(address);
+                        }
+                    }
+
+                    else if (header.StartsWith("Subject:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        email.Subject = parts[1];
+                    }
+
+                    else if (header.StartsWith("Message-Id:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        email.MessageId = parts[1].Replace("<", "").Replace(">", "").Trim();
+                    }
+                }
+            }
+            catch(Exception ex)
             {
-                var parts = SplitHeader(header);
-
-                if (header.StartsWith("From:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    email.SenderAddress = ParseEmailAddress(parts[1]);
-                }
-
-                else if (header.StartsWith("To:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    foreach (var address in SplitAddressList(parts[1]))
-                    {
-                        email.Addresses_To.Add(address);
-                    }
-                }
-
-                else if(header.StartsWith("Cc:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    foreach (var address in SplitAddressList(parts[1]))
-                    {
-                        email.Addresses_CC.Add(address);
-                    }
-                }
-
-                else if (header.StartsWith("Bcc:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    foreach (var address in SplitAddressList(parts[1]))
-                    {
-                        email.Addresses_BCC.Add(address);
-                    }
-                }
-
-                else if (header.StartsWith("Subject:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    email.Subject = parts[1];
-                }
-                
-                else if (header.StartsWith("Message-Id:", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    email.MessageId = parts[1].Replace("<", "").Replace(">", "").Trim();
-                }
+                Logger.LogException(ex);
             }
         }
 
         private void ParseAttachment(string line, Data.EmailMessage email)
         {
-            string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, email.MailboxName, email.InternalId.ToString());
-            IoUtil.EnsureFolder(attachmentFolder);
+            try
+            {
+                string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, email.MailboxName, email.InternalId.ToString());
+                IoUtil.EnsureFolder(attachmentFolder);
 
-            string srcPath = line.Replace("Attachment Converted:", "").Replace("\"", "").Trim();
-            string destPath = Path.Combine(attachmentFolder, Path.GetFileName(srcPath));
-            File.Copy(srcPath, destPath);
+                string srcPath = line.Replace("Attachment Converted:", "").Replace("\"", "").Trim();
+                string destPath = Path.Combine(attachmentFolder, Path.GetFileName(srcPath));
+                File.Copy(srcPath, destPath);
 
-            Data.EmailAttachment attachment = new();
-            attachment.Path = destPath;
-            attachment.Name = Path.GetFileName(attachment.Path);
-            email.Attachments.Add(attachment);
+                Data.EmailAttachment attachment = new();
+                attachment.Path = destPath;
+                attachment.Name = Path.GetFileName(attachment.Path);
+                email.Attachments.Add(attachment);
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         private void ParseEudoraBody3(List<string> body, ref Data.EmailMessage email)
