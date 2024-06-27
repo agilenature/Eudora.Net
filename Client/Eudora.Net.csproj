@@ -9,6 +9,7 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <PlatformTarget>x86</PlatformTarget>
     <Platforms>AnyCPU;x86;x64</Platforms>
+    <ApplicationIcon>GUI\res\icons\bigicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -36,6 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GUI\res\icons\bigicon.ico" />
     <None Remove="GUI\res\icons\mboxes.ico" />
     <None Remove="GUI\res\icons\persona.ico" />
     <None Remove="GUI\res\icons\search.ico" />
@@ -544,6 +546,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="GUI\res\icons\bigicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Javascript\BodyObserver.js" />
     <EmbeddedResource Include="Javascript\CheckForTextSelection.js" />
     <EmbeddedResource Include="Javascript\CreateDivForSelection.js" />
@@ -595,6 +601,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="GUI\res\icons\bigicon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="GUI\res\icons\mboxes.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -9,7 +9,7 @@
         Width="640"
         Height="360" 
          
-        WindowStyle="ToolWindow" 
+        WindowStyle="None"
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
         ShowInTaskbar="False"
@@ -34,8 +34,12 @@
                 Background="CornflowerBlue"
                 Foreground="White"
                 IsDefault="True"
-                Content="close"
-                Click="btn_Close_Click"/>
+                Click="btn_Close_Click">
+            <Button.Content>
+                <TextBlock Text="close" FontSize="14" FontWeight="Bold"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button.Content>
+        </Button>
 
     </Grid>
 </Window>
