@@ -49,7 +49,26 @@ namespace Eudora.Net.Data
             {
                 return false;
             }
-            return other.InternalId == InternalId;
+            
+            if( other.InternalId == InternalId )
+            {
+                return true;
+            }
+
+            if( other.MessageId == MessageId )
+            {
+                return true;
+            }
+
+            if (other.SenderAddress == SenderAddress &&
+                other.Subject == Subject &&
+                other.Date == Date &&
+                other.Body == Body)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

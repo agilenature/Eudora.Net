@@ -91,6 +91,11 @@ namespace Eudora.Net.Core
             IoUtil.EnsureFolder(DataRoot);
         }
 
+        public bool Contains(EmailMessage message)
+        {
+            return Messages.Contains(message);
+        }
+
         public void Delete()
         {
             try

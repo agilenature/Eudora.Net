@@ -249,19 +249,21 @@ namespace Eudora.Net.Core
             try
             {
                 List<string> lines = message.Split("\r\n").ToList();
-                int break1 = 1;
 
                 var index = lines.IndexOf(string.Empty);
                 List<string> headers = lines.Take(index).ToList();
                 List<string> body = lines.Skip(index).ToList();
-                int break2 = 1;
 
                 Data.EmailMessage email = new();
                 email.MailboxName = mailbox.Name;
 
                 ParseEudoraHeaders3(headers, ref email);
                 ParseEudoraBody3(body, ref email);
-                mailbox.AddMessage(email);
+
+                if (!mailbox.Contains(email))
+                {
+                    mailbox.AddMessage(email);
+                }
             }
             catch (Exception ex)
             {
