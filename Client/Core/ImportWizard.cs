@@ -431,53 +431,120 @@ namespace Eudora.Net.Core
             }
         }
 
+        private void ParseEmbedded(string line, Data.EmailMessage email)
+        {
+            try
+            {
+                // strip the line to the image filename
+                string fileName = line.Replace("Embedded Content:", "").Replace("\"", "").Trim();
+                fileName = fileName.Substring(0, fileName.IndexOf(":"));
+                string srcPath = Path.Combine(EudoraDataPath, "Embedded");
+                srcPath = Path.Combine(srcPath, fileName);
+
+                // copy the image to the mailbox folder
+                string destFolder = Path.Combine(PostOffice.MailboxesPath, email.MailboxName, email.InternalId.ToString());
+                IoUtil.EnsureFolder(destFolder);
+
+                string destPath = Path.Combine(destFolder, fileName);
+
+                File.Copy(srcPath, destPath);
+
+                EmbeddedImage ei = new()
+                {
+                    Source = destPath,
+                };
+
+                email.InlineImages.Add(ei);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
         private void ParseEudoraBody3(List<string> body, ref Data.EmailMessage email)
         {
+            // Note to whoever might be reading this:
+            // Qualcomm's email message format places statements about attachments and embedded images
+            // at the end of the message. This is why we parse the message body twice. On the first pass,
+            // we parse out and create/copy the attached or embedded assets. In the second pass, we make whatever
+            // changes are necessary to point to the local copies of the assets, while copying the rest of the body
+            // to the new email message.
+
+            // First pass
             try
             {
                 foreach (var line in body)
                 {
-                    // filter out markup we don't need
-                    if (line.Contains("<html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("<x-html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("<head>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("</head>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("<body>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("</body>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("</html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if (line.Contains("</x-html>", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-                    else if(line.StartsWith("Attachment Converted:", StringComparison.CurrentCultureIgnoreCase))
+                    // Qualcomm Eudora mail format notes the attachment thusly
+                    if (line.StartsWith("Attachment Converted:", StringComparison.CurrentCultureIgnoreCase))
                     {
                         ParseAttachment(line, email);
+                        continue;
+                    }
+                    // Embedded images are noted like this
+                    else if (line.StartsWith("Embedded Content:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        ParseEmbedded(line, email);
+                        continue;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            // Second pass
+            try
+            {
+
+                foreach (var line in body)
+                {
+                    // We still need to skip over these two types
+                    if (line.StartsWith("Attachment Converted:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+                    else if (line.StartsWith("Embedded Content:", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    // Here we will convert the src attribute value to point to the local copy of the image
+                    // Eudora stores the image filename as the alt parameter in the img tag
+                    // so we just need to replace the src value with the alt value
+                    // An example copied from a Eudora email:
+                    // <img src="cid:ii_lrqzllcm0" alt="Amaxresdefault.jpg"
+                    else if (line.Contains("<img"))
+                    {
+                        var indexStart = line.IndexOf("<img");
+                        var indexEnd = line.IndexOf(">", indexStart);
+                        var imgTag = line.Substring(indexStart, indexEnd - indexStart + 1);
+
+                        var altstart = imgTag.IndexOf("alt=");
+                        var altend = imgTag.IndexOf("\"", altstart + 5);
+                        var alt = imgTag.Substring(altstart + 5, altend - altstart - 5);
+
+                        EmbeddedImage? ei = email.InlineImages.Where(x => x.Source.Contains(alt)).FirstOrDefault();
+
+                        if (ei is not null)
+                        {
+                            string newImgSrc = alt;
+                            string newImgTag = $"<img src=\"{ei.Source}\">";
+
+                            string newLine = line.Replace(imgTag, newImgTag);
+                            email.Body += newLine;
+                        }
+                        else
+                        {
+                            email.Body += line;
+                        }
                     }
                     else
                     {
                         email.Body += line;
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
