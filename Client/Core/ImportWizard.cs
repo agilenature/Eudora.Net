@@ -1,4 +1,5 @@
 ﻿using Eudora.Net.Data;
+using Eudora.Net.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -544,6 +545,104 @@ namespace Eudora.Net.Core
                     else
                     {
                         email.Body += line;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private bool ImportContacts()
+        {
+            // Step 1: locate all address book files
+            string mainAddressBook = Path.Combine(EudoraDataPath, "nndbase.txt");
+
+
+            // Step 2: parse each address book file
+
+            return true;
+        }
+
+        private Data.AddressBook? GetAddressBook(string bookName)
+        {
+            Data.AddressBook? book = null;
+
+            try
+            {
+                book = AddressBookManager.Get(bookName);
+                if (book is null)
+                {
+                    AddressBookManager.New(bookName);
+                    book = AddressBookManager.Get(bookName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            return book;
+        }
+
+        private void ParseContact(string[] contactData, AddressBook book)
+        {
+            try
+            {
+                if (contactData[0].Length > 0 && contactData[1].Length > 0)
+                {
+                    string alias = contactData[0].Replace("alias", "").Trim();
+                    string note = contactData[1].Replace("note", "").Trim();
+
+                    Data.Contact contact = new();
+                    
+                    string[] aliasParts = alias.Split(" ", StringSplitOptions.TrimEntries);
+                    if (aliasParts.Length > 0)
+                    {
+                        
+                    }
+
+                    note = note.Replace("<", " ").Replace(">", " ");
+                    
+                    book.Contacts.AddUnique(contact);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void ParseAddressBook(string bookPath)
+        {
+            try
+            {
+                if(File.Exists(bookPath))
+                {
+                    string bookName = Path.GetFileNameWithoutExtension(bookPath);
+                    Data.AddressBook? book = GetAddressBook(bookName);
+                    if(book is null)
+                    {
+                        return;
+                    }
+
+                    List<string> lines = File.ReadAllLines(bookPath).ToList();
+                    string[] contactData = [string.Empty, string.Empty];
+                    foreach (var line in lines)
+                    {
+                        if(line.StartsWith("alias"))
+                        {
+                            contactData[0] = line;
+                        }
+                        else if(line.StartsWith("note"))
+                        {
+                            contactData[1] = line;
+                            if(contactData[0].Length > 0)
+                            {
+                                ParseContact(contactData, book);
+                                contactData = [string.Empty, string.Empty];
+                            }
+                        }
                     }
                 }
             }

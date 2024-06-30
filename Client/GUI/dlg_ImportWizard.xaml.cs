@@ -78,9 +78,9 @@ namespace Eudora.Net.GUI
             cb_FindData.FontWeight = FontWeights.Normal;
             cb_FindData.Foreground = System.Windows.SystemColors.ControlTextBrush;
 
-            cb_Accounts.IsChecked = false;
-            cb_Accounts.FontWeight = FontWeights.Normal;
-            cb_Accounts.Foreground = System.Windows.SystemColors.ControlTextBrush;
+            //cb_Accounts.IsChecked = false;
+            //cb_Accounts.FontWeight = FontWeights.Normal;
+            //cb_Accounts.Foreground = System.Windows.SystemColors.ControlTextBrush;
 
             cb_Mailboxes.IsChecked = false;
             cb_Mailboxes.FontWeight = FontWeights.Normal;
@@ -106,7 +106,7 @@ namespace Eudora.Net.GUI
 
             AddStatusText("Starting import process...");
             LocateData();
-            ImportAccounts();
+            //ImportAccounts();
             ImportMailboxes();
             
             AddStatusText("Import process complete");
@@ -146,19 +146,19 @@ namespace Eudora.Net.GUI
 
         private void ImportAccounts()
         {
-            AddStatusText("Importing accounts...");
-            MarkStepActive(cb_Accounts);
+            //AddStatusText("Importing accounts...");
+            //MarkStepActive(cb_Accounts);
             
-            if (TheWiz.ImportAccounts())
-            {
-                AddStatusText("Accounts imported successfully");
-                MarkStepCompleted(cb_Accounts);
-            }
-            else
-            {
-                AddStatusText("Account import failed");
-                MarkStepFailed(cb_Accounts);
-            }            
+            //if (TheWiz.ImportAccounts())
+            //{
+            //    AddStatusText("Accounts imported successfully");
+            //    MarkStepCompleted(cb_Accounts);
+            //}
+            //else
+            //{
+            //    AddStatusText("Account import failed");
+            //    MarkStepFailed(cb_Accounts);
+            //}            
         }
 
         private void ImportMailboxes()
@@ -177,6 +177,11 @@ namespace Eudora.Net.GUI
                 MarkStepFailed(cb_Mailboxes);
             }
             
+        }
+
+        private void ImportAddressBooks()
+        {
+            AddStatusText("Importing address books...");
         }
     }
 }
