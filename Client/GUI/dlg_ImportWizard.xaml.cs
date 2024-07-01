@@ -85,6 +85,10 @@ namespace Eudora.Net.GUI
             cb_Mailboxes.IsChecked = false;
             cb_Mailboxes.FontWeight = FontWeights.Normal;
             cb_Mailboxes.Foreground = System.Windows.SystemColors.ControlTextBrush;
+
+            cb_AddressBooks.IsChecked = false;
+            cb_AddressBooks.FontWeight = FontWeights.Normal;
+            cb_AddressBooks.Foreground = System.Windows.SystemColors.ControlTextBrush;
         }
 
         private void AddStatusText(string text)
@@ -108,7 +112,8 @@ namespace Eudora.Net.GUI
             LocateData();
             //ImportAccounts();
             ImportMailboxes();
-            
+            ImportAddressBooks();
+
             AddStatusText("Import process complete");
             Active = false;
             EnableStart(true);
@@ -182,6 +187,18 @@ namespace Eudora.Net.GUI
         private void ImportAddressBooks()
         {
             AddStatusText("Importing address books...");
+            MarkStepActive(cb_AddressBooks);
+
+            if(TheWiz.ImportContacts())
+            {
+                AddStatusText("Address books imported successfully");
+                MarkStepCompleted(cb_AddressBooks);
+            }
+            else
+            {
+                AddStatusText("Address book import failed");
+                MarkStepFailed(cb_AddressBooks);
+            }
         }
     }
 }

@@ -98,7 +98,7 @@ namespace Eudora.Net.Core
                 {
                     return false;
                 }
-                
+
 
                 // The default or "dominant" account is the first one listed in the eudora.ini file,
                 // not found in the "personalities" section but loose in the "settings" section. Sigh.
@@ -127,9 +127,9 @@ namespace Eudora.Net.Core
                 // there to find the other accounts
                 List<string> AccountTokens = [];
                 int index = lines.IndexOf("[Personalities]");
-                for(int i = index + 1; i < lines.Count; i++)
+                for (int i = index + 1; i < lines.Count; i++)
                 {
-                    if(lines[i].StartsWith("["))
+                    if (lines[i].StartsWith("["))
                     {
                         break;
                     }
@@ -285,7 +285,7 @@ namespace Eudora.Net.Core
                     parts[1] = header.Substring(index + 1);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -317,7 +317,7 @@ namespace Eudora.Net.Core
                     address.Address = displayAddress;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -404,7 +404,7 @@ namespace Eudora.Net.Core
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -426,7 +426,7 @@ namespace Eudora.Net.Core
                 attachment.Name = Path.GetFileName(attachment.Path);
                 email.Attachments.Add(attachment);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -491,7 +491,7 @@ namespace Eudora.Net.Core
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -554,17 +554,6 @@ namespace Eudora.Net.Core
             }
         }
 
-        private bool ImportContacts()
-        {
-            // Step 1: locate all address book files
-            string mainAddressBook = Path.Combine(EudoraDataPath, "nndbase.txt");
-
-
-            // Step 2: parse each address book file
-
-            return true;
-        }
-
         private Data.AddressBook? GetAddressBook(string bookName)
         {
             Data.AddressBook? book = null;
@@ -585,43 +574,42 @@ namespace Eudora.Net.Core
             return book;
         }
 
-        private void ParseContact(string[] contactData, AddressBook book)
+        private string[] SplitContactField(string fieldString)
         {
-            try
+            var parts = fieldString.Split(":", StringSplitOptions.TrimEntries);
+            if (parts.Length == 2)
             {
-                if (contactData[0].Length > 0 && contactData[1].Length > 0)
-                {
-                    string alias = contactData[0].Replace("alias", "").Trim();
-                    string note = contactData[1].Replace("note", "").Trim();
-
-                    Data.Contact contact = new();
-                    
-                    string[] aliasParts = alias.Split(" ", StringSplitOptions.TrimEntries);
-                    if (aliasParts.Length > 0)
-                    {
-                        
-                    }
-
-                    note = note.Replace("<", " ").Replace(">", " ");
-                    
-                    book.Contacts.AddUnique(contact);
-                }
+                parts[0] = parts[0].Trim().ToLower();
+                parts[1] = parts[1].Replace(">", " ");
             }
-            catch (Exception ex)
+            return parts;
+        }
+
+        public bool ImportContacts()
+        {
+            // Step 1: locate all address book files
+            string bookpath = Path.Combine(EudoraDataPath, "nickname");
+            List<string> addressBooks = Directory.GetFiles(bookpath, "*.txt").ToList();
+            addressBooks.Add(Path.Combine(EudoraDataPath, "nndbase.txt"));
+
+            // Step 2: parse each address book file
+            foreach (var book in addressBooks)
             {
-                Logger.LogException(ex);
+                ParseAddressBook(book);
             }
+
+            return true;
         }
 
         private void ParseAddressBook(string bookPath)
         {
             try
             {
-                if(File.Exists(bookPath))
+                if (File.Exists(bookPath))
                 {
                     string bookName = Path.GetFileNameWithoutExtension(bookPath);
                     Data.AddressBook? book = GetAddressBook(bookName);
-                    if(book is null)
+                    if (book is null)
                     {
                         return;
                     }
@@ -630,20 +618,168 @@ namespace Eudora.Net.Core
                     string[] contactData = [string.Empty, string.Empty];
                     foreach (var line in lines)
                     {
-                        if(line.StartsWith("alias"))
+                        if (line.StartsWith("alias"))
                         {
                             contactData[0] = line;
                         }
-                        else if(line.StartsWith("note"))
+                        else if (line.StartsWith("note"))
                         {
                             contactData[1] = line;
-                            if(contactData[0].Length > 0)
+                            if (contactData[0].Length > 0)
                             {
                                 ParseContact(contactData, book);
                                 contactData = [string.Empty, string.Empty];
                             }
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void ParseContact(string[] contactData, AddressBook book)
+        {
+            try
+            {
+                if (contactData[0].Length > 0 && contactData[1].Length > 0)
+                {
+                    string alias = contactData[0].Replace("alias", "").Trim();
+                    string note = contactData[1];
+
+                    Data.Contact contact = new();
+
+                    // line 1 of the Eudora format
+                    var lastSpace = alias.LastIndexOf(" ");
+                    contact.Name = alias.Substring(0, lastSpace).Trim();
+                    
+                    if (lastSpace > 0)
+                    {
+                        string addresses = alias.Substring(lastSpace).Trim();
+                        string[] splitAddresses = addresses.Split(",", StringSplitOptions.TrimEntries);
+                        if(splitAddresses.Length > 0)
+                        {
+                            contact.EmailAddress = splitAddresses[0];
+                        }
+                    }
+                    
+
+                    // line 2 of the Eudora format
+                    string[] fields = note.Substring(note.IndexOf("<")).Split("<", StringSplitOptions.TrimEntries);
+                    foreach (var field in fields)
+                    {
+                        var parts = SplitContactField(field);
+                        if (parts.Length != 2)
+                        {
+                            continue;
+                        }
+
+                        // home page
+                        if (parts[0].Equals("first", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.FirstName = parts[1];
+                        }
+                        else if (parts[0].Equals("last", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.LastName = parts[1];
+                        }
+                        else if (parts[0].Equals("address", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.StreetAddress_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("city", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.City_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("state", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.State_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("country", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Country_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("zip", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.PostalCode_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("phone", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Phone1_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("mobile", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Phone2_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("fax", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Fax_Home = parts[1];
+                        }
+                        else if (parts[0].Equals("web", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Url_Home = parts[1];
+                        }
+
+                        // work page
+                        else if (parts[0].Equals("title", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Title_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("company", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Organization_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("address2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.StreetAddress_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("city2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.City_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("state2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.State_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("country2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Country_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("zip2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.PostalCode_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("mobile2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Phone2_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("fax2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Fax_Work = parts[1];
+                        }
+                        else if (parts[0].Equals("web2", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.Url_Work = parts[1];
+                        }
+
+                        // other page
+                        else if (parts[0].Equals("otheremail", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.OtherEmails = parts[1];
+                        }
+                        else if (parts[0].Equals("otherphone", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.OtherPhones = parts[1];
+                        }
+                        else if (parts[0].Equals("otherweb", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            contact.OtherUrls = parts[1];
+                        }
+                    }
+
+                    book.Contacts.AddUnique(contact);
                 }
             }
             catch (Exception ex)
