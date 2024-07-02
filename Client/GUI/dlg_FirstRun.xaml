@@ -16,7 +16,7 @@
         BorderThickness="2"
         Background="{DynamicResource ControlDark}">
     
-    <Grid Background="{DynamicResource Window}">
+    <Grid Background="{DynamicResource Window}" Margin="2">
 
         <Grid.Resources>
         <ResourceDictionary>
