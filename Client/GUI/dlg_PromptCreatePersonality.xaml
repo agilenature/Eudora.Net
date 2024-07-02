@@ -13,9 +13,10 @@
         Height="240"
         Title="Eudora.Net: Create Personality (Email Account)" Topmost="True"
         BorderBrush="{DynamicResource ControlDark}"
+        Background="{DynamicResource ControlDark}"
         BorderThickness="2">
     
-    <Grid>
+    <Grid Margin="2" Background="{DynamicResource Control}">
 
         <Grid.Resources>
             <ResourceDictionary>
@@ -27,6 +28,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -43,8 +45,10 @@
             </TextBlock>
         </StackPanel>
 
+        <Border Grid.Row="1" Background="{DynamicResource ControlDark}"/>
+
         <!--Main dialog button panel-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
             <Button x:Name="btn_OK" Content="OK" Click="btn_OK_Click" IsDefault="True"/>
             <Button x:Name="btn_Cancel" Content="Cancel" Click="btn_Cancel_Click" IsCancel="True"/>
         </StackPanel>
