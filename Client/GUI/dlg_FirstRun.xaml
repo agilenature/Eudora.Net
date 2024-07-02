@@ -13,9 +13,10 @@
         ShowInTaskbar="False"
         Title="Eudora.Net: Initial Setup"
         BorderBrush="{DynamicResource ControlDark}"
-        BorderThickness="2">
+        BorderThickness="2"
+        Background="{DynamicResource ControlDark}">
     
-    <Grid>
+    <Grid Background="{DynamicResource Window}">
 
         <Grid.Resources>
         <ResourceDictionary>
@@ -82,7 +83,7 @@
                      HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0"
                      ScrollViewer.CanContentScroll="False"
                      AcceptsReturn="False" AcceptsTab="False"
-                     Text="{Binding Source={x:Static properties:Settings.Default}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Path=DataStoreRoot}"/>
+                     Text="{Binding Path=DataRoot}"/>
             
             <Button x:Name="btn_BrowseStorageRoot" Grid.Row="1" Grid.Column="2" 
                     HorizontalAlignment="Left" VerticalAlignment="Center"

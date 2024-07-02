@@ -17,8 +17,8 @@ namespace Eudora.Net
         #region Properties
         /////////////////////////////
 
-        public static string DatastoreRoot = string.Empty;
-        public readonly string ApplicationName = "Eudora.Net";
+        public string DatastoreRoot { get; private set; } = string.Empty;
+        public string ApplicationName { get; } = "Eudora.Net";
 
         /////////////////////////////
         #endregion Properties
@@ -59,13 +59,16 @@ namespace Eudora.Net
                     ApplicationName);
                 Eudora.Net.Properties.Settings.Default.DataStoreRoot = defaultStorage;
                 DatastoreRoot = defaultStorage;
-                //var dlg = new dlg_FirstRun();
-                //var result = dlg.ShowDialog();
-                //if (result is null || result == false)
-                //{
-                //    Application.Current.Shutdown();
-                //    return;
-                //}
+                var dlg = new Eudora.Net.GUI.dlg_FirstRun(defaultStorage);
+                var result = dlg.ShowDialog();
+                if (result is null || result == false)
+                {
+                    Application.Current.Shutdown();
+                    return;
+                }
+                DatastoreRoot = dlg.DataRoot;
+                Eudora.Net.Properties.Settings.Default.DataStoreRoot = dlg.DataRoot;
+                Eudora.Net.Properties.Settings.Default.Save();
             }
 
             // Get the WebView2 cache going

@@ -10,9 +10,22 @@ namespace Eudora.Net.GUI
     /// </summary>
     public partial class dlg_FirstRun : Window
     {
-        public dlg_FirstRun()
+        public string DataRoot
         {
+            get { return (string)GetValue(DataRootProperty); }
+            set { SetValue(DataRootProperty, value); }
+        }
+        public static readonly DependencyProperty DataRootProperty =
+            DependencyProperty.Register("DataRoot", typeof(string), typeof(dlg_FirstRun), 
+                new PropertyMetadata(string.Empty));
+
+
+
+        public dlg_FirstRun(string initialDataRoot)
+        {
+            DataContext = this;
             InitializeComponent();
+            DataRoot = initialDataRoot;
         }
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
@@ -39,8 +52,7 @@ namespace Eudora.Net.GUI
             var result = dlg.ShowDialog();
             if (result is null || result == false) return;
 
-            string folder = dlg.FolderName;
-            tb_StorageRoot.Text = folder;
+            DataRoot = dlg.FolderName;
         }
 
         private void ShowError()
