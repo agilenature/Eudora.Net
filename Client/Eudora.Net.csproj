@@ -598,6 +598,9 @@
     <Reference Include="MdiLib">
       <HintPath>MdiLib.dll</HintPath>
     </Reference>
+    <Reference Include="WpfThemer">
+      <HintPath>WpfThemer.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

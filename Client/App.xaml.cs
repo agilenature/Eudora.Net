@@ -5,6 +5,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.IO;
+using WpfThemer;
 
 namespace Eudora.Net
 {
@@ -26,7 +27,9 @@ namespace Eudora.Net
 
         public App() : base()
         {
-
+            ThemeManager.SetApplication(this);
+            ThemeManager.ActiveTheme = 
+                ThemeManager.Themes.Where(t => t.DisplayName.Equals("dark", StringComparison.CurrentCultureIgnoreCase)).First();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
