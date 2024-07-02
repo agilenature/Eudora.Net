@@ -98,7 +98,7 @@ namespace Eudora.Net.Core
             int count = 0;
             foreach(var address in collection)
             {
-                if(count > 1)
+                if(count > 0)
                 {
                     result += ";";
                 }
