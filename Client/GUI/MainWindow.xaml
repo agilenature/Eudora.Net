@@ -12,8 +12,7 @@
         mc:Ignorable="d"
         Title="Eudora.Net" Width="1024" Height="768" 
         WindowStartupLocation="CenterScreen"
-        BorderThickness="4"
-        Background="{DynamicResource WindowBrushKey}" Foreground="{DynamicResource WindowTextBrushKey}">
+        BorderThickness="4">
 
     <Grid x:Name="MainLayout">
 
@@ -23,7 +22,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="22"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="34"/>
             <RowDefinition Height="*" MinHeight="128"/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
@@ -113,106 +112,140 @@
         </Menu>
 
         <!--Main Toolbar-->
-        <Grid   x:Name="MainToolBar"
-                Grid.Row="1"
-                x:FieldModifier="public"
-                Height="40">
+        <StackPanel x:Name="MainToolBar"
+                    Grid.Row="1"
+                    x:FieldModifier="public"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
 
-            <!--Styling that applies to all controls of indicated types in this panel-->
-            <Grid.Resources>
+            <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Control.Margin" Value="3,3,3,3"/>
-                </Style>
-                <Style TargetType="{x:Type Separator}" 
-                       BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
-                    <Setter Property="Margin" Value="5,1,5,1"/>
-                </Style>
-            </Grid.Resources>
+                    <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource Button.Static.Border}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ForegroundNormal}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <!--<Setter Property="HorizontalAlignment" Value="Center"/>-->
+                    <!--<Setter Property="HorizontalContentAlignment" Value="Center"/>-->
+                    <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
+                    <!--<Setter Property="VerticalContentAlignment" Value="Center"/>-->
+                    <!--<Setter Property="Padding" Value="0"/>-->
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Width" Value="32"/>
+                    <Setter Property="Height" Value="32"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsDefaulted" Value="true">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrush}}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.MouseOver.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.MouseOver.Border}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.Pressed.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Pressed.Border}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ForegroundDisabled}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style>
+            </StackPanel.Resources>
 
-            <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False" Grid.Column="0">
+            <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_10.png"/>
             </Button>
 
-            <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click" Grid.Column="1">
+            <Separator/>
+
+            <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_21.png"/>
             </Button>
 
-            <Button x:Name="btn_Outbox" ToolTip="Outbox" Click="btn_Outbox_Click" Grid.Column="2">
+            <Button x:Name="btn_Outbox" ToolTip="Outbox" Click="btn_Outbox_Click" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_32.png"/>
             </Button>
 
-            <Button x:Name="btn_CheckMail" ToolTip="Check Mail" Click="btn_CheckMail_Click" Grid.Column="3">
+            <Separator/>
+            
+            <Button x:Name="btn_CheckMail" ToolTip="Check Mail" Click="btn_CheckMail_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_43.png"/>
             </Button>
 
-            <Button x:Name="btn_NewMsg" ToolTip="New Message" Click="btn_NewMsg_Click" Grid.Column="4">
+            <Separator/>
+            
+            <Button x:Name="btn_NewMsg" ToolTip="New Message" Click="btn_NewMsg_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_54.png"/>
             </Button>
 
-            <Button x:Name="btn_Reply" x:FieldModifier="public" ToolTip="Reply" IsEnabled="False" Grid.Column="5">
+            <Button x:Name="btn_Reply" x:FieldModifier="public" ToolTip="Reply" IsEnabled="False" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_61.png"/>
             </Button>
 
-            <Button x:Name="btn_ReplyAll" x:FieldModifier="public" ToolTip="Reply To All" IsEnabled="False" Grid.Column="6">
+            <Button x:Name="btn_ReplyAll" x:FieldModifier="public" ToolTip="Reply To All" IsEnabled="False" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_0.png"/>
             </Button>
 
-            <Button x:Name="btn_Forward" x:FieldModifier="public" ToolTip="Forward" IsEnabled="False" Grid.Column="7">
+            <Button x:Name="btn_Forward" x:FieldModifier="public" ToolTip="Forward" IsEnabled="False" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_1.png"/>
             </Button>
 
-            <Button x:Name="btn_Prev" x:FieldModifier="public" ToolTip="Previous Message" IsEnabled="False" Grid.Column="8">
+            <Separator/>
+            
+            <Button x:Name="btn_Prev" x:FieldModifier="public" ToolTip="Previous Message" IsEnabled="False">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_7.png"/>
             </Button>
 
-            <Button x:Name="btn_Next" x:FieldModifier="public" ToolTip="Next Message" IsEnabled="False" Grid.Column="9">
+            <Button x:Name="btn_Next" x:FieldModifier="public" ToolTip="Next Message" IsEnabled="False" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_8.png"/>
             </Button>
 
-            <Button x:Name="btn_Attach" x:FieldModifier="public" ToolTip="Attach File" IsEnabled="False" Grid.Column="10">
+            <Separator/>
+            
+            <Button x:Name="btn_Attach" x:FieldModifier="public" ToolTip="Attach File" IsEnabled="False">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_9.png"/>
             </Button>
 
-            <Button x:Name="btn_FindMsg" ToolTip="Find Messages" Click="btn_FindMsg_Click" Grid.Column="11">
+            <Separator/>
+            
+            <Button x:Name="btn_FindMsg" ToolTip="Find Messages" Click="btn_FindMsg_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_56.png"/>
             </Button>
 
-            <Button x:Name="btn_AddressBook" ToolTip="Address Book" Click="btn_AddressBook_Click" Grid.Column="12">
+            <Separator/>
+            
+            <Button x:Name="btn_AddressBook" ToolTip="Address Book" Click="btn_AddressBook_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_12.png"/>
             </Button>
 
-            <Button x:Name="btn_Browser" ToolTip="Browser" Click="btn_Browser_Click" Grid.Column="13">
+            <Separator/>
+            
+            <Button x:Name="btn_Browser" ToolTip="Browser" Click="btn_Browser_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/new/browser.png"/>
             </Button>
 
-            <!--<Button x:Name="btn_Help" ToolTip="Help" Click="btn_Help_Click" Grid.Column="14">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_14.png"/>
-            </Button>-->
-
-            <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click"  Grid.Column="14">
+            <Separator/>
+            
+            <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click">
                 <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
             </Button>
-            
-        </Grid>  
+
+        </StackPanel>
+       
 
         <!--Main content view-->
         <Grid x:Name="MainView" Grid.Row="2">

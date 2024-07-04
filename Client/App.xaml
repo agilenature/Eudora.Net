@@ -2,9 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Eudora.Net"
+             xmlns:GUI="clr-namespace:Eudora.Net.GUI"
              Exit="Application_Exit">
     <Application.Resources>
         <Style x:Key="{x:Type Window}" TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{DynamicResource WindowTextBrushKey}"/>
+            <Setter Property="Background" Value="{DynamicResource WindowBrushKey}"/>
+        </Style>
+        <Style x:Key="{x:Type GUI:ChildWindowBase}" TargetType="{x:Type GUI:ChildWindowBase}">
+            <Setter Property="Foreground" Value="{DynamicResource WindowTextBrushKey}"/>
+            <Setter Property="Background" Value="{DynamicResource WindowBrushKey}"/>
+        </Style>
+        <Style x:Key="{x:Type GUI:uc_TabBase}" TargetType="{x:Type GUI:uc_TabBase}">
+            <Setter Property="Foreground" Value="{DynamicResource WindowTextBrushKey}"/>
+            <Setter Property="Background" Value="{DynamicResource WindowBrushKey}"/>
+        </Style>
+        <Style x:Key="{x:Type UserControl}" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{DynamicResource WindowTextBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource WindowBrushKey}"/>
         </Style>

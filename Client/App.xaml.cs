@@ -51,6 +51,18 @@ namespace Eudora.Net
             {
                 DefaultValue = FindResource(typeof(Window))
             });
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.ChildWindowBase), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(GUI.ChildWindowBase))
+            });
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.uc_TabBase), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(GUI.uc_TabBase))
+            });
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(UserControl), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(UserControl))
+            });
 
             DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
 
