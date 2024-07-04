@@ -117,19 +117,16 @@
                     x:FieldModifier="public"
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0">
 
             <StackPanel.Resources>
+
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
                     <Setter Property="BorderBrush" Value="{DynamicResource Button.Static.Border}"/>
                     <Setter Property="Foreground" Value="{DynamicResource ForegroundNormal}"/>
                     <Setter Property="BorderThickness" Value="1"/>
-                    <!--<Setter Property="HorizontalAlignment" Value="Center"/>-->
-                    <!--<Setter Property="HorizontalContentAlignment" Value="Center"/>-->
-                    <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
-                    <!--<Setter Property="VerticalContentAlignment" Value="Center"/>-->
-                    <!--<Setter Property="Padding" Value="0"/>-->
                     <Setter Property="Margin" Value="0"/>
                     <Setter Property="Width" Value="32"/>
                     <Setter Property="Height" Value="32"/>
@@ -152,7 +149,6 @@
                                         <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Pressed.Border}"/>
                                     </Trigger>
                                     <Trigger Property="IsEnabled" Value="false">
-
                                         <Setter Property="Opacity" Value="0.5"/>
                                         <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ForegroundDisabled}"/>
                                     </Trigger>
