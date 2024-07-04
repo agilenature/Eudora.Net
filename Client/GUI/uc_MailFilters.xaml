@@ -8,7 +8,6 @@
                     xmlns:data="clr-namespace:Eudora.Net.Data"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="800"
-                    Background="{DynamicResource Control}"
                     d:DataContext="{d:DesignInstance Type=local:uc_MailFilters}">
     <Grid>
 
@@ -25,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Left panel upper: filter list-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Background="{DynamicResource ActiveBorder}">
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <Label Padding="0,0,0,0" Margin="2,2,2,2" Content="Filters"/>    
         </StackPanel>
         <DataGrid x:Name="dg_Filters"
@@ -53,8 +52,7 @@
                    Grid.Column="0" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" 
-                   LastChildFill="False"
-                   Background="{DynamicResource Control}">
+                   LastChildFill="False">
             
             <!--For uniformity in the control button dimensions-->
             <DockPanel.Resources>
@@ -128,7 +126,7 @@
   
 
         <!--Right panel: Filter settings-->
-        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Background="{DynamicResource ActiveBorder}">
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
             <Label Padding="0,0,0,0" Margin="2,2,2,2" Content="Filter Settings"/>
         </StackPanel>
         
@@ -156,11 +154,11 @@
             
             <!--Styling overrides for this panel-->
             <Grid.Resources>
-                <Style x:Key="{x:Type StackPanel}" TargetType="StackPanel">
+                <!--<Style x:Key="{x:Type StackPanel}" TargetType="StackPanel">
                     <Style.Setters>
                         <Setter Property="Background" Value="{DynamicResource Control}"/>
                     </Style.Setters>
-                </Style>
+                </Style>-->
                 <Style x:Key="{x:Type Label}" TargetType="Label">
                     <Style.Setters>
                         <Setter Property="Margin" Value="2,2,2,2"/>

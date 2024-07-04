@@ -15,8 +15,7 @@
         <!--Toolbar panel-->
         <DockPanel Grid.Row="0" LastChildFill="False"
                    HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch"
-                   Background="{DynamicResource Control}">
+                   VerticalAlignment="Stretch">
 
             <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" 
                        VerticalAlignment="Center"

@@ -44,7 +44,7 @@
         <TextBox Grid.Row="0" Grid.Column="3" x:Name="tb_Org"
                  Text="{Binding Path=Organization_Work}"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlDark}"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Street Address"/>
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tb_StreetAddress"
@@ -66,7 +66,7 @@
         <TextBox Grid.Row="4" Grid.Column="3" x:Name="tb_PostalCode"
                  Text="{Binding Path=PostalCode_Work}"/>
 
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlDark}"/>
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"/>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Phone"/>
         <TextBox Grid.Row="6" Grid.Column="1" x:Name="tb_Phone"

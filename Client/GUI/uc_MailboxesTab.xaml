@@ -12,7 +12,7 @@
             <RowDefinition Height="24"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="{DynamicResource Control}" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
             
             <Label Padding="0,0,0,0" Margin="5,2,2,2" Content="Mailboxes" VerticalAlignment="Center"/>
 
@@ -29,7 +29,6 @@
         </StackPanel>
         <ListBox x:Name="Listview"
                  Grid.Row="1"  
-                 Background="{DynamicResource Control}"
                  SelectionChanged="Listview_SelectionChanged"
                  MouseLeftButtonUp="Listview_MouseLeftButtonUp">
             <ListBox.ItemTemplate>

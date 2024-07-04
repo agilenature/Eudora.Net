@@ -8,14 +8,12 @@
                         d:DataContext="core:EudoraStatistics"
                         mc:Ignorable="d" 
                         d:DesignHeight="450" d:DesignWidth="800"
-                        Background="{DynamicResource Control}"
                         Title="Eudora.Net Statistics">
 
     <Grid Margin="10">
 
         <Grid.Resources>
             <Style TargetType="Border">
-                <Setter Property="Background" Value="{DynamicResource ControlDark}"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
                 <Setter Property="Height" Value="5"/>

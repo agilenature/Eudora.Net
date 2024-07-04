@@ -4,10 +4,9 @@
              xmlns:local="clr-namespace:Eudora.Net"
              Exit="Application_Exit">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="GUI/Themes/theme_System.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Style x:Key="{x:Type Window}" TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{DynamicResource WindowTextBrushKey}"/>
+            <Setter Property="Background" Value="{DynamicResource WindowBrushKey}"/>
+        </Style>
     </Application.Resources>
 </Application>

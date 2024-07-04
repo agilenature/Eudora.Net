@@ -19,11 +19,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Background="{DynamicResource Control}">
+        <StackPanel Grid.Row="0">
             <Label Padding="0,0,0,0" Margin="5,2,2,2" Content="Personalities"/>
         </StackPanel>
 
-        <DockPanel Grid.Row="1" Background="{DynamicResource Control}" HorizontalAlignment="Stretch" LastChildFill="False">
+        <DockPanel Grid.Row="1" HorizontalAlignment="Stretch" LastChildFill="False">
             
             <DockPanel.Resources>
                 <Style TargetType="{x:Type Button}">

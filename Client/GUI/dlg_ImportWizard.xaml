@@ -31,10 +31,10 @@
         </Grid.ColumnDefinitions>
 
         <!--Vertical divider-->
-        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Background="{DynamicResource ControlDark}"/>
+        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="4"/>
 
         <!--Top section-->
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlLight}">
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock TextWrapping="Wrap" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             This wizard will allow you to import data from legacy Eudora.<LineBreak/>
             Address books, contacts, mailboxes, and emails will be imported.<LineBreak/>
@@ -42,9 +42,9 @@
             </TextBlock>
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlDark}"/>
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
         
-        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlDark}"/>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <DockPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" LastChildFill="False">
             <Button x:Name="btn_Start" IsDefault="True" Content="Start" DockPanel.Dock="Right" Margin="5"
@@ -56,7 +56,7 @@
         
         <!--Status panel (left)-->
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0">
-            <Border Background="{DynamicResource ControlLight}" Height="18">
+            <Border Height="18">
                 <TextBlock Text="Steps:" Margin="5,0,0,0"/>    
             </Border>
             
@@ -73,7 +73,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Height="18" Background="{DynamicResource ControlLight}">
+            <Border Grid.Row="0" Height="18">
                 <TextBlock Text="Import Process:" Margin="5,0,0,0"/>
             </Border>
 

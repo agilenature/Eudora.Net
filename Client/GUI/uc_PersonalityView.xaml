@@ -25,7 +25,6 @@
         </Grid.RowDefinitions>
         
         <DockPanel Grid.Row="0"
-                   Background="{DynamicResource ActiveBorder}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Stretch"
                    LastChildFill="False">

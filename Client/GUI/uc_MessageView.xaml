@@ -29,7 +29,6 @@
         <ToolBarTray 
          x:Name="ToolbarRegion"
          Grid.Row="0" 
-         Background="{DynamicResource Control}"
          FlowDirection="LeftToRight"
          ClipToBounds="False">
 
@@ -40,7 +39,6 @@
                 <Style x:Key="ButtonStyle" TargetType="Button">
                     <Style.Setters>
                         <Setter Property="Control.BorderThickness" Value="1"/>
-                        <Setter Property="Control.BorderBrush" Value="{DynamicResource ActiveBorder}"/>
                         <Setter Property="Control.Margin" Value="1,0,1,0"/>
                     </Style.Setters>
                 </Style>
@@ -231,7 +229,7 @@
             </Grid.Resources>
 
             <!-- Label block, left side-->
-            <StackPanel Grid.Column="0" Background="{DynamicResource Window}">
+            <StackPanel Grid.Column="0">
                 <TextBlock TextAlignment="Right" Text="To:  "/>
                 <TextBlock TextAlignment="Right" Text="From:  "/>
                 <TextBlock TextAlignment="Right" Text="Subject:  "/>
@@ -239,7 +237,7 @@
                 <TextBlock TextAlignment="Right" Text="BCC:  "/>
             </StackPanel>
             <!--Edit control block, right side-->
-            <StackPanel Grid.Column="1" Background="{DynamicResource Window}">
+            <StackPanel Grid.Column="1">
                 <TextBox x:Name="tb_To"
                          Text="{Binding Path=Addresses_To, Converter={StaticResource EmailListToStringConverter}}"
                          TextChanged="tb_To_TextChanged"/>

@@ -145,7 +145,7 @@
 
         </ToolBarTray>
 
-        <Grid Grid.Row="2" Background="{DynamicResource Control}" x:Name="debugGrid">
+        <Grid Grid.Row="2" x:Name="debugGrid">
 
             <Grid.RowDefinitions>
                 <RowDefinition/>

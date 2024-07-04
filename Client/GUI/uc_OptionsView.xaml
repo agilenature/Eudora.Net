@@ -8,8 +8,7 @@
                         xmlns:properties="clr-namespace:Eudora.Net.Properties"
                         mc:Ignorable="d" 
                         d:DesignHeight="450" d:DesignWidth="800"
-                        Title="Eudora.Net: Options"
-                        Background="{DynamicResource Toolbar}">
+                        Title="Eudora.Net: Options">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -161,7 +160,7 @@
 
 
             <!--Visual app options tab-->
-            <!--<TabItem Header="GUI / Theme">
+            <TabItem Header="GUI / Theme">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -197,10 +196,11 @@
                                 Text="Selected Theme:"/>
 
                     <ComboBox   x:Name="cb_ThemeSelect"
-                                Grid.Row="2" Grid.Column="1"></ComboBox>
+                                Grid.Row="2" Grid.Column="1"
+                                SelectionChanged="cb_ThemeSelect_SelectionChanged"/>
                 </Grid>
 
-            </TabItem>-->
+            </TabItem>
 
             <!--Storage Options tab-->
             <TabItem Header="Storage" IsEnabled="False">

@@ -130,5 +130,17 @@ namespace Eudora.Net.Properties {
                 this["NotificationsEmail"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public string UxTheme {
+            get {
+                return ((string)(this["UxTheme"]));
+            }
+            set {
+                this["UxTheme"] = value;
+            }
+        }
     }
 }

@@ -10,7 +10,6 @@
                         mc:Ignorable="d"
                         d:DesignHeight="450"
                         d:DesignWidth="800"
-                        Background="{DynamicResource Control}"
                         Title="New Message">
 
     <local:ChildWindowBase.Resources>
@@ -44,7 +43,6 @@
                             <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
                                 <Style.Setters>
                                     <Setter Property="Control.BorderThickness" Value="1"/>
-                                    <Setter Property="Control.BorderBrush" Value="{DynamicResource ActiveBorder}"/>
                                     <Setter Property="Control.Margin" Value="1,0,1,0"/>
                                 </Style.Setters>
                             </Style>

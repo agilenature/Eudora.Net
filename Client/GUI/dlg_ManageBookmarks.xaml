@@ -10,7 +10,6 @@
         Height="450"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
-        BorderBrush="{DynamicResource ControlDark}"
         BorderThickness="2">
 
     <Grid>
@@ -20,7 +19,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="{DynamicResource ControlDark}">
+        <Grid Grid.Row="0">
 
             <Grid.Resources>
                 <Style TargetType="TextBlock">

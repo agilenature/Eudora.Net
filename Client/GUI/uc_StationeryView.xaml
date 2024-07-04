@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Background="{DynamicResource Control}">
+        <StackPanel Grid.Row="0">
             <Label Padding="0,0,0,0" Margin="1,1,1,1" Content="{Binding Name}"/>
         </StackPanel>
 

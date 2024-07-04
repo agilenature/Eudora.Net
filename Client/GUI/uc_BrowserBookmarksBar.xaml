@@ -6,14 +6,12 @@
              xmlns:local="clr-namespace:Eudora.Net.GUI"
              xmlns:core="clr-namespace:Eudora.Net.Core"
              mc:Ignorable="d" 
-             d:DesignHeight="24" d:DesignWidth="800"
-             Background="{DynamicResource Control}">
+             d:DesignHeight="24" d:DesignWidth="800">
 
     <ToolBar    x:Name="Toolbar"
                 Height="24"
                 VerticalAlignment="Top"
-                Focusable="False"
-                Background="{DynamicResource Control}">
+                Focusable="False">
         <ToolBar.Header>
             <TextBlock FontWeight="Bold" Text="Bookmarks:"/>
         </ToolBar.Header>

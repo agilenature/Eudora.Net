@@ -10,7 +10,6 @@
         d:DesignHeight="24"
         HorizontalContentAlignment="Center"
         Background="Transparent"
-        BorderBrush="{DynamicResource WindowFrame}"
         BorderThickness="0"
         ToolTip="{Binding DisplayText}">
     

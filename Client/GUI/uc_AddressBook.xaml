@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource Control}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="6"/>
@@ -39,7 +39,7 @@
             </Grid.RowDefinitions>
 
             <!--Address Book selection & control-->
-            <DockPanel Grid.Row="0" Background="{DynamicResource ActiveBorder}" LastChildFill="False">
+            <DockPanel Grid.Row="0" LastChildFill="False">
                 
                 <TextBlock Text="Address Books" DockPanel.Dock="Left"/>
 
@@ -86,7 +86,7 @@
             
 
             <!--Contact selection & control-->
-            <DockPanel Grid.Row="3" Background="{DynamicResource ActiveBorder}" LastChildFill="False">
+            <DockPanel Grid.Row="3" LastChildFill="False">
             
                 <TextBlock Text="Contacts" DockPanel.Dock="Left"/>
 

@@ -12,11 +12,9 @@
         Width="640"
         Height="240"
         Title="Eudora.Net: Create Personality (Email Account)" Topmost="True"
-        BorderBrush="{DynamicResource ControlDark}"
-        Background="{DynamicResource ControlDark}"
         BorderThickness="2">
     
-    <Grid Margin="2" Background="{DynamicResource Control}">
+    <Grid Margin="2">
 
         <Grid.Resources>
             <ResourceDictionary>
@@ -45,7 +43,7 @@
             </TextBlock>
         </StackPanel>
 
-        <Border Grid.Row="1" Background="{DynamicResource ControlDark}"/>
+        <Border Grid.Row="1"/>
 
         <!--Main dialog button panel-->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">

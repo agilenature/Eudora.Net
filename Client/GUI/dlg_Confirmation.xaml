@@ -12,7 +12,6 @@
         WindowStyle="ToolWindow"
         ResizeMode="NoResize" 
         ShowInTaskbar="False"
-        BorderBrush="{DynamicResource ControlDark}"
         BorderThickness="2">
     
     <Grid>
@@ -32,7 +31,7 @@
                    VerticalAlignment="Stretch"
                    Margin="10"/>
 
-        <Border Grid.Row="1" Height="5" VerticalAlignment="Center" Background="{DynamicResource ActiveBorder}"/>
+        <Border Grid.Row="1" Height="5" VerticalAlignment="Center"/>
 
         <!--Buttons Panel-->
         <DockPanel Grid.Row="2" LastChildFill="False" Margin="0,0,10,0">

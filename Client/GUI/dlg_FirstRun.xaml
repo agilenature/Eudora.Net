@@ -12,11 +12,10 @@
         ResizeMode="NoResize"
         ShowInTaskbar="False"
         Title="Eudora.Net: Initial Setup"
-        BorderBrush="{DynamicResource ControlDark}"
-        BorderThickness="2"
-        Background="{DynamicResource ControlDark}">
-    
-    <Grid Background="{DynamicResource Window}" Margin="2">
+        BorderThickness="2">
+
+
+    <Grid Margin="2">
 
         <Grid.Resources>
         <ResourceDictionary>

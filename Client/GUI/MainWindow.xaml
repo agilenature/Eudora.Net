@@ -12,8 +12,8 @@
         mc:Ignorable="d"
         Title="Eudora.Net" Width="1024" Height="768" 
         WindowStartupLocation="CenterScreen"
-        BorderBrush="{DynamicResource ControlDark}"
-        BorderThickness="4">
+        BorderThickness="4"
+        Background="{DynamicResource WindowBrushKey}" Foreground="{DynamicResource WindowTextBrushKey}">
 
     <Grid x:Name="MainLayout">
 
@@ -116,13 +116,11 @@
         <Grid   x:Name="MainToolBar"
                 Grid.Row="1"
                 x:FieldModifier="public"
-                Height="40"
-                Background="{DynamicResource Control}">
+                Height="40">
 
             <!--Styling that applies to all controls of indicated types in this panel-->
             <Grid.Resources>
-                <Style TargetType="{x:Type Button}" 
-                       BasedOn="{StaticResource ButtonStyle1}">
+                <Style TargetType="{x:Type Button}">
                     <Setter Property="Control.Margin" Value="3,3,3,3"/>
                 </Style>
                 <Style TargetType="{x:Type Separator}" 

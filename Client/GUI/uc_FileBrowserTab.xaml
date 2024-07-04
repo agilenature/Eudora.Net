@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Background="{DynamicResource Control}">
+        <StackPanel Grid.Row="0">
             <Label Padding="0,0,0,0" Margin="5,2,2,2" Content="File Browser"/>
         </StackPanel>
         
@@ -47,8 +47,7 @@
                         VerticalAlignment="Center"
                         Height="5"
                         Width="Auto"
-                        Margin="5,5,5,5"
-                        Background="{DynamicResource ControlDark}"/>
+                        Margin="5,5,5,5"/>
 
         <DataGrid x:Name="dgfiles" Grid.Row="3" Margin="5" 
                   ItemsSource="{Binding}" IsReadOnly="True" 

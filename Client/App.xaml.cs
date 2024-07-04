@@ -28,8 +28,7 @@ namespace Eudora.Net
         public App() : base()
         {
             ThemeManager.SetApplication(this);
-            ThemeManager.ActiveTheme = 
-                ThemeManager.Themes.Where(t => t.DisplayName.Equals("dark", StringComparison.CurrentCultureIgnoreCase)).First();
+            ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -47,6 +46,11 @@ namespace Eudora.Net
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.MouseDoubleClickEvent, new RoutedEventHandler(TextBox_GotFocus));
 
             base.OnStartup(e);
+
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(Window))
+            });
 
             DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
 

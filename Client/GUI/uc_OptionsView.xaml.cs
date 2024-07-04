@@ -2,7 +2,7 @@
 using Eudora.Net.Data;
 using Microsoft.Win32;
 using System.Windows;
-
+using WpfThemer;
 
 namespace Eudora.Net.GUI
 {
@@ -15,6 +15,10 @@ namespace Eudora.Net.GUI
         {
             InitializeComponent();
             Loaded += Uc_OptionsView_Loaded;
+
+            cb_ThemeSelect.ItemsSource = ThemeManager.Themes;
+            cb_ThemeSelect.DisplayMemberPath = "DisplayName";
+            cb_ThemeSelect.SelectedItem = ThemeManager.Themes.Where(x => x.DisplayName == Properties.Settings.Default.UxTheme).First();
         }
 
         private void Uc_OptionsView_Loaded(object sender, RoutedEventArgs e)
@@ -68,6 +72,16 @@ namespace Eudora.Net.GUI
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void cb_ThemeSelect_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if(cb_ThemeSelect.SelectedItem is Theme theme)
+            {
+                ThemeManager.SetTheme(theme.DisplayName);
+                Properties.Settings.Default.UxTheme = theme.DisplayName;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }
