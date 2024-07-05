@@ -9,7 +9,7 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <PlatformTarget>x86</PlatformTarget>
     <Platforms>AnyCPU;x86;x64</Platforms>
-    <ApplicationIcon>GUI\res\icons\bigicon.ico</ApplicationIcon>
+    <ApplicationIcon>GUI\res\icons\logo3a.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -546,7 +546,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GUI\res\icons\bigicon.ico" />
+    <Content Include="GUI\res\icons\logo3a.ico" />
   </ItemGroup>
 
   <ItemGroup>
