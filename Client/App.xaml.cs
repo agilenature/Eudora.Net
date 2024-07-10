@@ -31,9 +31,7 @@ namespace Eudora.Net
 
         public App() : base()
         {
-            ThemeManager.SetApplication(this);
-            SymboLib.Build();
-            ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
+            
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -55,12 +53,17 @@ namespace Eudora.Net
         {
             try
             {
+                SymboLib.Build();
+                ThemeManager.SetApplication(this);
+
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
                 var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora", "Eudora Theme", new ResourceDictionary()
                 {
                     Source = new Uri(uri, UriKind.RelativeOrAbsolute)
                 });
                 ThemeManager.AddExternalTheme(theme);
+
+                ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
             }
             catch(Exception ex)
             {
