@@ -17,14 +17,6 @@
 
     <Grid Margin="2">
 
-        <Grid.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Styles_Dialog.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        </Grid.Resources>
-    
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="5"/>

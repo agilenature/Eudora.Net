@@ -309,6 +309,14 @@ namespace Eudora.Net.GUI
                 DeleteSelectedMessages();
                 SelectNearest(0);
             }
+            else if(e.Key == Key.Enter)
+            {
+                if (datagrid.SelectedItem is EmailMessage message)
+                {
+                    e.Handled = true;
+                    MainWindow.Instance?.ShowMailMessage(message);
+                }
+            }
         }
 
         private void Btn_Forward_Click(object sender, RoutedEventArgs e)

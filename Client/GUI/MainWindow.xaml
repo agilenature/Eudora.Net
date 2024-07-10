@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Eudora.Net.GUI"
         xmlns:core="clr-namespace:Eudora.Net.Core"
         xmlns:extensions="clr-namespace:Eudora.Net.ExtensionMethods"
+        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         xmlns:mdi="clr-namespace:mdilib;assembly=MdiLib"
         xmlns:Properties="clr-namespace:Eudora.Net.Properties"
@@ -123,8 +124,8 @@
             <StackPanel.Resources>
 
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource Button.Static.Border}"/>
+                    <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderNormalBrushKey}"/>
                     <Setter Property="Foreground" Value="{DynamicResource ForegroundNormal}"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="Margin" Value="0"/>
@@ -141,12 +142,12 @@
                                         <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrush}}"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.MouseOver.Background}"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.MouseOver.Border}"/>
+                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource ControlMouseOverBrushKey}"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderMoueOverBrushKey}"/>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="true">
-                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.Pressed.Background}"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Pressed.Border}"/>
+                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource ControlPressedBrushKey}"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderPressedBrushKey}"/>
                                     </Trigger>
                                     <Trigger Property="IsEnabled" Value="false">
                                         <Setter Property="Opacity" Value="0.5"/>
@@ -237,7 +238,8 @@
             <Separator/>
             
             <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+                <themer:DynamicImage SymbolName="settings" 
+                                     Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
             </Button>
 
         </StackPanel>

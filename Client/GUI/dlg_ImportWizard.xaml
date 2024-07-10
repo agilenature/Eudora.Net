@@ -12,7 +12,7 @@
         ResizeMode="NoResize"
         WindowStyle="ToolWindow"
         BorderThickness="2"
-        BorderBrush="{DynamicResource ControlDark}">
+        BorderBrush="{DynamicResource BorderNormalBrushKey}">
     
     <Grid>
 

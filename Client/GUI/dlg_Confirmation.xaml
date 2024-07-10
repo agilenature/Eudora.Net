@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Eudora.Net.GUI"
+        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
         mc:Ignorable="d"
         Title="Eudora.Net: Please Confirm" 
         Width="350"
@@ -44,8 +45,9 @@
                     Click="btn_Confirm_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <Image Width="22" Height="22" VerticalAlignment="Center" 
-                               Source="pack://application:,,,/GUI/res/images/new/done.png"/>
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
+                                             SymbolName="check"
+                                             Source="pack://application:,,,/GUI/res/images/new/done.png"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
                     </StackPanel>
                 </Button.Content>
@@ -62,8 +64,9 @@
                     Click="btn_Cancel_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <Image Width="22" Height="22" VerticalAlignment="Center" 
-                               Source="pack://application:,,,/GUI/res/images/new/cancel.png"/>
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" 
+                                             SymbolName="cancel"
+                                             Source="pack://application:,,,/GUI/res/images/new/cancel.png"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
                     </StackPanel>
                 </Button.Content>

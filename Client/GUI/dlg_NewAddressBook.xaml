@@ -13,13 +13,7 @@
         HorizontalAlignment="Center" VerticalAlignment="Center"
         BorderThickness="2">
     <Grid>
-        <Grid.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="Themes/Styles_Dialog.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="40"/>

@@ -7,6 +7,7 @@
                         xmlns:local="clr-namespace:Eudora.Net.GUI"
                         xmlns:core="clr-namespace:Eudora.Net.Core"
                         xmlns:Properties="clr-namespace:Eudora.Net.Properties"
+                        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
                         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
                         d:DataContext="{d:DesignInstance Type=local:uc_BrowserView}"
                         mc:Ignorable="d"
@@ -42,7 +43,7 @@
                     Click="btn_Back_Click"
                     IsEnabled="{Binding CanGoBack, ElementName=Browser}">
             <Button.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/leftback.png"/>
+                <themer:DynamicImage SymbolName="arrow_back" Source="pack://application:,,,/GUI/res/images/new/leftback.png"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -57,7 +58,7 @@
                     Click="btn_Forward_Click"
                     IsEnabled="{Binding CanGoForward, ElementName=Browser}">
             <Button.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/rightnext.png"/>
+                <themer:DynamicImage SymbolName="arrow_forward" Source="pack://application:,,,/GUI/res/images/new/rightnext.png"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -71,7 +72,7 @@
                     ToolTip="Refresh"
                     Click="btn_Refresh_Click">
             <Button.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/refresh.png"/>
+                <themer:DynamicImage SymbolName="refresh" Source="pack://application:,,,/GUI/res/images/new/refresh.png"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -99,7 +100,7 @@
                     ToolTip="Add Bookmark"
                     Click="btn_Bookmark_Click">
             <Button.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/star.png"/>
+                <themer:DynamicImage SymbolName="star" Source="pack://application:,,,/GUI/res/images/new/star.png"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -114,7 +115,7 @@
                       Checked="btn_ManageBookmarks_Checked"
                       Unchecked="btn_ManageBookmarks_Unchecked">
             <ToggleButton.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/bookmarks.png"/>
+                <themer:DynamicImage SymbolName="bookmarks" Source="pack://application:,,,/GUI/res/images/new/bookmarks.png"/>
             </ToggleButton.Content>
             <ToggleButton.Resources>
                 <Style TargetType="Border">
@@ -128,7 +129,7 @@
                 ToolTip="Settings"
                 Click="btn_Settings_Click">
             <Button.Content>
-                <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+                <themer:DynamicImage SymbolName="settings" Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -191,7 +192,8 @@
                                 <Button x:Name="btn_DeleteBookmark" Click="btn_DeleteBookmark_Click">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="pack://application:,,,/GUI/res/images/new/delete.png" Width="16" Height="16"/>
+                                            <themer:DynamicImage SymbolName="delete" 
+                                                                 Source="pack://application:,,,/GUI/res/images/new/delete.png" Width="16" Height="16"/>
                                             <TextBlock Text="Delete" Margin="5,0,0,0" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Button.Content>

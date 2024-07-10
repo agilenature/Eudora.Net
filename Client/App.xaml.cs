@@ -6,6 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using WpfThemer;
+using Eudora.Net.GUI;
+using System.Xml.Linq;
+using Xceed.Wpf.AvalonDock.Themes;
+using Eudora.Net.GUI.theme;
 
 namespace Eudora.Net
 {
@@ -28,6 +32,7 @@ namespace Eudora.Net
         public App() : base()
         {
             ThemeManager.SetApplication(this);
+            SymboLib.Build();
             ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
         }
 
@@ -39,13 +44,28 @@ namespace Eudora.Net
             }
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        private void InstallTextboxBehaviors()
         {
             // By default, all textboxes behave as "select all" when you click in them
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotMouseCaptureEvent, new RoutedEventHandler(TextBox_GotFocus));
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.MouseDoubleClickEvent, new RoutedEventHandler(TextBox_GotFocus));
+        }
 
-            base.OnStartup(e);
+        private void InstallThemes()
+        {
+            try
+            {
+                string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
+                var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora", "Eudora Theme", new ResourceDictionary()
+                {
+                    Source = new Uri(uri, UriKind.RelativeOrAbsolute)
+                });
+                ThemeManager.AddExternalTheme(theme);
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
 
             FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
             {
@@ -63,10 +83,42 @@ namespace Eudora.Net
             {
                 DefaultValue = FindResource(typeof(UserControl))
             });
+        }
 
-            DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            InstallTextboxBehaviors();
 
+            base.OnStartup(e);
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            InstallThemes();
+
+            InitDataStore();
+
+            // Get the WebView2 cache going
+            InitWebviewOptionsAndQueue();
+
+            // The rest of early startup & init
+            SignatureManager.Startup();
+            StationeryManager.Startup();
+            LabelManager.Startup();
+            PersonalityManager.Startup();
+            AddressBookManager.Startup();
+            PostOffice.Instance.Startup();
+            EmailSearchEngine.Startup();
+            BrowserSettings.Instance.Startup();
+            EudoraStatistics.Startup();
+
+            GUI.MainWindow.Instance = new GUI.MainWindow();
+            ShutdownMode = ShutdownMode.OnLastWindowClose;
+            MainWindow = GUI.MainWindow.Instance;
+            MainWindow.Show();
+        }
+
+        private void InitDataStore()
+        {
+            DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
 
             if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete ||
                 string.IsNullOrEmpty(DatastoreRoot) ||
@@ -89,25 +141,6 @@ namespace Eudora.Net
                 Eudora.Net.Properties.Settings.Default.DataStoreRoot = dlg.DataRoot;
                 Eudora.Net.Properties.Settings.Default.Save();
             }
-
-            // Get the WebView2 cache going
-            InitWebviewOptionsAndQueue();
-
-            // The rest of early startup & init
-            SignatureManager.Startup();
-            StationeryManager.Startup();
-            LabelManager.Startup();
-            PersonalityManager.Startup();
-            AddressBookManager.Startup();
-            PostOffice.Instance.Startup();
-            EmailSearchEngine.Startup();
-            BrowserSettings.Instance.Startup();
-            EudoraStatistics.Startup();
-
-            GUI.MainWindow.Instance = new GUI.MainWindow();
-            ShutdownMode = ShutdownMode.OnLastWindowClose;
-            MainWindow = GUI.MainWindow.Instance;
-            MainWindow.Show();
         }
 
         private async void InitWebviewOptionsAndQueue()

@@ -6,6 +6,7 @@
                     xmlns:local="clr-namespace:Eudora.Net.GUI"
                     xmlns:core="clr-namespace:Eudora.Net.Core"
                     xmlns:data="clr-namespace:Eudora.Net.Data"
+                    xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
                     d:DataContext="{d:DesignInstance Type=data:Signature}"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="400">
@@ -32,21 +33,21 @@
             <Button x:Name="btn_New" DockPanel.Dock="Left" Click="btn_New_Click" Margin="5,0,5,0"
                     ToolTip="New Signature">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/add.png"/>
+                    <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
                 </Button.Content>
             </Button>
 
             <Button x:Name="btn_Edit" DockPanel.Dock="Left" Click="btn_Edit_Click" Margin="5,0,5,0"
                     ToolTip="Edit Signature">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/edit.png"/>
+                    <themer:DynamicImage SymbolName="edit" Source="pack://application:,,,/GUI/res/images/new/edit.png"/>
                 </Button.Content>
             </Button>
 
             <Button x:Name="btn_Delete" DockPanel.Dock="Left" Click="btn_Delete_Click" Margin="5,0,5,0"
                     ToolTip="Delete Signature">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
+                    <themer:DynamicImage SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
                 </Button.Content>
             </Button>
 

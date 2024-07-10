@@ -84,6 +84,156 @@
     <None Remove="GUI\res\images\source\tbar32a.png" />
     <None Remove="GUI\res\images\source\tbar32b.png" />
     <None Remove="GUI\res\images\source\toolbar32.png" />
+    <None Remove="GUI\res\images\symbolsDark\add.png" />
+    <None Remove="GUI\res\images\symbolsDark\add_attachment.png" />
+    <None Remove="GUI\res\images\symbolsDark\add_image.png" />
+    <None Remove="GUI\res\images\symbolsDark\arrow_back.png" />
+    <None Remove="GUI\res\images\symbolsDark\arrow_drop_down.png" />
+    <None Remove="GUI\res\images\symbolsDark\arrow_forward.png" />
+    <None Remove="GUI\res\images\symbolsDark\arrow_right.png" />
+    <None Remove="GUI\res\images\symbolsDark\attach_email.png" />
+    <None Remove="GUI\res\images\symbolsDark\attach_file.png" />
+    <None Remove="GUI\res\images\symbolsDark\bookmark.png" />
+    <None Remove="GUI\res\images\symbolsDark\bookmarks.png" />
+    <None Remove="GUI\res\images\symbolsDark\bookmark_add.png" />
+    <None Remove="GUI\res\images\symbolsDark\cancel.png" />
+    <None Remove="GUI\res\images\symbolsDark\check.png" />
+    <None Remove="GUI\res\images\symbolsDark\check_circle.png" />
+    <None Remove="GUI\res\images\symbolsDark\chevron_left.png" />
+    <None Remove="GUI\res\images\symbolsDark\chevron_right.png" />
+    <None Remove="GUI\res\images\symbolsDark\close.png" />
+    <None Remove="GUI\res\images\symbolsDark\contact.png" />
+    <None Remove="GUI\res\images\symbolsDark\content_copy.png" />
+    <None Remove="GUI\res\images\symbolsDark\content_cut.png" />
+    <None Remove="GUI\res\images\symbolsDark\content_paste.png" />
+    <None Remove="GUI\res\images\symbolsDark\delete.png" />
+    <None Remove="GUI\res\images\symbolsDark\draft.png" />
+    <None Remove="GUI\res\images\symbolsDark\drafts.png" />
+    <None Remove="GUI\res\images\symbolsDark\edit.png" />
+    <None Remove="GUI\res\images\symbolsDark\edit2.png" />
+    <None Remove="GUI\res\images\symbolsDark\email.png" />
+    <None Remove="GUI\res\images\symbolsDark\expand_circle.png" />
+    <None Remove="GUI\res\images\symbolsDark\favorite.png" />
+    <None Remove="GUI\res\images\symbolsDark\file_open.png" />
+    <None Remove="GUI\res\images\symbolsDark\find.png" />
+    <None Remove="GUI\res\images\symbolsDark\folder.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_align_center.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_align_left.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_align_right.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_bold.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_italic.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_size.png" />
+    <None Remove="GUI\res\images\symbolsDark\format_underlined.png" />
+    <None Remove="GUI\res\images\symbolsDark\group.png" />
+    <None Remove="GUI\res\images\symbolsDark\help.png" />
+    <None Remove="GUI\res\images\symbolsDark\home.png" />
+    <None Remove="GUI\res\images\symbolsDark\image.png" />
+    <None Remove="GUI\res\images\symbolsDark\inbox.png" />
+    <None Remove="GUI\res\images\symbolsDark\language.png" />
+    <None Remove="GUI\res\images\symbolsDark\library_add.png" />
+    <None Remove="GUI\res\images\symbolsDark\link.png" />
+    <None Remove="GUI\res\images\symbolsDark\login.png" />
+    <None Remove="GUI\res\images\symbolsDark\mail.png" />
+    <None Remove="GUI\res\images\symbolsDark\mark_as_unread2.png" />
+    <None Remove="GUI\res\images\symbolsDark\mark_email_unread.png" />
+    <None Remove="GUI\res\images\symbolsDark\menu.png" />
+    <None Remove="GUI\res\images\symbolsDark\menu_book.png" />
+    <None Remove="GUI\res\images\symbolsDark\minimize.png" />
+    <None Remove="GUI\res\images\symbolsDark\more_horiz.png" />
+    <None Remove="GUI\res\images\symbolsDark\more_vert.png" />
+    <None Remove="GUI\res\images\symbolsDark\person.png" />
+    <None Remove="GUI\res\images\symbolsDark\person_add.png" />
+    <None Remove="GUI\res\images\symbolsDark\question_mark.png" />
+    <None Remove="GUI\res\images\symbolsDark\redo.png" />
+    <None Remove="GUI\res\images\symbolsDark\refresh.png" />
+    <None Remove="GUI\res\images\symbolsDark\remove.png" />
+    <None Remove="GUI\res\images\symbolsDark\search.png" />
+    <None Remove="GUI\res\images\symbolsDark\send.png" />
+    <None Remove="GUI\res\images\symbolsDark\settings.png" />
+    <None Remove="GUI\res\images\symbolsDark\share.png" />
+    <None Remove="GUI\res\images\symbolsDark\sort.png" />
+    <None Remove="GUI\res\images\symbolsDark\star.png" />
+    <None Remove="GUI\res\images\symbolsDark\sync.png" />
+    <None Remove="GUI\res\images\symbolsDark\toggle_off.png" />
+    <None Remove="GUI\res\images\symbolsDark\toggle_on.png" />
+    <None Remove="GUI\res\images\symbolsDark\undo.png" />
+    <None Remove="GUI\res\images\symbolsDark\zoom_in.png" />
+    <None Remove="GUI\res\images\symbolsDark\zoom_out.png" />
+    <None Remove="GUI\res\images\symbolsLight\add.png" />
+    <None Remove="GUI\res\images\symbolsLight\add_attachment.png" />
+    <None Remove="GUI\res\images\symbolsLight\add_image.png" />
+    <None Remove="GUI\res\images\symbolsLight\arrow_back.png" />
+    <None Remove="GUI\res\images\symbolsLight\arrow_drop_down.png" />
+    <None Remove="GUI\res\images\symbolsLight\arrow_forward.png" />
+    <None Remove="GUI\res\images\symbolsLight\arrow_right.png" />
+    <None Remove="GUI\res\images\symbolsLight\attach_email.png" />
+    <None Remove="GUI\res\images\symbolsLight\attach_file.png" />
+    <None Remove="GUI\res\images\symbolsLight\bookmark.png" />
+    <None Remove="GUI\res\images\symbolsLight\bookmarks.png" />
+    <None Remove="GUI\res\images\symbolsLight\bookmark_add.png" />
+    <None Remove="GUI\res\images\symbolsLight\cancel.png" />
+    <None Remove="GUI\res\images\symbolsLight\check.png" />
+    <None Remove="GUI\res\images\symbolsLight\check_circle.png" />
+    <None Remove="GUI\res\images\symbolsLight\chevron_left.png" />
+    <None Remove="GUI\res\images\symbolsLight\chevron_right.png" />
+    <None Remove="GUI\res\images\symbolsLight\close.png" />
+    <None Remove="GUI\res\images\symbolsLight\contact.png" />
+    <None Remove="GUI\res\images\symbolsLight\content_copy.png" />
+    <None Remove="GUI\res\images\symbolsLight\content_cut.png" />
+    <None Remove="GUI\res\images\symbolsLight\content_paste.png" />
+    <None Remove="GUI\res\images\symbolsLight\delete.png" />
+    <None Remove="GUI\res\images\symbolsLight\draft.png" />
+    <None Remove="GUI\res\images\symbolsLight\drafts.png" />
+    <None Remove="GUI\res\images\symbolsLight\edit.png" />
+    <None Remove="GUI\res\images\symbolsLight\edit2.png" />
+    <None Remove="GUI\res\images\symbolsLight\email.png" />
+    <None Remove="GUI\res\images\symbolsLight\expand_circle.png" />
+    <None Remove="GUI\res\images\symbolsLight\favorite.png" />
+    <None Remove="GUI\res\images\symbolsLight\file_open.png" />
+    <None Remove="GUI\res\images\symbolsLight\find.png" />
+    <None Remove="GUI\res\images\symbolsLight\folder.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_align_center.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_align_left.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_align_right.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_bold.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_italic.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_size.png" />
+    <None Remove="GUI\res\images\symbolsLight\format_underlined.png" />
+    <None Remove="GUI\res\images\symbolsLight\group.png" />
+    <None Remove="GUI\res\images\symbolsLight\help.png" />
+    <None Remove="GUI\res\images\symbolsLight\home.png" />
+    <None Remove="GUI\res\images\symbolsLight\image.png" />
+    <None Remove="GUI\res\images\symbolsLight\inbox.png" />
+    <None Remove="GUI\res\images\symbolsLight\language.png" />
+    <None Remove="GUI\res\images\symbolsLight\library_add.png" />
+    <None Remove="GUI\res\images\symbolsLight\link.png" />
+    <None Remove="GUI\res\images\symbolsLight\login.png" />
+    <None Remove="GUI\res\images\symbolsLight\mail.png" />
+    <None Remove="GUI\res\images\symbolsLight\mark_as_unread2.png" />
+    <None Remove="GUI\res\images\symbolsLight\mark_email_unread.png" />
+    <None Remove="GUI\res\images\symbolsLight\menu.png" />
+    <None Remove="GUI\res\images\symbolsLight\menu_book.png" />
+    <None Remove="GUI\res\images\symbolsLight\minimize.png" />
+    <None Remove="GUI\res\images\symbolsLight\more_horiz.png" />
+    <None Remove="GUI\res\images\symbolsLight\more_vert.png" />
+    <None Remove="GUI\res\images\symbolsLight\person.png" />
+    <None Remove="GUI\res\images\symbolsLight\person_add.png" />
+    <None Remove="GUI\res\images\symbolsLight\question_mark.png" />
+    <None Remove="GUI\res\images\symbolsLight\redo.png" />
+    <None Remove="GUI\res\images\symbolsLight\refresh.png" />
+    <None Remove="GUI\res\images\symbolsLight\remove.png" />
+    <None Remove="GUI\res\images\symbolsLight\search.png" />
+    <None Remove="GUI\res\images\symbolsLight\send.png" />
+    <None Remove="GUI\res\images\symbolsLight\settings.png" />
+    <None Remove="GUI\res\images\symbolsLight\share.png" />
+    <None Remove="GUI\res\images\symbolsLight\sort.png" />
+    <None Remove="GUI\res\images\symbolsLight\star.png" />
+    <None Remove="GUI\res\images\symbolsLight\sync.png" />
+    <None Remove="GUI\res\images\symbolsLight\toggle_off.png" />
+    <None Remove="GUI\res\images\symbolsLight\toggle_on.png" />
+    <None Remove="GUI\res\images\symbolsLight\undo.png" />
+    <None Remove="GUI\res\images\symbolsLight\zoom_in.png" />
+    <None Remove="GUI\res\images\symbolsLight\zoom_out.png" />
     <None Remove="GUI\res\images\tb16b\image10x1.png" />
     <None Remove="GUI\res\images\tb16b\image11x1.png" />
     <None Remove="GUI\res\images\tb16b\image13x1.png" />
@@ -491,6 +641,156 @@
     <None Remove="GUI\res\images\tb32\tb32_97.png" />
     <None Remove="GUI\res\images\tb32\tb32_98.png" />
     <None Remove="GUI\res\images\tb32\tb32_99.png" />
+    <None Remove="GUI\theme\symbols\dark\add.png" />
+    <None Remove="GUI\theme\symbols\dark\add_attachment.png" />
+    <None Remove="GUI\theme\symbols\dark\add_image.png" />
+    <None Remove="GUI\theme\symbols\dark\arrow_back.png" />
+    <None Remove="GUI\theme\symbols\dark\arrow_drop_down.png" />
+    <None Remove="GUI\theme\symbols\dark\arrow_forward.png" />
+    <None Remove="GUI\theme\symbols\dark\arrow_right.png" />
+    <None Remove="GUI\theme\symbols\dark\attach_email.png" />
+    <None Remove="GUI\theme\symbols\dark\attach_file.png" />
+    <None Remove="GUI\theme\symbols\dark\bookmark.png" />
+    <None Remove="GUI\theme\symbols\dark\bookmarks.png" />
+    <None Remove="GUI\theme\symbols\dark\bookmark_add.png" />
+    <None Remove="GUI\theme\symbols\dark\cancel.png" />
+    <None Remove="GUI\theme\symbols\dark\check.png" />
+    <None Remove="GUI\theme\symbols\dark\check_circle.png" />
+    <None Remove="GUI\theme\symbols\dark\chevron_left.png" />
+    <None Remove="GUI\theme\symbols\dark\chevron_right.png" />
+    <None Remove="GUI\theme\symbols\dark\close.png" />
+    <None Remove="GUI\theme\symbols\dark\contact.png" />
+    <None Remove="GUI\theme\symbols\dark\content_copy.png" />
+    <None Remove="GUI\theme\symbols\dark\content_cut.png" />
+    <None Remove="GUI\theme\symbols\dark\content_paste.png" />
+    <None Remove="GUI\theme\symbols\dark\delete.png" />
+    <None Remove="GUI\theme\symbols\dark\draft.png" />
+    <None Remove="GUI\theme\symbols\dark\drafts.png" />
+    <None Remove="GUI\theme\symbols\dark\edit.png" />
+    <None Remove="GUI\theme\symbols\dark\edit2.png" />
+    <None Remove="GUI\theme\symbols\dark\email.png" />
+    <None Remove="GUI\theme\symbols\dark\expand_circle.png" />
+    <None Remove="GUI\theme\symbols\dark\favorite.png" />
+    <None Remove="GUI\theme\symbols\dark\file_open.png" />
+    <None Remove="GUI\theme\symbols\dark\find.png" />
+    <None Remove="GUI\theme\symbols\dark\folder.png" />
+    <None Remove="GUI\theme\symbols\dark\format_align_center.png" />
+    <None Remove="GUI\theme\symbols\dark\format_align_left.png" />
+    <None Remove="GUI\theme\symbols\dark\format_align_right.png" />
+    <None Remove="GUI\theme\symbols\dark\format_bold.png" />
+    <None Remove="GUI\theme\symbols\dark\format_italic.png" />
+    <None Remove="GUI\theme\symbols\dark\format_size.png" />
+    <None Remove="GUI\theme\symbols\dark\format_underlined.png" />
+    <None Remove="GUI\theme\symbols\dark\group.png" />
+    <None Remove="GUI\theme\symbols\dark\help.png" />
+    <None Remove="GUI\theme\symbols\dark\home.png" />
+    <None Remove="GUI\theme\symbols\dark\image.png" />
+    <None Remove="GUI\theme\symbols\dark\inbox.png" />
+    <None Remove="GUI\theme\symbols\dark\language.png" />
+    <None Remove="GUI\theme\symbols\dark\library_add.png" />
+    <None Remove="GUI\theme\symbols\dark\link.png" />
+    <None Remove="GUI\theme\symbols\dark\login.png" />
+    <None Remove="GUI\theme\symbols\dark\mail.png" />
+    <None Remove="GUI\theme\symbols\dark\mark_as_unread2.png" />
+    <None Remove="GUI\theme\symbols\dark\mark_email_unread.png" />
+    <None Remove="GUI\theme\symbols\dark\menu.png" />
+    <None Remove="GUI\theme\symbols\dark\menu_book.png" />
+    <None Remove="GUI\theme\symbols\dark\minimize.png" />
+    <None Remove="GUI\theme\symbols\dark\more_horiz.png" />
+    <None Remove="GUI\theme\symbols\dark\more_vert.png" />
+    <None Remove="GUI\theme\symbols\dark\person.png" />
+    <None Remove="GUI\theme\symbols\dark\person_add.png" />
+    <None Remove="GUI\theme\symbols\dark\question_mark.png" />
+    <None Remove="GUI\theme\symbols\dark\redo.png" />
+    <None Remove="GUI\theme\symbols\dark\refresh.png" />
+    <None Remove="GUI\theme\symbols\dark\remove.png" />
+    <None Remove="GUI\theme\symbols\dark\search.png" />
+    <None Remove="GUI\theme\symbols\dark\send.png" />
+    <None Remove="GUI\theme\symbols\dark\settings.png" />
+    <None Remove="GUI\theme\symbols\dark\share.png" />
+    <None Remove="GUI\theme\symbols\dark\sort.png" />
+    <None Remove="GUI\theme\symbols\dark\star.png" />
+    <None Remove="GUI\theme\symbols\dark\sync.png" />
+    <None Remove="GUI\theme\symbols\dark\toggle_off.png" />
+    <None Remove="GUI\theme\symbols\dark\toggle_on.png" />
+    <None Remove="GUI\theme\symbols\dark\undo.png" />
+    <None Remove="GUI\theme\symbols\dark\zoom_in.png" />
+    <None Remove="GUI\theme\symbols\dark\zoom_out.png" />
+    <None Remove="GUI\theme\symbols\light\add.png" />
+    <None Remove="GUI\theme\symbols\light\add_attachment.png" />
+    <None Remove="GUI\theme\symbols\light\add_image.png" />
+    <None Remove="GUI\theme\symbols\light\arrow_back.png" />
+    <None Remove="GUI\theme\symbols\light\arrow_drop_down.png" />
+    <None Remove="GUI\theme\symbols\light\arrow_forward.png" />
+    <None Remove="GUI\theme\symbols\light\arrow_right.png" />
+    <None Remove="GUI\theme\symbols\light\attach_email.png" />
+    <None Remove="GUI\theme\symbols\light\attach_file.png" />
+    <None Remove="GUI\theme\symbols\light\bookmark.png" />
+    <None Remove="GUI\theme\symbols\light\bookmarks.png" />
+    <None Remove="GUI\theme\symbols\light\bookmark_add.png" />
+    <None Remove="GUI\theme\symbols\light\cancel.png" />
+    <None Remove="GUI\theme\symbols\light\check.png" />
+    <None Remove="GUI\theme\symbols\light\check_circle.png" />
+    <None Remove="GUI\theme\symbols\light\chevron_left.png" />
+    <None Remove="GUI\theme\symbols\light\chevron_right.png" />
+    <None Remove="GUI\theme\symbols\light\close.png" />
+    <None Remove="GUI\theme\symbols\light\contact.png" />
+    <None Remove="GUI\theme\symbols\light\content_copy.png" />
+    <None Remove="GUI\theme\symbols\light\content_cut.png" />
+    <None Remove="GUI\theme\symbols\light\content_paste.png" />
+    <None Remove="GUI\theme\symbols\light\delete.png" />
+    <None Remove="GUI\theme\symbols\light\draft.png" />
+    <None Remove="GUI\theme\symbols\light\drafts.png" />
+    <None Remove="GUI\theme\symbols\light\edit.png" />
+    <None Remove="GUI\theme\symbols\light\edit2.png" />
+    <None Remove="GUI\theme\symbols\light\email.png" />
+    <None Remove="GUI\theme\symbols\light\expand_circle.png" />
+    <None Remove="GUI\theme\symbols\light\favorite.png" />
+    <None Remove="GUI\theme\symbols\light\file_open.png" />
+    <None Remove="GUI\theme\symbols\light\find.png" />
+    <None Remove="GUI\theme\symbols\light\folder.png" />
+    <None Remove="GUI\theme\symbols\light\format_align_center.png" />
+    <None Remove="GUI\theme\symbols\light\format_align_left.png" />
+    <None Remove="GUI\theme\symbols\light\format_align_right.png" />
+    <None Remove="GUI\theme\symbols\light\format_bold.png" />
+    <None Remove="GUI\theme\symbols\light\format_italic.png" />
+    <None Remove="GUI\theme\symbols\light\format_size.png" />
+    <None Remove="GUI\theme\symbols\light\format_underlined.png" />
+    <None Remove="GUI\theme\symbols\light\group.png" />
+    <None Remove="GUI\theme\symbols\light\help.png" />
+    <None Remove="GUI\theme\symbols\light\home.png" />
+    <None Remove="GUI\theme\symbols\light\image.png" />
+    <None Remove="GUI\theme\symbols\light\inbox.png" />
+    <None Remove="GUI\theme\symbols\light\language.png" />
+    <None Remove="GUI\theme\symbols\light\library_add.png" />
+    <None Remove="GUI\theme\symbols\light\link.png" />
+    <None Remove="GUI\theme\symbols\light\login.png" />
+    <None Remove="GUI\theme\symbols\light\mail.png" />
+    <None Remove="GUI\theme\symbols\light\mark_as_unread2.png" />
+    <None Remove="GUI\theme\symbols\light\mark_email_unread.png" />
+    <None Remove="GUI\theme\symbols\light\menu.png" />
+    <None Remove="GUI\theme\symbols\light\menu_book.png" />
+    <None Remove="GUI\theme\symbols\light\minimize.png" />
+    <None Remove="GUI\theme\symbols\light\more_horiz.png" />
+    <None Remove="GUI\theme\symbols\light\more_vert.png" />
+    <None Remove="GUI\theme\symbols\light\person.png" />
+    <None Remove="GUI\theme\symbols\light\person_add.png" />
+    <None Remove="GUI\theme\symbols\light\question_mark.png" />
+    <None Remove="GUI\theme\symbols\light\redo.png" />
+    <None Remove="GUI\theme\symbols\light\refresh.png" />
+    <None Remove="GUI\theme\symbols\light\remove.png" />
+    <None Remove="GUI\theme\symbols\light\search.png" />
+    <None Remove="GUI\theme\symbols\light\send.png" />
+    <None Remove="GUI\theme\symbols\light\settings.png" />
+    <None Remove="GUI\theme\symbols\light\share.png" />
+    <None Remove="GUI\theme\symbols\light\sort.png" />
+    <None Remove="GUI\theme\symbols\light\star.png" />
+    <None Remove="GUI\theme\symbols\light\sync.png" />
+    <None Remove="GUI\theme\symbols\light\toggle_off.png" />
+    <None Remove="GUI\theme\symbols\light\toggle_on.png" />
+    <None Remove="GUI\theme\symbols\light\undo.png" />
+    <None Remove="GUI\theme\symbols\light\zoom_in.png" />
+    <None Remove="GUI\theme\symbols\light\zoom_out.png" />
     <None Remove="HtmlTemplates\Email.html" />
     <None Remove="HtmlTemplates\EmailForward.html" />
     <None Remove="HtmlTemplates\EmailReply.html" />
@@ -625,97 +925,922 @@
     <Resource Include="GUI\res\images\logos\BigIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\add_attachment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\add_image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\arrow_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\arrow_drop_down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\arrow_forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\arrow_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\attach_email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\attach_file.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\bookmark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\bookmarks.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\bookmark_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\check_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\chevron_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\chevron_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\contact.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\content_copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\content_cut.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\content_paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\draft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\drafts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\edit2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\expand_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\favorite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\file_open.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\find.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_align_center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_align_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_align_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_size.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\format_underlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\group.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\inbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\language.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\library_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\link.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\login.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\mail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\mark_as_unread2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\mark_email_unread.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\menu_book.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\more_horiz.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\more_vert.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\person.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\person_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\question_mark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\redo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\remove.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\send.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\share.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\sort.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\star.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\sync.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\toggle_off.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\toggle_on.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\undo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\zoom_in.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsDark\zoom_out.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\add_attachment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\add_image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\arrow_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\arrow_drop_down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\arrow_forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\arrow_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\attach_email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\attach_file.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\bookmark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\bookmarks.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\bookmark_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\check_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\chevron_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\chevron_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\contact.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\content_copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\content_cut.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\content_paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\draft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\drafts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\edit2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\expand_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\favorite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\file_open.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\find.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_align_center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_align_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_align_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_size.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\format_underlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\group.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\inbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\language.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\library_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\link.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\login.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\mail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\mark_as_unread2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\mark_email_unread.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\menu_book.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\more_horiz.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\more_vert.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\person.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\person_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\question_mark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\redo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\remove.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\send.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\share.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\sort.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\star.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\sync.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\toggle_off.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\toggle_on.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\undo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\zoom_in.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\symbolsLight\zoom_out.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\add_attachment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\add_image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\arrow_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\arrow_drop_down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\arrow_forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\arrow_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\attach_email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\attach_file.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\bookmark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\bookmarks.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\bookmark_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\check_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\chevron_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\chevron_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\contact.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\content_copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\content_cut.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\content_paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\draft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\drafts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\edit2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\expand_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\favorite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\file_open.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\find.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_align_center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_align_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_align_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_size.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\format_underlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\group.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\inbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\language.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\library_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\link.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\login.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\mail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\mark_as_unread2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\mark_email_unread.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\menu_book.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\more_horiz.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\more_vert.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\person.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\person_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\question_mark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\redo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\remove.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\send.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\share.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\sort.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\star.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\sync.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\toggle_off.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\toggle_on.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\undo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\zoom_in.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\dark\zoom_out.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\add_attachment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\add_image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\arrow_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\arrow_drop_down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\arrow_forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\arrow_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\attach_email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\attach_file.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\bookmark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\bookmarks.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\bookmark_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\check_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\chevron_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\chevron_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\contact.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\content_copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\content_cut.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\content_paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\draft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\drafts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\edit2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\email.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\expand_circle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\favorite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\file_open.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\find.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_align_center.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_align_left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_align_right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_size.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\format_underlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\group.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\inbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\language.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\library_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\link.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\login.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\mail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\mark_as_unread2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\mark_email_unread.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\menu_book.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\more_horiz.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\more_vert.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\person.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\person_add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\question_mark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\redo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\remove.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\send.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\share.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\sort.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\star.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\sync.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\toggle_off.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\toggle_on.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\undo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\zoom_in.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\symbols\light\zoom_out.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <SplashScreen Include="GUI\res\images\logos\MainLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </SplashScreen>
-    <Resource Include="GUI\res\images\new\add.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\add_attachment.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\add_image.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\images\new\bing.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\bookmark.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\bookmarks.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\browser.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="GUI\res\images\new\cancel.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\close.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\copy.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\delete.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\done.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\images\new\duckduckgo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\edit.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_align_center.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_align_left.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_align_right.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_bold.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_italic.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_size.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\format_underlined.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\google.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="GUI\res\images\new\image.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\leftback.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\menu.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\refresh.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\rightnext.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\settings.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\images\new\splash.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\star.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\source\comptbar.png">

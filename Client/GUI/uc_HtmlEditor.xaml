@@ -8,6 +8,7 @@
              xmlns:core="clr-namespace:Eudora.Net.Core"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=core:Webview2Document}"
@@ -60,21 +61,21 @@
                 <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text" Focusable="False"
                               IsChecked="{Binding ActiveFontBold}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_bold.png"/>
+                        <themer:DynamicImage SymbolName="format_bold" Source="pack://application:,,,/GUI/res/images/new/format_bold.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" Focusable="False"
                               IsChecked="{Binding ActiveFontItalic}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_italic.png"/>
+                        <themer:DynamicImage SymbolName="format_italic" Source="pack://application:,,,/GUI/res/images/new/format_italic.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" Focusable="False"
                               IsChecked="{Binding ActiveFontUnderline}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_underlined.png"/>
+                        <themer:DynamicImage SymbolName="format_underlined" Source="pack://application:,,,/GUI/res/images/new/format_underlined.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
             </ToolBar>
@@ -87,21 +88,21 @@
                 <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentLeft}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_left.png"/>
+                        <themer:DynamicImage SymbolName="format_align_left" Source="pack://application:,,,/GUI/res/images/new/format_align_left.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentCenter}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_center.png"/>
+                        <themer:DynamicImage SymbolName="format_align_center" Source="pack://application:,,,/GUI/res/images/new/format_align_center.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentRight}">
                     <ToggleButton.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/format_align_right.png"/>
+                        <themer:DynamicImage SymbolName="format_align_right" Source="pack://application:,,,/GUI/res/images/new/format_align_right.png"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
@@ -125,7 +126,7 @@
                 <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Focusable="False"
                         Click="btn_InsertImage_Click" x:FieldModifier="public">
                     <Button.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/image.png"/>
+                        <themer:DynamicImage SymbolName="add_image" Source="pack://application:,,,/GUI/res/images/new/image.png"/>
                     </Button.Content>
                 </Button>
             </ToolBar>
@@ -136,7 +137,7 @@
                 <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment" Focusable="False"
                         Click="btn_InsertAttachment_Click" x:FieldModifier="public">
                     <Button.Content>
-                        <Image Source="pack://application:,,,/GUI/res/images/new/add_attachment.png"/>
+                        <themer:DynamicImage SymbolName="add_attachment" Source="pack://application:,,,/GUI/res/images/new/add_attachment.png"/>
                     </Button.Content>
                 </Button>
 

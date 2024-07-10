@@ -16,14 +16,6 @@
     
     <Grid Margin="2">
 
-        <Grid.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="Themes/Styles_Dialog.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="5"/>
@@ -47,8 +39,12 @@
 
         <!--Main dialog button panel-->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
-            <Button x:Name="btn_OK" Content="OK" Click="btn_OK_Click" IsDefault="True"/>
-            <Button x:Name="btn_Cancel" Content="Cancel" Click="btn_Cancel_Click" IsCancel="True"/>
+            
+            <Button x:Name="btn_Cancel" Content="Cancel" Click="btn_Cancel_Click" IsCancel="True"
+                    Width="50" Height="28" Margin="5,0,0,0"/>
+            
+            <Button x:Name="btn_OK" Content="OK" Click="btn_OK_Click" IsDefault="True"
+                    Width="50" Height="28" Margin="5,0,0,0"/>
         </StackPanel>
 
     </Grid>

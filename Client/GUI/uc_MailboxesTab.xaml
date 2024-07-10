@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Eudora.Net.GUI"
              xmlns:root="clr-namespace:Eudora.Net"
+             xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,23 +13,40 @@
             <RowDefinition Height="24"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            
-            <Label Padding="0,0,0,0" Margin="5,2,2,2" Content="Mailboxes" VerticalAlignment="Center"/>
 
-            <Button x:Name="btn_New" DockPanel.Dock="Left" Click="btn_New_Click"  Margin="15,0,5,0" ToolTip="New Mailbox" VerticalAlignment="Center">
-                <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/add.png"/>
-                </Button.Content>
-            </Button>
-            <Button x:Name="btn_Delete" DockPanel.Dock="Left" Click="btn_Delete_Click" Margin="5,0,5,0" ToolTip="Delete Mailbox" VerticalAlignment="Center">
-                <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
-                </Button.Content>
-            </Button>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Mailboxes" VerticalAlignment="Center"/>
+
+        <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1" Margin="15,0,5,0" ToolTip="New Mailbox" VerticalAlignment="Center"
+                Click="btn_New_Click" Width="60">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
+                    <TextBlock Text="New" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
+        <Button x:Name="btn_Delete" Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" ToolTip="Delete Mailbox" VerticalAlignment="Center"
+                Click="btn_Delete_Click" Width="60">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <themer:DynamicImage SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
+                    <TextBlock Text="Delete" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
         <ListBox x:Name="Listview"
-                 Grid.Row="1"  
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
                  SelectionChanged="Listview_SelectionChanged"
                  MouseLeftButtonUp="Listview_MouseLeftButtonUp">
             <ListBox.ItemTemplate>
