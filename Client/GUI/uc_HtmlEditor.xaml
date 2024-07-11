@@ -26,6 +26,23 @@
         <!--Editor Toolbars-->
         <ToolBarTray x:Name="Toolbars" Grid.Row="0" Focusable="False">
 
+            <ToolBarTray.Resources>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="MaxWidth" Value="20"/>
+                    <Setter Property="MaxHeight" Value="20"/>
+                </Style>
+                <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                    <Setter Property="MaxWidth" Value="20"/>
+                    <Setter Property="MaxHeight" Value="20"/>
+                </Style>
+                <Style TargetType="{x:Type themer:DynamicImage}">
+                    <Setter Property="Width" Value="20"/>
+                    <Setter Property="Height" Value="20"/>
+                    <Setter Property="MaxWidth" Value="20"/>
+                    <Setter Property="MaxHeight" Value="20"/>
+                </Style>
+            </ToolBarTray.Resources>
+            
             <!--Font toolbar-->
             <ToolBar x:Name="ToolbarFont" Band="0" BandIndex="0" Focusable="False">
 
@@ -61,21 +78,21 @@
                 <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text" Focusable="False"
                               IsChecked="{Binding ActiveFontBold}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_bold" Source="pack://application:,,,/GUI/res/images/new/format_bold.png"/>
+                        <themer:DynamicImage SymbolName="format_bold"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" Focusable="False"
                               IsChecked="{Binding ActiveFontItalic}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_italic" Source="pack://application:,,,/GUI/res/images/new/format_italic.png"/>
+                        <themer:DynamicImage SymbolName="format_italic"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" Focusable="False"
                               IsChecked="{Binding ActiveFontUnderline}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_underlined" Source="pack://application:,,,/GUI/res/images/new/format_underlined.png"/>
+                        <themer:DynamicImage SymbolName="format_underlined"/>
                     </ToggleButton.Content>
                 </ToggleButton>
             </ToolBar>
@@ -88,21 +105,21 @@
                 <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentLeft}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_left" Source="pack://application:,,,/GUI/res/images/new/format_align_left.png"/>
+                        <themer:DynamicImage SymbolName="format_align_left"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentCenter}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_center" Source="pack://application:,,,/GUI/res/images/new/format_align_center.png"/>
+                        <themer:DynamicImage SymbolName="format_align_center"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" Focusable="False"
                               IsChecked="{Binding ActiveAlignmentRight}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_right" Source="pack://application:,,,/GUI/res/images/new/format_align_right.png"/>
+                        <themer:DynamicImage SymbolName="format_align_right"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
@@ -126,7 +143,7 @@
                 <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Focusable="False"
                         Click="btn_InsertImage_Click" x:FieldModifier="public">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="add_image" Source="pack://application:,,,/GUI/res/images/new/image.png"/>
+                        <themer:DynamicImage SymbolName="add_image"/>
                     </Button.Content>
                 </Button>
             </ToolBar>
@@ -137,7 +154,7 @@
                 <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment" Focusable="False"
                         Click="btn_InsertAttachment_Click" x:FieldModifier="public">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="add_attachment" Source="pack://application:,,,/GUI/res/images/new/add_attachment.png"/>
+                        <themer:DynamicImage SymbolName="add_attachment"/>
                     </Button.Content>
                 </Button>
 

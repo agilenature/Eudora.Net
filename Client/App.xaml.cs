@@ -54,7 +54,7 @@ namespace Eudora.Net
             try
             {
                 SymboLib.Build();
-                ThemeManager.SetApplication(this);
+                
 
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
                 var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora", "Eudora Theme", new ResourceDictionary()
@@ -62,8 +62,8 @@ namespace Eudora.Net
                     Source = new Uri(uri, UriKind.RelativeOrAbsolute)
                 });
                 ThemeManager.AddExternalTheme(theme);
-
-                ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
+                ThemeManager.SetApplication(this);
+                ThemeManager.SetTheme("system");
             }
             catch(Exception ex)
             {

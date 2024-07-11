@@ -53,7 +53,7 @@ namespace Eudora.Net.GUI.theme
                     "format_align_left",
                     "format_align_right",
                     "format_bold",
-                    "format_itatic",
+                    "format_italic",
                     "format_underlined",
                     "group",
                     "help",

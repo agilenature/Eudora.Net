@@ -4,6 +4,7 @@ using System.Windows;
 using Eudora.Net.Data;
 using System.Windows.Controls;
 using Eudora.Net.ExtensionMethods;
+using WpfThemer;
 
 namespace Eudora.Net.GUI
 {
@@ -38,6 +39,8 @@ namespace Eudora.Net.GUI
             PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
             PopulateMailboxMenu();
             HandleUxStateOnWindowChange();
+
+            ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
         }
 
         private void PostStartupChecks()

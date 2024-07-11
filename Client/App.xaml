@@ -8,18 +8,22 @@
         <Style x:Key="{x:Type Window}" TargetType="{x:Type Window}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
         <Style x:Key="{x:Type GUI:ChildWindowBase}" TargetType="{x:Type GUI:ChildWindowBase}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
         <Style x:Key="{x:Type GUI:uc_TabBase}" TargetType="{x:Type GUI:uc_TabBase}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
         <Style x:Key="{x:Type UserControl}" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
     </Application.Resources>
 </Application>
