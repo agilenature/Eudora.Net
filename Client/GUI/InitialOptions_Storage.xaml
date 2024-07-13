@@ -1,0 +1,71 @@
+﻿<Page x:Class="Eudora.Net.GUI.InitialOptions_Storage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Eudora.Net.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InitialOptions_Storage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontWeight="Bold" FontSize="16">
+            Data Storage Location
+        </TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" TextWrapping="Wrap">
+            The root folder in which Eudora.Net stores your data is called the "Data Store".
+            <LineBreak/><LineBreak/>
+            You can override the default location by clicking the "Change" button. If you have cloud storage
+            integration installed, such as Google Drive or One Drive apps, you can set the Data Store to a folder
+            in your cloud storage. This will allow you to access your data from any computer.
+        </TextBlock>
+
+
+
+        <TextBox x:Name="tb_Datastore"
+                 Grid.Row="2" Grid.Column="0"
+                 Height="24"
+                 VerticalAlignment="Top"
+                 VerticalContentAlignment="Center"
+                 Margin="0"
+                 Text="{Binding Path=DataStore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 IsReadOnly="True">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+            <Button x:Name="btn_SetDatastore"
+                    Grid.Row="2" Grid.Column="1"
+                    Width="100" Height="24"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="5,0,0,0"
+                    Content="Change"
+                    Click="btn_SetDatastore_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        
+    </Grid>
+    
+</Page>

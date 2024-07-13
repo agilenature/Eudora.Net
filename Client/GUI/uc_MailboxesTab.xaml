@@ -16,30 +16,28 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="24"/>
         </Grid.ColumnDefinitions>
 
 
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Mailboxes" VerticalAlignment="Center"/>
 
-        <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1" Margin="15,0,5,0" ToolTip="New Mailbox" VerticalAlignment="Center"
-                Click="btn_New_Click" Width="60">
+        <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                Style="{DynamicResource SmallPanelButton}"
+                ToolTip="New Mailbox"
+                Click="btn_New_Click">
             <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
-                    <TextBlock Text="New" VerticalAlignment="Center"/>
-                </StackPanel>
+                <themer:DynamicImage SymbolName="add"/>
             </Button.Content>
         </Button>
-        
-        <Button x:Name="btn_Delete" Grid.Row="0" Grid.Column="2" Margin="5,0,5,0" ToolTip="Delete Mailbox" VerticalAlignment="Center"
-                Click="btn_Delete_Click" Width="60">
+
+        <Button x:Name="btn_Delete" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+                Style="{DynamicResource SmallPanelButton}"
+                ToolTip="Delete Mailbox"
+                Click="btn_Delete_Click">
             <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <themer:DynamicImage SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
-                    <TextBlock Text="Delete" VerticalAlignment="Center"/>
-                </StackPanel>
+                <themer:DynamicImage SymbolName="delete"/>
             </Button.Content>
         </Button>
 
@@ -48,7 +46,8 @@
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  SelectionChanged="Listview_SelectionChanged"
-                 MouseLeftButtonUp="Listview_MouseLeftButtonUp">
+                 MouseLeftButtonUp="Listview_MouseLeftButtonUp"
+                 BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">

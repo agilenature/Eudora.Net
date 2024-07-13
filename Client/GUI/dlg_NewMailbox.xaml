@@ -39,7 +39,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Mailbox Name:  "/>
 
         <TextBox x:Name="tb_Mailbox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
-                 Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"
+                 Validation.ErrorTemplate="{DynamicResource validationErrorTemplate}"
                  LostFocus="tb_Mailbox_LostFocus"
                  TextChanged="tb_Mailbox_TextChanged"
                  KeyUp="tb_Mailbox_KeyUp">

@@ -22,8 +22,8 @@ namespace Eudora.Net
         #region Properties
         /////////////////////////////
 
-        public string DatastoreRoot { get; private set; } = string.Empty;
-        public string ApplicationName { get; } = "Eudora.Net";
+        public static string DatastoreRoot { get; private set; } = string.Empty;
+        public static string ApplicationName { get; } = "Eudora.Net";
 
         /////////////////////////////
         #endregion Properties
@@ -31,61 +31,112 @@ namespace Eudora.Net
 
         public App() : base()
         {
-            
+
         }
 
+        /// <summary>
+        /// Gives all textboxes the behavior of "select all" when clicked into
+        /// </summary>
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox tb)
             {
                 tb.SelectAll();
             }
-        }
-
+}
         private void InstallTextboxBehaviors()
         {
-            // By default, all textboxes behave as "select all" when you click in them
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotMouseCaptureEvent, new RoutedEventHandler(TextBox_GotFocus));
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.MouseDoubleClickEvent, new RoutedEventHandler(TextBox_GotFocus));
         }
 
+        /// <summary>
+        /// Initialize the WpfThemer lib, and install the Eudora theme to complement the default themes
+        /// </summary>
         private void InstallThemes()
         {
             try
             {
+                ThemeManager.SetApplication(this);
+
+                // The application's library of control symbols for light & dark themes
                 SymboLib.Build();
                 
-
+                // The Eudora theme
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
                 var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora", "Eudora Theme", new ResourceDictionary()
                 {
                     Source = new Uri(uri, UriKind.RelativeOrAbsolute)
                 });
                 ThemeManager.AddExternalTheme(theme);
-                ThemeManager.SetApplication(this);
-                ThemeManager.SetTheme("system");
             }
             catch(Exception ex)
             {
                 Logger.LogException(ex);
             }
 
-            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
+            try
             {
-                DefaultValue = FindResource(typeof(Window))
-            });
-            FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.ChildWindowBase), new FrameworkPropertyMetadata
+                ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
+
+                // Set the default styles for all windows, user controls, etc.
+                FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
+                {
+                    DefaultValue = FindResource(typeof(Window))
+                });
+                FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.ChildWindowBase), new FrameworkPropertyMetadata
+                {
+                    DefaultValue = FindResource(typeof(GUI.ChildWindowBase))
+                });
+                FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.uc_TabBase), new FrameworkPropertyMetadata
+                {
+                    DefaultValue = FindResource(typeof(GUI.uc_TabBase))
+                });
+                FrameworkElement.StyleProperty.OverrideMetadata(typeof(UserControl), new FrameworkPropertyMetadata
+                {
+                    DefaultValue = FindResource(typeof(UserControl))
+                });
+            }
+            catch (Exception ex)
             {
-                DefaultValue = FindResource(typeof(GUI.ChildWindowBase))
-            });
-            FrameworkElement.StyleProperty.OverrideMetadata(typeof(GUI.uc_TabBase), new FrameworkPropertyMetadata
+                Logger.LogException(ex);
+            }
+        }
+
+        private void InstallStyles()
+        {
+            try
             {
-                DefaultValue = FindResource(typeof(GUI.uc_TabBase))
-            });
-            FrameworkElement.StyleProperty.OverrideMetadata(typeof(UserControl), new FrameworkPropertyMetadata
+                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+                {
+                    Source = new Uri("/Eudora.Net;component/GUI/theme/CommonUX.xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+            catch (Exception ex)
             {
-                DefaultValue = FindResource(typeof(UserControl))
-            });
+                Logger.LogException(ex);
+            }
+        }
+
+        /// <summary>
+        /// On first run, show the user the welcome & initial options dialog
+        /// Save the user's choices to the settings
+        /// </summary>
+        private void HandleFirstRun()
+        {
+            if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete)
+            {
+                var dlg = new Eudora.Net.GUI.dlg_FirstRun();
+                var result = dlg.ShowDialog();
+                if (result is null || result == false)
+                {
+                    Application.Current.Shutdown();
+                    return;
+                }
+
+                Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete = true;
+                Eudora.Net.Properties.Settings.Default.Save();
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -96,8 +147,9 @@ namespace Eudora.Net
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             InstallThemes();
-
-            InitDataStore();
+            InstallStyles();
+            HandleFirstRun();
+            //InitDataStore();
 
             // Get the WebView2 cache going
             InitWebviewOptionsAndQueue();
@@ -114,37 +166,32 @@ namespace Eudora.Net
             EudoraStatistics.Startup();
 
             GUI.MainWindow.Instance = new GUI.MainWindow();
-            ShutdownMode = ShutdownMode.OnLastWindowClose;
+            //ShutdownMode = ShutdownMode.OnLastWindowClose;
             MainWindow = GUI.MainWindow.Instance;
             MainWindow.Show();
+            ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
-        private void InitDataStore()
-        {
-            DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
+        //private void InitDataStore()
+        //{
+        //    DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
 
-            if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete ||
-                string.IsNullOrEmpty(DatastoreRoot) ||
-                string.IsNullOrWhiteSpace(DatastoreRoot))
-            {
-                // Default choices; user can override
-                string defaultStorage = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    ApplicationName);
-                Eudora.Net.Properties.Settings.Default.DataStoreRoot = defaultStorage;
-                DatastoreRoot = defaultStorage;
-                var dlg = new Eudora.Net.GUI.dlg_FirstRun(defaultStorage);
-                var result = dlg.ShowDialog();
-                if (result is null || result == false)
-                {
-                    Application.Current.Shutdown();
-                    return;
-                }
-                DatastoreRoot = dlg.DataRoot;
-                Eudora.Net.Properties.Settings.Default.DataStoreRoot = dlg.DataRoot;
-                Eudora.Net.Properties.Settings.Default.Save();
-            }
-        }
+        //    if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete ||
+        //        string.IsNullOrEmpty(DatastoreRoot) ||
+        //        string.IsNullOrWhiteSpace(DatastoreRoot))
+        //    {
+        //        // Default choices; user can override
+        //        string defaultStorage = Path.Combine(
+        //            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        //            ApplicationName);
+        //        Eudora.Net.Properties.Settings.Default.DataStoreRoot = defaultStorage;
+        //        DatastoreRoot = defaultStorage;
+                
+        //        DatastoreRoot = dlg.DataRoot;
+                
+        //    }
+        //}
 
         private async void InitWebviewOptionsAndQueue()
         {

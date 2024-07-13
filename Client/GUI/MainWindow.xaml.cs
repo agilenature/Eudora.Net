@@ -39,8 +39,6 @@ namespace Eudora.Net.GUI
             PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
             PopulateMailboxMenu();
             HandleUxStateOnWindowChange();
-
-            ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
         }
 
         private void PostStartupChecks()

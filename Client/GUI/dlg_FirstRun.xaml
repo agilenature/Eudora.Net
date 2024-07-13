@@ -8,14 +8,61 @@
         mc:Ignorable="d"
         Width="800" Height="450"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="ToolWindow" 
+        WindowStyle="None" 
         ResizeMode="NoResize"
         ShowInTaskbar="False"
         Title="Eudora.Net: Initial Setup"
-        BorderThickness="2">
+        BorderThickness="4">
 
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-    <Grid Margin="2">
+        <Border Grid.Row="0">
+            <TextBlock Text="Eudora.Net: Initial Setup"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontWeight="Bold" FontSize="18"/>
+        </Border>
+
+        <Border Grid.Row="1" Height="5" Background="{DynamicResource BorderMediumBrushKey}"/>
+
+        <Frame Grid.Row="2" x:Name="ContentFrame"
+               Margin="20,0,20,0"
+               Source="InitialOptions_Landing.xaml" 
+               NavigationUIVisibility="Hidden"
+               Navigating="ContentFrame_Navigating"/>
+
+        <Border Grid.Row="3" Height="5" Background="{DynamicResource BorderMediumBrushKey}"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btn_Back" Width="60" Height="30" Content="Back" Click="btn_Back_Click"
+                    VerticalAlignment="Center" BorderThickness="3">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20,0,0,20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Border Width="20" Height="30" Background="{DynamicResource BorderNormalBrushKey}"/>
+            <Button x:Name="btn_Next" Width="60" Height="30" Content="Next" Click="btn_Next_Click"
+                    VerticalAlignment="Center" BorderThickness="3">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,20,20,0"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+
+    <!--<Grid Margin="2">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -27,7 +74,7 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <!--Instructions panel-->
+        --><!--Instructions panel--><!--
         <TextBox Grid.Row="0"
                  IsReadOnly="True"
                  Margin="10,10,10,10"
@@ -41,7 +88,7 @@
 
         <Separator Grid.Row="1"/>
         
-        <!--Settings grid-->
+        --><!--Settings grid--><!--
         <Grid Grid.Row="2" Margin="10,10,10,10">
 
             <Grid.RowDefinitions>
@@ -55,7 +102,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <!--Setting: Storage Root-->
+            --><!--Setting: Storage Root--><!--
             <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,5,0"
                        Text="Storage Root" FontWeight="Bold"/>
 
@@ -95,14 +142,16 @@
 
         <Separator Grid.Row="5"/>
         
-        <!--Main dialog button panel-->
+        --><!--Main dialog button panel--><!--
         <Button x:Name="btn_OK"
                 Grid.Row="6"
-                HorizontalAlignment="Right"
-                Margin="10,0,10,0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="50"
+                Height="24"
+                IsDefault="True"
                 Content="OK" 
                 Click="btn_OK_Click"/>
 
-    </Grid>
+    </Grid>-->
     
 </Window>

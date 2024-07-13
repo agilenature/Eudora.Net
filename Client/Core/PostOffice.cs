@@ -108,11 +108,13 @@ namespace Eudora.Net.Core
 
         public PostOffice()
         {
-            MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
+            //MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
         }
 
         public void Startup()
         {
+            MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
+
             if (!Path.Exists(MailboxesPath))
             {
                 Directory.CreateDirectory(MailboxesPath);

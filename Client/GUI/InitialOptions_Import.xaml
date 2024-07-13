@@ -1,0 +1,79 @@
+﻿<Page x:Class="Eudora.Net.GUI.InitialOptions_Import"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Eudora.Net.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InitialOptions_Import">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontWeight="Bold" FontSize="16">
+            Import from Eudora 7
+        </TextBlock>
+
+        <Grid Grid.Row="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                Mailboxes, email, address books, and contacts can be imported from Eudora 7. 
+                You can do this now, or any time later from the Tools menu.
+                <LineBreak/>
+                Click the "Start" button to begin the import process.
+            </TextBlock>
+
+            
+
+            <!--Status panel (left)-->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Background="{DynamicResource BorderLightBrushKey}">
+
+                <Button x:Name="btn_Import"
+                        Width="100" Height="24"
+                        VerticalAlignment="Bottom"
+                        Margin="0,5,0,0"
+                        Content="Start Importer"
+                        Click="btn_Import_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Border Height="20" Background="Transparent"/>
+
+                <CheckBox x:Name="cb_FindData" IsEnabled="False" IsChecked="False" Content="Locate Eudora 7 data"/>
+                <CheckBox x:Name="cb_Mailboxes" IsEnabled="False" IsChecked="False" Content="Import mailboxes and email"/>
+                <CheckBox x:Name="cb_AddressBooks" IsEnabled="False" IsChecked="False" Content="Import address books and contacts"/>
+            
+            </StackPanel>
+
+            <TextBlock  x:Name="tb_Status" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"
+                        Text="{Binding StatusText}"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            </TextBlock>
+
+        </Grid>
+        
+    </Grid>
+    
+</Page>

@@ -27,7 +27,6 @@ namespace Eudora.Net.Core
         private List<string> Accounts = [];
         private List<string> Mailboxes = [];
         private List<string> AddressBooks = [];
-        static string DefaultEudoraPath = @"C:\Program Files (x86)\Qualcomm\Eudora";
         static string DefaultEudoraDataPath = @"C:\Users\{0}\AppData\Roaming\Qualcomm\Eudora";
         private static string mailboxExtension = ".mbx";
         private static string emailDelimiter = "From ???@???";

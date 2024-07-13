@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--Import some custom UX style overrides-->
+    <!--Import some custom UX style overrides--><!--
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Styles_CommonForms.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     
     <Grid>
         <Grid.RowDefinitions>

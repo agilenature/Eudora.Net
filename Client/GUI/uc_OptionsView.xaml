@@ -268,18 +268,6 @@
 
         </TabControl>
 
-        <!--Option Screen main controls-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
-            <Button x:Name="btn_OK" 
-                    Content="OK"
-                    IsDefault="True"
-                    Click="btn_OK_Click"/>
-            <Button x:Name="btn_Cancel"
-                    Content="Cancel"
-                    IsCancel="True"
-                    Click="btn_Cancel_Click"/>
-        </StackPanel>
-
     </Grid>
 
 </local:ChildWindowBase>

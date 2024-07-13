@@ -30,7 +30,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UxTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Default</Value>
+      <Value Profile="(Default)">Eudora</Value>
+    </Setting>
+    <Setting Name="AllowReporting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

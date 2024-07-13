@@ -13,7 +13,7 @@
         mc:Ignorable="d"
         Title="Eudora.Net" Width="1024" Height="768" 
         WindowStartupLocation="CenterScreen"
-        BorderThickness="4">
+        BorderThickness="0">
 
     <Grid x:Name="MainLayout">
 
@@ -23,7 +23,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="22"/>
-            <RowDefinition Height="34"/>
+            <RowDefinition Height="44"/>
             <RowDefinition Height="*" MinHeight="128"/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
@@ -117,49 +117,21 @@
                     Grid.Row="1"
                     x:FieldModifier="public"
                     Orientation="Horizontal"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0">
 
             <StackPanel.Resources>
 
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource BorderNormalBrushKey}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource ForegroundNormal}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="Margin" Value="0"/>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Margin" Value="2,0,2,0"/>
                     <Setter Property="Width" Value="32"/>
                     <Setter Property="Height" Value="32"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsDefaulted" Value="true">
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrush}}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource ControlMouseOverBrushKey}"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderMoueOverBrushKey}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="true">
-                                        <Setter Property="Background" TargetName="border" Value="{DynamicResource ControlPressedBrushKey}"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderPressedBrushKey}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Opacity" Value="0.5"/>
-                                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ForegroundDisabled}"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
                 </Style>
                 <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
                     <Setter Property="Margin" Value="5,0,5,0"/>
+                    <Setter Property="Background" Value="{DynamicResource BorderDarkBrushKey}"/>
                 </Style>
             </StackPanel.Resources>
 
@@ -238,8 +210,7 @@
             <Separator/>
             
             <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click">
-                <themer:DynamicImage SymbolName="settings" 
-                                     Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+                <themer:DynamicImage SymbolName="settings"/>
             </Button>
 
         </StackPanel>

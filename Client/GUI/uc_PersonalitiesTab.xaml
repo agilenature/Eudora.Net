@@ -10,60 +10,61 @@
                     d:DataContext="{d:DesignInstance Type=data:Personality}"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="400">
-
-   
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="22"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="24"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Label Padding="0,0,0,0" Margin="5,2,2,2" Content="Personalities"/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="24"/>
+        </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Row="1" HorizontalAlignment="Stretch" LastChildFill="False">
-            
-            <DockPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Width" Value="30"/>
-                    <Setter Property="Height" Value="22"/>
-                </Style>    
-            </DockPanel.Resources>
-            
-            <Button x:Name="btn_New" DockPanel.Dock="Left" Click="btn_New_Click" Margin="5,0,5,0"
-                    ToolTip="New Personality">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
-                </Button.Content>
-            </Button>
-            
-            <Button x:Name="btn_Edit" DockPanel.Dock="Left" Click="btn_Edit_Click" Margin="5,0,5,0"
-                    ToolTip="Edit Personality">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="edit" Source="pack://application:,,,/GUI/res/images/new/edit.png"/>
-                </Button.Content>
-            </Button>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Personalities" VerticalAlignment="Center"/>
 
-            <Button x:Name="btn_Delete" DockPanel.Dock="Left" Click="btn_Delete_Click" Margin="5,0,5,0"
-                    ToolTip="Delete Personality">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
-                </Button.Content>
-            </Button>
-            
-        </DockPanel>
-        
-        <ListView Grid.Row="2" 
+        <Button x:Name="btn_New" Grid.Column="1"
+                Style="{DynamicResource SmallPanelButton}"
+                Click="btn_New_Click"
+                ToolTip="New Personality">
+            <Button.Content>
+                <themer:DynamicImage SymbolName="add"/>
+            </Button.Content>
+        </Button>
+
+        <Button x:Name="btn_Edit" Grid.Column="2"
+                Style="{DynamicResource SmallPanelButton}"
+                Click="btn_Edit_Click"
+                ToolTip="Edit Personality">
+            <Button.Content>
+                <themer:DynamicImage SymbolName="edit"/>
+            </Button.Content>
+        </Button>
+
+        <Button x:Name="btn_Delete" Grid.Column="3"
+                Style="{DynamicResource SmallPanelButton}"
+                Click="btn_Delete_Click"
+                ToolTip="Delete Personality">
+            <Button.Content>
+                <themer:DynamicImage SymbolName="delete"/>
+            </Button.Content>
+        </Button>
+
+
+        <ListView Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="4"
                   x:Name="listview" 
                   MouseDoubleClick="listview_MouseDoubleClick" 
                   SelectionChanged="listview_SelectionChanged"
                   HorizontalAlignment="Stretch" 
                   HorizontalContentAlignment="Left"
                   Width="Auto"
-                  SelectedIndex="0">
+                  SelectedIndex="0"
+                  BorderThickness="0">
             <ListView.Resources>
                 <ResourceDictionary>
                     <Style TargetType="ListViewItem">

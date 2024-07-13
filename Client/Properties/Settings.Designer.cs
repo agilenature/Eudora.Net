@@ -133,13 +133,25 @@ namespace Eudora.Net.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Eudora")]
         public string UxTheme {
             get {
                 return ((string)(this["UxTheme"]));
             }
             set {
                 this["UxTheme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowReporting {
+            get {
+                return ((bool)(this["AllowReporting"]));
+            }
+            set {
+                this["AllowReporting"] = value;
             }
         }
     }
