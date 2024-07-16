@@ -12,7 +12,7 @@ namespace Eudora.Net.GUI
         public uc_StationeryTab()
         {
             InitializeComponent();
-            listbox.ItemsSource = StationeryManager.Collection;
+            listbox.ItemsSource = StationeryManager.Datastore.Data;
             listbox.SelectedIndex = 0;
             EnableButtons(false);
 

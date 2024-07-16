@@ -146,7 +146,7 @@ namespace Eudora.Net.GUI
 
             cb_Signature.ItemsSource = SignatureManager.Datastore.Data;
 
-            cb_Stationery.ItemsSource = StationeryManager.Collection;
+            cb_Stationery.ItemsSource = StationeryManager.Datastore.Data;
         }
 
         /////////////////////////////

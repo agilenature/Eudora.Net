@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Eudora.Net.Core;
 using Eudora.Net.HtmlTemplates;
+using SQLite;
 
 namespace Eudora.Net.Data
 {
@@ -43,7 +44,7 @@ namespace Eudora.Net.Data
         #region Fields
         /////////////////////////////
 
-        public static readonly string extension = ".sta";
+        private Guid _Id = Guid.NewGuid();
         private string _Name = string.Empty;
         private string _Content = string.Empty;
         private HtmlAttribute _Style = new("style", string.Empty);
@@ -56,6 +57,13 @@ namespace Eudora.Net.Data
         ///////////////////////////////////////////////////////////
         #region Properties
         /////////////////////////////
+
+        [PrimaryKey]
+        public Guid Id
+        {
+            get => _Id;
+            set => SetField(ref _Id, value, nameof(Id));
+        }
 
         public string Name
         {
@@ -90,46 +98,38 @@ namespace Eudora.Net.Data
         }
     }
 
-    public static class StationeryManager
+    internal static class StationeryManager
     {
-        private static readonly string DataRoot = string.Empty;
-        private static object Locker;
-
-        public static ObservableCollection<Stationery> Collection { get; private set; } = [];
+        public static DatastoreBase<Stationery> Datastore;
 
         static StationeryManager()
         {
-            Locker = new();
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "Stationery");
-            IoUtil.EnsureFolder(DataRoot);
+            Datastore = new("Data", "Stationery", "Stationery");
         }
 
         public static void Startup()
         {
-            Load();
+            try
+            {
+                Datastore.Open();
+                Datastore.Load();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static void Shutdown()
         {
-
-        }
-
-        private static void Stationery_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is Stationery stationery)
+            try
             {
-                Save(stationery);
+                Datastore.Close();
             }
-        }
-
-        private static string MakeFilename(string name)
-        {
-            return $@"{name}{Stationery.extension}";
-        }
-
-        private static string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static Stationery New(string name)
@@ -140,88 +140,24 @@ namespace Eudora.Net.Data
                 Content = HtmlDepot.html_Stationery
             };
             
-            stationery.PropertyChanged += Stationery_PropertyChanged;
-            Collection.Add(stationery);
-            Save(stationery);
+            Datastore.Add(stationery);
             return stationery;
         }
 
         public static void Add(Stationery stationery)
         {
-            Collection.Add(stationery);
-            Save(stationery);
+            Datastore.Add(stationery);
         }
 
         public static void Remove(Stationery stationery)
         {
-            Collection.Remove(stationery);
-
-            try
-            {
-                string fullPath = MakeFullPath(stationery.Name);
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+            Datastore.Remove(stationery);
         }
 
         public static bool Contains(string name)
         {
-            if (Collection.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
+            if (Datastore.Data.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
             return false;
-        }
-
-        private static void Load()
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", Stationery.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        Stationery stationery = new()
-                        {
-                            Name = Path.GetFileNameWithoutExtension(file.Name),
-                            Content = File.ReadAllText(file.FullName)
-                        };
-                        Collection.Add(stationery);
-                        stationery.PropertyChanged += Stationery_PropertyChanged;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public static void Save(Stationery stationery)
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    string fullPath = MakeFullPath(stationery.Name);
-                    File.WriteAllText(fullPath, stationery.Content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Eudora.Net.GUI
 
             cb_Stationery.Items.Clear();
             cb_Stationery.Items.Add(GHelpers.NullSelection);
-            foreach (var sta in StationeryManager.Collection)
+            foreach (var sta in StationeryManager.Datastore.Data)
             {
                 cb_Stationery.Items.Add(sta.Name);
             }

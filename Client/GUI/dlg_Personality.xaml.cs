@@ -41,7 +41,7 @@ namespace Eudora.Net.GUI
             InitializeComponent();
             
             // Combo box for stationery selection
-            cb_Stationery.ItemsSource = StationeryManager.Collection;
+            cb_Stationery.ItemsSource = StationeryManager.Datastore.Data;
             cb_Stationery.DisplayMemberPath = "Name";
             cb_Stationery.SelectedIndex = 0;
 
