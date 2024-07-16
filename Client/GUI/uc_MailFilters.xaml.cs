@@ -97,7 +97,7 @@ namespace Eudora.Net.GUI
 
             apar_MailboxParam.ItemsSource = PostOffice.Instance.Mailboxes;
 
-            apar_PersonalityParam.ItemsSource = PersonalityManager.Collection;
+            apar_PersonalityParam.ItemsSource = PersonalityManager.Datastore.Data;
 
             apar_PriorityParam.ItemsSource = Enum.GetValues(typeof(PostOffice.eMailPriority)).Cast<PostOffice.eMailPriority>();
 

@@ -14,7 +14,7 @@ namespace Eudora.Net.GUI
         public uc_PersonalitiesTab()
         {
             InitializeComponent();
-            listview.ItemsSource = PersonalityManager.Collection;
+            listview.ItemsSource = PersonalityManager.Datastore.Data;
             btn_Delete.IsEnabled = false;
         }
 

@@ -1,68 +1,126 @@
-﻿using SQLite;
+﻿using Eudora.Net.Core;
+using SQLite;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 
 namespace Eudora.Net.Data
 {
     /// <summary>
     /// 
     /// </summary>
-    internal class DatastoreBase<T> where T : class, new()
+    internal class DatastoreBase<T> where T : class, INotifyPropertyChanged, new()
     {
-        protected string DbPath = string.Empty;
-        protected SQLiteConnection DB = default;
+        protected string DbFolder { get; set; } = string.Empty;
+        protected string DbName { get; set; } = string.Empty;
+        protected string DbPath { get; set; } = string.Empty;
+        protected SQLiteConnection DB { get; private set; } = default;
         public ObservableCollection<T> Data { get; private set; } = [];
 
 
-        public DatastoreBase(string dbPath)
+        public DatastoreBase(string folder, string? subfolder, string name)
         {
-            DbPath = dbPath;
-            DB = new SQLiteConnection(DbPath);
-            DB.CreateTable<T>();
+            DbName = $"{name}.db";
+            DbFolder = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, $"{folder}");
+            if (subfolder is not null)
+            {
+                DbFolder = Path.Combine(DbFolder, $"{subfolder}");
+            }
+            DbPath = Path.Combine(DbFolder, $"{name}.db" );
 
             Data.CollectionChanged += Data_CollectionChanged;
         }
 
         private void Data_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add && e.NewItems is not null)
+            try
             {
-                foreach (T t in e.NewItems)
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add && e.NewItems is not null)
                 {
-                    DB.Insert(t);
+                    foreach (T t in e.NewItems)
+                    {
+                        DB.InsertOrReplace(t);
+                    }
+                }
+                else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove && e.OldItems is not null)
+                {
+                    foreach (T t in e.OldItems)
+                    {
+                        DB.Delete(t);
+                    }
                 }
             }
-            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove && e.OldItems is not null)
+            catch (Exception ex)
             {
-                foreach (T t in e.OldItems)
-                {
-                    DB.Delete(t);
-                }
+                Logger.LogException(ex);
             }
         }
 
-        private void T_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void T_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (sender is T t)
+            try
             {
-                DB.Update(t);
+                if (sender is T t)
+                {
+                    int rowsUpdated = DB.Update(t);
+                    Debug.WriteLine($"DataClass1_PropertyChanged: {rowsUpdated} rows updated");
+                }
+                else if (sender is not null)
+                {
+                    Debug.WriteLine($"DataClass1_PropertyChanged: sender is type {sender.GetType()}");
+                }
+                else
+                {
+                    Debug.WriteLine($"DataClass1_PropertyChanged: sender is null");
+                }
             }
-            else if (sender is not null)
+            catch(Exception ex)
             {
-                Debug.WriteLine($"DataClass1_PropertyChanged: sender is type {sender.GetType()}");
+                Logger.LogException(ex);
             }
-            else
+        }
+
+        public void Open()
+        {
+            try
             {
-                Debug.WriteLine($"DataClass1_PropertyChanged: sender is null");
+                IoUtil.EnsureFolder(DbFolder);
+                DB = new SQLiteConnection(DbPath);
+                DB.CreateTable<T>();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        public void Close()
+        {
+            try
+            {
+                DB.Close();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
         public void Load()
         {
-            Data.Clear();
-            foreach (T t in DB.Table<T>())
+            try
             {
-                Data.Add(t);
+                Data.Clear();
+                foreach (T t in DB.Table<T>())
+                {
+                    t.PropertyChanged += T_PropertyChanged;
+                    Data.Add(t);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
@@ -72,7 +130,14 @@ namespace Eudora.Net.Data
         /// <param name="item"></param>
         public void Add(T item)
         {
-            Data.Add(item);
+            try
+            {
+                Data.Add(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         /// <summary>
@@ -81,7 +146,14 @@ namespace Eudora.Net.Data
         /// <param name="item"></param>
         public void Remove(T item)
         {
-            Data.Remove(item);
+            try
+            {
+                Data.Remove(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         /// <summary>
@@ -90,7 +162,14 @@ namespace Eudora.Net.Data
         /// <param name="item"></param>
         public void Update(T item)
         {
-            DB.Update(item);
+            try
+            {
+                DB.Update(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
     }
 }

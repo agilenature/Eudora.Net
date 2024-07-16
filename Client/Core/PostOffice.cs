@@ -488,7 +488,7 @@ namespace Eudora.Net.Core
 
         public void CheckAllAccounts()
         {
-            foreach (var personality in PersonalityManager.Collection)
+            foreach (var personality in PersonalityManager.Datastore.Data)
             {
                 Logger.NewEvent(LogEvent.EventCategory.Information, "Checking " + personality.EmailAddress);
                 if(personality.UsePop)

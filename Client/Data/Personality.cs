@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Eudora.Net.Core;
+using SQLite;
 
 namespace Eudora.Net.Data
 {
@@ -40,42 +41,63 @@ namespace Eudora.Net.Data
         ///////////////////////////////////////////////////////////
 
 
+        ///////////////////////////////////////////////////////////
+        #region Fields
+        /////////////////////////////
+
+        private Guid _Id = Guid.NewGuid();
+        private string _PersonalityName = "unnamed";
+        private bool _IsDefault = false;
+        private string _DefaultSignature = GHelpers.NullSelection;
+        private string _DefaultStationery = GHelpers.NullSelection;
+        private string _EmailName = string.Empty;
+        private string _EmailAddress = "blank@blank.com";
+        private string _EmailPassword = string.Empty;
+        private MailKit.Security.SecureSocketOptions _SocketOptions_Outgoing = SecureSocketOptions.Auto;
+        private string _Server_Outgoing = string.Empty;
+        private int _Port_Outgoing = 0;
+        private MailKit.Security.SecureSocketOptions _SocketOptions_Incoming = SecureSocketOptions.Auto;
+        private string _Server_Incoming = string.Empty;
+        private int _Port_Incoming = 0;
+        private bool _UsePOP = false;
+        private bool _UseImap = true;
+        private bool _DeleteMailOnServer = false;
+
+        /////////////////////////////
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
+
 
         ///////////////////////////////////////////////////////////
         #region Properties
         /////////////////////////////
 
-        public static readonly string extension = ".per";
-
-        private string _PersonalityName = "unnamed";
-        public string PersonalityName
-        {
-            get => _PersonalityName;
-            set => SetField(ref _PersonalityName, value, nameof(PersonalityName));
-        }
-
-        private Guid _Id = Guid.NewGuid();
+        [PrimaryKey]
         public Guid Id
         {
             get => _Id;
             set => SetField(ref _Id, value, nameof(Id));
         }
 
-        private bool _IsDefault = false;
+        public string PersonalityName
+        {
+            get => _PersonalityName;
+            set => SetField(ref _PersonalityName, value, nameof(PersonalityName));
+        }
+        
         public bool IsDefault
         {
             get => _IsDefault;
             set => SetField(ref _IsDefault, value, nameof(IsDefault));
         }
-
-        private string _DefaultSignature = GHelpers.NullSelection;
+        
         public string DefaultSignature
         {
             get => _DefaultSignature;
             set => SetField(ref _DefaultSignature, value, nameof(DefaultSignature));
         }
-
-        private string _DefaultStationery = GHelpers.NullSelection;
+        
         public string DefaultStationery
         {
             get => _DefaultStationery;
@@ -83,21 +105,18 @@ namespace Eudora.Net.Data
         }
 
         // Common mail settings
-        private string _EmailName = string.Empty;
         public string EmailName
         {
             get => _EmailName;
             set => SetField(ref _EmailName, value, nameof(EmailName));
         }
-
-        private string _EmailAddress = "blank@blank.com";
+        
         public string EmailAddress
         {
             get => _EmailAddress;
             set => SetField(ref _EmailAddress, value, nameof(EmailAddress));
         }
-
-        private string _EmailPassword = string.Empty;
+        
         public string EmailPassword
         {
             get => _EmailPassword;
@@ -105,21 +124,18 @@ namespace Eudora.Net.Data
         }
 
         // Outgoing mail settings
-        private MailKit.Security.SecureSocketOptions _SocketOptions_Outgoing = SecureSocketOptions.Auto;
         public SecureSocketOptions SocketOptions_Outgoing
         {
             get => _SocketOptions_Outgoing;
             set => SetField(ref _SocketOptions_Outgoing, value, nameof(SocketOptions_Outgoing));
         }
-
-        private string _Server_Outgoing = string.Empty;
+        
         public string Server_Outgoing
         {
             get => _Server_Outgoing;
             set => SetField(ref _Server_Outgoing, value, nameof(Server_Outgoing));
         }
-
-        private int _Port_Outgoing = 0;
+        
         public int Port_Outgoing
         {
             get => _Port_Outgoing;
@@ -127,42 +143,36 @@ namespace Eudora.Net.Data
         }
 
         // Incoming mail settings
-        private MailKit.Security.SecureSocketOptions _SocketOptions_Incoming = SecureSocketOptions.Auto;
         public SecureSocketOptions SocketOptions_Incoming
         {
             get => _SocketOptions_Incoming;
             set => SetField(ref _SocketOptions_Incoming, value, nameof(SocketOptions_Incoming));
         }
-
-        private string _Server_Incoming = string.Empty;
+        
         public string Server_Incoming
         {
             get => _Server_Incoming;
             set => SetField(ref _Server_Incoming, value, nameof(Server_Incoming));
         }
-
-        private int _Port_Incoming = 0;
+        
         public int Port_Incoming
         {
             get => _Port_Incoming;
             set => SetField(ref _Port_Incoming, value, nameof(Port_Incoming));
         }
-
-        private bool _UsePOP = false;
+        
         public bool UsePop
         {
             get => _UsePOP;
             set => SetField(ref _UsePOP, value, nameof(UsePop));
         }
-
-        private bool _UseImap = true;
+        
         public bool UseImap
         {
             get => _UseImap;
             set => SetField(ref _UseImap, value, nameof(UseImap));
         }
-
-        private bool _DeleteMailOnServer = false;
+        
         public bool DeleteMailOnServer
         {
             get => _DeleteMailOnServer;
@@ -225,7 +235,7 @@ namespace Eudora.Net.Data
 
         public void MakeDefault()
         {
-            foreach (Personality p in PersonalityManager.Collection)
+            foreach (Personality p in PersonalityManager.Datastore.Data)
             {
                 if (p != this && p.IsDefault)
                 {
@@ -246,134 +256,61 @@ namespace Eudora.Net.Data
     }
 
 
-    public static class PersonalityManager
+    internal static class PersonalityManager
     {
-        private static readonly string DataRoot = string.Empty;
-        private static object Locker;
-
-        public static ObservableCollection<Personality> Collection { get; private set; } = [];
+        public static DatastoreBase<Personality> Datastore;
 
         static PersonalityManager()
         {
-            Locker = new();
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "Personalities");
-            IoUtil.EnsureFolder(DataRoot);
+            Datastore = new("Data", "Personalities", "Personalities");
         }
 
         public static void Startup()
         {
-            Load();
+            try
+            {
+                Datastore.Open();
+                Datastore.Load();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static void Shutdown()
         {
-
-        }
-
-        private static void Personality_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is Personality personality)
+            try
             {
-                Save(personality);
+                Datastore.Close();
             }
-        }
-
-        private static string MakeFilename(string name)
-        {
-            return string.Format("{0}{1}", name, Personality.extension);
-        }
-
-        private static string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static Personality New(string name)
         {
             Personality personality = new() { PersonalityName = name };
-            personality.PropertyChanged += Personality_PropertyChanged;
-            Collection.Add(personality);
-            Save(personality);
+            Datastore.Add(personality);
             return personality;
         }
 
         public static void Add(Personality personality)
         {
-            Collection.Add(personality);
-            Save(personality);
+            Datastore.Add(personality);
         }
 
         public static void Remove(Personality personality)
         {
-            Collection.Remove(personality);
-
-            try
-            {
-                string fullPath = MakeFullPath(personality.PersonalityName);
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+            Datastore.Remove(personality);
         }
 
         public static bool Contains(string name)
         {
-            if (Collection.Any(x => x.PersonalityName.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
+            if (Datastore.Data.Any(x => x.PersonalityName.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
             return false;
-        }
-
-        private static void Load()
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", Personality.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var personality = JsonSerializer.Deserialize<Personality>(raw);
-                        if (personality is not null)
-                        {
-                            personality.PropertyChanged += Personality_PropertyChanged;
-                            Collection.Add(personality);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-      
-        public static void Save(Personality personality)
-        {
-            try
-            {
-                lock(Locker)
-                {
-                    string fullPath = MakeFullPath(personality.PersonalityName);
-                    string json = JsonSerializer.Serialize<Personality>(personality, IoUtil.JsonWriterOptions);
-                    File.WriteAllText(fullPath, json);
-                }
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-            }
         }
 
         public static Personality? FindPersonality(Guid id)
@@ -382,7 +319,7 @@ namespace Eudora.Net.Data
 
             try
             {
-                personality = Collection.Where(i => i.Id == id).First();
+                personality = Datastore.Data.Where(i => i.Id == id).First();
             }
             catch (Exception ex)
             {
@@ -394,7 +331,7 @@ namespace Eudora.Net.Data
 
         public static Personality? DefaultPersonality()
         {
-            return Collection.Where(p => p.IsDefault == true).FirstOrDefault();
+            return Datastore.Data.Where(p => p.IsDefault == true).FirstOrDefault();
         }
     }
 }

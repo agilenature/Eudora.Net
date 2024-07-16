@@ -20,7 +20,7 @@ namespace Eudora.Net.GUI
             InitializeComponent();
             
             // Load the Sender combo with available personalities
-            cb_Sender.ItemsSource = PersonalityManager.Collection;
+            cb_Sender.ItemsSource = PersonalityManager.Datastore.Data;
             DataContextChanged += Uc_MessageView_DataContextChanged;         
         }
 

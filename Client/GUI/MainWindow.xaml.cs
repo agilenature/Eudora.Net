@@ -44,7 +44,7 @@ namespace Eudora.Net.GUI
         private void PostStartupChecks()
         {
             // 1. Prompt user to create a Personality if none exist
-            if(PersonalityManager.Collection.Count == 0)
+            if(PersonalityManager.Datastore.Data.Count == 0)
             {
                 var dlg = new dlg_PromptCreatePersonality();
                 dlg.Owner = this;

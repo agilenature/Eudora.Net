@@ -56,7 +56,7 @@ namespace Eudora.Net.GUI
                     cbx_Default.IsChecked = true;
                     cbx_Default.IsEnabled = false;
                 }
-                else if(PersonalityManager.Collection.Count == 1)
+                else if(PersonalityManager.Datastore.Data.Count == 1)
                 {
                     personality.MakeDefault();
                     cbx_Default.IsChecked = true;
