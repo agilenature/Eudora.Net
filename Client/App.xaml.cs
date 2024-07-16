@@ -122,7 +122,7 @@ namespace Eudora.Net
         /// On first run, show the user the welcome & initial options dialog
         /// Save the user's choices to the settings
         /// </summary>
-        private void HandleFirstRun()
+        private bool HandleFirstRun()
         {
             if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete)
             {
@@ -130,13 +130,14 @@ namespace Eudora.Net
                 var result = dlg.ShowDialog();
                 if (result is null || result == false)
                 {
-                    Application.Current.Shutdown();
-                    return;
+                    return false;
                 }
 
                 Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete = true;
                 Eudora.Net.Properties.Settings.Default.Save();
             }
+
+            return true;
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -148,8 +149,13 @@ namespace Eudora.Net
 
             InstallThemes();
             InstallStyles();
-            HandleFirstRun();
-            //InitDataStore();
+
+            // Inital options upon first run
+            if(HandleFirstRun() == false)
+            {
+                Shutdown();
+                return;
+            }
 
             // Get the WebView2 cache going
             InitWebviewOptionsAndQueue();
@@ -165,11 +171,15 @@ namespace Eudora.Net
             BrowserSettings.Instance.Startup();
             EudoraStatistics.Startup();
 
+            // Load the main window
             GUI.MainWindow.Instance = new GUI.MainWindow();
-            //ShutdownMode = ShutdownMode.OnLastWindowClose;
             MainWindow = GUI.MainWindow.Instance;
             MainWindow.Show();
+
+            // Set the theme
             ThemeManager.SetTheme(Eudora.Net.Properties.Settings.Default.UxTheme);
+            
+            // Change shutdown mode to close when the main window closes
             ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 

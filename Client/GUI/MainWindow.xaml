@@ -107,27 +107,34 @@
 
             <!-- HELP menu -->
             <MenuItem x:Name="Menu_Help" Header="_Help">
+                <MenuItem x:Name="Menu_Help_Contents" Header="Contents" Click="Menu_Help_Contents_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Help_Feedback" Header="Submit feedback about Eudora.Net" Click="Menu_Help_Feedback_Click"/>
+                <Separator/>
                 <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
             </MenuItem>
             
         </Menu>
 
         <!--Main Toolbar-->
+        <Border Grid.Row="1" Background="{DynamicResource ControlNormalBrushKey}"/>
         <StackPanel x:Name="MainToolBar"
                     Grid.Row="1"
                     x:FieldModifier="public"
                     Orientation="Horizontal"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="10,0,0,0">
+                    Margin="10,0,0,0"
+                    Background="Transparent">
 
             <StackPanel.Resources>
 
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="Margin" Value="2,0,2,0"/>
                     <Setter Property="Width" Value="32"/>
                     <Setter Property="Height" Value="32"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
                 </Style>
                 <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
                     <Setter Property="Margin" Value="5,0,5,0"/>
@@ -136,17 +143,17 @@
             </StackPanel.Resources>
 
             <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_10.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/trash.png"/>
             </Button>
 
             <Separator/>
 
             <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_21.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/inbox.png"/>
             </Button>
 
             <Button x:Name="btn_Outbox" ToolTip="Outbox" Click="btn_Outbox_Click" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_32.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/outbox.png"/>
             </Button>
 
             <Separator/>
@@ -158,19 +165,19 @@
             <Separator/>
             
             <Button x:Name="btn_NewMsg" ToolTip="New Message" Click="btn_NewMsg_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_54.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/envelope.png"/>
             </Button>
 
             <Button x:Name="btn_Reply" x:FieldModifier="public" ToolTip="Reply" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_61.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/reply.png"/>
             </Button>
 
             <Button x:Name="btn_ReplyAll" x:FieldModifier="public" ToolTip="Reply To All" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_0.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/reply_all.png"/>
             </Button>
 
             <Button x:Name="btn_Forward" x:FieldModifier="public" ToolTip="Forward" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_1.png"/>
+                <Image Source="pack://application:,,,/GUI/theme/images/forward.png"/>
             </Button>
 
             <Separator/>

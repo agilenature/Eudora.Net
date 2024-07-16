@@ -150,30 +150,29 @@ namespace Eudora.Net.GUI
 
             // Enable the main menu items that are always active
 
+            // File
+            Menu_File.IsEnabled = true;
+            Menu_File_Exit.IsEnabled = true;
+
+            // Mailboxes
+            Menu_Mailboxes.IsEnabled = true;
+            Menu_Mailboxes.EnableAllSubitems();
+
+            // Tools
+            Menu_Tools.IsEnabled = true;
+            Menu_Tools.EnableAllSubitems();
+
+            // Help
+            Menu_Help.IsEnabled = true;
+            Menu_Help.EnableAllSubitems();
+
 
             // Now selectively enable based on active view type
-            
+
             // No view is active
             if (MDI.ActiveMdiChild is null)
             {
                 /* Main Menu */
-
-                // File
-                Menu_File.IsEnabled = true;
-                Menu_File_Exit.IsEnabled = true;
-
-                // Mailboxes
-                Menu_Mailboxes.IsEnabled = true;
-                Menu_Mailboxes.EnableAllSubitems();
-
-                // Tools
-                Menu_Tools.IsEnabled = true;
-                Menu_Tools.EnableAllSubitems();
-
-                // Help
-                Menu_Help.IsEnabled = true;
-                Menu_Help_About.IsEnabled = true;
-
 
                 /* Main Toolbar */
 
@@ -196,23 +195,6 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
-
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
@@ -228,23 +210,6 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
-
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
@@ -259,22 +224,6 @@ namespace Eudora.Net.GUI
                 else if(t == typeof(uc_CombinedMailboxView))
                 {
                     /* Main Menu */
-
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
 
 
                     /* Main Toolbar */
@@ -305,17 +254,6 @@ namespace Eudora.Net.GUI
                         Menu_Edit.EnableAllSubitems();
                     }
 
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
 
 
                     /* Main Toolbar */
@@ -333,22 +271,6 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
 
                     /* Main Toolbar */
 
@@ -365,23 +287,6 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
-
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
@@ -396,22 +301,6 @@ namespace Eudora.Net.GUI
                 else if(t == typeof(uc_OptionsView))
                 {
                     /* Main Menu */
-
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
 
 
                     /* Main Toolbar */
@@ -429,22 +318,6 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
 
                     /* Main Toolbar */
 
@@ -460,22 +333,6 @@ namespace Eudora.Net.GUI
                 else if(t == typeof(uc_ServicesView))
                 {
                     /* Main Menu */
-
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
 
 
                     /* Main Toolbar */
@@ -493,25 +350,9 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
                     // Edit
                     Menu_Edit.IsEnabled = true;
                     Menu_Edit.EnableAllSubitems();
-
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
 
 
                     /* Main Toolbar */
@@ -529,29 +370,12 @@ namespace Eudora.Net.GUI
                 {
                     /* Main Menu */
 
-                    // File
-                    Menu_File.IsEnabled = true;
-                    Menu_File_Exit.IsEnabled = true;
-
                     // Edit
                     Menu_Edit.IsEnabled = true;
                     Menu_Edit.EnableAllSubitems();
 
-                    // Mailboxes
-                    Menu_Mailboxes.IsEnabled = true;
-                    Menu_Mailboxes.EnableAllSubitems();
-
-                    // Tools
-                    Menu_Tools.IsEnabled = true;
-                    Menu_Tools.EnableAllSubitems();
-
-                    // Help
-                    Menu_Help.IsEnabled = true;
-                    Menu_Help_About.IsEnabled = true;
-
 
                     /* Main Toolbar */
-
                     btn_Inbox.IsEnabled = true;
                     btn_Outbox.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
@@ -1144,7 +968,23 @@ namespace Eudora.Net.GUI
             ShowBrowserView();
         }
 
-        
+        private void Menu_Help_Feedback_Click(object sender, RoutedEventArgs e)
+        {
+            dlg_SubmitFeedback dlg = new();
+            if(dlg.ShowDialog() == false)
+            {
+                return;
+            }
+
+            IssueReporter.ReportFeedback(dlg.Feedback);
+        }
+
+        private void Menu_Help_Contents_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
 
 

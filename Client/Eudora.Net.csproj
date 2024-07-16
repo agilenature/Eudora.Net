@@ -491,6 +491,14 @@
     <None Remove="GUI\res\images\tb32\tb32_97.png" />
     <None Remove="GUI\res\images\tb32\tb32_98.png" />
     <None Remove="GUI\res\images\tb32\tb32_99.png" />
+    <None Remove="GUI\theme\images\envelope.png" />
+    <None Remove="GUI\theme\images\forward.png" />
+    <None Remove="GUI\theme\images\inbox.png" />
+    <None Remove="GUI\theme\images\mailbox.png" />
+    <None Remove="GUI\theme\images\outbox.png" />
+    <None Remove="GUI\theme\images\reply.png" />
+    <None Remove="GUI\theme\images\reply_all.png" />
+    <None Remove="GUI\theme\images\trash.png" />
     <None Remove="GUI\theme\symbols\dark\add.png" />
     <None Remove="GUI\theme\symbols\dark\add_attachment.png" />
     <None Remove="GUI\theme\symbols\dark\add_image.png" />
@@ -773,6 +781,30 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\logos\BigIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\envelope.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\inbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\mailbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\outbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\reply.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\reply_all.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\trash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\theme\symbols\dark\add.png">
