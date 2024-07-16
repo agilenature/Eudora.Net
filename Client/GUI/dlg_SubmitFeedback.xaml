@@ -1,0 +1,84 @@
+﻿<Window x:Class="Eudora.Net.GUI.dlg_SubmitFeedback"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eudora.Net.GUI"
+        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+        mc:Ignorable="d"
+        Title="Eudora.Net: Submit Feedback" 
+        Width="600"
+        Height="350" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize" 
+        ShowInTaskbar="False">
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
+                   TextWrapping="Wrap" HorizontalAlignment="Center">
+            Use this form to submit whatever feedback you like to the develpoment team.
+            We welcome all feedback:
+            suggestions, bug reports, feature requests, compliments, dessert recipes, etc.
+        </TextBlock>
+
+        <Border Grid.Row="2" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>
+
+        <TextBox x:Name="tb_Feedback" Grid.Row="3" Grid.ColumnSpan="5" Margin="5"
+                 TextWrapping="Wrap" AcceptsReturn="True" SpellCheck.IsEnabled="True"
+                 BorderThickness="0"
+                 Text="{Binding Feedback}">
+        </TextBox>
+
+        <Border Grid.Row="4" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>
+
+        <Button x:Name="btn_OK" Grid.Row="5" Grid.Column="3"
+                Style="{DynamicResource DialogMainButton}"
+                IsDefault="True"
+                Click="btn_OK_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <themer:DynamicImage VerticalAlignment="Center" SymbolName="Check"/>
+                    <TextBlock VerticalAlignment="Center" Text="Send"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <Button x:Name="btn_Cancel" Grid.Row="5" Grid.Column="1"
+                Style="{DynamicResource DialogMainButton}"
+                IsCancel="True"
+                Click="btn_Cancel_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <themer:DynamicImage VerticalAlignment="Center" SymbolName="Cancel"/>
+                    <TextBlock VerticalAlignment="Center" Text="Cancel"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
+        <!--Buttons Panel-->
+        
+
+
+    </Grid>
+    
+</Window>

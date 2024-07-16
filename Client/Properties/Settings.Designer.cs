@@ -146,12 +146,12 @@ namespace Eudora.Net.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AllowReporting {
+        public bool EnableErrorReporting {
             get {
-                return ((bool)(this["AllowReporting"]));
+                return ((bool)(this["EnableErrorReporting"]));
             }
             set {
-                this["AllowReporting"] = value;
+                this["EnableErrorReporting"] = value;
             }
         }
     }

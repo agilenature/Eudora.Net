@@ -109,6 +109,11 @@ namespace Eudora.Net.Core
                 }
             }
             NewEvent(LogEvent.EventCategory.Warning, message);
+
+            if(Eudora.Net.Properties.Settings.Default.EnableErrorReporting)
+            {
+                IssueReporter.ReportException(ex);
+            }
         }
 
         public static void DumpToFile()

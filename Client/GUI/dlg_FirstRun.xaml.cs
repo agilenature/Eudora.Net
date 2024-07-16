@@ -40,6 +40,15 @@ namespace Eudora.Net.GUI
                 typeof(dlg_FirstRun), 
                 new PropertyMetadata(string.Empty, OnDataStoreChanged));
 
+        private static void OnDataStoreChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is dlg_FirstRun dlg)
+            {
+                Properties.Settings.Default.DataStoreRoot = dlg.DataStore;
+                Properties.Settings.Default.Save();
+            }
+        }
+
 
         public WpfThemer.Theme CurrentTheme
         {
@@ -55,29 +64,33 @@ namespace Eudora.Net.GUI
                 new PropertyMetadata(ThemeManager.ActiveTheme));
 
 
-        public bool AllowReporting
+        public bool EnableReporting
         {
-            get { return (bool)GetValue(AllowReportingProperty); }
-            set { SetValue(AllowReportingProperty, value); }
+            get { return (bool)GetValue(EnableReportingProperty); }
+            set { SetValue(EnableReportingProperty, value); }
         }
 
-        public static readonly DependencyProperty AllowReportingProperty =
+        public static readonly DependencyProperty EnableReportingProperty =
             DependencyProperty.Register(
-                "AllowReporting", 
+                "EnableReporting", 
                 typeof(bool), 
                 typeof(dlg_FirstRun),
-                new PropertyMetadata(false));
+                new PropertyMetadata(false, OnEnableReportingChanged));
 
-        private int CurrentPageIndex = 0;
-
-        private static void OnDataStoreChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnEnableReportingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is dlg_FirstRun dlg)
             {
-                Properties.Settings.Default.DataStoreRoot = dlg.DataStore;
+                Properties.Settings.Default.EnableErrorReporting = dlg.EnableReporting;
                 Properties.Settings.Default.Save();
             }
         }
+
+        private int CurrentPageIndex = 0;
+
+        
+
+        
 
         public dlg_FirstRun()
         {

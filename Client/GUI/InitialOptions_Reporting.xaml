@@ -13,16 +13,28 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-           FontWeight="Bold" FontSize="16">
+        <TextBlock  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontWeight="Bold" FontSize="16">
             Bug reporting and feedback
         </TextBlock>
 
-        <TextBlock Grid.Row="1">
-            
+        <TextBlock Grid.Row="1" TextWrapping="Wrap">
+            To help us improve Eudora.Net, errors can be automatically and anonymously reported to the developers.
+            <LineBreak/>
+            <LineBreak/>
+            Absolutely no personal information is collected or sent. If an exception (error) occurs, only the
+            exception message and stack trace are sent. No information about you, your computer, or your location is
+            collected or transmitted.
+            <LineBreak/>
+            <LineBreak/>
+            By default, exception reporting is turned off. However, you can enable it by checking the box below.
+            You can also toggle the setting at any time in the settings screen.
         </TextBlock>
+
+        <CheckBox Grid.Row="2" Margin="10,10,10,10" Content="Enable exception reporting" IsChecked="{Binding Path=EnableReporting}"/>
 
     </Grid>
     
