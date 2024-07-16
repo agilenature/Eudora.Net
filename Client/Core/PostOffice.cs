@@ -701,7 +701,7 @@ namespace Eudora.Net.Core
             }
 
             // Check this message against each of the existing filters
-            foreach (EmailFilter filter in FilterManager.Collection)
+            foreach (EmailFilter filter in FilterManager.Datastore.Data)
             {
                 var result = await filter.AppliesToMessage(message);
                 if (result)

@@ -1,8 +1,7 @@
 ﻿using Eudora.Net.Core;
+using SQLite;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
 
 namespace Eudora.Net.Data
 {
@@ -40,35 +39,51 @@ namespace Eudora.Net.Data
         ////////////////////////////////////////////////////////////////
 
 
+        ////////////////////////////////////////////////////////////////
+        #region Fields
+        ////////////////////////////////////////////////////////////////
+
+        private Guid _Id = Guid.NewGuid();
+        private string _Name = string.Empty;
+        private UInt32 _Priority = 0;
+        private EmailSearch.EmailSearchAtom _Atom = new();
+        private EmailFilterAction _Action = new();
+
+        ////////////////////////////////////////////////////////////////
+        #endregion Fields
+        ////////////////////////////////////////////////////////////////
+
+
 
         ////////////////////////////////////////////////////////////////
         #region Properties
         ////////////////////////////////////////////////////////////////
 
-        public static readonly string extension = ".flt";
+        [PrimaryKey]
+        public Guid Id
+        {
+            get => _Id;
+            set => SetField(ref _Id, value, nameof(Id));
+        }
 
-        private string _Name = string.Empty;
         public string Name
         {
             get => _Name;
             set => SetField(ref _Name, value, nameof(Name));
         }
 
-        private UInt32 _Priority = 0;
         public UInt32 Priority
         {
             get => _Priority;
             set => SetField(ref _Priority, value, nameof(Priority));
         }
-
-        private EmailSearch.EmailSearchAtom _Atom = new();
+        
         public EmailSearch.EmailSearchAtom Atom
         {
             get => _Atom;
             set => SetField(ref _Atom, value, nameof(Atom));
         }
-
-        private EmailFilterAction _Action = new();
+        
         public EmailFilterAction Action
         {
             get => _Action;
@@ -145,129 +160,33 @@ namespace Eudora.Net.Data
 
 
 
-    public static class FilterManager
+    internal static class FilterManager
     {
-        private static readonly string DataRoot = string.Empty;
-        private static object Locker;
-
-        public static SortableObservableCollection<EmailFilter> Collection { get; private set; } = [];
+        public static DatastoreBase<EmailFilter> Datastore;
 
         static FilterManager()
         {
-            Locker = new();
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "Filters");
-            IoUtil.EnsureFolder(DataRoot);
+            Datastore = new("Data", "Filters", "Filters");
         }
 
         public static void Startup()
         {
-            Load();
+            try
+            {
+                Datastore.Open();
+                Datastore.Load();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static void Shutdown()
         {
-
-        }
-
-        private static void Filter_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is EmailFilter filter)
-            {
-                Save(filter);
-            }
-        }
-
-        private static string MakeFilename(string name)
-        {
-            return string.Format("{0}{1}", name, EmailFilter.extension);
-        }
-
-        private static string MakeFullPath(string name)
-        {
-            return string.Format("{0}{1}{2}", DataRoot, name, EmailFilter.extension);
-        }
-
-        public static EmailFilter New(string name)
-        {
-            EmailFilter filter = new() { Name  = name };
-            filter.PropertyChanged += Filter_PropertyChanged;
-            Collection.Add(filter);
-            Save(filter);
-            return filter;
-        }
-
-        public static void Add(EmailFilter filter)
-        {
-            Collection.Add(filter);
-            Save(filter);
-        }
-
-        public static void Remove(EmailFilter filter)
-        {
-            Collection.Remove(filter);
-
             try
             {
-                string fullPath = MakeFullPath(filter.Name);
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public static bool Contains(string name)
-        {
-            if (Collection.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
-            return false;
-        }
-
-        private static void Load()
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", EmailFilter.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var filter = JsonSerializer.Deserialize<EmailFilter>(raw);
-                        if (filter is not null)
-                        {
-                            Collection.Add(filter);
-                            filter.PropertyChanged += Filter_PropertyChanged;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public static void Save(EmailFilter filter)
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    string fullPath = MakeFullPath(filter.Name);
-                    string json = JsonSerializer.Serialize<EmailFilter>(filter, IoUtil.JsonWriterOptions);
-                    File.WriteAllText(fullPath, json);
-                }
+                Datastore.Close();
             }
             catch (Exception ex)
             {
@@ -278,14 +197,36 @@ namespace Eudora.Net.Data
         public static EmailFilter New()
         {
             EmailFilter filter = new();
-            Collection.Add(filter);
-            Save(filter);
+            Datastore.Add(filter);
             return filter;
+        }
+
+        public static EmailFilter New(string name)
+        {
+            EmailFilter filter = new() { Name  = name };
+            Datastore.Add(filter);
+            return filter;
+        }
+
+        public static void Add(EmailFilter filter)
+        {
+            Datastore.Add(filter);
+        }
+
+        public static void Remove(EmailFilter filter)
+        {
+            Datastore.Remove(filter);
+        }
+
+        public static bool Contains(string name)
+        {
+            if (Datastore.Data.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
+            return false;
         }
 
         public static void Sort()
         {
-            Collection.Sort(i => i.Priority);
+            Datastore.Data.Sort(i => i.Priority);
         }
     }
 

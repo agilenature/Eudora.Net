@@ -1,6 +1,5 @@
 ﻿using Eudora.Net.Core;
 using SQLite;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -16,7 +15,7 @@ namespace Eudora.Net.Data
         protected string DbName { get; set; } = string.Empty;
         protected string DbPath { get; set; } = string.Empty;
         protected SQLiteConnection DB { get; private set; } = default;
-        public ObservableCollection<T> Data { get; private set; } = [];
+        public SortableObservableCollection<T> Data { get; private set; } = [];
 
 
         public DatastoreBase(string folder, string? subfolder, string name)

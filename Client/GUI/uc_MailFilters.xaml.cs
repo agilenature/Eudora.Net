@@ -82,7 +82,7 @@ namespace Eudora.Net.GUI
 
         private void ConnectUX() 
         {
-            dg_Filters.ItemsSource = FilterManager.Collection;
+            dg_Filters.ItemsSource = FilterManager.Datastore.Data;
 
             //cb_Query.ItemsSource = Core.EmailSearchEngine.QueryKeys;
 
