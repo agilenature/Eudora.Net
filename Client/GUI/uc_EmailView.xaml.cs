@@ -144,7 +144,7 @@ namespace Eudora.Net.GUI
             cb_Priority.ItemsSource = Enum.GetValues(typeof(PostOffice.eMailPriority));
             cb_Priority.SelectedIndex = 2; // Index 2: Value: Normal
 
-            cb_Signature.ItemsSource = SignatureManager.Collection;
+            cb_Signature.ItemsSource = SignatureManager.Datastore.Data;
 
             cb_Stationery.ItemsSource = StationeryManager.Collection;
         }

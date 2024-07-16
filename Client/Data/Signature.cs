@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Eudora.Net.Core;
+using SQLite;
 
 namespace Eudora.Net.Data
 {
@@ -36,19 +37,35 @@ namespace Eudora.Net.Data
 
 
         ///////////////////////////////////////////////////////////
+        #region Fields
+        /////////////////////////////
+
+        private Guid _Id = Guid.NewGuid();
+        private string _Name = string.Empty;
+        private string _Content = string.Empty;
+
+        /////////////////////////////
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
+
+        ///////////////////////////////////////////////////////////
         #region Properties
         /////////////////////////////
 
-        public static readonly string extension = ".sig";
+        [PrimaryKey]
+        public Guid Id
+        {
+            get => _Id;
+            set => SetField(ref _Id, value, nameof(Id));
+        }
 
-        private string _Name = string.Empty;
         public string Name
         {
             get => _Name;
             set => SetField(ref _Name, value, nameof(Name));
         }
-
-        private string _Content = string.Empty;
+        
         public string Content
         {
             get => _Content;
@@ -70,106 +87,21 @@ namespace Eudora.Net.Data
         }
     }
 
-    public static class SignatureManager
+    internal static class SignatureManager
     {
-        private static readonly string DataRoot = string.Empty;
-        private static object Locker;
-
-        public static ObservableCollection<Signature> Collection { get; private set; } = [];
+        public static DatastoreBase<Signature> Datastore;
 
         static SignatureManager()
         {
-            Locker = new();
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "Signatures");
-            IoUtil.EnsureFolder(DataRoot);
+            Datastore = new("Data", "Signatures", "Signatures");
         }
 
         public static void Startup()
         {
-            Load();
-        }
-
-        public static void Shutdown()
-        {
-            
-        }
-
-        private static void Signature_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is Signature signature)
-            {
-                Save(signature);
-            }
-        }
-
-        private static string MakeFilename(string name)
-        {
-            return $@"{name}{Signature.extension}";
-        }
-
-        private static string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
-        }
-
-        public static Signature New(string name)
-        {
-            Signature signature = new() { Name = name };
-            signature.PropertyChanged += Signature_PropertyChanged;
-            Collection.Add(signature);
-            Save(signature);
-            return signature;
-        }
-
-        public static void Remove(Signature signature)
-        {
-            Collection.Remove(signature);
-
             try
             {
-                string fullPath = MakeFullPath(signature.Name);
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public static bool Contains(string name)
-        {
-            if(Collection.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
-            return false;
-        }
-
-        private static void Load()
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", Signature.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        Signature signature = new()
-                        {
-                            Name = Path.GetFileNameWithoutExtension(file.Name),
-                            Content = File.ReadAllText(file.FullName)
-                        };
-                        Collection.Add(signature);
-                        signature.PropertyChanged += Signature_PropertyChanged;
-                    }
-                }
+                Datastore.Open();
+                Datastore.Load();
             }
             catch (Exception ex)
             {
@@ -177,23 +109,35 @@ namespace Eudora.Net.Data
             }
         }
 
-        public static void Save(Signature signature)
+        public static void Shutdown()
         {
             try
             {
-                lock (Locker)
-                {
-                    string fullPath = MakeFullPath(signature.Name);
-                    File.WriteAllText(fullPath, signature.Content);
-                }
+                Datastore.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
         }
+
+        public static Signature New(string name)
+        {
+            Signature signature = new() { Name = name };
+            Datastore.Add(signature);
+            return signature;
+        }
+
+        public static void Remove(Signature signature)
+        {
+            Datastore.Remove(signature);
+        }
+
+        public static bool Contains(string name)
+        {
+            if(Datastore.Data.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
+            return false;
+        }
+
     }
-
-
-    
 }

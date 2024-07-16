@@ -46,7 +46,7 @@ namespace Eudora.Net.GUI
             cb_Stationery.SelectedIndex = 0;
 
             // Combo box for signature selection
-            cb_Signature.ItemsSource = SignatureManager.Collection;
+            cb_Signature.ItemsSource = SignatureManager.Datastore.Data;
             cb_Signature.DisplayMemberPath = "Name";
             cb_Signature.SelectedIndex = 0;
         }

@@ -24,7 +24,7 @@ namespace Eudora.Net.GUI
         {
             cb_Signature.Items.Clear();
             cb_Signature.Items.Add(GHelpers.NullSelection);
-            foreach(var sig in SignatureManager.Collection)
+            foreach(var sig in SignatureManager.Datastore.Data)
             {
                 cb_Signature.Items.Add(sig.Name);
             }            

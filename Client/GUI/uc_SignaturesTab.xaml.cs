@@ -12,7 +12,7 @@ namespace Eudora.Net.GUI
         public uc_SignaturesTab()
         {
             InitializeComponent();
-            listbox.ItemsSource = SignatureManager.Collection;
+            listbox.ItemsSource = SignatureManager.Datastore.Data;
             listbox.SelectedIndex = 0;
             EnableButtons(false);
 
