@@ -444,7 +444,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[0].Name;
+                message.LabelName = LabelManager.Datastore.Data[0].Name;
             }
         }
 
@@ -453,7 +453,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[1].Name;
+                message.LabelName = LabelManager.Datastore.Data[1].Name;
             }
         }
 
@@ -462,7 +462,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[2].Name;
+                message.LabelName = LabelManager.Datastore.Data[2].Name;
             }
         }
 
@@ -471,7 +471,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[3].Name;
+                message.LabelName = LabelManager.Datastore.Data[3].Name;
             }
         }
 
@@ -480,7 +480,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[4].Name;
+                message.LabelName = LabelManager.Datastore.Data[4].Name;
             }
         }
 
@@ -489,7 +489,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[5].Name;
+                message.LabelName = LabelManager.Datastore.Data[5].Name;
             }
         }
 
@@ -498,7 +498,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 e.Handled = true;
-                message.LabelName = LabelManager.Collection[6].Name;
+                message.LabelName = LabelManager.Datastore.Data[6].Name;
             }
         }
 

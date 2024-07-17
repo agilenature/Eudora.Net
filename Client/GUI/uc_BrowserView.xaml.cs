@@ -38,7 +38,7 @@ namespace Eudora.Net.GUI
             Browser.EnsureCoreWebView2Async(Webview2Options.Environment);
 
             DataContext = this;
-            datagrid.DataContext = BrowserSettings.Bookmarks;
+            datagrid.DataContext = BrowserData.Bookmarks;
             datagrid.SelectedIndex = -1;
         }
 
@@ -76,7 +76,7 @@ namespace Eudora.Net.GUI
         {
             // Bind bookmarks to the Bookmarks bar
             BookmarksBar.Browser = this;
-            BookmarksBar.Toolbar.ItemsSource = BrowserSettings.Bookmarks;
+            BookmarksBar.Toolbar.ItemsSource = BrowserData.Bookmarks.Data;
 
             // Bind browser events to be handled
             Browser.CoreWebView2.ProcessFailed += CoreWebView2_ProcessFailed;
@@ -214,15 +214,11 @@ namespace Eudora.Net.GUI
             // If neither have been specified, we'll turn it into a query for the default search engine
             if (!hasProtocol && !hasHost)
             {
-                BrowserSearchEngine searchEngine = BrowserSettings.SearchEngines.First();
-                if(BrowserSettings.Instance.ActiveSearchEngine != null)
-                {
-                    searchEngine = BrowserSettings.Instance.ActiveSearchEngine;
-                }
+                BrowserSearchEngine? searchEngine = BrowserData.Instance.ActiveSearchEngine;
 
                 uri = uri.Replace(" ", "+");
                 uri = string.Format("{0}{1}",
-                                    searchEngine.SearchString,
+                                    searchEngine?.SearchString,
                                     uri);
                 return uri;
             }
@@ -263,7 +259,7 @@ namespace Eudora.Net.GUI
                 Url = Browser.Source.AbsoluteUri,
                 DisplayString = Browser.CoreWebView2.DocumentTitle
             };
-            BrowserSettings.Bookmarks.Add(bookmark);
+            BrowserData.Bookmarks.Add(bookmark);
         }
 
         private void btn_Settings_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -289,7 +285,7 @@ namespace Eudora.Net.GUI
             var bookmark = ((FrameworkElement)sender).DataContext as BrowserBookmark;
             if(bookmark is not null)
             {
-                BrowserSettings.Bookmarks.Remove(bookmark);
+                BrowserData.Bookmarks.Remove(bookmark);
             }
         }
 

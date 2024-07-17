@@ -38,12 +38,12 @@
 
         <!--Browser Toolbar area-->
         <Button x:Name="btn_Back" Grid.Row="0" Grid.Column="0"
-                    Width="24" Height="24"
+                    Width="24" Height="24" BorderThickness="2"
                     ToolTip="Go Back"
                     Click="btn_Back_Click"
                     IsEnabled="{Binding CanGoBack, ElementName=Browser}">
             <Button.Content>
-                <themer:DynamicImage SymbolName="arrow_back" Source="pack://application:,,,/GUI/res/images/new/leftback.png"/>
+                <themer:DynamicImage SymbolName="arrow_back"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -53,12 +53,12 @@
         </Button>
 
         <Button x:Name="btn_Forward" Grid.Row="0" Grid.Column="1"
-                    Width="24" Height="24"
+                    Width="24" Height="24" BorderThickness="2"
                     ToolTip="Go Forward"
                     Click="btn_Forward_Click"
                     IsEnabled="{Binding CanGoForward, ElementName=Browser}">
             <Button.Content>
-                <themer:DynamicImage SymbolName="arrow_forward" Source="pack://application:,,,/GUI/res/images/new/rightnext.png"/>
+                <themer:DynamicImage SymbolName="arrow_forward"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -68,11 +68,11 @@
         </Button>
 
         <Button x:Name="btn_Refresh" Grid.Row="0" Grid.Column="2"
-                    Width="24" Height="24"
+                    Width="24" Height="24" BorderThickness="2"
                     ToolTip="Refresh"
                     Click="btn_Refresh_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="refresh" Source="pack://application:,,,/GUI/res/images/new/refresh.png"/>
+                <themer:DynamicImage SymbolName="refresh"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -96,11 +96,11 @@
         </TextBox>
 
         <Button x:Name="btn_Bookmark" Grid.Row="0" Grid.Column="4" 
-                    Width="24" Height="24"
+                    Width="24" Height="24" BorderThickness="2"
                     ToolTip="Add Bookmark"
                     Click="btn_Bookmark_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="star" Source="pack://application:,,,/GUI/res/images/new/star.png"/>
+                <themer:DynamicImage SymbolName="star"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -110,12 +110,12 @@
         </Button>
 
         <ToggleButton x:Name="btn_ManageBookmarks" Grid.Row="0" Grid.Column="5"
-                      Width="24" Height="24"
+                      Width="24" Height="24" BorderThickness="2"
                       ToolTip="Manage Bookmarks"
                       Checked="btn_ManageBookmarks_Checked"
                       Unchecked="btn_ManageBookmarks_Unchecked">
             <ToggleButton.Content>
-                <themer:DynamicImage SymbolName="bookmarks" Source="pack://application:,,,/GUI/res/images/new/bookmarks.png"/>
+                <themer:DynamicImage SymbolName="bookmarks"/>
             </ToggleButton.Content>
             <ToggleButton.Resources>
                 <Style TargetType="Border">
@@ -125,11 +125,11 @@
         </ToggleButton>
 
         <Button x:Name="btn_Settings" Grid.Row="0" Grid.Column="6"
-                Width="24" Height="24"
+                Width="24" Height="24" BorderThickness="2"
                 ToolTip="Settings"
                 Click="btn_Settings_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="settings" Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+                <themer:DynamicImage SymbolName="settings"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -193,7 +193,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <themer:DynamicImage SymbolName="delete" 
-                                                                 Source="pack://application:,,,/GUI/res/images/new/delete.png" Width="16" Height="16"/>
+                                                                 Width="16" Height="16"/>
                                             <TextBlock Text="Delete" Margin="5,0,0,0" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Button.Content>

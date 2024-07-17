@@ -1,11 +1,10 @@
-﻿using Eudora.Net.Core;
-using SQLite;
+﻿using SQLite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Eudora.Net.Data
 {
-    public class BrowserBookmark : INotifyPropertyChanged
+    public class BrowserSearchEngine : INotifyPropertyChanged
     {
         ///////////////////////////////////////////////////////////
         #region INotifyPropertyChanged
@@ -39,10 +38,9 @@ namespace Eudora.Net.Data
         /////////////////////////////
 
         private Guid _Id = Guid.NewGuid();
-        private string _Url = string.Empty;
-        private string _DisplayString = string.Empty;
-        private Uri _IconImage = new("pack://application:,,,/GUI/res/images/new/bookmark.png");
-        private string _Tooltip = string.Empty;
+        private string _Name = string.Empty;
+        private string _SearchString = string.Empty;
+        private string _ImagePath = string.Empty;
 
         /////////////////////////////
         #endregion Fields
@@ -59,42 +57,37 @@ namespace Eudora.Net.Data
             get => _Id;
             set => SetField(ref _Id, value, nameof(Id));
         }
-        
-        public string Url
+
+        public string Name
         {
-            get => _Url;
-            set => SetField(ref _Url, value, nameof(Url));
+            get => _Name;
+            set => SetField(ref _Name, value, nameof(Name));
         }
         
-        public string DisplayString
+        public string SearchString
         {
-            get => _DisplayString;
-            set => SetField(ref _DisplayString, value, nameof(DisplayString));
+            get => _SearchString;
+            set => SetField(ref _SearchString, value, nameof(SearchString));
         }
         
-        public Uri IconImage
+        public string ImagePath
         {
-            get => _IconImage;
-            set => SetField(ref _IconImage, value, nameof(IconImage));
-        }
-        
-        public string Tooltip
-        {
-            get => $@"{DisplayString}{Environment.NewLine}{Url}";
+            get => _ImagePath;
+            set => SetField(ref _ImagePath, value, nameof(ImagePath));
         }
 
         /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
-        public BrowserBookmark()
+        public BrowserSearchEngine()
         { }
 
-        public BrowserBookmark(string url, string displayString, Uri iconImage)
+        public BrowserSearchEngine(string name, string searchString, string imagePath)
         {
-            Url = url;
-            DisplayString = displayString;
-            IconImage = iconImage;
+            Name = name;
+            SearchString = searchString;
+            ImagePath = imagePath;
         }
     }
 }
