@@ -1,4 +1,5 @@
 ﻿using Eudora.Net.Core;
+using Eudora.Net.ExtensionMethods;
 using SQLite;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ namespace Eudora.Net.Data
     /// <summary>
     /// 
     /// </summary>
-    internal class DatastoreBase<T> where T : class, INotifyPropertyChanged, new()
+    public class DatastoreBase<T> where T : class, INotifyPropertyChanged, new()
     {
         protected string DbFolder { get; set; } = string.Empty;
         protected string DbName { get; set; } = string.Empty;
@@ -132,6 +133,22 @@ namespace Eudora.Net.Data
             try
             {
                 Data.Add(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        /// <summary>
+        /// interface to my extension method to add only unique items to the underlying observable collection
+        /// </summary>
+        /// <param name="item"></param>
+        public void AddUnique(T item)
+        {
+            try
+            {
+                Data.AddUnique(item);
             }
             catch (Exception ex)
             {
