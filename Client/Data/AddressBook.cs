@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using Eudora.Net.Core;
+using SQLite;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
-using Eudora.Net.Core;
 
 namespace Eudora.Net.Data
 {
@@ -38,15 +37,18 @@ namespace Eudora.Net.Data
         /////////////////////////////
         #endregion INotifyPropertyChanged
         ///////////////////////////////////////////////////////////
-        
+
 
         ///////////////////////////////////////////////////////////
         #region Properties
         /////////////////////////////
 
-        public static readonly string extension = ".abk";
-        private readonly string DataRoot = string.Empty;
-        private object Locker = new();
+        [Ignore]
+        public DatastoreBase<Contact> Contacts { get; private set; }
+
+
+        [PrimaryKey]
+        public int Id { get; set; }
 
         private string _Title = string.Empty;
         public string Title
@@ -55,83 +57,49 @@ namespace Eudora.Net.Data
             set => SetField(ref _Title, value, nameof(Title));
         }
 
-        public ObservableCollection<Contact> Contacts { get; set; } = [];
-
         /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
+        public AddressBook()
+        {
+        }
+
         public AddressBook(string title)
         {
             _Title = title;
-            DataRoot = Path.Combine(AddressBookManager.DataRoot, Title);
-            IoUtil.EnsureFolder(DataRoot);
-        }
-
-        private void Contact_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is Contact contact)
-            {
-                Save(contact);
-            }
         }
 
         public void NewContact()
         {
             Contact contact = new() { AddressBookName = Title };
-            contact.PropertyChanged += Contact_PropertyChanged;
             Contacts.Add(contact);
-            Save(contact);
         }
 
         public void RemoveContact(Contact contact)
         {
             Contacts.Remove(contact);
-            Delete(contact);
         }
         
         public void Load()
         {
             try
             {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", Contact.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var contact = JsonSerializer.Deserialize<Contact>(raw);
-                        if (contact is not null)
-                        {
-                            Contacts.Add(contact);
-                            contact.PropertyChanged += Contact_PropertyChanged;
-                        }
-                    }
-                }
+                Contacts = new("Data", "AddressBooks", Title);
+                Contacts.Open();
+                Contacts.Load();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
         }
 
-        public void Save(Contact contact)
+        public void Close()
         {
             try
             {
-                lock (Locker)
-                {
-                    string fullPath = MakeFullPath(contact.Name);
-                    string json = JsonSerializer.Serialize<Contact>(contact, IoUtil.JsonWriterOptions);
-                    File.WriteAllText(fullPath, json);
-                }
+                Contacts.Close();
             }
             catch (Exception ex)
             {
@@ -143,172 +111,84 @@ namespace Eudora.Net.Data
         {
             try
             {
-                lock(Locker)
-                {
-                    Contacts.Remove(contact);
-                    string fullPath = MakeFullPath(contact.Name);
-                    File.Delete(fullPath);
-                }
+                Contacts.Remove(contact);
             }
             catch(Exception ex)
             {
                 Logger.LogException(ex);
             }
         }
-
-        private string MakeFilename(string name)
-        {
-            return string.Format("{0}{1}", name, Contact.extension);
-        }
-
-        private string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
-        }
-
-        private string MakeFolder(string name)
-        {
-            return Path.Combine(DataRoot, name);
-        }
     }
 
-    public static class AddressBookManager
+    internal static class AddressBookManager
     {
-        public static readonly string DataRoot = string.Empty;
-        private static object Locker;
-
-        public static ObservableCollection<AddressBook> Collection { get; private set; } = [];
+        public static DatastoreBase<AddressBook> Datastore;
 
         static AddressBookManager()
         {
-            Locker = new();
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "AddressBooks");
-            IoUtil.EnsureFolder(DataRoot);
+            Datastore = new("Data", "AddressBooks", "AddressBooks");
         }
 
         public static void Startup()
         {
-            Load();
+            try
+            {
+                Datastore.Open();
+                Datastore.Load();
+
+                foreach(AddressBook book in Datastore.Data)
+                {
+                    book.Load();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static void Shutdown()
         {
-
-        }
-
-        private static void AddressBook_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is AddressBook book)
+            try
             {
-                Save(book);
+                foreach (AddressBook book in Datastore.Data)
+                {
+                    book.Close();
+                }
+                Datastore.Close();
             }
-        }
-
-        private static string MakeFilename(string name)
-        {
-            return string.Format("{0}{1}", name, AddressBook.extension);
-        }
-
-        private static string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
-        }
-
-        private static string MakeFolder(string name)
-        {
-            return Path.Combine(DataRoot, name);
-        }
-
-        public static AddressBook? Get(string name)
-        {
-            return Collection.Where(i => i.Title.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         public static void New(string name)
         {
             AddressBook book = new(name);
+            book.Load();
             Add(book);
         }
 
         public static void Add(AddressBook book)
         {
-            Collection.Add(book);
-            Save(book);
+            Datastore.Data.Add(book);
         }
 
         public static void Remove(AddressBook book)
         {
-            Collection.Remove(book);
+            Datastore.Data.Remove(book);
+        }
 
-            try
-            {
-                string fullPath = MakeFullPath(book.Title);
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+        public static AddressBook? Get(string name)
+        {
+            return Datastore.Data.Where(i => i.Title.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
         }
 
         public static bool Contains(string title)
         {
-            if (Collection.Any(x => x.Title.Equals(title, StringComparison.CurrentCultureIgnoreCase))) return true;
+            if (Datastore.Data.Any(x => x.Title.Equals(title, StringComparison.CurrentCultureIgnoreCase))) return true;
             return false;
         }
-
-        private static void Load()
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", AddressBook.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var book = JsonSerializer.Deserialize<AddressBook>(raw);
-                        if (book is not null)
-                        {
-                            book.PropertyChanged += AddressBook_PropertyChanged;
-                            book.Load();
-                            Collection.Add(book);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public static void Save(AddressBook book)
-        {
-            try
-            {
-                lock (Locker)
-                {
-                    string fullPath = MakeFullPath(book.Title);
-                    string json = JsonSerializer.Serialize<AddressBook>(book, IoUtil.JsonWriterOptions);
-                    File.WriteAllText(fullPath, json);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
     }
-
 }

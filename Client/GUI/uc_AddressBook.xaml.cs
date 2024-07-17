@@ -17,7 +17,7 @@ namespace Eudora.Net.GUI
             // Disable Contact UX until a contact is selected
             DetailsGrid.IsEnabled = false;
 
-            lb_Books.ItemsSource = AddressBookManager.Collection;
+            lb_Books.ItemsSource = AddressBookManager.Datastore.Data;
         }
 
         private void Uc_AddressBook_Loaded(object sender, RoutedEventArgs e)
@@ -48,7 +48,7 @@ namespace Eudora.Net.GUI
         {
             if(lb_Books.SelectedItem is AddressBook book)
             {
-                lb_Contacts.ItemsSource = book.Contacts;
+                lb_Contacts.ItemsSource = book.Contacts.Data;
             }
         }
 

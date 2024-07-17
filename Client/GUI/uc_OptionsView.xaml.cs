@@ -1,5 +1,4 @@
-﻿using Eudora.Net.Core;
-using Eudora.Net.Data;
+﻿using Eudora.Net.Data;
 using Microsoft.Win32;
 using System.Windows;
 using WpfThemer;
@@ -23,20 +22,20 @@ namespace Eudora.Net.GUI
 
         private void Uc_OptionsView_Loaded(object sender, RoutedEventArgs e)
         {
-            cb_SearchEngine.ItemsSource = BrowserSettings.SearchEngines;
-            if (BrowserSettings.Instance.ActiveSearchEngine is null)
+            cb_SearchEngine.ItemsSource = BrowserData.SearchEngines.Data;
+            if (BrowserData.Instance.ActiveSearchEngine is null)
             {
                 cb_SearchEngine.SelectedIndex = 0;
                 return;
             }
-            cb_SearchEngine.SelectedIndex = BrowserSettings.SearchEngines.IndexOf(BrowserSettings.Instance.ActiveSearchEngine);
+            cb_SearchEngine.SelectedIndex = BrowserData.SearchEngines.Data.IndexOf(BrowserData.Instance.ActiveSearchEngine);
         }
 
         private void Cb_SearchEngine_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cb_SearchEngine.SelectedItem is BrowserSearchEngine bse)
             {
-                BrowserSettings.Instance.ActiveSearchEngine = bse;
+                BrowserData.Instance.ActiveSearchEngine = bse;
             }
         }
 

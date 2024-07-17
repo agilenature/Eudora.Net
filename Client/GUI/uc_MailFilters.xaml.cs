@@ -93,7 +93,7 @@ namespace Eudora.Net.GUI
 
             cb_Action.ItemsSource = EmailFilterActions.Actions;            
 
-            apar_LabelParam.ItemsSource = LabelManager.Collection;
+            apar_LabelParam.ItemsSource = LabelManager.Datastore.Data;
 
             apar_MailboxParam.ItemsSource = PostOffice.Instance.Mailboxes;
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SQLite;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
@@ -34,10 +35,9 @@ namespace Eudora.Net.Data
         #endregion INotifyPropertyChanged
         ///////////////////////////////////////////////////////////
 
-        [JsonIgnore]
-        public static readonly string extension = ".con";
 
-        [JsonIgnore]
+
+        [JsonIgnore, Ignore]
         public AddressBook? AddressBook
         {
             get { return AddressBookManager.Get(AddressBookName); }
