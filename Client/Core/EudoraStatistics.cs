@@ -75,7 +75,7 @@ namespace Eudora.Net.Core
 
         static EudoraStatistics()
         {
-            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, "Statistics");
+            DataRoot = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Data\Statistics");
             IoUtil.EnsureFolder(DataRoot);
             
             EmailTablePath = Path.Combine(DataRoot, EmailTableFilename);
