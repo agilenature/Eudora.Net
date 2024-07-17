@@ -81,6 +81,32 @@ namespace Eudora.Net.Data
             }
         }
 
+        public int Count()
+        {
+            try
+            {
+                return Data.Count;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return 0;
+            }
+        }
+
+        public T? First()
+        {
+            try
+            {
+                return Data.First();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return default;
+            }
+        }
+
         public void Open()
         {
             try
