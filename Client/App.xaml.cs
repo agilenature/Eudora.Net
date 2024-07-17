@@ -22,7 +22,6 @@ namespace Eudora.Net
         #region Properties
         /////////////////////////////
 
-        public static string DatastoreRoot { get; private set; } = string.Empty;
         public static string ApplicationName { get; } = "Eudora.Net";
 
         /////////////////////////////
@@ -168,11 +167,11 @@ namespace Eudora.Net
             AddressBookManager.Startup();
             PostOffice.Instance.Startup();
             EmailSearchEngine.Startup();
-            BrowserSettings.Instance.Startup();
+            BrowserData.Instance.Startup();
             EudoraStatistics.Startup();
 
             // Load the main window
-            GUI.MainWindow.Instance = new GUI.MainWindow();
+            GUI.MainWindow.Instance = new();
             MainWindow = GUI.MainWindow.Instance;
             MainWindow.Show();
 
@@ -182,26 +181,6 @@ namespace Eudora.Net
             // Change shutdown mode to close when the main window closes
             ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
-
-        //private void InitDataStore()
-        //{
-        //    DatastoreRoot = Eudora.Net.Properties.Settings.Default.DataStoreRoot;
-
-        //    if (!Eudora.Net.Properties.Settings.Default.FirstRunOptionsComplete ||
-        //        string.IsNullOrEmpty(DatastoreRoot) ||
-        //        string.IsNullOrWhiteSpace(DatastoreRoot))
-        //    {
-        //        // Default choices; user can override
-        //        string defaultStorage = Path.Combine(
-        //            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        //            ApplicationName);
-        //        Eudora.Net.Properties.Settings.Default.DataStoreRoot = defaultStorage;
-        //        DatastoreRoot = defaultStorage;
-                
-        //        DatastoreRoot = dlg.DataRoot;
-                
-        //    }
-        //}
 
         private async void InitWebviewOptionsAndQueue()
         {
@@ -214,10 +193,9 @@ namespace Eudora.Net
             Eudora.Net.Properties.Settings.Default.Save();
             PostOffice.Instance.Shutdown();
             //IconCache.Save();
-            BrowserSettings.Instance.Shutdown();
+            BrowserData.Instance.Shutdown();
             EudoraStatistics.Shutdown();
             TempFileManager.Shutdown();
         }
     }
-
 }
