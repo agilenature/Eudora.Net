@@ -28,7 +28,7 @@
                     ToolTip="Close event log"
                     Click="btn_EventLog_Click">
                 <Button.Content>
-                    <themer:DynamicImage SymbolName="close" Source="pack://application:,,,/GUI/res/images/new/close.png"/>
+                    <themer:DynamicImage SymbolName="close"/>
                 </Button.Content>
             </Button>
 
@@ -38,7 +38,7 @@
                     ToolTip="Copy event log"
                     Click="btn_Copy_Click">
                 <Button.Content>
-                    <themer:DynamicImage SymbolName="copy" Source="pack://application:,,,/GUI/res/images/new/copy.png"/>
+                    <themer:DynamicImage SymbolName="content_copy"/>
                 </Button.Content>
             </Button>
 
