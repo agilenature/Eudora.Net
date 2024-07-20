@@ -48,7 +48,7 @@ namespace Eudora.Net.GUI
         {
             if(lb_Books.SelectedItem is AddressBook book)
             {
-                lb_Contacts.ItemsSource = book.Contacts.Data;
+                lb_Contacts.ItemsSource = book.Datastore.Data;
             }
         }
 
@@ -72,12 +72,12 @@ namespace Eudora.Net.GUI
         /// <param name="e"></param>
         private void btn_NewBook_Click(object sender, RoutedEventArgs e)
         {
-            dlg_NewAddressBook dlg = new dlg_NewAddressBook();
-            dlg.ShowDialog();
+            dlg_NamePrompt dlg = new dlg_NamePrompt("Address Book");
             dlg.Owner = MainWindow.Instance;
-            if (dlg.DialogResult == true)
+            if (dlg.ShowDialog() == true)
             {
-                AddressBookManager.New(dlg.BookName);
+                AddressBookManager.New(dlg.ItemName);
+                lb_Books.SelectedIndex = lb_Books.Items.Count - 1;
             }
         }
 
@@ -99,6 +99,7 @@ namespace Eudora.Net.GUI
                 if (result == true)
                 {
                     AddressBookManager.Remove(book);
+                    lb_Books.SelectedIndex = lb_Books.Items.Count - 1;
                 }
             }
         }
@@ -113,6 +114,7 @@ namespace Eudora.Net.GUI
             if (lb_Books.SelectedItem is AddressBook book)
             {
                 book.NewContact();
+                lb_Contacts.SelectedIndex = lb_Contacts.Items.Count - 1;
             }
         }
 
@@ -135,6 +137,7 @@ namespace Eudora.Net.GUI
                     if (result == true)
                     {
                         book.Delete(contact);
+                        lb_Contacts.SelectedIndex = lb_Contacts.Items.Count - 1;
                     }
                 }
             }

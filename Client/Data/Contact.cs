@@ -35,12 +35,18 @@ namespace Eudora.Net.Data
         #endregion INotifyPropertyChanged
         ///////////////////////////////////////////////////////////
 
-
-
-        [JsonIgnore, Ignore]
+        [Ignore]
         public AddressBook? AddressBook
         {
             get { return AddressBookManager.Get(AddressBookName); }
+        }
+
+        private Guid _Id = Guid.NewGuid();
+        [PrimaryKey]
+        public Guid Id
+        {
+            get => _Id;
+            set => SetField(ref _Id, value, nameof(Id));
         }
 
         private string _AddressBookName = string.Empty;

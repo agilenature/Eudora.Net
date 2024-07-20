@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Eudora.Net.Data
 {
@@ -31,7 +32,7 @@ namespace Eudora.Net.Data
             }
 
             field = value;
-            //OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName);
         }
 
         /////////////////////////////
@@ -44,17 +45,22 @@ namespace Eudora.Net.Data
         /////////////////////////////
 
         [Ignore]
-        public DatastoreBase<Contact> Contacts { get; private set; }
+        public DatastoreBase<Contact> Datastore { get; private set; }
 
 
+        private Guid _Id = Guid.NewGuid();
         [PrimaryKey]
-        public int Id { get; set; }
-
-        private string _Title = string.Empty;
-        public string Title
+        public Guid Id
         {
-            get => _Title;
-            set => SetField(ref _Title, value, nameof(Title));
+            get => _Id;
+            set => SetField(ref _Id, value, nameof(Id));
+        }
+
+        private string _Name = "unnamed";
+        public string Name
+        {
+            get => _Name;
+            set => SetField(ref _Name, value, nameof(Name));
         }
 
         /////////////////////////////
@@ -65,29 +71,33 @@ namespace Eudora.Net.Data
         {
         }
 
-        public AddressBook(string title)
+        public AddressBook(string name)
         {
-            _Title = title;
+            Datastore = new("Data", "AddressBooks", name);
+            Name = name;
         }
 
         public void NewContact()
         {
-            Contact contact = new() { AddressBookName = Title };
-            Contacts.Add(contact);
+            Contact contact = new() { AddressBookName = Name };
+            Datastore.Add(contact);
         }
 
         public void RemoveContact(Contact contact)
         {
-            Contacts.Remove(contact);
+            Datastore.Remove(contact);
         }
         
         public void Load()
         {
             try
             {
-                Contacts = new("Data", "AddressBooks", Title);
-                Contacts.Open();
-                Contacts.Load();
+                if(Datastore is null)
+                {
+                    Datastore = new("Data", "AddressBooks", Name);
+                }
+                Datastore.Open();
+                Datastore.Load();
             }
             catch (Exception ex)
             {
@@ -99,7 +109,7 @@ namespace Eudora.Net.Data
         {
             try
             {
-                Contacts.Close();
+                Datastore.Close();
             }
             catch (Exception ex)
             {
@@ -111,7 +121,7 @@ namespace Eudora.Net.Data
         {
             try
             {
-                Contacts.Remove(contact);
+                Datastore.Remove(contact);
             }
             catch(Exception ex)
             {
@@ -123,6 +133,7 @@ namespace Eudora.Net.Data
     internal static class AddressBookManager
     {
         public static DatastoreBase<AddressBook> Datastore;
+        public static ObservableCollection<AddressBook> Data => Datastore.Data;
 
         static AddressBookManager()
         {
@@ -166,28 +177,28 @@ namespace Eudora.Net.Data
         public static void New(string name)
         {
             AddressBook book = new(name);
-            book.Load();
             Add(book);
+            book.Load();            
         }
 
         public static void Add(AddressBook book)
         {
-            Datastore.Data.Add(book);
+            Datastore.Add(book);
         }
 
         public static void Remove(AddressBook book)
         {
-            Datastore.Data.Remove(book);
+            Datastore.Remove(book);
         }
 
         public static AddressBook? Get(string name)
         {
-            return Datastore.Data.Where(i => i.Title.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            return Datastore.Data.Where(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
         }
 
-        public static bool Contains(string title)
+        public static bool Contains(string name)
         {
-            if (Datastore.Data.Any(x => x.Title.Equals(title, StringComparison.CurrentCultureIgnoreCase))) return true;
+            if (Datastore.Data.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
             return false;
         }
     }

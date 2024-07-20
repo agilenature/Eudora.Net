@@ -50,7 +50,7 @@
                         Click="btn_DeleteBook_Click"
                         ToolTip="Delete Address Book">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
+                        <themer:DynamicImage SymbolName="delete"/>
                     </Button.Content>
                 </Button>
                 
@@ -60,7 +60,7 @@
                         Click="btn_NewBook_Click"
                         ToolTip="New Address Book">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
+                        <themer:DynamicImage SymbolName="add"/>
                     </Button.Content>
                 </Button>
                 
@@ -79,7 +79,7 @@
                             <Image Width="16"
                                    Height="16"
                                    Source="pack://application:,,,/GUI/res/images/tb32/tb32_12.png"/>
-                            <TextBlock Text="{Binding Path=Title}"/>
+                            <TextBlock Text="{Binding Path=Name}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -97,7 +97,7 @@
                         Click="btn_DeleteContact_Click"
                         ToolTip="Delete Contact">
                     <Button.Content>
-                        <themer:DynamicImage  SymbolName="delete" Source="pack://application:,,,/GUI/res/images/new/delete.png"/>
+                        <themer:DynamicImage  SymbolName="delete"/>
                     </Button.Content>
                 </Button>
                 
@@ -107,7 +107,7 @@
                         Click="btn_NewContact_Click"
                         ToolTip="New Contact">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="add" Source="pack://application:,,,/GUI/res/images/new/add.png"/>
+                        <themer:DynamicImage SymbolName="add"/>
                     </Button.Content>
                 </Button>
                 

@@ -778,7 +778,7 @@ namespace Eudora.Net.Core
                         }
                     }
 
-                    book.Contacts.AddUnique(contact);
+                    book.Datastore.AddUnique(contact);
                 }
             }
             catch (Exception ex)
