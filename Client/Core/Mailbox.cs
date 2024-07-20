@@ -33,29 +33,7 @@ namespace Eudora.Net.Core
         [JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
 
-        [JsonIgnore]
-        public static Mailbox? Inbox
-        {
-            get => PostOffice.Instance.GetMailboxByName("Inbox");
-        }
-
-        [JsonIgnore]
-        public static Mailbox? Outbox
-        {
-            get => PostOffice.Instance.GetMailboxByName("Outbox");
-        }
-
-        [JsonIgnore]
-        public static Mailbox? Junk
-        {
-            get => PostOffice.Instance.GetMailboxByName("Junk");
-        }
-
-        [JsonIgnore]
-        public static Mailbox? Trash
-        {
-            get => PostOffice.Instance.GetMailboxByName("Trash");
-        }
+        
         
         public string Name
         {

@@ -170,20 +170,20 @@ namespace Eudora.Net.Core
                 if (name.Equals("in", StringComparison.CurrentCultureIgnoreCase) ||
                     name.Equals("inbox", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return Mailbox.Inbox;
+                    return PostOffice.Inbox;
                 }
                 else if (name.Equals("out", StringComparison.CurrentCultureIgnoreCase) ||
                          name.Equals("outbox", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return Mailbox.Outbox;
+                    return PostOffice.Outbox;
                 }
                 else if (name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return Mailbox.Junk;
+                    return PostOffice.Junk;
                 }
                 else if (name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return Mailbox.Trash;
+                    return PostOffice.Trash;
                 }
 
                 // CreateImportedMailbox handles the case where the mailbox already exists

@@ -28,6 +28,26 @@ namespace Eudora.Net.Core
         #region Properties
         /////////////////////////////
 
+        public static Mailbox? Inbox
+        {
+            get => PostOffice.Instance.GetMailboxByName("Inbox");
+        }
+
+        public static Mailbox? Outbox
+        {
+            get => PostOffice.Instance.GetMailboxByName("Outbox");
+        }
+
+        public static Mailbox? Junk
+        {
+            get => PostOffice.Instance.GetMailboxByName("Junk");
+        }
+
+        public static Mailbox? Trash
+        {
+            get => PostOffice.Instance.GetMailboxByName("Trash");
+        }
+
         private static string _MailboxesPath = string.Empty;
         public static string MailboxesPath
         {
