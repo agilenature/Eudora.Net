@@ -4,35 +4,70 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Eudora.Net.GUI"
+        xmlns:theme="clr-namespace:Eudora.Net.GUI.theme"
+        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
         mc:Ignorable="d"
         Title="Eudora.Net: Create Address Book" 
-        Height="250" Width="350" 
+        Height="Auto" Width="350" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize" 
         ShowInTaskbar="False" 
         HorizontalAlignment="Center" VerticalAlignment="Center"
         BorderThickness="2">
+
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="3,20,3,0">
-            <TextBlock Text=" Enter a name for this book:"/>
-            <TextBox x:Name="tb_BookName" Text="{Binding Path=BookName}"/>
-        </StackPanel>
+        <TextBlock Grid.Row="1" Text=" Enter a name for this book:"/>
+            
+        <TextBox x:Name="tb_BookName" Grid.Row="2" 
+                 Text="{Binding Path=BookName}" 
+                 KeyUp="tb_BookName_KeyUp"/>
+
+
+        <Border Grid.Row="3" Background="{DynamicResource BorderMediumBrushKey}"/>
 
         <!--Main dialog button panel-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
-            <Button x:Name="btn_OK" 
-                    Content="OK" 
-                    Click="btn_OK_Click"/>
-            <Button x:Name="btn_Cancel" 
-                    Content="Cancel" 
-                    Click="btn_Cancel_Click" 
-                    IsCancel="True"/>
-        </StackPanel>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_Cancel" Grid.Column="1"
+                    Style="{DynamicResource DialogMainButton}"
+                    Click="btn_Cancel_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage SymbolName="cancel" VerticalAlignment="Center"/>
+                        <TextBlock Text="Cancel" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="btn_OK" Grid.Row="2" Grid.Column="3" 
+                    Style="{DynamicResource DialogMainButton}" 
+                    Click="btn_OK_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage SymbolName="cancel" VerticalAlignment="Center"/>
+                        <TextBlock Text="OK" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+
     </Grid>
 </Window>

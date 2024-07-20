@@ -15,6 +15,11 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
+        <Style x:Key="{x:Type GUI:SubviewBase}" TargetType="{x:Type GUI:SubviewBase}">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
+        </Style>
         <Style x:Key="{x:Type GUI:uc_TabBase}" TargetType="{x:Type GUI:uc_TabBase}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
@@ -25,10 +30,13 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
-        <ResourceDictionary x:Key="merged">
+
+
+        <ResourceDictionary x:Key="common">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="GUI/theme/CommonUX.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

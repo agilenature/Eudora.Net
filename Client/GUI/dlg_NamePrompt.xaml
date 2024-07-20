@@ -50,8 +50,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
-                                             SymbolName="check"
-                                             Source="pack://application:,,,/GUI/res/images/new/done.png"/>
+                                             SymbolName="check"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
                     </StackPanel>
                 </Button.Content>
@@ -71,8 +70,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
-                                             SymbolName="cancel"
-                                             Source="pack://application:,,,/GUI/res/images/new/cancel.png"/>
+                                             SymbolName="cancel"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
                     </StackPanel>
                 </Button.Content>

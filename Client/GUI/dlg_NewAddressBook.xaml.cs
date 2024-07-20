@@ -14,6 +14,12 @@ namespace Eudora.Net.GUI
         {
             InitializeComponent();
             DataContext = this;
+            tb_BookName.Focus();
+        }
+
+        private void Btn_OK_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
@@ -40,9 +46,13 @@ namespace Eudora.Net.GUI
             Close();
         }
 
-        private void btn_Help_Click(object sender, RoutedEventArgs e)
+        private void tb_BookName_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-
+            if(e.Key == System.Windows.Input.Key.Enter)
+            {
+                e.Handled = true;
+                btn_OK_Click(sender, e);
+            }
         }
     }
 }
