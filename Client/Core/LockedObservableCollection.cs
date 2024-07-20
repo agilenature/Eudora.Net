@@ -3,6 +3,12 @@
 
 namespace Eudora.Net.Core
 {
+    /// <summary>
+    /// Extension class of ObservableCollection<T>
+    /// Primary feature: the operational methods are locking
+    /// Otherwise it's just an ObservableCollection
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LockedObservableCollection<T> : ObservableCollection<T>
     {
         private object Locker = new();
