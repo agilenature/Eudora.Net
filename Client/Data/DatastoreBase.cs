@@ -28,33 +28,6 @@ namespace Eudora.Net.Data
                 DbFolder = Path.Combine(DbFolder, $"{subfolder}");
             }
             DbPath = Path.Combine(DbFolder, $"{name}.db" );
-
-            Data.CollectionChanged += Data_CollectionChanged;
-        }
-
-        private void Data_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            try
-            {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add && e.NewItems is not null)
-                {
-                    foreach (T t in e.NewItems)
-                    {
-                        DB.InsertOrReplace(t);
-                    }
-                }
-                else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove && e.OldItems is not null)
-                {
-                    foreach (T t in e.OldItems)
-                    {
-                        DB.Delete(t);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
         }
 
         private void T_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -64,15 +37,15 @@ namespace Eudora.Net.Data
                 if (sender is T t)
                 {
                     int rowsUpdated = DB.Update(t);
-                    Debug.WriteLine($"DataClass1_PropertyChanged: {rowsUpdated} rows updated");
+                    Debug.WriteLine($"{t.GetType()} T_PropertyChanged: {rowsUpdated} rows updated");
                 }
                 else if (sender is not null)
                 {
-                    Debug.WriteLine($"DataClass1_PropertyChanged: sender is type {sender.GetType()}");
+                    Debug.WriteLine($"T_PropertyChanged: sender is type {sender.GetType()}");
                 }
                 else
                 {
-                    Debug.WriteLine($"DataClass1_PropertyChanged: sender is null");
+                    Debug.WriteLine($"T_PropertyChanged: sender is null");
                 }
             }
             catch(Exception ex)
@@ -150,15 +123,13 @@ namespace Eudora.Net.Data
             }
         }
 
-        /// <summary>
-        /// Add is done via the ObservableCollection
-        /// </summary>
-        /// <param name="item"></param>
         public void Add(T item)
         {
             try
             {
-                Data.Add(item);
+                item.PropertyChanged += T_PropertyChanged;
+                DB.InsertOrReplace(item);
+                Data.Add(item);                
             }
             catch (Exception ex)
             {
@@ -166,14 +137,12 @@ namespace Eudora.Net.Data
             }
         }
 
-        /// <summary>
-        /// interface to my extension method to add only unique items to the underlying observable collection
-        /// </summary>
-        /// <param name="item"></param>
         public void AddUnique(T item)
         {
             try
             {
+                item.PropertyChanged += T_PropertyChanged;
+                DB.Insert(item);
                 Data.AddUnique(item);
             }
             catch (Exception ex)
@@ -182,14 +151,12 @@ namespace Eudora.Net.Data
             }
         }
 
-        /// <summary>
-        /// Remove is done via the ObservableCollection
-        /// </summary>
-        /// <param name="item"></param>
         public void Remove(T item)
         {
             try
             {
+                item.PropertyChanged -= T_PropertyChanged;
+                DB.Delete(item);
                 Data.Remove(item);
             }
             catch (Exception ex)
@@ -198,10 +165,6 @@ namespace Eudora.Net.Data
             }
         }
 
-        /// <summary>
-        /// Update works directly on the DB
-        /// </summary>
-        /// <param name="item"></param>
         public void Update(T item)
         {
             try
