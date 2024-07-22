@@ -8,50 +8,54 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="22"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+
         <!--Toolbar panel-->
-        <DockPanel Grid.Row="0" LastChildFill="False"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch">
 
-            <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" 
-                       VerticalAlignment="Center"
-                       Text="Event Log"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5,0,0,0" Text="Event Log"/>
 
-            <Button x:Name="btn_Toggle" DockPanel.Dock="Right" Margin="0,0,5,0"
-                    Width="16" Height="16" VerticalAlignment="Center" 
-                    VerticalContentAlignment="Center"
-                    ToolTip="Close event log"
-                    Click="btn_EventLog_Click">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="close"/>
-                </Button.Content>
-            </Button>
+        <Button x:Name="btn_Toggle" 
+                Grid.Row="0" Grid.Column="1"
+                Style="{DynamicResource SmallPanelButton}"
+                ToolTip="Close event log"
+                Click="btn_EventLog_Click">
+            <Button.Content>
+                <themer:DynamicImage SymbolName="close"/>
+            </Button.Content>
+        </Button>
 
-            <Button x:Name="btn_Copy" DockPanel.Dock="Right" Margin="0,0,5,0"
-                    Width="16" Height="16" VerticalAlignment="Center" 
-                    VerticalContentAlignment="Center"
-                    ToolTip="Copy event log"
-                    Click="btn_Copy_Click">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="content_copy"/>
-                </Button.Content>
-            </Button>
-
-        </DockPanel>
+        <Button x:Name="btn_Copy"
+                Grid.Row="0" Grid.Column="2"
+                Style="{DynamicResource SmallPanelButton}"
+                ToolTip="Copy event log"
+                Click="btn_Copy_Click">
+            <Button.Content>
+                <themer:DynamicImage SymbolName="content_copy"/>
+            </Button.Content>
+        </Button>
 
         <!--Eventlog display-->
         <ListView x:Name="Display"
-                  Grid.Row="1"
+                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                   ScrollViewer.CanContentScroll="True"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   Height="Auto"
-                  ClipToBounds="True">
+                  ClipToBounds="True"
+                  Background="{DynamicResource BackgroundNormalBrushKey}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Path=Timestamp}"/>
