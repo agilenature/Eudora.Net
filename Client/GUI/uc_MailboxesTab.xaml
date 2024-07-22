@@ -7,12 +7,13 @@
              xmlns:root="clr-namespace:Eudora.Net"
              xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             BorderThickness="0">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -22,9 +23,11 @@
         </Grid.ColumnDefinitions>
 
 
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlLightBrushKey}"/>
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Mailboxes" VerticalAlignment="Center"/>
 
-        <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+        <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1"
                 Style="{DynamicResource SmallPanelButton}"
                 ToolTip="New Mailbox"
                 Click="btn_New_Click">
@@ -33,7 +36,7 @@
             </Button.Content>
         </Button>
 
-        <Button x:Name="btn_Delete" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+        <Button x:Name="btn_Delete" Grid.Row="0" Grid.Column="2"
                 Style="{DynamicResource SmallPanelButton}"
                 ToolTip="Delete Mailbox"
                 Click="btn_Delete_Click">
@@ -43,12 +46,13 @@
         </Button>
 
         <ListBox x:Name="Listview"
-                 Grid.Row="2"
+                 Grid.Row="1"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  SelectionChanged="Listview_SelectionChanged"
                  MouseLeftButtonUp="Listview_MouseLeftButtonUp"
-                 BorderThickness="0">
+                 BorderThickness="0"
+                 Background="{DynamicResource BackgroundNormalBrushKey}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">

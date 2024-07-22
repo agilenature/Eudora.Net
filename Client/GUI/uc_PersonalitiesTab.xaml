@@ -24,6 +24,8 @@
             <ColumnDefinition Width="24"/>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Personalities" VerticalAlignment="Center"/>
 
         <Button x:Name="btn_New" Grid.Column="1"
@@ -67,7 +69,7 @@
                   BorderThickness="0">
             <ListView.Resources>
                 <ResourceDictionary>
-                    <Style TargetType="ListViewItem">
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
                         <Setter Property="Control.HorizontalContentAlignment" Value="Left"/>
                         <Setter Property="Control.HorizontalAlignment" Value="Left"/>
                     </Style>

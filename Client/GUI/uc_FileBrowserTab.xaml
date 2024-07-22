@@ -14,11 +14,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="File Browser" VerticalAlignment="Center"/>
 
-        <TreeView x:Name="treeView" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding}" SelectedItemChanged="treeView_SelectedItemChanged">
+        <TreeView x:Name="treeView" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding}" 
+                  SelectedItemChanged="treeView_SelectedItemChanged">
             <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
+                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                     <Setter Property="FontWeight" Value="Normal" />
@@ -52,7 +55,7 @@
                   AutoGenerateColumns="False" CanUserSortColumns="True" GridLinesVisibility="None"
                   SelectionMode="Single">
             <DataGrid.Resources>
-                <Style TargetType="DataGridRow">
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
                 </Style>
             </DataGrid.Resources>

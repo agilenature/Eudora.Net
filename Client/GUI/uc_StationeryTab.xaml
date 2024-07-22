@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -23,6 +23,8 @@
             <ColumnDefinition Width="24"/>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Stationery" VerticalAlignment="Center"/>
 
             <Button x:Name="btn_New" Grid.Column="1" 
@@ -59,8 +61,9 @@
                  VerticalAlignment="Stretch"
                  HorizontalAlignment="Stretch"
                  SelectionChanged="listbox_SelectionChanged"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 BorderThickness="0">
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 BorderThickness="0"
+                 Background="{DynamicResource BackgroundNormalBrushKey}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
