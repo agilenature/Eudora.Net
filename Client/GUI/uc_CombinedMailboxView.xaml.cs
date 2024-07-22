@@ -390,7 +390,10 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedIndex < datagrid.Items.Count)
             {
                 datagrid.SelectedIndex++;
-                datagrid.ScrollIntoView(datagrid.SelectedItem);
+                if (datagrid.SelectedItem is not null)
+                {
+                    datagrid.ScrollIntoView(datagrid.SelectedItem);
+                }
             }
         }
 
@@ -399,7 +402,10 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedIndex > 0)
             {
                 datagrid.SelectedIndex--;
-                datagrid.ScrollIntoView(datagrid.SelectedItem);
+                if (datagrid.SelectedItem is not null)
+                {
+                    datagrid.ScrollIntoView(datagrid.SelectedItem);
+                }
             }
         }
 
