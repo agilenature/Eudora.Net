@@ -63,7 +63,7 @@ namespace Eudora.Net
                 
                 // The Eudora theme
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
-                var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora", "Eudora Theme", new ResourceDictionary()
+                var theme = new WpfThemer.Theme(WpfThemer.Theme.eThemeType.Light, "Eudora Classic", "Eudora Classic", new ResourceDictionary()
                 {
                     Source = new Uri(uri, UriKind.RelativeOrAbsolute)
                 });
@@ -104,17 +104,18 @@ namespace Eudora.Net
 
         private void InstallStyles()
         {
-            try
-            {
-                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
-                {
-                    Source = new Uri("/Eudora.Net;component/GUI/theme/CommonUX.xaml", UriKind.RelativeOrAbsolute)
-                });
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
+            // Unnecessary: MainWindow references CommonUX
+            //try
+            //{
+            //    App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+            //    {
+            //        Source = new Uri("/Eudora.Net;component/GUI/theme/CommonUX.xaml", UriKind.RelativeOrAbsolute)
+            //    });
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger.LogException(ex);
+            //}
         }
 
         /// <summary>

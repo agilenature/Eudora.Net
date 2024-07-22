@@ -30,13 +30,6 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BorderMediumBrushKey}"/>
         </Style>
-
-
-        <ResourceDictionary x:Key="common">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="GUI/theme/CommonUX.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
         
     </Application.Resources>
 </Application>

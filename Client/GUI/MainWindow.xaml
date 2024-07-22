@@ -15,6 +15,14 @@
         WindowStartupLocation="CenterScreen"
         BorderThickness="0">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/theme/CommonUX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid x:Name="MainLayout">
 
         <Grid.Resources>
@@ -69,7 +77,7 @@
                 <MenuItem x:Name="Menu_Message_Forward" Header="Forward"/>
             </MenuItem>
 
-            <!-- TRANSFER menu -->
+             <!--TRANSFER menu--> 
             <MenuItem x:Name="Menu_Transfer" Header="_Transfer" x:FieldModifier="public"/>
 
             <!-- TOOLS menu -->
@@ -135,6 +143,7 @@
                     <Setter Property="Width" Value="32"/>
                     <Setter Property="Height" Value="32"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Background" Value="Transparent"/>
                 </Style>
                 <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
                     <Setter Property="Margin" Value="5,0,5,0"/>

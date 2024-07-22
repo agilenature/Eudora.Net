@@ -6,12 +6,16 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                 <Grid Width="12" Height="12">
                     <Ellipse Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red"/>
-                    <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8"
-                           HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"
-                           ToolTip="{Binding ElementName=ErrorAdorner,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
+                    <TextBlock Foreground="White" 
+                               FontWeight="Heavy" 
+                               FontSize="8"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"
+                               ToolTip="{Binding ElementName=ErrorAdorner,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
                 </Grid>
-                <TextBlock Foreground="Red" FontWeight="Medium" Margin="2,0,0,0"
-                       Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                <TextBlock Foreground="Red" 
+                           FontWeight="Medium" 
+                           Margin="2,0,0,0"
+                           Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
             </StackPanel>
             <AdornedElementPlaceholder x:Name="ErrorAdorner"/>
         </DockPanel>
@@ -20,6 +24,16 @@
     <Style x:Key="SmallPanelButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Width" Value="20"/>
         <Setter Property="Height" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.3"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="DialogMainButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
@@ -29,6 +43,47 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="HeaderPanel">
+        <Setter Property="Control.Background" Value="{DynamicResource BorderLightBrushKey}"/>
+        <Setter Property="Control.BorderBrush" Value="{DynamicResource BorderLightBrushKey}"/>
+    </Style>
+
+    <!--Overrides of the WpfThemer templates to support the Eudora Classic color scheme.
+        Specifically, in Eudora 7.1 the content area of a control tends to be white.
+        WpfThemer tends to make the default Background and Control colors the same,
+        which is a more modern styling approach. To support both, in the Eudora Classic
+        theme the BackgroundNormal color is set to white.
+    -->
+    <Style x:Key="{x:Type ListBox}" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+    </Style>
+
+    <Style x:Key="{x:Type ListView}" TargetType="ListView" BasedOn="{StaticResource {x:Type ListView}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+    </Style>
+
+    <Style x:Key="{x:Type TextBox}" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+    </Style>
+
+    <Style x:Key="{x:Type TreeView}" TargetType="{x:Type TreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+    </Style>
+
+    <Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
     </Style>
 
 </ResourceDictionary>

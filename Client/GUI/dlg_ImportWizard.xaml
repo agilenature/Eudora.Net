@@ -13,6 +13,14 @@
         WindowStyle="ToolWindow"
         BorderThickness="2"
         BorderBrush="{DynamicResource BorderNormalBrushKey}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/theme/CommonUX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     
     <Grid>
 

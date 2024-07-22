@@ -14,7 +14,15 @@
         ResizeMode="NoResize" 
         ShowInTaskbar="False"
         BorderThickness="2">
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/theme/CommonUX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
