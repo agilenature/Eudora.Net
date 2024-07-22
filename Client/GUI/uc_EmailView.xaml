@@ -38,15 +38,6 @@
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary>
-
-                            <!--Style rules: Toolbar button-->
-                            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
-                                <Style.Setters>
-                                    <Setter Property="Control.BorderThickness" Value="1"/>
-                                    <Setter Property="Control.Margin" Value="1,0,1,0"/>
-                                </Style.Setters>
-                            </Style>
-
                             <!--Style rules: Toolbar button image-->
                             <Style x:Key="{x:Type Image}" TargetType="Image">
                                 <Style.Setters>
@@ -121,18 +112,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!--Define some styling here so it doesn't have to be repeated for individual controls-->
+            <!--Define some styling here so it doesn't have to be repeated for individual controls--><!--
             <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary>
-                            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+                            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                                 <Setter Property="MinHeight" Value="20"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                                 <Setter Property="Margin" Value="2,2,2,2"/>
                             </Style>
-                            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="MinHeight" Value="20"/>
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
                                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -142,7 +133,7 @@
                         </ResourceDictionary>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </Grid.Resources>
+            </Grid.Resources>-->
 
             <!--Field Labels-->
             <TextBlock Grid.Row="0" Grid.Column="0" Text="To"/>
