@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <TextBox x:Name="tb_Notes" AcceptsReturn="True"
-             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto"
              Text="{Binding Path=Notes}"/>
 
 </UserControl>

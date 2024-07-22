@@ -9,14 +9,20 @@
                 d:DesignHeight="450" d:DesignWidth="800">
 
 
-    <!--Import some custom UX style overrides-->
-    <!--<UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Styles_CommonForms.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>-->
+    <!-- some UX style overrides-->
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,49 +36,58 @@
 
         <!--Left pane-->
         <Grid Grid.Column="0" Margin="3,3,3,3">
+            
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="20"/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <!--Address Book selection & control-->
-            <DockPanel Grid.Row="0" LastChildFill="False">
-                
-                <TextBlock Text="Address Books" DockPanel.Dock="Left"/>
-
-                <Button x:Name="btn_DeleteBook"
-                        DockPanel.Dock="Right"
-                        Width="16" Height="16" Margin="5,0,0,0"
-                        Click="btn_DeleteBook_Click"
-                        ToolTip="Delete Address Book">
-                    <Button.Content>
-                        <themer:DynamicImage SymbolName="delete"/>
-                    </Button.Content>
-                </Button>
-                
-                <Button x:Name="btn_NewBook"
-                        DockPanel.Dock="Right"
-                        Width="16" Height="16" Margin="5,0,0,0"
-                        Click="btn_NewBook_Click"
-                        ToolTip="New Address Book">
-                    <Button.Content>
-                        <themer:DynamicImage SymbolName="add"/>
-                    </Button.Content>
-                </Button>
-                
-                
-                
-            </DockPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
             
+            <!--Address Book selection & control-->
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Text="Address Books" />
+
+            <Button x:Name="btn_NewBook"
+                    Grid.Row="0" Grid.Column="1"
+                    Style="{DynamicResource SmallPanelButton}"
+                    Click="btn_NewBook_Click"
+                    ToolTip="New Address Book">
+                <Button.Content>
+                    <themer:DynamicImage SymbolName="add"/>
+                </Button.Content>
+            </Button>
+            
+            <Button x:Name="btn_DeleteBook"
+                    Grid.Row="0" Grid.Column="2"
+                    Style="{DynamicResource SmallPanelButton}"
+                    Click="btn_DeleteBook_Click"
+                    ToolTip="Delete Address Book">
+                <Button.Content>
+                    <themer:DynamicImage SymbolName="delete"/>
+                </Button.Content>
+            </Button>
+
+            
+
             <ListBox x:Name="lb_Books"
-                     Grid.Row="1"
+                     Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      SelectionChanged="lb_Books_SelectionChanged"
-                     BorderThickness="0">
+                     BorderThickness="0"
+                     Background="{DynamicResource BackgroundNormalBrushKey}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -87,38 +102,40 @@
             
 
             <!--Contact selection & control-->
-            <DockPanel Grid.Row="3" LastChildFill="False">
-            
-                <TextBlock Text="Contacts" DockPanel.Dock="Left"/>
 
-                <Button x:Name="btn_DeleteContact"
-                        DockPanel.Dock="Right"
-                        Width="16" Height="16" Margin="5,0,0,0"
-                        Click="btn_DeleteContact_Click"
-                        ToolTip="Delete Contact">
-                    <Button.Content>
-                        <themer:DynamicImage  SymbolName="delete"/>
-                    </Button.Content>
-                </Button>
-                
-                <Button x:Name="btn_NewContact"
-                        Width="16" Height="16" Margin="5,0,0,0"
-                        DockPanel.Dock="Right"
-                        Click="btn_NewContact_Click"
-                        ToolTip="New Contact">
-                    <Button.Content>
-                        <themer:DynamicImage SymbolName="add"/>
-                    </Button.Content>
-                </Button>
-                
-            </DockPanel>
+            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource ControlLightBrushKey}"/>
+            
+            <TextBlock Text="Contacts" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"/>
+
+            <Button x:Name="btn_NewContact"
+                    Style="{DynamicResource SmallPanelButton}"
+                    Grid.Row="3" Grid.Column="1"
+                    Click="btn_NewContact_Click"
+                    ToolTip="New Contact">
+                <Button.Content>
+                    <themer:DynamicImage SymbolName="add"/>
+                </Button.Content>
+            </Button>
+            
+            <Button x:Name="btn_DeleteContact"
+                    Style="{DynamicResource SmallPanelButton}"
+                    Grid.Row="3" Grid.Column="2"
+                    Click="btn_DeleteContact_Click"
+                    ToolTip="Delete Contact">
+                <Button.Content>
+                    <themer:DynamicImage  SymbolName="delete"/>
+                </Button.Content>
+            </Button>
+
             
             <ListBox x:Name="lb_Contacts"
                      Grid.Row="4"
+                     Grid.ColumnSpan="4"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      HorizontalContentAlignment="Stretch"
                      SelectionChanged="lb_Contacts_SelectionChanged"
-                     BorderThickness="0">
+                     BorderThickness="0"
+                     Background="{DynamicResource BackgroundNormalBrushKey}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -147,12 +164,16 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
+                           Height="24"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
                            Margin="0,0,5,0"
                            Text="Nickname:"/>
                 <TextBox x:Name="tb_Nickname"
                          Grid.Column="1"
+                         Height="20"
                          HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center"
                          Text="{Binding Path=Name}"/>
                 <CheckBox x:Name="cb_RecipientList"
                           Grid.Column="2"

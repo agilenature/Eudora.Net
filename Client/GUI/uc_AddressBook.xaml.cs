@@ -31,7 +31,7 @@ namespace Eudora.Net.GUI
         /// DataContext for each tab.
         /// </summary>
         /// <param name="contact"></param>
-        private void UpdateDataContext(Contact contact)
+        private void UpdateDataContext(Contact? contact)
         {
             DataContext = contact;
             foreach(var item in tc_Tabs.Items)
@@ -49,20 +49,15 @@ namespace Eudora.Net.GUI
             if(lb_Books.SelectedItem is AddressBook book)
             {
                 lb_Contacts.ItemsSource = book.Datastore.Data;
+                lb_Contacts.SelectedIndex = lb_Contacts.Items.Count - 1;
             }
         }
 
         private void lb_Contacts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(lb_Contacts.SelectedItem is Contact contact)
-            {
-                UpdateDataContext(contact);
-                DetailsGrid.IsEnabled = true;
-            }
-            else
-            {
-                DetailsGrid.IsEnabled = false;
-            }                
+            Contact? contact = lb_Contacts.SelectedItem as Contact;
+            DetailsGrid.IsEnabled = (contact is not null);
+            UpdateDataContext(contact);
         }        
 
         /// <summary>
