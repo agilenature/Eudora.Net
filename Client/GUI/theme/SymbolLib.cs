@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Eudora.Net.Core;
 using WpfThemer;
 
 
@@ -12,11 +13,13 @@ namespace Eudora.Net.GUI.theme
     {
         public static void Build()
         {
-            string category = "light";
+            try
+            {
+                string category = "light";
 
-            List<string> symbolNames =
-                [
-                    "add",
+                List<string> symbolNames =
+                    [
+                        "add",
                     "add_attachment",
                     "add_image",
                     "arrow_back",
@@ -90,33 +93,48 @@ namespace Eudora.Net.GUI.theme
                     "undo",
                     "zoom_in",
                     "zoom_out"
-                ];
+                    ];
 
-            Theme.eThemeType themeType = Theme.eThemeType.Light;
-            for (int i = 0; i < 3; i++)
+                Theme.eThemeType themeType = Theme.eThemeType.Light;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (i == 0)
+                    {
+                        themeType = Theme.eThemeType.Light;
+                        category = "dark";
+                    }
+                    else
+                    if (i == 1)
+                    {
+                        themeType = Theme.eThemeType.Dark;
+                        category = "light";
+                    }
+                    else if (i == 2)
+                    {
+                        themeType = Theme.eThemeType.Undefined;
+                        category = "dark";
+                    }
+                    string path = $"pack://application:,,,/GUI/theme/symbols/{category}/";
+                    //string path = $"/GUI/theme/symbols/{category}/";
+
+                    foreach (var symbol in symbolNames)
+                    {
+                        try
+                        {
+                            string symbolPath = $"{path}{symbol}.png";
+                            var uri = new Uri(symbolPath, UriKind.RelativeOrAbsolute);
+                            WpfThemer.ThemeSymbolManager.AddSymbol(symbol, uri, themeType);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                if(i == 0)
-                {
-                    themeType = Theme.eThemeType.Light;
-                    category = "dark";
-                }
-                else
-                if(i == 1)
-                {
-                    themeType = Theme.eThemeType.Dark;
-                    category = "light";
-                }
-                else if(i == 2)
-                {
-                    themeType = Theme.eThemeType.Undefined;
-                    category = "dark";
-                }
-                string path = $"pack://application:,,,/GUI/theme/symbols/{category}/";
-
-                foreach(var symbol in symbolNames)
-                {
-                    WpfThemer.ThemeSymbolManager.AddSymbol(symbol, new Uri($"{path}{symbol}.png"), themeType);
-                }
+                Logger.LogException(ex);
             }
         }
     }

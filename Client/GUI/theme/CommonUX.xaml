@@ -50,6 +50,15 @@
         <Setter Property="Control.BorderBrush" Value="{DynamicResource BorderLightBrushKey}"/>
     </Style>
 
+    
+    <!--Overrides for the Toolbar template-->
+    <Style x:Key="{x:Type ToolBar}" TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
+        <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderNormalBrushKey}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
     <!--Overrides of the WpfThemer templates to support the Eudora Classic color scheme.
         Specifically, in Eudora 7.1 the content area of a control tends to be white.
         WpfThemer tends to make the default Background and Control colors the same,

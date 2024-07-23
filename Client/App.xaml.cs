@@ -1,15 +1,9 @@
 ﻿using Eudora.Net.Core;
 using Eudora.Net.Data;
-using System.Configuration;
-using System.Data;
+using Eudora.Net.GUI.theme;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
 using WpfThemer;
-using Eudora.Net.GUI;
-using System.Xml.Linq;
-using Xceed.Wpf.AvalonDock.Themes;
-using Eudora.Net.GUI.theme;
 
 namespace Eudora.Net
 {
@@ -30,7 +24,7 @@ namespace Eudora.Net
 
         public App() : base()
         {
-
+            
         }
 
         /// <summary>
@@ -56,10 +50,10 @@ namespace Eudora.Net
         {
             try
             {
-                ThemeManager.SetApplication(this);
-
                 // The application's library of control symbols for light & dark themes
                 SymboLib.Build();
+
+                ThemeManager.SetApplication(this);
                 
                 // The Eudora theme
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
