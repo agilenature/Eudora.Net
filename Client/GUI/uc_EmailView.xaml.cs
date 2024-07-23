@@ -372,7 +372,7 @@ namespace Eudora.Net.GUI
 
         private void ApplyStationery(Stationery stationery)
         {
-            Editor.Document.BodyStyle.Value = stationery.Style.Value;
+            Editor.Document.BodyStyle.Value = stationery.Style;
             Editor.Document.SetBodyStyle();
         }
 

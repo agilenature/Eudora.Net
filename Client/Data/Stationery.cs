@@ -47,7 +47,7 @@ namespace Eudora.Net.Data
         private Guid _Id = Guid.NewGuid();
         private string _Name = string.Empty;
         private string _Content = string.Empty;
-        private HtmlAttribute _Style = new("style", string.Empty);
+        private string _Style = string.Empty;
 
         /////////////////////////////
         #endregion Fields
@@ -77,7 +77,7 @@ namespace Eudora.Net.Data
             set => SetField(ref _Content, value, nameof(Content));
         }
 
-        public HtmlAttribute Style
+        public string Style
         {
             get => _Style;
             set => SetField(ref _Style, value, nameof(Style));
