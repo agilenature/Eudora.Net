@@ -88,7 +88,7 @@ namespace Eudora.Net.GUI
             }
 
             await Editor.Document.GetBodyStyle();
-            ((Stationery)DataContext).Style.Value = Editor.Document.BodyStyle.Value;
+            ((Stationery)DataContext).Style = Editor.Document.BodyStyle.Value;
         }
 
         private void Editor_DocumentLoaded(object? sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace Eudora.Net.GUI
             if (DataContext is Stationery stationery)
             {
                 await Editor.Document.GetBodyStyle();
-                stationery.Style.Value = Editor.Document.BodyStyle.Value;
+                stationery.Style = Editor.Document.BodyStyle.Value;
             }            
         }
 
