@@ -11,7 +11,8 @@
         HorizontalContentAlignment="Center"
         Background="Transparent"
         BorderThickness="0"
-        ToolTip="{Binding DisplayText}">
+        ToolTip="{Binding DisplayText}"
+        Style="{StaticResource {x:Type Button}}">
     
     <Grid>
         

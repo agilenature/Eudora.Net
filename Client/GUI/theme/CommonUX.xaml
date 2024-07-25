@@ -50,21 +50,37 @@
         <Setter Property="Control.BorderBrush" Value="{DynamicResource BorderLightBrushKey}"/>
     </Style>
 
+
+    <!--Overrides of the WpfThemer templates.
     
-    <!--Overrides for the Toolbar template-->
-    <Style x:Key="{x:Type ToolBar}" TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
+    In part, this is to support the Eudora Classic color scheme. Specifically, in Eudora 7.1 
+    the content area of a control tends to be white. WpfThemer tends to make the default 
+    Background and Control colors the same, which is a more modern styling approach. To 
+    support both, in the Eudora Classic theme the BackgroundNormal color is set to white.
+    
+    The other reason is to achieve certain effects compatible with the overall look and
+    feel of Eudora, which differs a bit from the default WpfThemer styling.
+-->
+
+    <Style x:Key="{x:Type ToolBarTray}" TargetType="{x:Type ToolBarTray}" BasedOn="{StaticResource {x:Type ToolBarTray}}">
         <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderNormalBrushKey}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Control.BorderBrush" Value="{DynamicResource ControlNormalBrushKey}"/>
     </Style>
 
-    <!--Overrides of the WpfThemer templates to support the Eudora Classic color scheme.
-        Specifically, in Eudora 7.1 the content area of a control tends to be white.
-        WpfThemer tends to make the default Background and Control colors the same,
-        which is a more modern styling approach. To support both, in the Eudora Classic
-        theme the BackgroundNormal color is set to white.
-    -->
+    <Style x:Key="{x:Type ToolBar}" TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
+        <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlNormalBrushKey}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style x:Key="{x:Static ToolBar.ComboBoxStyleKey}" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundNormalBrushKey}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderNormalBrushKey}"/>
+    </Style>
+    
     <Style x:Key="{x:Type ListBox}" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{DynamicResource BackgroundNormalBrushKey}"/>

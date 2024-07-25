@@ -52,6 +52,22 @@ namespace Eudora.Net.GUI
             Editor.btn_InsertAttachment.Click += Btn_InsertAttachment_Click;
         }
 
+        private void Toolbar_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(sender is not ToolBar toolBar) return;
+
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+            var mainPanelBorder = toolBar.Template.FindName("MainPanelBorder", toolBar) as FrameworkElement;
+            if (mainPanelBorder != null)
+            {
+                mainPanelBorder.Margin = new Thickness();
+            }
+        }
+
         private void Btn_InsertAttachment_Click(object sender, RoutedEventArgs e)
         {
             EmailMessage? message = DataContext as EmailMessage;
@@ -350,7 +366,6 @@ namespace Eudora.Net.GUI
 
                 bool messageIsEditable = (Message.Status == EmailMessage.MessageStatus.Draft);
                 MainToolbar.IsEnabled = messageIsEditable;
-                ToolbarSend.IsEnabled = messageIsEditable;
                 HeaderPanel.IsEnabled = messageIsEditable;
                 Editor.ToolbarsVisible = messageIsEditable;
                 AttachmentsBar.IsEnabled = true;
@@ -475,7 +490,17 @@ namespace Eudora.Net.GUI
             MainWindow.Instance?.UpdateMessageViewTitle(Message, Title);
         }
 
-        
+        private void MainToolbar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ToolbarSend_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
         /////////////////////////////
         #endregion Utility

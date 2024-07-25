@@ -19,8 +19,7 @@ namespace Eudora.Net.GUI
             Editor.DocumentLoaded += Editor_DocumentLoaded;
             Editor.ToolbarFontStyleEnabled = false;
             Editor.ToolbarAlignmentEnabled = false;
-            Editor.ToolbarAttachmentsEnabled = false;
-            Editor.ToolbarEmbedImageEnabled = false;
+            Editor.ToolbarEmbedEnabled = false;
         }
 
         public override void MdiActivated()

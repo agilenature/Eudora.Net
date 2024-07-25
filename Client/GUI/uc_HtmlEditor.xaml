@@ -17,14 +17,16 @@
     <Grid x:Name="MainGrid">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" x:Name="RowToolbars"/>
+            <RowDefinition Height="70" x:Name="RowToolbars"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="70" x:Name="RowDebug"/>
         </Grid.RowDefinitions>
 
 
+        <Border Grid.Row="1" BorderBrush="{DynamicResource BorderNormalBrushKey}" BorderThickness="1" Margin="0"/>
+
         <!--Editor Toolbars-->
-        <ToolBarTray x:Name="Toolbars" Grid.Row="0" Focusable="False">
+        <ToolBarTray x:Name="Toolbars" Grid.Row="0" IsLocked="True">
 
             <ToolBarTray.Resources>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
@@ -44,7 +46,7 @@
             </ToolBarTray.Resources>
             
             <!--Font toolbar-->
-            <ToolBar x:Name="ToolbarFont" Band="0" BandIndex="0" Focusable="False">
+            <ToolBar x:Name="ToolbarFont" Band="0" BandIndex="0" Loaded="Toolbar_Loaded">
 
                 <ToolBar.Header>Font</ToolBar.Header>
 
@@ -55,14 +57,13 @@
                 </ComboBox>
 
                 <ComboBox x:Name="cb_FontSize"
-                          Focusable="False"
                           Width="100"
                           Margin="5,0,0,0"
                           ToolTip="Font Size"
                           SelectedItem="{Binding ActiveFontSize}">
                 </ComboBox>
 
-                <xctk:ColorPicker x:Name="cp_Font" Focusable="False"
+                <xctk:ColorPicker x:Name="cp_Font" 
                                   x:FieldModifier="public"
                                   Width="40"
                                   ToolTip="Text Color"
@@ -71,25 +72,25 @@
             </ToolBar>
 
             <!--Text style toolbar-->
-            <ToolBar x:Name="ToolbarTextStyle" Band="0" BandIndex="1" Focusable="False">
+            <ToolBar x:Name="ToolbarTextStyle" Band="0" BandIndex="1" Loaded="Toolbar_Loaded">
 
                 <ToolBar.Header>Text Style</ToolBar.Header>
 
-                <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text" Focusable="False"
+                <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text"
                               IsChecked="{Binding ActiveFontBold}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_bold"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
-                <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" Focusable="False"
+                <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" 
                               IsChecked="{Binding ActiveFontItalic}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_italic"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
-                <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" Focusable="False"
+                <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" 
                               IsChecked="{Binding ActiveFontUnderline}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_underlined"/>
@@ -98,25 +99,25 @@
             </ToolBar>
 
             <!--Alignment toolbar-->
-            <ToolBar x:Name="ToolbarAlignment" Band="0" BandIndex="1" Focusable="False">
+            <ToolBar x:Name="ToolbarAlignment" Band="0" BandIndex="1" Loaded="Toolbar_Loaded">
 
                 <ToolBar.Header>Alignment</ToolBar.Header>
 
-                <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" Focusable="False"
+                <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" 
                               IsChecked="{Binding ActiveAlignmentLeft}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_align_left"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
-                <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" Focusable="False"
+                <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" 
                               IsChecked="{Binding ActiveAlignmentCenter}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_align_center"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
-                <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" Focusable="False"
+                <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" 
                               IsChecked="{Binding ActiveAlignmentRight}">
                     <ToggleButton.Content>
                         <themer:DynamicImage SymbolName="format_align_right"/>
@@ -126,40 +127,42 @@
             </ToolBar>
 
             <!--Document-wide formatting toolbar-->
-            <ToolBar x:Name="ToolbarBackground" Band="1" BandIndex="0" Focusable="False">
+            <ToolBar x:Name="ToolbarBackground" Band="0" BandIndex="3" Loaded="Toolbar_Loaded">
 
                 <ToolBar.Header>Background</ToolBar.Header>
 
-                <xctk:ColorPicker x:Name="cp_Background" Focusable="False"
+                <xctk:ColorPicker x:Name="cp_Background" 
                                   Width="40"
                                   ToolTip="Background Color"
                                   SelectedColor="{Binding ActiveBackgroundColor}">
                 </xctk:ColorPicker>
             </ToolBar>
 
-            <!--Image toolbar-->
-            <ToolBar x:Name="ToolbarEmbedImage" Band="1" BandIndex="1" Focusable="False">
-                <ToolBar.Header>Embed Image</ToolBar.Header>
-                <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Focusable="False"
-                        Click="btn_InsertImage_Click" x:FieldModifier="public">
-                    <Button.Content>
-                        <themer:DynamicImage SymbolName="add_image"/>
-                    </Button.Content>
-                </Button>
-            </ToolBar>
+            <!--Insert/Embed toolbar-->
+            <ToolBar x:Name="ToolbarEmbedInsert" Band="1" BandIndex="1" Loaded="Toolbar_Loaded">
+                <ToolBar.Header>Embed or Insert</ToolBar.Header>
 
-            <!--Attachment toolbar-->
-            <ToolBar x:Name="ToolbarAttachments" Band="1" BandIndex="2" Focusable="False">
-                <ToolBar.Header>Attach File</ToolBar.Header>
-                <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment" Focusable="False"
-                        Click="btn_InsertAttachment_Click" x:FieldModifier="public">
+                <Button x:Name="btn_InsertImage" ToolTip="Insert Image" Click="btn_InsertImage_Click" x:FieldModifier="public"
+                        VerticalAlignment="Center">
                     <Button.Content>
-                        <themer:DynamicImage SymbolName="add_attachment"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <themer:DynamicImage SymbolName="add_image" VerticalAlignment="Center" Width="16" Height="16"/>
+                            <TextBlock Text="Image" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </Button.Content>
                 </Button>
 
+                <Button x:Name="btn_InsertAttachment" ToolTip="Add Attachment"  Click="btn_InsertAttachment_Click" x:FieldModifier="public"
+                        VerticalAlignment="Center">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <themer:DynamicImage SymbolName="add_attachment" VerticalAlignment="Center" Width="16" Height="16"/>
+                            <TextBlock Text="Attachment" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                
             </ToolBar>
-
 
         </ToolBarTray>
 
@@ -178,8 +181,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=BrowserCursorPosition}"/>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock Text="{Binding Path=BrowserCursorPosition}" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">

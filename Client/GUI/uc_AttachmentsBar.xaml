@@ -11,7 +11,9 @@
         <ToolBar x:Name="Toolbar"
                  Height="24"
                  VerticalAlignment="Top"
-                 Focusable="False">
+                 BorderBrush="{DynamicResource BorderNormalBrushKey}"
+                 BorderThickness="0"
+                 Background="{DynamicResource ControlNormalBrushKey}">
             <ToolBar.Header>
                 <TextBlock FontWeight="Bold" Text="Attachments:"/>
             </ToolBar.Header>

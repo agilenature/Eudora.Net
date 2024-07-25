@@ -28,7 +28,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5,0,0,0" Text="Event Log"/>
 
         <Button x:Name="btn_Toggle" 
-                Grid.Row="0" Grid.Column="1"
+                Grid.Row="0" Grid.Column="2"
                 Style="{DynamicResource SmallPanelButton}"
                 ToolTip="Close event log"
                 Click="btn_EventLog_Click">
@@ -38,7 +38,7 @@
         </Button>
 
         <Button x:Name="btn_Copy"
-                Grid.Row="0" Grid.Column="2"
+                Grid.Row="0" Grid.Column="1"
                 Style="{DynamicResource SmallPanelButton}"
                 ToolTip="Copy event log"
                 Click="btn_Copy_Click">

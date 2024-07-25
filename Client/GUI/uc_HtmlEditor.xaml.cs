@@ -48,8 +48,7 @@ namespace Eudora.Net.GUI
         private bool _ToolbarFontStyleEnabled = true;
         private bool _ToolbarAlignmentEnabled = true;
         private bool _ToolbarBackgroundEnabled = true;
-        private bool _ToolbarEmbedImageEnabled = true;
-        private bool _ToolbarAttachmentsEnabled = true;
+        private bool _ToolbarEmbedEnabled = true;
 
         /////////////////////////////
         #endregion Fields
@@ -124,29 +123,16 @@ namespace Eudora.Net.GUI
             }
         }
 
-        public bool ToolbarEmbedImageEnabled
+        public bool ToolbarEmbedEnabled
         {
-            get => _ToolbarEmbedImageEnabled;
+            get => _ToolbarEmbedEnabled;
             set
             {
-                _ToolbarEmbedImageEnabled = value;
-                ToolbarEmbedImage.IsEnabled = value;
-                ToolbarEmbedImage.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                _ToolbarEmbedEnabled = value;
+                ToolbarEmbedInsert.IsEnabled = value;
+                ToolbarEmbedInsert.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-
-        public bool ToolbarAttachmentsEnabled
-        {
-            get => _ToolbarAttachmentsEnabled;
-            set
-            {
-                _ToolbarAttachmentsEnabled = value;
-                ToolbarAttachments.IsEnabled = value;
-                ToolbarAttachments.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-
-
 
         /////////////////////////////
         #endregion Properties
@@ -165,6 +151,7 @@ namespace Eudora.Net.GUI
 
             MainGrid.Children.Add(Webview);
             Grid.SetRow(Webview, 1);
+            //Webview.Margin = new Thickness(2);
             Webview.Focusable = true;
 
             Webview.CoreWebView2.NavigationStarting += Webview_NavigationStarting;
@@ -194,6 +181,22 @@ namespace Eudora.Net.GUI
             debugGrid.Visibility = Visibility.Collapsed;
             RowDebug.Height = new GridLength(0);
 #endif
+        }
+
+        private void Toolbar_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is not ToolBar toolBar) return;
+
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+            var mainPanelBorder = toolBar.Template.FindName("MainPanelBorder", toolBar) as FrameworkElement;
+            if (mainPanelBorder != null)
+            {
+                mainPanelBorder.Margin = new Thickness();
+            }
         }
 
         private void Uc_HtmlEditor_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

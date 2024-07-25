@@ -18,8 +18,7 @@ namespace Eudora.Net.GUI
             //Editor.Document.PropertyChanged += Document_PropertyChanged;
             Editor.EditorIsReady += Editor_EditorIsReady;
             Editor.DocumentLoaded += Editor_DocumentLoaded;
-            Editor.ToolbarAttachmentsEnabled = false;
-            Editor.ToolbarEmbedImageEnabled = false;
+            Editor.ToolbarEmbedEnabled = false;
             Editor.ToolbarBackgroundEnabled = false;
         }
 

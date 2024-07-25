@@ -10,7 +10,6 @@ namespace Eudora.Net.GUI
         public enum eSubview
         {
             AddressBook,
-            DirectoryServices,
             Filters,
             FilterReport,
             LinkHistory
@@ -53,15 +52,12 @@ namespace Eudora.Net.GUI
                     TabTitle = "Address Book";
                     break;
                 case 1:
-                    TabTitle = "Directory Services";
-                    break;
-                case 2:
                     TabTitle = "Filters";
                     break;
-                case 3:
+                case 2:
                     TabTitle = "Filter Report";
                     break;
-                case 4:
+                case 3:
                     TabTitle = "Link History";
                     break;
                 default:

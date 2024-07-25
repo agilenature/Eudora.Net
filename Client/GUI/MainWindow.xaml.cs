@@ -633,11 +633,6 @@ namespace Eudora.Net.GUI
             ActivateServicesViewTab(uc_ServicesView.eSubview.AddressBook);
         }
 
-        public void ShowDirectoryServicesView()
-        {
-            ActivateServicesViewTab(uc_ServicesView.eSubview.DirectoryServices);
-        }
-
         public void ShowFiltersView()
         {
             ActivateServicesViewTab(uc_ServicesView.eSubview.Filters);

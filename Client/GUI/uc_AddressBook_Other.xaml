@@ -21,21 +21,21 @@
                     <Setter Property="LastChildFill" Value="False"/>
                 </Style.Setters>
             </Style>
-            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Style.Setters>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="5,0,5,0"/>
                 </Style.Setters>
             </Style>
-            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                 <Style.Setters>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="5,0,5,0"/>
                 </Style.Setters>
             </Style>
-            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                 <Style.Setters>
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     <Setter Property="VerticalAlignment" Value="Stretch"/>

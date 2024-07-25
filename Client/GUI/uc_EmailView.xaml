@@ -6,6 +6,7 @@
                         xmlns:local="clr-namespace:Eudora.Net.GUI"
                         xmlns:core="clr-namespace:Eudora.Net.Core"
                         xmlns:data="clr-namespace:Eudora.Net.Data"
+                        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
                         d:DataContext="{d:DesignInstance Type=data:EmailMessage}"
                         mc:Ignorable="d"
                         d:DesignHeight="450"
@@ -23,7 +24,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition x:Name="row_Toolbar" Height="30"/>
-            <RowDefinition x:Name="row_Header" Height="125"/>
+            <RowDefinition x:Name="row_Header" Height="140"/>
             <RowDefinition x:Name="row_Attachments" Height="24"/>
             <RowDefinition x:Name="row_Editor" Height="*"/>
         </Grid.RowDefinitions>
@@ -31,7 +32,7 @@
 
 
         <!--Mail toolbar section-->
-        <ToolBarTray Grid.Row="0" Focusable="False">
+        <ToolBarTray Grid.Row="0" IsLocked="True">
 
             <!--GUI styling for this tray region and its contents-->
             <ToolBarTray.Resources>
@@ -51,117 +52,106 @@
             </ToolBarTray.Resources>
 
             <!--Mail toolbar-->
-            <ToolBar x:Name="MainToolbar" IsEnabled="False" BandIndex="0" Band="0">
+            <ToolBar x:Name="MainToolbar" IsEnabled="False" BandIndex="0" Band="0" Loaded="Toolbar_Loaded">
 
-                <Label Content="Priority:"/>
-                <ComboBox x:Name="cb_Priority"
+                <Label Content="Priority:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="cb_Priority" VerticalAlignment="Center" Margin="0,0,5,0"
                           Width="100"
                           ToolTip="Message priority"
                           SelectionChanged="cb_Priority_SelectionChanged">
                 </ComboBox>
 
-                <Label Content="Signature:"/>
-                <ComboBox x:Name="cb_Signature"
+                <Border Width="20" Background="Transparent"/>
+
+                <Label Content="Signature:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="cb_Signature" VerticalAlignment="Center" Margin="0,0,5,0"
                           Width="150"
                           ToolTip="Select signature"
                           DisplayMemberPath="Name"
                           SelectionChanged="cb_Signature_SelectionChanged">
                 </ComboBox>
 
-                <Label Content="Stationery:"/>
-                <ComboBox x:Name="cb_Stationery"
+                <Border Width="20" Background="Transparent"/>
+                
+                <Label Content="Stationery:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="cb_Stationery" VerticalAlignment="Center" Margin="0,0,5,0"
                           Width="150"
                           ToolTip="Select stationery"
                           DisplayMemberPath="Name"
                           SelectionChanged="cb_Stationery_SelectionChanged">
                 </ComboBox>
 
-            </ToolBar>
-
-            
-
-            <ToolBar x:Name="ToolbarSend" BandIndex="1" Band="0">
+                <Border Width="20" Background="Transparent"/>
                 
-                <Button x:Name="btn_Send" Click="btn_Send_Click" ToolTip="Send">
+                <Button x:Name="btn_Send" Click="btn_Send_Click" ToolTip="Send" MinWidth="50" Margin="5,0,5,0">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://application:,,,/GUI/res/images/tb18/image26x1.png"/>
+                            <themer:DynamicImage SymbolName="send" Width="16" Height="16"/>
                             <TextBlock Text="Send"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
                 
             </ToolBar>
+            
         </ToolBarTray>
 
 
 
         <!--Mail header section-->
-        <Grid Grid.Row="1" x:Name="HeaderPanel" IsEnabled="False" Focusable="False">
+        <!--<Border Grid.Row="1" BorderBrush="{DynamicResource BorderNormalBrushKey}" Background="{DynamicResource BorderNormalBrushKey}"/>-->
+
+        <Grid Grid.Row="1" x:Name="HeaderPanel" IsEnabled="False" Margin="1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="5"/>
-                <!--Margin, leave empty-->
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
 
-            <!--Define some styling here so it doesn't have to be repeated for individual controls--><!--
-            <Grid.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary>
-                            <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-                                <Setter Property="MinHeight" Value="20"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="Margin" Value="2,2,2,2"/>
-                            </Style>
-                            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-                                <Setter Property="MinHeight" Value="20"/>
-                                <Setter Property="HorizontalAlignment" Value="Right"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="Margin" Value="2,2,2,2"/>
-                                <Setter Property="Padding" Value="2,1,2,2"/>
-                            </Style>
-                        </ResourceDictionary>
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </Grid.Resources>-->
-
             <!--Field Labels-->
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="To"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="From"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Subject"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Cc"/>
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Bcc"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="To" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="From" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Subject" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Cc" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Bcc" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
 
             <!--Field Controls-->
-            <TextBox Grid.Row="0" Grid.Column="2" x:Name="tb_To"
-                     Text="{Binding Path=Addresses_To,Converter={StaticResource EmailListToStringConverter}}"/>
-            <TextBox Grid.Row="1" Grid.Column="2" x:Name="tb_From"
-                     Text="{Binding Path=SenderAddress.Address}"/>
-            <TextBox Grid.Row="2" Grid.Column="2" x:Name="tb_Subject"
+            <TextBox Grid.Row="1" Grid.Column="2" x:Name="tb_To"
+                     Text="{Binding Path=Addresses_To,Converter={StaticResource EmailListToStringConverter}}"
+                     VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="2" x:Name="tb_From"
+                     Text="{Binding Path=SenderAddress.Address}"
+                     VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="2" x:Name="tb_Subject"
                      Text="{Binding Path=Subject}"
-                     TextChanged="tb_Subject_TextChanged"/>
-            <TextBox Grid.Row="3" Grid.Column="2" x:Name="tb_CC"
-                     Text="{Binding Path=Addresses_CC,Converter={StaticResource EmailListToStringConverter}}"/>
-            <TextBox Grid.Row="4" Grid.Column="2" x:Name="tb_BCC"
-                     Text="{Binding Path=Addresses_BCC,Converter={StaticResource EmailListToStringConverter}}"/>
+                     TextChanged="tb_Subject_TextChanged"
+                     VerticalAlignment="Center"/>
+            <TextBox Grid.Row="4" Grid.Column="2" x:Name="tb_CC"
+                     Text="{Binding Path=Addresses_CC,Converter={StaticResource EmailListToStringConverter}}"
+                     VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5" Grid.Column="2" x:Name="tb_BCC"
+                     Text="{Binding Path=Addresses_BCC,Converter={StaticResource EmailListToStringConverter}}"
+                     VerticalAlignment="Center"/>
         </Grid>
 
         <local:uc_AttachmentsBar x:Name="AttachmentsBar" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                         DataContext="{Binding Path=Attachments}"></local:uc_AttachmentsBar>
-
+                                 DataContext="{Binding Path=Attachments}"
+                                 ToolBarTray.IsLocked="True"
+                                 Loaded="Toolbar_Loaded"/>
 
         <!--Mail editor / viewer section-->
-        <local:uc_HtmlEditor x:Name="Editor" Grid.Row="3" Focusable="True"/>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="{DynamicResource BorderNormalBrushKey}" BorderThickness="1"/>
+        <local:uc_HtmlEditor x:Name="Editor" Grid.Row="3" Focusable="True" Margin="3"/>
 
     </Grid>
 </local:ChildWindowBase>
