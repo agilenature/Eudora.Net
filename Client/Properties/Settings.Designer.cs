@@ -133,7 +133,7 @@ namespace Eudora.Net.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Eudora")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Eudora Classic")]
         public string UxTheme {
             get {
                 return ((string)(this["UxTheme"]));
