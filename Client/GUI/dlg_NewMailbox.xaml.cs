@@ -28,13 +28,9 @@ namespace Eudora.Net.GUI
             }
 
             // Must not exist already
-            string mailboxLc = mailbox.ToLower();
-            foreach(var mb in PostOffice.Instance.Mailboxes)
+            if (PostOffice.Mailboxes.Contains(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
             {
-                if(mb.Name.ToLower().Equals(mailboxLc, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return new ValidationResult(false, "That Mailbox already exists");
-                }
+                return new ValidationResult(false, "That Mailbox already exists");
             }
 
             // Must be a legal filename
