@@ -85,7 +85,7 @@ namespace Eudora.Net.Data
 
         public void RemoveContact(Contact contact)
         {
-            Datastore.Remove(contact);
+            Datastore.Delete(contact);
         }
         
         public void Load()
@@ -121,7 +121,7 @@ namespace Eudora.Net.Data
         {
             try
             {
-                Datastore.Remove(contact);
+                Datastore.Delete(contact);
             }
             catch(Exception ex)
             {
@@ -188,7 +188,7 @@ namespace Eudora.Net.Data
 
         public static void Remove(AddressBook book)
         {
-            Datastore.Remove(book);
+            Datastore.Delete(book);
         }
 
         public static AddressBook? Get(string name)

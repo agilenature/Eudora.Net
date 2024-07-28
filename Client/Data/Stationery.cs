@@ -151,7 +151,7 @@ namespace Eudora.Net.Data
 
         public static void Remove(Stationery stationery)
         {
-            Datastore.Remove(stationery);
+            Datastore.Delete(stationery);
         }
 
         public static bool Contains(string name)

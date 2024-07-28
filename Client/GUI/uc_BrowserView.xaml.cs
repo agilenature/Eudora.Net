@@ -285,7 +285,7 @@ namespace Eudora.Net.GUI
             var bookmark = ((FrameworkElement)sender).DataContext as BrowserBookmark;
             if(bookmark is not null)
             {
-                BrowserData.Bookmarks.Remove(bookmark);
+                BrowserData.Bookmarks.Delete(bookmark);
             }
         }
 

@@ -304,7 +304,7 @@ namespace Eudora.Net.Data
 
         public static void Remove(Personality personality)
         {
-            Datastore.Remove(personality);
+            Datastore.Delete(personality);
         }
 
         public static bool Contains(string name)

@@ -215,7 +215,7 @@ namespace Eudora.Net.Data
 
         public static void Remove(EmailFilter filter)
         {
-            Datastore.Remove(filter);
+            Datastore.Delete(filter);
         }
 
         public static bool Contains(string name)

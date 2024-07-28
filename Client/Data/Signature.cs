@@ -130,7 +130,7 @@ namespace Eudora.Net.Data
 
         public static void Remove(Signature signature)
         {
-            Datastore.Remove(signature);
+            Datastore.Delete(signature);
         }
 
         public static bool Contains(string name)
