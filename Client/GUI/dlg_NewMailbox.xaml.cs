@@ -28,7 +28,8 @@ namespace Eudora.Net.GUI
             }
 
             // Must not exist already
-            if (PostOffice.Mailboxes.Contains(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
+            //if (PostOffice.Instance.Mailboxes.Contains(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
+            if(PostOffice.Instance.Mailboxes.Any(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
             {
                 return new ValidationResult(false, "That Mailbox already exists");
             }
