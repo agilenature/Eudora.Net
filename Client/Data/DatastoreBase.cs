@@ -1,6 +1,7 @@
 ﻿using Eudora.Net.Core;
 using Eudora.Net.ExtensionMethods;
 using SQLite;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -21,13 +22,41 @@ namespace Eudora.Net.Data
 
         public DatastoreBase(string folder, string? subfolder, string name)
         {
-            DbName = $"{name}.db";
-            DbFolder = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, $"{folder}");
-            if (subfolder is not null)
+            try
             {
-                DbFolder = Path.Combine(DbFolder, $"{subfolder}");
+                DbName = $"{name}.db";
+                DbFolder = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, $"{folder}");
+                if (subfolder is not null)
+                {
+                    DbFolder = Path.Combine(DbFolder, subfolder);
+                }
+                DbPath = Path.Combine(DbFolder, $"{name}.db");
             }
-            DbPath = Path.Combine(DbFolder, $"{name}.db" );
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        public DatastoreBase(string folder, string[]? subfolders, string name)
+        {
+            try
+            {
+                DbName = $"{name}.db";
+                DbFolder = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, $"{folder}");
+                if (subfolders is not null)
+                {
+                    foreach (string subfolder in subfolders)
+                    {
+                        DbFolder = Path.Combine(DbFolder, subfolder);
+                    }
+                }
+                DbPath = Path.Combine(DbFolder, $"{name}.db");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         private void T_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -141,6 +170,10 @@ namespace Eudora.Net.Data
         {
             try
             {
+                if(Contains(item))
+                {
+                    return;
+                }
                 item.PropertyChanged += T_PropertyChanged;
                 DB.Insert(item);
                 Data.AddUnique(item);
@@ -151,7 +184,7 @@ namespace Eudora.Net.Data
             }
         }
 
-        public void Remove(T item)
+        public void Delete(T item)
         {
             try
             {
@@ -174,6 +207,58 @@ namespace Eudora.Net.Data
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+            }
+        }
+
+        public bool Contains(T t)
+        {
+           try
+            {
+                return Data.Contains(t);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return false;
+            }
+        }
+
+        public bool Contains(Func<T, bool> lambda)
+        {
+            try
+            {
+                return (DB.Table<T>().Where(lambda).FirstOrDefault() is not null);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return false;
+            }
+        }
+
+        public T? Find(Func<T, bool> lambda)
+        {
+            try
+            {
+                return DB.Table<T>().Where(lambda).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return default;
+            } 
+        }
+
+        public ObservableCollection<T>? FindAll(Func<T, bool> lambda)
+        {
+            try
+            {
+                return new ObservableCollection<T>(DB.Table<T>().Where(lambda));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return null;
             }
         }
     }
