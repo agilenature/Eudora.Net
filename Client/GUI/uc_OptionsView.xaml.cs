@@ -17,7 +17,8 @@ namespace Eudora.Net.GUI
 
             cb_ThemeSelect.ItemsSource = ThemeManager.Themes;
             cb_ThemeSelect.DisplayMemberPath = "DisplayName";
-            cb_ThemeSelect.SelectedItem = ThemeManager.Themes.Where(x => x.DisplayName == Properties.Settings.Default.UxTheme).First();
+            var theme = ThemeManager.Themes.Where(x => x.DisplayName == Properties.Settings.Default.UxTheme).FirstOrDefault();
+            cb_ThemeSelect.SelectedItem = theme ?? ThemeManager.Themes.First();
         }
 
         private void Uc_OptionsView_Loaded(object sender, RoutedEventArgs e)
