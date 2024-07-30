@@ -7,7 +7,6 @@
                     xmlns:core="clr-namespace:Eudora.Net.Core"
                     xmlns:data="clr-namespace:Eudora.Net.Data"
                     xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
-                    d:DataContext="{d:DesignInstance Type=data:Signature}"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="400">
     <Grid>
@@ -65,9 +64,18 @@
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  BorderThickness="0"
                  Background="{DynamicResource BackgroundNormalBrushKey}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="Transparent">
+                            <StackPanel.InputBindings>
+                                <MouseBinding MouseAction="LeftDoubleClick"
+                                              Command="{Binding RelativeSource={RelativeSource AncestorType=local:uc_SignaturesTab}, Path=EditCommand}"/>
+                            </StackPanel.InputBindings>
                         <Image Source="pack://application:,,,/GUI/res/icons/signatur.ico" Width="16" Height="16"/>
                         <TextBlock Text="{Binding Path=Name}"/>
                     </StackPanel>

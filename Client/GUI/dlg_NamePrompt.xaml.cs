@@ -1,7 +1,9 @@
 ﻿using Eudora.Net.Core;
 using Eudora.Net.Data;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Windows.Gaming.Input;
 
 namespace Eudora.Net.GUI
 {
@@ -34,6 +36,9 @@ namespace Eudora.Net.GUI
             set { SetValue(ItemTypeNameProperty, value); }
         }
 
+        public delegate bool ValidateNameDelegate(string name);
+
+
         /////////////////////////////
         #endregion Dependency Properties
         ///////////////////////////////////////////////////////////
@@ -46,6 +51,8 @@ namespace Eudora.Net.GUI
             tb_Name.Focus();
         }
 
+
+
         private void SetErrorState(bool set)
         {
             tb_Name.BorderBrush = set ? GHelpers.ErrorBrush : SystemColors.HotTrackBrush;
@@ -54,11 +61,13 @@ namespace Eudora.Net.GUI
         private bool ValidateName()
         {
             SetErrorState(false);
+            
             if (!DataValidation.IsValidPath(ItemName))
             {
                 SetErrorState(true);
                 return false;
             }
+
             return true;
         }
 

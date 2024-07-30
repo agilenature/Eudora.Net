@@ -168,5 +168,16 @@ namespace Eudora.Net.GUI
         {
             Editor.Print();
         }
+
+        private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (DataContext is Signature signature)
+                {
+                    signature.Name = tb_Name.Text;
+                }
+            }
+        }
     }
 }

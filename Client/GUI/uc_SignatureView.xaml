@@ -16,8 +16,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Label Padding="0,0,0,0" Margin="1,1,1,1" Content="{Binding Name}"/>
+        <Border Grid.Row="0" Background="{DynamicResource ControlNormalBrushKey}"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Signature name:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBox x:Name="tb_Name" VerticalAlignment="Center" Margin="5,0,0,0" MinWidth="150" KeyUp="TextBox_KeyUp">
+                <TextBox.Text>
+                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+            </TextBox>
         </StackPanel>
 
         <local:uc_HtmlEditor x:Name="Editor" Grid.Row="1"/>

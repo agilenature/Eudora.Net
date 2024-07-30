@@ -1,4 +1,5 @@
 ﻿using Eudora.Net.Data;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,11 +10,17 @@ namespace Eudora.Net.GUI
     /// </summary>
     public partial class uc_StationeryTab : uc_TabBase
     {
+        public DelegateCommand EditCommand { get; set; }
+
         public uc_StationeryTab()
         {
+            EditCommand = new DelegateCommand((o) => btn_Edit_Click(o, null), (o) => listbox.SelectedItem != null);
+
             InitializeComponent();
+            
             listbox.ItemsSource = StationeryManager.Datastore.Data;
             listbox.SelectedIndex = 0;
+            
             EnableButtons(false);
 
             Loaded += Uc_StationeryTab_Loaded;
@@ -50,11 +57,11 @@ namespace Eudora.Net.GUI
 
         private void btn_New_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new dlg_NamePrompt(nameof(Stationery));
-            dlg.Owner = MainWindow.Instance;
-            if (dlg.ShowDialog() == false) return;
+            //var dlg = new dlg_NamePrompt(nameof(Stationery));
+            //dlg.Owner = MainWindow.Instance;
+            //if (dlg.ShowDialog() == false) return;
 
-            var stationery = StationeryManager.New(dlg.ItemName);
+            var stationery = StationeryManager.New($"stationery_{Path.GetRandomFileName()}");
             ListviewSelectLastItem();
             MainWindow.Instance?.ShowStationery(stationery);
         }
