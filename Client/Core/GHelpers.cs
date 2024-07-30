@@ -14,6 +14,20 @@ namespace Eudora.Net.Core
         public static string EmailContentToken = "@CONTENT_TOKEN";
         public static SolidColorBrush ErrorBrush = new(Colors.Red);
 
+        public static string MakeTempName(string templatePrefix)
+        {
+            string name = string.Empty;
+            try
+            {
+               name = $"{templatePrefix}_{DateTime.Now.Ticks}";
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            return name;
+        }
+
 
         public static string LoadResourceFileAsString(string resourceName)
         {

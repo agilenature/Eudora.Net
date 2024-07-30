@@ -39,13 +39,13 @@
             <TabItem Header="General">
                 <Grid Margin="5,5,5,5">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -53,27 +53,27 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Label Block-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Personality Name" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Email Name" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Email Address" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Password" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="Signature" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Text="Stationery" Margin="0,0,5,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Personality Name" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Email Name" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Email Address" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Password" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="Signature" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Text="Stationery" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     
                     <!--Data-entry Block-->
-                    <TextBox x:Name="tb_DisplayName" Grid.Row="0" Grid.Column="1" Text="{Binding PersonalityName}" Margin="5,0,5,0"/>
-                    <TextBox x:Name="tb_RealName" Grid.Row="1" Grid.Column="1" Text="{Binding EmailName}" Margin="5,0,5,0"/>
-                    <TextBox x:Name="tb_Address" Grid.Row="2" Grid.Column="1" Text="{Binding EmailAddress}" Margin="5,0,5,0"/>
-                    <TextBox x:Name="tb_Password" Grid.Row="3" Grid.Column="1" Text="{Binding EmailPassword}" Margin="5,0,5,0"/>
+                    <TextBox x:Name="tb_DisplayName" Grid.Row="0" Grid.Column="1" Text="{Binding PersonalityName}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_RealName" Grid.Row="1" Grid.Column="1" Text="{Binding EmailName}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_Address" Grid.Row="2" Grid.Column="1" Text="{Binding EmailAddress}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_Password" Grid.Row="3" Grid.Column="1" Text="{Binding EmailPassword}" Margin="5,0,5,0" VerticalAlignment="Center"/>
                     <ComboBox x:Name="cb_Signature"
                               Grid.Row="4" Grid.Column="1" SelectionChanged="cb_Signature_SelectionChanged"
-                              Margin="5,1,5,1" HorizontalAlignment="Left" MinWidth="150" 
+                              Margin="5,1,5,1" HorizontalAlignment="Left" MinWidth="150" VerticalAlignment="Center"
                               SelectedValue="{Binding DefaultSignature}"/>
                     <ComboBox x:Name="cb_Stationery"
                               Grid.Row="5" Grid.Column="1" SelectionChanged="cb_Stationery_SelectionChanged"
-                              Margin="5,1,5,1" HorizontalAlignment="Left" MinWidth="150" 
+                              Margin="5,1,5,1" HorizontalAlignment="Left" MinWidth="150" VerticalAlignment="Center"
                               SelectedValue="{Binding DefaultStationery}"/>
-                    <CheckBox x:Name="cbx_Default" Grid.Row="6" Grid.Column="0" IsChecked="{Binding IsDefault}" Margin="5,0,5,0"
+                    <CheckBox x:Name="cbx_Default" Grid.Row="6" Grid.Column="0" IsChecked="{Binding IsDefault}" Margin="5,5,5,0"
                               Content="Make Default" HorizontalAlignment="Right" Checked="cbx_Default_Checked"/>
                 </Grid>
             </TabItem>
@@ -82,9 +82,9 @@
             <TabItem Header="Outgoing">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -92,13 +92,13 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Label Block-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Server Address" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Port" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Secure Sockets Option" Margin="0,0,5,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Server Address" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Port" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Secure Sockets Option" Margin="0,0,5,0" VerticalAlignment="Center"/>
 
                     <!--Data-entry Block-->
-                    <TextBox x:Name="tb_Outgoing_Server" Grid.Row="0" Grid.Column="1" Text="{Binding Server_Outgoing}" Margin="5,0,5,0"/>
-                    <TextBox x:Name="tb_Outgoing_Port" Grid.Row="1" Grid.Column="1" Text="{Binding Port_Outgoing}" Margin="5,0,5,0"/>
+                    <TextBox x:Name="tb_Outgoing_Server" Grid.Row="0" Grid.Column="1" Text="{Binding Server_Outgoing}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_Outgoing_Port" Grid.Row="1" Grid.Column="1" Text="{Binding Port_Outgoing}" Margin="5,0,5,0" VerticalAlignment="Center"/>
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,5,0">
                         <RadioButton x:Name="rb_out_none" Tag="none" GroupName="grp_SSL_Out" Content="None" Margin="5,0,5,0" Click="RadioGroup_SSL_Click"/>
                         <RadioButton x:Name="rb_out_auto" Tag="auto" GroupName="grp_SSL_Out" Content="Auto" Margin="5,0,5,0" Click="RadioGroup_SSL_Click"/>
@@ -113,11 +113,11 @@
             <TabItem Header="Incoming">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -125,10 +125,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Label Block-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Protocol" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Server Address" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Port" Margin="0,0,5,0"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Secure Sockets Option" Margin="0,0,5,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Protocol" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Server Address" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Port" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Secure Sockets Option" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <!--<TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="Remote Mailbox Option" Margin="0,0,5,0"/>-->
                     
                     <!--Data-entry Block-->
@@ -140,8 +140,8 @@
                         <RadioButton GroupName="grp_protocol" Content="POP3" IsChecked="{Binding UsePop}" Margin="5,0,0,0"/>
                         <RadioButton GroupName="grp_protocol" Content="IMAP" IsChecked="{Binding UseImap}" Margin="5,0,0,0"/>
                     </StackPanel>
-                    <TextBox x:Name="tb_Incoming_Server" Grid.Row="1" Grid.Column="1" Text="{Binding Server_Incoming}" Margin="5,0,5,0"/>
-                    <TextBox x:Name="tb_Incoming_Port" Grid.Row="2" Grid.Column="1" Text="{Binding Port_Incoming}" Margin="5,0,5,0"/>
+                    <TextBox x:Name="tb_Incoming_Server" Grid.Row="1" Grid.Column="1" Text="{Binding Server_Incoming}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_Incoming_Port" Grid.Row="2" Grid.Column="1" Text="{Binding Port_Incoming}" Margin="5,0,5,0" VerticalAlignment="Center"/>
                     <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                         <RadioButton x:Name="rb_in_none" Tag="none" GroupName="grp_SSL_In" Content="None" Margin="5,0,5,0" Click="RadioGroup_SSL_Click"/>
                         <RadioButton x:Name="rb_in_auto" Tag="auto" GroupName="grp_SSL_In" Content="Auto" Margin="5,0,5,0" Click="RadioGroup_SSL_Click"/>

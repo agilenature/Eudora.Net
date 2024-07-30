@@ -1,4 +1,5 @@
-﻿using Eudora.Net.Data;
+﻿using Eudora.Net.Core;
+using Eudora.Net.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -61,7 +62,7 @@ namespace Eudora.Net.GUI
             //dlg.Owner = MainWindow.Instance;
             //if (dlg.ShowDialog() == false) return;
 
-            var stationery = StationeryManager.New($"stationery_{Path.GetRandomFileName()}");
+            var stationery = StationeryManager.New(GHelpers.MakeTempName("stationery"));
             ListviewSelectLastItem();
             MainWindow.Instance?.ShowStationery(stationery);
         }
