@@ -54,6 +54,14 @@ namespace Eudora.Net.GUI
         private void listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableButtons(listbox.SelectedItem != null);
+
+            if (listbox.SelectedItem is Signature signature)
+            {
+                if (MainWindow.Instance?.MDI.FindWindow(typeof(uc_SignatureView)) is not null)
+                {
+                    MainWindow.Instance?.ShowSignature(signature);
+                }
+            }
         }
 
         private void btn_New_Click(object sender, RoutedEventArgs e)

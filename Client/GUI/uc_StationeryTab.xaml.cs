@@ -54,6 +54,14 @@ namespace Eudora.Net.GUI
         private void listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableButtons(listbox.SelectedItem != null);
+
+            if (listbox.SelectedItem is Stationery stationery)
+            {
+                if(MainWindow.Instance?.MDI.FindWindow(typeof(uc_StationeryView)) is not null)
+                {
+                    MainWindow.Instance?.ShowStationery(stationery);
+                }
+            }
         }
 
         private void btn_New_Click(object sender, RoutedEventArgs e)

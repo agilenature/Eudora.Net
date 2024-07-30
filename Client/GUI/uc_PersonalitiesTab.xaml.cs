@@ -36,8 +36,12 @@ namespace Eudora.Net.GUI
         {
             if (listview.SelectedItem is Personality personality)
             {
-                MainWindow.Instance?.ShowMailMessage(PostOffice.CreateMessage_Outgoing(personality));
+                MainWindow.Instance?.ShowPersonality(personality);
             }
+            //if (listview.SelectedItem is Personality personality)
+            //{
+            //    MainWindow.Instance?.ShowMailMessage(PostOffice.CreateMessage_Outgoing(personality));
+            //}
         }
 
         private void btn_New_Click(object sender, RoutedEventArgs e)
@@ -80,6 +84,11 @@ namespace Eudora.Net.GUI
             if (listview.SelectedItem is Personality personality)
             {
                 btn_Delete.IsEnabled = true;
+
+                if(MainWindow.Instance?.MDI.FindWindow(typeof(uc_PersonalityView)) is not null)
+                {
+                    MainWindow.Instance?.ShowPersonality(personality);
+                }
             }
         }
     }

@@ -72,6 +72,7 @@
                     <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
                         <Setter Property="Control.HorizontalContentAlignment" Value="Left"/>
                         <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+                        <EventSetter Event="MouseDoubleClick" Handler="listview_MouseDoubleClick"/>
                     </Style>
                 </ResourceDictionary>
             </ListView.Resources>
