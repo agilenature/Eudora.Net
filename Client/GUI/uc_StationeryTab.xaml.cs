@@ -75,7 +75,7 @@ namespace Eudora.Net.GUI
             MainWindow.Instance?.ShowStationery(stationery);
         }
 
-        private void btn_Edit_Click(object sender, RoutedEventArgs e)
+        private void btn_Edit_Click(object? sender, RoutedEventArgs e)
         {
             if (listbox.SelectedItem is Stationery stationery)
             {

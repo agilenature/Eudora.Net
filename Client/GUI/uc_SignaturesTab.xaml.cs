@@ -75,7 +75,7 @@ namespace Eudora.Net.GUI
             MainWindow.Instance?.ShowSignature(signature);
         }
 
-        private void btn_Edit_Click(object sender, RoutedEventArgs e)
+        private void btn_Edit_Click(object? sender, RoutedEventArgs e)
         {
             if(listbox.SelectedValue is Signature signature)
             {
