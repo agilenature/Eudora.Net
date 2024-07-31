@@ -110,6 +110,7 @@ namespace Eudora.Net.Core
             }
             NewEvent(LogEvent.EventCategory.Warning, message);
 
+            // If enabled, email the exception to the reporting service
             if(Eudora.Net.Properties.Settings.Default.EnableErrorReporting)
             {
                 IssueReporter.ReportException(ex);

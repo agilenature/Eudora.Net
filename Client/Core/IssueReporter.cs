@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MailKit;
+﻿using System.Diagnostics;
+using System.IO;
 
 namespace Eudora.Net.Core
 {
     internal static class IssueReporter
     {
-        public static void ReportException(Exception ex)
+        public static async void ReportException(Exception ex)
         {
             try
             {
-                string template = GHelpers.LoadResourceFileAsString("Eudora.Net.HtmlTemplates.ExceptionReport.html");
-                template.Replace("@Model.ExceptionType", ex.GetType().Name);
-                template.Replace("@Model.ExceptionMessage", ex.Message);
-                template.Replace("@Model.ExceptionStackTrace", ex.StackTrace);
-
-                Data.EmailMessage email = new();
-                email.Subject = "Eudora.Net Exception Report";
-                email.Body = template;
-                email.Addresses_To.Add(new Data.EmailAddress("Eudora.Net Support", ""));
-                email.SenderAddress = new Data.EmailAddress("Eudora.Net Support", "");
+                DateTime now = DateTime.Now.ToUniversalTime();
+                await Send("Eudora.Net Exception", $"{now.ToString()}\r\n{ex.Message}");
             }
             catch(Exception e)
             {
@@ -30,23 +18,41 @@ namespace Eudora.Net.Core
             }
         }
 
-        public static void ReportFeedback(string feedback)
+        public static async void ReportFeedback(string feedback)
         {
             try
             {
-                // The text originates in a Windows TextBox
-                feedback = feedback.Replace("\r\n", "<br/>");
-
-                string template = GHelpers.LoadResourceFileAsString("Eudora.Net.HtmlTemplates.FeedbackReport.html");
-                template.Replace("@Model.Feedback", feedback);
-
-                Data.EmailMessage email = new();
-                email.Subject = "Eudora.Net Feedback";
-                email.Body = template;
-                email.Addresses_To.Add(new Data.EmailAddress("Eudora.Net Support", ""));
-                email.SenderAddress = new Data.EmailAddress("Eudora.Net Support", "");
+                DateTime now = DateTime.Now.ToUniversalTime();
+                await Send("Eudora.Net Feedback", $"{now.ToString()}\r\n{feedback}");
             }
             catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private static async Task Send(string subject, string body)
+        {
+            try
+            {
+                using Process process = new Process();
+                process.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"EudoraReporter\EudoraReporter.exe");
+                process.StartInfo.ArgumentList.Add(subject);
+                process.StartInfo.ArgumentList.Add(body);
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.ErrorDialog = true;
+
+                if(process.Start())
+                {
+                    process.WaitForExit();
+                    Logger.NewEvent(LogEvent.EventCategory.Information, "EudoraReporter.exe exited with code " + process.ExitCode);
+                }
+                else
+                {
+                    Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to start EudoraReporter.exe");
+                }
+            }
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
