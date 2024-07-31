@@ -18,12 +18,13 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="3"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="5"/>
+            <RowDefinition Height="26"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -37,13 +38,12 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
                    TextWrapping="Wrap" HorizontalAlignment="Center">
             Use this form to submit whatever feedback you like to the develpoment team.
-            We welcome all feedback:
-            suggestions, bug reports, feature requests, compliments, dessert recipes, etc.
+            We welcome all feedback: suggestions, bug reports, feature requests, compliments, complaints, etc.
         </TextBlock>
 
         <Border Grid.Row="2" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>
 
-        <TextBox x:Name="tb_Feedback" Grid.Row="3" Grid.ColumnSpan="5" Margin="5"
+        <TextBox x:Name="tb_Feedback" Grid.Row="3" Grid.ColumnSpan="5" Margin="10"
                  TextWrapping="Wrap" AcceptsReturn="True" SpellCheck.IsEnabled="True"
                  BorderThickness="0"
                  Text="{Binding Feedback}">
@@ -51,7 +51,7 @@
 
         <Border Grid.Row="4" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>
 
-        <Button x:Name="btn_OK" Grid.Row="5" Grid.Column="3"
+        <Button x:Name="btn_OK" Grid.Row="6" Grid.Column="3"
                 Style="{DynamicResource DialogMainButton}"
                 IsDefault="True"
                 Click="btn_OK_Click">
@@ -63,7 +63,7 @@
             </Button.Content>
         </Button>
 
-        <Button x:Name="btn_Cancel" Grid.Row="5" Grid.Column="1"
+        <Button x:Name="btn_Cancel" Grid.Row="6" Grid.Column="1"
                 Style="{DynamicResource DialogMainButton}"
                 IsCancel="True"
                 Click="btn_Cancel_Click">
