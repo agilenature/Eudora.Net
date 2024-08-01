@@ -662,9 +662,9 @@
     <Resource Include="GUI\theme\images\trash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <SplashScreen Include="GUI\res\images\logos\MainLogo.png">
+    <Resource Include="GUI\res\images\logos\MainLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </SplashScreen>
+    </Resource>
     <Resource Include="GUI\res\images\new\bing.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -677,9 +677,9 @@
     <Resource Include="GUI\res\images\new\google.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="GUI\res\images\new\splash.png">
+    <SplashScreen Include="GUI\res\images\new\splash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    </SplashScreen>
     <Resource Include="GUI\res\images\source\comptbar.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
