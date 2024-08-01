@@ -20,6 +20,7 @@ namespace Eudora.Net.Core
         private object CollectionLocker = new();
         private string _Name = string.Empty;
         private string _ImageSource = string.Empty;
+        private int _SortOrder = 999;
 
         /////////////////////////////
         #endregion Fields
@@ -33,7 +34,11 @@ namespace Eudora.Net.Core
         [JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
 
-        
+        public int SortOrder
+        {
+            get => _SortOrder;
+            set { if (_SortOrder != value) { _SortOrder = value; } }
+        }
         
         public string Name
         {
@@ -60,6 +65,14 @@ namespace Eudora.Net.Core
         {
             _Name = name;
             _ImageSource = imageSource;
+            InitializeForIO();
+        }
+
+        public Mailbox(string name, string imageSource, int sortOrder)
+        {
+            _Name = name;
+            _ImageSource = imageSource;
+            _SortOrder = sortOrder;
             InitializeForIO();
         }
 

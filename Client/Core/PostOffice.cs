@@ -84,7 +84,7 @@ namespace Eudora.Net.Core
             Forward
         }
 
-        public ObservableCollection<Mailbox> Mailboxes { get; set; } = [];
+        public SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
 
         /////////////////////////////
         #endregion Properties
@@ -143,19 +143,19 @@ namespace Eudora.Net.Core
             // Default mailboxes
             if (!File.Exists(MailboxFullPathFromName("Inbox")))
             {
-                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/tb32/tb32_21.png"));
+                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/tb32/tb32_21.png", 0));
             }
             if (!File.Exists(MailboxFullPathFromName("Drafts")))
             {
-                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png"));
+                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png", 1));
             }
             if (!File.Exists(MailboxFullPathFromName("Sent")))
             {
-                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png"));
+                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png", 2));
             }
             if (!File.Exists(MailboxFullPathFromName("Trash")))
             {
-                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/tb16/tb16_49.png"));
+                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/tb16/tb16_49.png", 3));
             }
 
             LoadMailboxes();
@@ -304,6 +304,9 @@ namespace Eudora.Net.Core
                             Mailboxes.Add(mailbox);
                         }
                     }
+
+                    // File-on-disk order will differ from the desired order
+                    Mailboxes.Sort(Mailboxes.OrderBy(i => i.SortOrder));
                 }
             }
             catch(Exception ex)
