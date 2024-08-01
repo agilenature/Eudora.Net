@@ -5,6 +5,8 @@ using Eudora.Net.Data;
 using System.Windows.Controls;
 using Eudora.Net.ExtensionMethods;
 using WpfThemer;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Eudora.Net.GUI
 {
@@ -74,16 +76,15 @@ namespace Eudora.Net.GUI
         private void PopulateMailboxMenu()
         {
             Menu_Mailboxes.Items.Clear();
-            
-            foreach(var mailbox in PostOffice.Instance.Mailboxes)
+
+            foreach (var mailbox in PostOffice.Instance.Mailboxes)
             {
-                MenuItem item = new()
-                {
-                    Header = mailbox.Name,
-                    Icon = mailbox.ImageSource,
-                    Tag = mailbox.Name
-                };
+                MenuItem item = new();
+                item.Header = mailbox.Name;
+                //item.Icon = new BitmapImage(new Uri(mailbox.ImageSource));
+                item.Tag = mailbox.Name;
                 item.Click += MailboxMenuItem_Click;
+
                 Menu_Mailboxes.Items.Add(item);
             }
 
@@ -112,7 +113,7 @@ namespace Eudora.Net.GUI
                     MenuItem item = new()
                     {
                         Header = mailbox.Name,
-                        Icon = mailbox.ImageSource,
+                        //Icon = mailbox.ImageSource,
                         Tag = mailbox.Name
                     };
                     Menu_Transfer.Items.Add(item);
@@ -166,27 +167,26 @@ namespace Eudora.Net.GUI
             Menu_Help.IsEnabled = true;
             Menu_Help.EnableAllSubitems();
 
+            // Transfer
             Menu_Transfer.IsEnabled = false;
             Menu_Transfer.EnableAllSubitems();
 
+            // Enable the main toolbar items that are always active
+            btn_Inbox.IsEnabled = true;
+            btn_Drafts.IsEnabled = true;
+            btn_CheckMail.IsEnabled = true;
+            btn_NewMsg.IsEnabled = true;
+            btn_FindMsg.IsEnabled = true;
+            btn_AddressBook.IsEnabled = true;
+            btn_Browser.IsEnabled = true;
+            btn_Settings.IsEnabled = true;
 
             // Now selectively enable based on active view type
 
             // No view is active
             if (MDI.ActiveMdiChild is null)
             {
-                /* Main Menu */
-
-                /* Main Toolbar */
-
-                btn_Inbox.IsEnabled = true;
-                btn_Drafts.IsEnabled = true;
-                btn_CheckMail.IsEnabled = true;
-                btn_NewMsg.IsEnabled = true;
-                btn_FindMsg.IsEnabled = true;
-                btn_AddressBook.IsEnabled = true;
-                btn_Browser.IsEnabled = true;
-                btn_Settings.IsEnabled = true;
+                
             }
             // There is an active view
             else
@@ -199,30 +199,12 @@ namespace Eudora.Net.GUI
                     /* Main Menu */
 
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_BrowserView))
                 {
                     /* Main Menu */
 
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_CombinedMailboxView))
                 {
@@ -230,15 +212,6 @@ namespace Eudora.Net.GUI
 
 
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_EmailView))
                 {
@@ -257,49 +230,19 @@ namespace Eudora.Net.GUI
                         Menu_Edit.EnableAllSubitems();
                     }
 
-
-
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_EudoraStatisticsView))
                 {
                     /* Main Menu */
 
-
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_FindMessagesView))
                 {
                     /* Main Menu */
 
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_OptionsView))
                 {
@@ -307,47 +250,18 @@ namespace Eudora.Net.GUI
 
 
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_PersonalityView))
                 {
                     /* Main Menu */
 
-
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_ServicesView))
                 {
                     /* Main Menu */
 
-
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_SignatureView))
                 {
@@ -357,17 +271,7 @@ namespace Eudora.Net.GUI
                     Menu_Edit.IsEnabled = true;
                     Menu_Edit.EnableAllSubitems();
 
-
                     /* Main Toolbar */
-
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
                 else if(t == typeof(uc_StationeryView))
                 {
@@ -377,16 +281,7 @@ namespace Eudora.Net.GUI
                     Menu_Edit.IsEnabled = true;
                     Menu_Edit.EnableAllSubitems();
 
-
                     /* Main Toolbar */
-                    btn_Inbox.IsEnabled = true;
-                    btn_Drafts.IsEnabled = true;
-                    btn_CheckMail.IsEnabled = true;
-                    btn_NewMsg.IsEnabled = true;
-                    btn_FindMsg.IsEnabled = true;
-                    btn_AddressBook.IsEnabled = true;
-                    btn_Browser.IsEnabled = true;
-                    btn_Settings.IsEnabled = true;
                 }
             }
         }
