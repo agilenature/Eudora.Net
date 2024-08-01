@@ -11,6 +11,7 @@ namespace Eudora.Net.GUI
 
         public dlg_Confirmation(string message)
         {
+            Owner = Application.Current.MainWindow;
             InitializeComponent();
             DataContext = this;
             Message = message;
@@ -23,6 +24,12 @@ namespace Eudora.Net.GUI
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            Close();
+        }
+
+        private void btn_NCA_Close_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
             Close();

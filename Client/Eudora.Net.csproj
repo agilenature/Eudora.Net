@@ -491,6 +491,7 @@
     <None Remove="GUI\res\images\tb32\tb32_97.png" />
     <None Remove="GUI\res\images\tb32\tb32_98.png" />
     <None Remove="GUI\res\images\tb32\tb32_99.png" />
+    <None Remove="GUI\theme\images\close.png" />
     <None Remove="GUI\theme\images\envelope.png" />
     <None Remove="GUI\theme\images\forward.png" />
     <None Remove="GUI\theme\images\inbox.png" />
@@ -632,6 +633,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\logos\BigIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\theme\images\close.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\theme\images\envelope.png">

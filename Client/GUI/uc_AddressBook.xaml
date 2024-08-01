@@ -73,7 +73,7 @@
             <Button x:Name="btn_DeleteBook"
                     Grid.Row="0" Grid.Column="2"
                     Style="{DynamicResource SmallPanelButton}"
-                    Click="btn_DeleteBook_Click"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType=local:uc_AddressBook}, Path=CmdDeleteBook}"
                     ToolTip="Delete Address Book">
                 <Button.Content>
                     <themer:DynamicImage SymbolName="delete"/>
@@ -84,7 +84,7 @@
 
             <ListBox x:Name="lb_Books"
                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                      SelectionChanged="lb_Books_SelectionChanged"
                      BorderThickness="0"
                      Background="{DynamicResource BackgroundNormalBrushKey}">
@@ -120,7 +120,7 @@
             <Button x:Name="btn_DeleteContact"
                     Style="{DynamicResource SmallPanelButton}"
                     Grid.Row="3" Grid.Column="2"
-                    Click="btn_DeleteContact_Click"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType=local:uc_AddressBook}, Path=CmdDeleteContact}"
                     ToolTip="Delete Contact">
                 <Button.Content>
                     <themer:DynamicImage  SymbolName="delete"/>
@@ -131,7 +131,7 @@
             <ListBox x:Name="lb_Contacts"
                      Grid.Row="4"
                      Grid.ColumnSpan="4"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                      HorizontalContentAlignment="Stretch"
                      SelectionChanged="lb_Contacts_SelectionChanged"
                      BorderThickness="0"

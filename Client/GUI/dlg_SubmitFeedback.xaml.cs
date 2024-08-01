@@ -38,6 +38,7 @@ namespace Eudora.Net.GUI
 
         public dlg_SubmitFeedback()
         {
+            Owner = Application.Current.MainWindow;
             InitializeComponent();
             DataContext = this;
             tb_Feedback.Focus();

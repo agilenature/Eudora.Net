@@ -8,21 +8,21 @@
         Title="About Eudora.Net" 
         Width="640"
         Height="360" 
-         
         WindowStyle="None"
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Background="#FF336799"
-        BorderThickness="2">
+        BorderBrush="#FF336799"
+        BorderThickness="0">
     
-    <Grid Margin="0,0,0,0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,0" 
+        <Image Grid.Row="0" Grid.RowSpan="2" Margin="0" 
                HorizontalAlignment="Center" VerticalAlignment="Stretch"
                Source="pack://application:,,,/GUI/res/images/logos/MainLogo.png"/>
 

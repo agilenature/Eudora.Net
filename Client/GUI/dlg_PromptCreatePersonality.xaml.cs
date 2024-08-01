@@ -9,7 +9,9 @@ namespace Eudora.Net.GUI
     {
         public dlg_PromptCreatePersonality()
         {
+            Owner = Application.Current.MainWindow;
             InitializeComponent();
+            DataContext = this;
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -21,6 +23,12 @@ namespace Eudora.Net.GUI
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+            Close();
+        }
+
+        private void btn_NCA_Close_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
             Close();
         }
     }

@@ -9,10 +9,11 @@
         Title="Eudora.Net: Please Confirm" 
         Width="350"
         Height="200"  
-        WindowStartupLocation="CenterScreen" 
-        WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterOwner" 
+        WindowStyle="None"
         ResizeMode="NoResize" 
         ShowInTaskbar="False"
+        BorderBrush="{DynamicResource BorderNormalBrushKey}"
         BorderThickness="2">
 
     <Window.Resources>
@@ -26,63 +27,84 @@
     <Grid>
                 
         <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
             <RowDefinition/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <!--Message panel-->
-        <TextBlock Grid.Row="0"
-                   Text="{Binding Path=Message}"
-                   TextWrapping="Wrap"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch"
-                   Margin="10"/>
+        <!--Title bar-->
+        <Grid Grid.Row="0" Background="{DynamicResource BorderDarkBrushKey}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="1" Height="5" VerticalAlignment="Center"/>
-
-        <!--Buttons Panel-->
-        <DockPanel Grid.Row="2" LastChildFill="False" Margin="0,0,10,0">
-
-            <Button x:Name="btn_OK"
-                    DockPanel.Dock="Right"
-                    Width="75"
-                    Height="32"
-                    IsDefault="True" 
-                    Click="btn_Confirm_Click">
+            <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"/>
+            <Button x:Name="btn_NCA_Close"
+                    Grid.Column="2"
+                    Style="{StaticResource TitlebarCloseButton}"
+                    Click="btn_NCA_Close_Click"
+                    VerticalAlignment="Center">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
-                                             SymbolName="check"
-                                             Source="pack://application:,,,/GUI/res/images/new/done.png"/>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
-                    </StackPanel>
+                    <Image Source="pack://application:,,,/GUI/theme/images/close.png" 
+                           Width="16" Height="16"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button.Content>
             </Button>
 
-            <!--Spacer-->
-            <Canvas DockPanel.Dock="Right" Width="10"/>
+        </Grid>
+        
+        <!--Message panel-->
+        <TextBlock Grid.Row="1"
+                   Text="{Binding Path=Message}"
+                   TextWrapping="Wrap"
+                   Margin="10,10,10,0"/>
 
-            <Button x:Name="btn_Cancel" 
-                    DockPanel.Dock="Right"
-                    Width="75"
-                    Height="32"
-                    IsCancel="True" 
+        <Border Grid.Row="2" Background="{DynamicResource BorderNormalBrushKey}"/>
+        
+        <!--Buttons Panel-->
+        <Grid Grid.Row="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_Cancel"
+                    Style="{StaticResource DialogMainButton}"
+                    Grid.Column="1"
+                    IsCancel="True"
                     Click="btn_Cancel_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" 
-                                             SymbolName="cancel"
-                                             Source="pack://application:,,,/GUI/res/images/new/cancel.png"/>
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="cancel"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
-
             
+            <Button x:Name="btn_OK"
+                    Style="{StaticResource DialogMainButton}"
+                    Grid.Column="3"
+                    Click="btn_Confirm_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="check"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
             
-        </DockPanel>
+        </Grid>
         
     </Grid>
+
 </Window>

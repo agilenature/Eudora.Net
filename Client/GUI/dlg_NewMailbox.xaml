@@ -8,93 +8,125 @@
         d:DataContext="{d:DesignInstance Type=local:dlg_NewMailbox}"
         mc:Ignorable="d"
         Title="Eudora.Net: Create Mailbox" 
-        Height="150" Width="350" 
-        WindowStartupLocation="CenterScreen" 
-        ResizeMode="NoResize" 
-        ShowInTaskbar="False" 
-        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Height="150" Width="350"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        BorderBrush="{DynamicResource BorderNormalBrushKey}"
         BorderThickness="2">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/theme/CommonUX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     
     <Grid>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="10"/>
-        </Grid.ColumnDefinitions>
-        
+        <!--Title bar-->
+        <Grid Grid.Row="0" Background="{DynamicResource BorderDarkBrushKey}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
 
-        
-        <!--Row 0: Padding-->
-        
-        <!--Row 1: Controls-->
+            <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"/>
+            <Button x:Name="btn_NCA_Close"
+                    Grid.Column="2"
+                    Style="{StaticResource TitlebarCloseButton}"
+                    Click="btn_NCA_Close_Click"
+                    VerticalAlignment="Center">
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/close.png"
+                           Width="16" Height="16"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button.Content>
+            </Button>
+        </Grid>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Mailbox Name:  "/>
 
-        <TextBox x:Name="tb_Mailbox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
-                 Validation.ErrorTemplate="{DynamicResource validationErrorTemplate}"
-                 LostFocus="tb_Mailbox_LostFocus"
-                 TextChanged="tb_Mailbox_TextChanged"
-                 KeyUp="tb_Mailbox_KeyUp">
+        <!--Content panel-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Text="Mailbox Name:"/>
+            <TextBox x:Name="tb_Mailbox" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+                     Validation.ErrorTemplate="{DynamicResource validationErrorTemplate}"
+                     LostFocus="tb_Mailbox_LostFocus"
+                     TextChanged="tb_Mailbox_TextChanged"
+                     KeyUp="tb_Mailbox_KeyUp">
                 <TextBox.Text>
-                    <Binding Path="MailboxName" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                    <Binding Path="MailboxName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:MailboxValidationRule/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
+        </Grid>
 
-        <!--Row 2: Main dialog button panel-->
-        <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="False" Margin="0,0,0,0" VerticalAlignment="Bottom">
+        <Border Grid.Row="2" Background="{DynamicResource BorderNormalBrushKey}"/>
 
-            <Button x:Name="btn_OK" 
-                    DockPanel.Dock="Right"
-                    Width="75"
-                    Height="32"
-                    IsDefault="True" 
+        <!--Main dialog button panel-->
+        <Grid Grid.Row="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_Cancel"
+                    Style="{StaticResource DialogMainButton}"
+                    Grid.Column="1"
+                    IsCancel="True"
+                    Click="btn_Cancel_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="cancel"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="btn_OK"
+                    Style="{StaticResource DialogMainButton}"
+                    Grid.Column="3"
                     Click="btn_OK_Click"
                     IsEnabled="{Binding Path=ValidationPassed}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
-                                             SymbolName="check"
-                                             Source="pack://application:,,,/GUI/res/images/new/done.png"/>
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="check"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
 
-            <!--Spacer-->
-            <Canvas DockPanel.Dock="Right" Width="10"/>
-
-            <Button x:Name="btn_Cancel" 
-                    DockPanel.Dock="Right" 
-                    Width="75"
-                    Height="32"
-                    IsCancel="True" 
-                    Click="btn_Cancel_Click">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage  Width="22" Height="22" VerticalAlignment="Center"
-                                              SymbolName="cancel"
-                                              Source="pack://application:,,,/GUI/res/images/new/cancel.png">
-                            <Image.OpacityMask>
-                                <SolidColorBrush Color="#55FFFFFF"/>
-                            </Image.OpacityMask>
-                        </themer:DynamicImage>
-                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
-                </StackPanel>
-            </Button.Content>
-            </Button>
-        </DockPanel>
+        </Grid>
 
     </Grid>
 </Window>

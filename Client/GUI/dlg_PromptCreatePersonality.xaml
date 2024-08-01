@@ -4,26 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Eudora.Net.GUI"
+        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="ToolWindow" 
+        Width="350"
+        Height="200"
+        Title="Eudora.Net: Create Personality (Email Account)" 
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
-        Width="640"
-        Height="240"
-        Title="Eudora.Net: Create Personality (Email Account)" Topmost="True"
+        BorderBrush="{DynamicResource BorderNormalBrushKey}"
         BorderThickness="2">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/theme/CommonUX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     
-    <Grid Margin="2">
+    <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
             <RowDefinition/>
+            <RowDefinition Height="3"/>
             <RowDefinition Height="5"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
+        <!--Title bar-->
+        <Grid Grid.Row="0" Background="{DynamicResource BorderDarkBrushKey}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"/>
+            <Button x:Name="btn_NCA_Close"
+            Grid.Column="2"
+            Style="{StaticResource TitlebarCloseButton}"
+            Click="btn_NCA_Close_Click"
+            VerticalAlignment="Center">
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/close.png" 
+                   Width="16" Height="16"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
         <!--Content panel-->
-        <StackPanel Grid.Row="0" Orientation="Vertical">
+        <StackPanel Grid.Row="1" Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Margin="10">
                 <TextBlock.Text> In order to send and receive email with Eudora, at least one email account must exist.
                 Eudora's term for an email account is a Personality.
@@ -35,17 +71,45 @@
             </TextBlock>
         </StackPanel>
 
-        <Border Grid.Row="1"/>
+        <Border Grid.Row="2" Background="{DynamicResource BorderNormalBrushKey}"/>
 
         <!--Main dialog button panel-->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
-            
-            <Button x:Name="btn_Cancel" Content="Cancel" Click="btn_Cancel_Click" IsCancel="True"
-                    Width="50" Height="28" Margin="5,0,0,0"/>
-            
-            <Button x:Name="btn_OK" Content="OK" Click="btn_OK_Click" IsDefault="True"
-                    Width="50" Height="28" Margin="5,0,0,0"/>
-        </StackPanel>
+        <Grid Grid.Row="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_Cancel"
+            Style="{StaticResource DialogMainButton}"
+            Grid.Column="1"
+            IsCancel="True"
+            Click="btn_Cancel_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="cancel"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="btn_OK"
+            Style="{StaticResource DialogMainButton}"
+            Grid.Column="3"
+            Click="btn_OK_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center" SymbolName="check"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+        </Grid>
 
     </Grid>
 

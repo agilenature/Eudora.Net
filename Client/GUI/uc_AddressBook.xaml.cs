@@ -9,6 +9,9 @@ namespace Eudora.Net.GUI
     /// </summary>
     public partial class uc_AddressBook : UserControl
     {
+        public DelegateCommand CmdDeleteBook { get; set; }
+        public DelegateCommand CmdDeleteContact { get; set; }
+
         public uc_AddressBook() : base()
         {
             InitializeComponent();
@@ -18,6 +21,9 @@ namespace Eudora.Net.GUI
             DetailsGrid.IsEnabled = false;
 
             lb_Books.ItemsSource = AddressBookManager.Datastore.Data;
+
+            CmdDeleteBook = new((o) => btn_DeleteBook_Click(null, null), (o) => lb_Books.SelectedItem is not null);
+            CmdDeleteContact = new((o) => btn_DeleteContact_Click(null, null), (o) => lb_Contacts.SelectedItem is not null);
         }
 
         private void Uc_AddressBook_Loaded(object sender, RoutedEventArgs e)

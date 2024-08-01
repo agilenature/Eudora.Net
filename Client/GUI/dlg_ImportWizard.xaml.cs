@@ -14,7 +14,7 @@ namespace Eudora.Net.GUI
         private string _StatusText = string.Empty;
         private bool _Active = false;
         
-        private string StatusText
+        public string StatusText
         {
             get => _StatusText;
             set => _StatusText = value;
@@ -28,7 +28,9 @@ namespace Eudora.Net.GUI
 
         public dlg_ImportWizard()
         {
-            InitializeComponent();
+            Owner = Application.Current.MainWindow;
+            DataContext = this;
+            InitializeComponent();            
         }
 
         private void btn_Start_Click(object sender, RoutedEventArgs e)
@@ -47,7 +49,7 @@ namespace Eudora.Net.GUI
 
         private void EnableStart(bool enable)
         {
-            btn_Start.IsEnabled = enable;
+            btn_OK.IsEnabled = enable;
         }
 
         private void EnableCancel(bool enable)
@@ -199,6 +201,12 @@ namespace Eudora.Net.GUI
                 AddStatusText("Address book import failed");
                 MarkStepFailed(cb_AddressBooks);
             }
+        }
+
+        private void btn_NCA_Close_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

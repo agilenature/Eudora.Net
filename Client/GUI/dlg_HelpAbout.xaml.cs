@@ -9,6 +9,7 @@ namespace Eudora.Net.GUI
     {
         public dlg_HelpAbout()
         {
+            Owner = Application.Current.MainWindow;
             InitializeComponent();
         }
 

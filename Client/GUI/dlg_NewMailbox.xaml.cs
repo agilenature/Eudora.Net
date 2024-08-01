@@ -83,6 +83,7 @@ namespace Eudora.Net.GUI
 
         public dlg_NewMailbox()
         {
+            Owner = Application.Current.MainWindow;
             Mouse.OverrideCursor = Cursors.Wait;
 
             InitializeComponent();
@@ -124,6 +125,12 @@ namespace Eudora.Net.GUI
             {
                 btn_OK_Click(sender, null);
             }
+        }
+
+        private void btn_NCA_Close_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }
