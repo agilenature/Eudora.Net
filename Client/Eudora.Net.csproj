@@ -10,6 +10,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Platforms>AnyCPU;x86;x64</Platforms>
     <ApplicationIcon>GUI\res\icons\logo3a.ico</ApplicationIcon>
+    <Title>Eudora.Net</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
