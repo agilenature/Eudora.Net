@@ -166,6 +166,9 @@ namespace Eudora.Net.GUI
             Menu_Help.IsEnabled = true;
             Menu_Help.EnableAllSubitems();
 
+            Menu_Transfer.IsEnabled = false;
+            Menu_Transfer.EnableAllSubitems();
+
 
             // Now selectively enable based on active view type
 
@@ -177,7 +180,7 @@ namespace Eudora.Net.GUI
                 /* Main Toolbar */
 
                 btn_Inbox.IsEnabled = true;
-                btn_Outbox.IsEnabled = true;
+                btn_Drafts.IsEnabled = true;
                 btn_CheckMail.IsEnabled = true;
                 btn_NewMsg.IsEnabled = true;
                 btn_FindMsg.IsEnabled = true;
@@ -198,7 +201,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -213,7 +216,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -229,7 +232,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -259,7 +262,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -275,7 +278,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -290,7 +293,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -306,7 +309,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -322,7 +325,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -338,7 +341,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -358,7 +361,7 @@ namespace Eudora.Net.GUI
                     /* Main Toolbar */
 
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -377,7 +380,7 @@ namespace Eudora.Net.GUI
 
                     /* Main Toolbar */
                     btn_Inbox.IsEnabled = true;
-                    btn_Outbox.IsEnabled = true;
+                    btn_Drafts.IsEnabled = true;
                     btn_CheckMail.IsEnabled = true;
                     btn_NewMsg.IsEnabled = true;
                     btn_FindMsg.IsEnabled = true;
@@ -480,21 +483,21 @@ namespace Eudora.Net.GUI
                 return;
             }
             
-            if(name.Equals("inbox", StringComparison.CurrentCultureIgnoreCase))
+            if(mailbox.Equals(PostOffice.Inbox))
             {
-                _ = new uc_CombinedMailboxView(mailbox, true, false);
+                _ = new uc_MailboxInbox();
             }
-            else if(name.Equals("outbox", StringComparison.CurrentCultureIgnoreCase))
+            else if(mailbox.Equals(PostOffice.Drafts))
             {
-                _ = new uc_CombinedMailboxView(mailbox, false, true);
+                _ = new uc_MailboxDrafts();
             }
-            else if (name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
+            else if (mailbox.Equals(PostOffice.Sent))
             {
-                _ = new uc_CombinedMailboxView(mailbox, true, false);
+                _ = new uc_MailboxSent();
             }
-            else if (name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
+            else if (mailbox.Equals(PostOffice.Trash))
             {
-                _ = new uc_CombinedMailboxView(mailbox, true, true);
+                _ = new uc_MailboxTrash();
             }
             else
             {
@@ -715,10 +718,10 @@ namespace Eudora.Net.GUI
             ShowMailbox("Inbox");
         }
 
-        private void btn_Outbox_Click(object sender, RoutedEventArgs e)
+        private void btn_Drafts_Click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            ShowMailbox("Outbox");
+            ShowMailbox("Drafts");
         }
 
         private void btn_CheckMail_Click(object sender, RoutedEventArgs e)
@@ -978,6 +981,8 @@ namespace Eudora.Net.GUI
         {
 
         }
+
+        
 
 
 

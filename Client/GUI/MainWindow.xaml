@@ -161,7 +161,7 @@
                 <Image Source="pack://application:,,,/GUI/theme/images/inbox.png"/>
             </Button>
 
-            <Button x:Name="btn_Outbox" ToolTip="Outbox" Click="btn_Outbox_Click" Margin="5,0,0,0">
+            <Button x:Name="btn_Drafts" ToolTip="Drafts" Click="btn_Drafts_Click" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/theme/images/outbox.png"/>
             </Button>
 

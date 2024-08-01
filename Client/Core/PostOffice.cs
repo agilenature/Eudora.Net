@@ -33,14 +33,14 @@ namespace Eudora.Net.Core
             get => PostOffice.Instance.GetMailboxByName("Inbox");
         }
 
-        public static Mailbox? Outbox
+        public static Mailbox? Drafts
         {
-            get => PostOffice.Instance.GetMailboxByName("Outbox");
+            get => PostOffice.Instance.GetMailboxByName("Drafts");
         }
 
-        public static Mailbox? Junk
+        public static Mailbox? Sent
         {
-            get => PostOffice.Instance.GetMailboxByName("Junk");
+            get => PostOffice.Instance.GetMailboxByName("Sent");
         }
 
         public static Mailbox? Trash
@@ -145,13 +145,13 @@ namespace Eudora.Net.Core
             {
                 Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/tb32/tb32_21.png"));
             }
-            if (!File.Exists(MailboxFullPathFromName("Outbox")))
+            if (!File.Exists(MailboxFullPathFromName("Drafts")))
             {
-                Mailboxes.Add(new("Outbox", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png"));
+                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png"));
             }
-            if (!File.Exists(MailboxFullPathFromName("Junk")))
+            if (!File.Exists(MailboxFullPathFromName("Sent")))
             {
-                Mailboxes.Add(new("Junk", "pack://application:,,,/GUI/res/images/tb16/tb16_50.png"));
+                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png"));
             }
             if (!File.Exists(MailboxFullPathFromName("Trash")))
             {
@@ -234,8 +234,8 @@ namespace Eudora.Net.Core
             // Just in case...
             string nameCheck = name.ToLower();
             if (nameCheck.Equals("inbox", StringComparison.CurrentCultureIgnoreCase) ||
-                nameCheck.Equals("outbox", StringComparison.CurrentCultureIgnoreCase) ||
-                nameCheck.Equals("junk", StringComparison.CurrentCultureIgnoreCase) ||
+                nameCheck.Equals("drafts", StringComparison.CurrentCultureIgnoreCase) ||
+                nameCheck.Equals("sent", StringComparison.CurrentCultureIgnoreCase) ||
                 nameCheck.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
             {
                 return;
@@ -352,7 +352,7 @@ namespace Eudora.Net.Core
             message.SenderAddress.Address = personality.EmailAddress;
             message.SenderAddress.Name = personality.EmailName;
             message.ReplyTo = personality.ToEmailAddress();
-            message.MailboxName = "Outbox";
+            message.MailboxName = Drafts?.Name ?? string.Empty;
             PostOffice.Instance.GetMailboxByName(message.MailboxName)?.AddMessage(message);
 
             message.Body = HtmlDepot.MakeBlankEmail(message);
@@ -370,7 +370,7 @@ namespace Eudora.Net.Core
                 return outMessage;
             }
             
-            outMessage.MailboxName = "Outbox";
+            outMessage.MailboxName = Drafts?.Name ?? string.Empty;
             outMessage.Status = EmailMessage.MessageStatus.Draft;
             outMessage.Origin = EmailMessage.MessageOrigin.Outgoing;
             outMessage.InReplyToId = inMessage.MessageId;
@@ -430,7 +430,7 @@ namespace Eudora.Net.Core
                 return outMessage;
             }
 
-            outMessage.MailboxName = "Outbox";
+            outMessage.MailboxName = Drafts?.Name ?? string.Empty;
             outMessage.Status = EmailMessage.MessageStatus.Draft;
             outMessage.Origin = EmailMessage.MessageOrigin.Outgoing;
             outMessage.InReplyToId = inMessage.MessageId;
@@ -451,7 +451,7 @@ namespace Eudora.Net.Core
             EmailMessage message = new();
             message.Status = EmailMessage.MessageStatus.Sealed;
             message.Origin = EmailMessage.MessageOrigin.IncomingTo;
-            message.MailboxName = "Inbox";
+            message.MailboxName = Inbox?.Name ?? string.Empty;
             return message;
         }
 
@@ -671,6 +671,7 @@ namespace Eudora.Net.Core
             {
                 if (TransmitMail(mime))
                 {
+                    MoveMessage(message, Sent?.Name ?? string.Empty);
                     message.Status = EmailMessage.MessageStatus.Sealed;
                     message.SendStatus = EmailMessage.eSendStatus.Sent;
                 }
@@ -696,7 +697,7 @@ namespace Eudora.Net.Core
         /// <param name="message"></param>
         private async void RouteIncomingMessage(EmailMessage message)
         {
-            Mailbox? mailbox = GetMailboxByName("Inbox");
+            Mailbox? mailbox = Inbox;
             if (mailbox is null) return;
             
             var existing = mailbox.Messages.Where(msg => msg.MessageId.Equals(message.MessageId, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();

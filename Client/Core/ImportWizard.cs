@@ -172,14 +172,14 @@ namespace Eudora.Net.Core
                 {
                     return PostOffice.Inbox;
                 }
+                else if(name.Equals("drafts", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return PostOffice.Drafts;
+                }
                 else if (name.Equals("out", StringComparison.CurrentCultureIgnoreCase) ||
                          name.Equals("outbox", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return PostOffice.Outbox;
-                }
-                else if (name.Equals("junk", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return PostOffice.Junk;
+                    return PostOffice.Sent;
                 }
                 else if (name.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
                 {

@@ -46,8 +46,8 @@ namespace Eudora.Net.GUI
             {
                 string selectedBox = mailbox.Name.ToLower();
                 if (!selectedBox.Equals("inbox", StringComparison.CurrentCultureIgnoreCase) &&
-                    !selectedBox.Equals("outbox", StringComparison.CurrentCultureIgnoreCase) &&
-                    !selectedBox.Equals("junk", StringComparison.CurrentCultureIgnoreCase) &&
+                    !selectedBox.Equals("drafts", StringComparison.CurrentCultureIgnoreCase) &&
+                    !selectedBox.Equals("sent", StringComparison.CurrentCultureIgnoreCase) &&
                     !selectedBox.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
                 {
                     result = true;

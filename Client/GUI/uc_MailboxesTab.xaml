@@ -55,7 +55,7 @@
                  Background="{DynamicResource BackgroundNormalBrushKey}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <Image Source="{Binding Path=ImageSource}" Width="20" Height="20"/>
                         <Separator Width="10" Background="Transparent" Foreground="Transparent"/>
                         <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" TextAlignment="Center"/>
