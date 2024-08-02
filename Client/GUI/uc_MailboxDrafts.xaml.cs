@@ -15,9 +15,20 @@ namespace Eudora.Net.GUI
     /// </summary>
     public partial class uc_MailboxDrafts : ChildWindowBase
     {
+        public static readonly DependencyProperty MailboxProperty =
+            DependencyProperty.Register("Mailbox", typeof(Mailbox), typeof(uc_MailboxDrafts),
+                new PropertyMetadata(PostOffice.Drafts));
+
+        private Mailbox Mailbox
+        {
+            get { return (Mailbox)GetValue(MailboxProperty); }
+            set { SetValue(MailboxProperty, value); }
+        }
+
         public uc_MailboxDrafts()
         {
             InitializeComponent();
+            datagrid.ItemsSource = Mailbox.Messages;
         }
 
         public override void MdiActivated()

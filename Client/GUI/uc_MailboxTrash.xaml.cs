@@ -14,12 +14,8 @@ namespace Eudora.Net.GUI
     public partial class uc_MailboxTrash : ChildWindowBase
     {
         public static readonly DependencyProperty MailboxProperty =
-            DependencyProperty.Register("Mailbox", typeof(Mailbox), typeof(uc_MailboxTrash), new PropertyMetadata(null, MailboxChangedCallback));
-
-        private static void MailboxChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-         
-        }
+            DependencyProperty.Register("Mailbox", typeof(Mailbox), typeof(uc_MailboxTrash), 
+                new PropertyMetadata(PostOffice.Trash));
 
         private Mailbox Mailbox
         {
@@ -31,6 +27,7 @@ namespace Eudora.Net.GUI
         public uc_MailboxTrash()
         {
             InitializeComponent();
+            datagrid.ItemsSource = Mailbox.Messages;
         }
 
         public override void MdiActivated()
