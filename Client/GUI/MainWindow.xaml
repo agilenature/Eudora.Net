@@ -158,11 +158,11 @@
             <Separator/>
 
             <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click">
-                <Image Source="pack://application:,,,/GUI/theme/images/inbox.png"/>
+                <Image Source="pack://application:,,,/GUI/res/images/new/newinbox.png"/>
             </Button>
 
             <Button x:Name="btn_Drafts" ToolTip="Drafts" Click="btn_Drafts_Click" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/theme/images/outbox.png"/>
+                <Image Source="pack://application:,,,/GUI/res/images/new/newsent.png"/>
             </Button>
 
             <Separator/>
@@ -214,7 +214,7 @@
             <Separator/>
             
             <Button x:Name="btn_AddressBook" ToolTip="Address Book" Click="btn_AddressBook_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_12.png"/>
+                <Image Source="pack://application:,,,/GUI/res/images/new/contacts.png"/>
             </Button>
 
             <Separator/>

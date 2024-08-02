@@ -55,6 +55,7 @@
     <None Remove="GUI\res\images\new\browser.png" />
     <None Remove="GUI\res\images\new\cancel.png" />
     <None Remove="GUI\res\images\new\close.png" />
+    <None Remove="GUI\res\images\new\contacts.png" />
     <None Remove="GUI\res\images\new\copy.png" />
     <None Remove="GUI\res\images\new\delete.png" />
     <None Remove="GUI\res\images\new\done.png" />
@@ -71,6 +72,13 @@
     <None Remove="GUI\res\images\new\image.png" />
     <None Remove="GUI\res\images\new\leftback.png" />
     <None Remove="GUI\res\images\new\menu.png" />
+    <None Remove="GUI\res\images\new\newdrafts.png" />
+    <None Remove="GUI\res\images\new\newinbox.png" />
+    <None Remove="GUI\res\images\new\newlogo.png" />
+    <None Remove="GUI\res\images\new\newmailbox.png" />
+    <None Remove="GUI\res\images\new\newsent.png" />
+    <None Remove="GUI\res\images\new\newsplash.png" />
+    <None Remove="GUI\res\images\new\newtrashbox.png" />
     <None Remove="GUI\res\images\new\refresh.png" />
     <None Remove="GUI\res\images\new\rightnext.png" />
     <None Remove="GUI\res\images\new\settings.png" />
@@ -636,6 +644,27 @@
     <Resource Include="GUI\res\images\logos\BigIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="GUI\res\images\new\contacts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newdrafts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newinbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newlogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newmailbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newsent.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\newtrashbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="GUI\theme\images\close.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -678,9 +707,9 @@
     <Resource Include="GUI\res\images\new\google.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <SplashScreen Include="GUI\res\images\new\splash.png">
+    <Resource Include="GUI\res\images\new\splash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </SplashScreen>
+    </Resource>
     <Resource Include="GUI\res\images\source\comptbar.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -1947,6 +1976,12 @@
     <EmbeddedResource Include="HtmlTemplates\Stationery.html">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="GUI\res\images\new\newsplash.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </SplashScreen>
   </ItemGroup>
 
   <ItemGroup>
