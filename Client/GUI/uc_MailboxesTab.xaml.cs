@@ -38,6 +38,18 @@ namespace Eudora.Net.GUI
             IsDeleteEnabled = false;
         }
 
+        public void SetSelectedMailbox(string mailboxName)
+        {
+            foreach (Mailbox mailbox in Listview.Items)
+            {
+                if (mailbox.Name.Equals(mailboxName, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    Listview.SelectedItem = mailbox;
+                    break;
+                }
+            }
+        }
+
         private bool IsSelectionDeletable()
         {
             bool result = false;

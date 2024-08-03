@@ -152,7 +152,7 @@
             </StackPanel.Resources>
 
             <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False">
-                <Image Source="pack://application:,,,/GUI/theme/images/trash.png"/>
+                <Image Source="pack://application:,,,/GUI/res/images/new/trash.png"/>
             </Button>
 
             <Separator/>
@@ -162,6 +162,10 @@
             </Button>
 
             <Button x:Name="btn_Drafts" ToolTip="Drafts" Click="btn_Drafts_Click" Margin="5,0,0,0">
+                <Image Source="pack://application:,,,/GUI/res/images/new/newdrafts.png"/>
+            </Button>
+
+            <Button x:Name="btn_Sent" ToolTip="Sent" Click="btn_Sent_Click" Margin="5,0,0,0">
                 <Image Source="pack://application:,,,/GUI/res/images/new/newsent.png"/>
             </Button>
 
@@ -275,7 +279,7 @@
                     <TabItem.Header>
                         <Image Source="pack://application:,,,/GUI/res/icons/mboxes.ico"/>
                     </TabItem.Header>
-                    <local:uc_MailboxesTab></local:uc_MailboxesTab>
+                    <local:uc_MailboxesTab x:Name="MailboxesTab"/>
                 </TabItem>
 
                 <!--File browser tab-->

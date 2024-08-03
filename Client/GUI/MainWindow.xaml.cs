@@ -174,6 +174,7 @@ namespace Eudora.Net.GUI
             // Enable the main toolbar items that are always active
             btn_Inbox.IsEnabled = true;
             btn_Drafts.IsEnabled = true;
+            btn_Sent.IsEnabled = true;
             btn_CheckMail.IsEnabled = true;
             btn_NewMsg.IsEnabled = true;
             btn_FindMsg.IsEnabled = true;
@@ -611,12 +612,21 @@ namespace Eudora.Net.GUI
         {
             e.Handled = true;
             ShowMailbox("Inbox");
+            MailboxesTab.SetSelectedMailbox("Inbox");
         }
 
         private void btn_Drafts_Click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
             ShowMailbox("Drafts");
+            MailboxesTab.SetSelectedMailbox("Drafts");
+        }
+
+        private void btn_Sent_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            ShowMailbox("Sent");
+            MailboxesTab.SetSelectedMailbox("Sent");
         }
 
         private void btn_CheckMail_Click(object sender, RoutedEventArgs e)
@@ -878,6 +888,8 @@ namespace Eudora.Net.GUI
         }
 
         
+
+
 
 
 
