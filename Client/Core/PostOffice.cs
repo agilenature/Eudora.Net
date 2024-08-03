@@ -143,19 +143,19 @@ namespace Eudora.Net.Core
             // Default mailboxes
             if (!File.Exists(MailboxFullPathFromName("Inbox")))
             {
-                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/tb32/tb32_21.png", 0));
+                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/new/newinbox.png", 0));
             }
             if (!File.Exists(MailboxFullPathFromName("Drafts")))
             {
-                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png", 1));
+                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/new/newdrafts.png", 1));
             }
             if (!File.Exists(MailboxFullPathFromName("Sent")))
             {
-                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/tb32/tb32_32.png", 2));
+                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/new/newsent.png", 2));
             }
             if (!File.Exists(MailboxFullPathFromName("Trash")))
             {
-                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/tb16/tb16_49.png", 3));
+                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/new/newtrashbox.png", 3));
             }
 
             LoadMailboxes();

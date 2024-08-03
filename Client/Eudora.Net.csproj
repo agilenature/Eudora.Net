@@ -9,7 +9,7 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Platforms>AnyCPU;x86;x64</Platforms>
-    <ApplicationIcon>GUI\res\icons\logo3a.ico</ApplicationIcon>
+    <ApplicationIcon>GUI\res\icons\eudoranet.ico</ApplicationIcon>
     <Title>Eudora.Net</Title>
   </PropertyGroup>
 
@@ -84,6 +84,7 @@
     <None Remove="GUI\res\images\new\settings.png" />
     <None Remove="GUI\res\images\new\splash.png" />
     <None Remove="GUI\res\images\new\star.png" />
+    <None Remove="GUI\res\images\new\trash.png" />
     <None Remove="GUI\res\images\source\comptbar.png" />
     <None Remove="GUI\res\images\source\il_common16.png" />
     <None Remove="GUI\res\images\source\tbar16.png" />
@@ -564,7 +565,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GUI\res\icons\logo3a.ico" />
+    <Content Include="GUI\res\icons\eudoranet.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -663,6 +664,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\newtrashbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\trash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\theme\images\close.png">
