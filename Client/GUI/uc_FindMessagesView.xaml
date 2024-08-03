@@ -18,23 +18,23 @@
             <Style x:Key="{x:Type StackPanel}">
                 <Setter Property="Control.VerticalAlignment" Value="Center"/>
             </Style>
-            <Style x:Key="{x:Type ComboBox}">
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
                 <Setter Property="Control.Margin" Value="0"/>
             </Style>
-            <Style x:Key="{x:Type TextBox}">
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                 <Setter Property="Control.Margin" Value="0"/>
             </Style>
-            <Style x:Key="{x:Type Button}">
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                 <Setter Property="Control.Margin" Value="0"/>
                 <Setter Property="Control.Width" Value="50"/>
                 <Setter Property="Control.VerticalAlignment" Value="Center"/>
                 <Setter Property="Control.HorizontalAlignment" Value="Center"/>
             </Style>
-            <Style x:Key="{x:Type RadioButton}">
+            <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource {x:Type RadioButton}}">
                 <Setter Property="Control.Margin" Value="3,0,3,0"/>
                 <Setter Property="Control.Width" Value="100"/>
             </Style>
-            <Style x:Key="{x:Type TextBlock}">
+            <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Control.VerticalAlignment" Value="Center"/>
             </Style>
         </Grid.Resources>
