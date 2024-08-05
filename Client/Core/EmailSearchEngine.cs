@@ -72,6 +72,11 @@ namespace Eudora.Net.Core
             //QueryKeys.Add(new("Status", EmailSearch.eQueryKey.Status));
         }
 
+        public static void Shutdown()
+        {
+
+        }
+
         public static async Task<bool> SearchOneMessage(EmailSearch.EmailSearchAtom search, EmailMessage message)
         {
             bool result = false;
