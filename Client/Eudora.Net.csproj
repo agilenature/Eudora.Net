@@ -44,8 +44,6 @@
     <None Remove="GUI\res\icons\search.ico" />
     <None Remove="GUI\res\icons\signatur.ico" />
     <None Remove="GUI\res\icons\stationery.ico" />
-    <None Remove="GUI\res\images\logos\BigIcon.png" />
-    <None Remove="GUI\res\images\logos\MainLogo.png" />
     <None Remove="GUI\res\images\new\add.png" />
     <None Remove="GUI\res\images\new\add_attachment.png" />
     <None Remove="GUI\res\images\new\add_image.png" />
@@ -642,9 +640,6 @@
     <Resource Include="GUI\res\icons\stationery.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="GUI\res\images\logos\BigIcon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\images\new\contacts.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -664,6 +659,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\newtrashbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GUI\res\images\new\settings.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\trash.png">
@@ -696,9 +694,6 @@
     <Resource Include="GUI\theme\images\trash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="GUI\res\images\logos\MainLogo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\images\new\bing.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -709,9 +704,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\new\google.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GUI\res\images\new\splash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="GUI\res\images\source\comptbar.png">

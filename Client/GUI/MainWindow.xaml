@@ -152,85 +152,117 @@
             </StackPanel.Resources>
 
             <Button x:Name="btn_Delete" ToolTip="Delete" IsEnabled="False">
-                <Image Source="pack://application:,,,/GUI/res/images/new/trash.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/trash.png"/>
+                </Button.Content>                
             </Button>
 
             <Separator/>
 
             <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/new/newinbox.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/newinbox.png"/>
+                </Button.Content>                
             </Button>
 
             <Button x:Name="btn_Drafts" ToolTip="Drafts" Click="btn_Drafts_Click" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/new/newdrafts.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/newdrafts.png"/>
+                </Button.Content>                
             </Button>
 
             <Button x:Name="btn_Sent" ToolTip="Sent" Click="btn_Sent_Click" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/new/newsent.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/newsent.png"/>
+                </Button.Content>                
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_CheckMail" ToolTip="Check Mail" Click="btn_CheckMail_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_43.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_43.png"/>    
+                </Button.Content>                
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_NewMsg" ToolTip="New Message" Click="btn_NewMsg_Click">
-                <Image Source="pack://application:,,,/GUI/theme/images/envelope.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/envelope.png"/>
+                </Button.Content>
             </Button>
 
             <Button x:Name="btn_Reply" x:FieldModifier="public" ToolTip="Reply" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/theme/images/reply.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/reply.png"/>
+                </Button.Content>
             </Button>
 
             <Button x:Name="btn_ReplyAll" x:FieldModifier="public" ToolTip="Reply To All" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/theme/images/reply_all.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/reply_all.png"/>
+                </Button.Content>
             </Button>
 
             <Button x:Name="btn_Forward" x:FieldModifier="public" ToolTip="Forward" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/theme/images/forward.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/theme/images/forward.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_Prev" x:FieldModifier="public" ToolTip="Previous Message" IsEnabled="False">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_7.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_7.png"/>
+                </Button.Content>
             </Button>
 
             <Button x:Name="btn_Next" x:FieldModifier="public" ToolTip="Next Message" IsEnabled="False" Margin="5,0,0,0">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_8.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_8.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_Attach" x:FieldModifier="public" ToolTip="Attach File" IsEnabled="False">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_9.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_9.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_FindMsg" ToolTip="Find Messages" Click="btn_FindMsg_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_56.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/tb32/tb32_56.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_AddressBook" ToolTip="Address Book" Click="btn_AddressBook_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/new/contacts.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/contacts.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_Browser" ToolTip="Browser" Click="btn_Browser_Click">
-                <Image Source="pack://application:,,,/GUI/res/images/new/browser.png"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/browser.png"/>
+                </Button.Content>
             </Button>
 
             <Separator/>
             
             <Button x:Name="btn_Settings" ToolTip="Settings" Click="btn_Settings_Click">
-                <themer:DynamicImage SymbolName="settings"/>
+                <Button.Content>
+                    <Image Source="pack://application:,,,/GUI/res/images/new/settings.png"/>
+                </Button.Content>
             </Button>
 
         </StackPanel>
