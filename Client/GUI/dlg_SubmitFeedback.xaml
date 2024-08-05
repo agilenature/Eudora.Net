@@ -47,7 +47,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Title bar-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="{DynamicResource BorderDarkBrushKey}">
+        <Grid Grid.Row="0" Grid.ColumnSpan="5" Background="{DynamicResource BorderDarkBrushKey}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
