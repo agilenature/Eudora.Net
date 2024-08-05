@@ -158,6 +158,7 @@ namespace Eudora.Net
             AddressBookManager.Startup();
             PostOffice.Instance.Startup();
             EmailSearchEngine.Startup();
+            FilterManager.Startup();
             BrowserData.Instance.Startup();
             EudoraStatistics.Startup();
 
@@ -182,10 +183,18 @@ namespace Eudora.Net
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             Eudora.Net.Properties.Settings.Default.Save();
+
+            SignatureManager.Shutdown();
+            StationeryManager.Shutdown();
+            LabelManager.Shutdown();
+            PersonalityManager.Shutdown();
+            AddressBookManager.Shutdown();
             PostOffice.Instance.Shutdown();
-            //IconCache.Save();
+            EmailSearchEngine.Shutdown();
+            FilterManager.Shutdown();
             BrowserData.Instance.Shutdown();
             EudoraStatistics.Shutdown();
+
             TempFileManager.Shutdown();
         }
     }
