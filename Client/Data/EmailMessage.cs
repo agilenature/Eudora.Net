@@ -338,8 +338,8 @@ namespace Eudora.Net.Data
             set => SetField(ref _InlineImages, value, nameof(InlineImages));
         }
 
-        private PostOffice.eOutgoingType _MessageCategory = PostOffice.eOutgoingType.NewThread;
-        public PostOffice.eOutgoingType MessageCategory
+        private PostOffice.eMailThreadType _MessageCategory = PostOffice.eMailThreadType.NewThread;
+        public PostOffice.eMailThreadType MessageCategory
         {
             get => _MessageCategory;
             set => SetField(ref _MessageCategory, value, nameof(MessageCategory));

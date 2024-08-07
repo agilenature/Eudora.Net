@@ -44,12 +44,12 @@ namespace Eudora.Net.Data
         #region Properties
         /////////////////////////////
 
-        [Ignore]
+        [SQLite.Ignore]
         public DatastoreBase<Contact> Datastore { get; private set; }
 
 
         private Guid _Id = Guid.NewGuid();
-        [PrimaryKey]
+        [SQLite.PrimaryKey]
         public Guid Id
         {
             get => _Id;

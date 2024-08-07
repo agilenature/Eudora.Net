@@ -37,7 +37,7 @@ namespace Eudora.Net.Data
         ///////////////////////////////////////////////////////////
 
         private Guid _Id = Guid.NewGuid();
-        [PrimaryKey]
+        [SQLite.PrimaryKey]
         public Guid Id
         {
             get => _Id;

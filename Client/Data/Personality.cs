@@ -73,7 +73,7 @@ namespace Eudora.Net.Data
         #region Properties
         /////////////////////////////
 
-        [PrimaryKey]
+        [SQLite.PrimaryKey]
         public Guid Id
         {
             get => _Id;

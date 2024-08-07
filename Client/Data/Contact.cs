@@ -35,14 +35,14 @@ namespace Eudora.Net.Data
         #endregion INotifyPropertyChanged
         ///////////////////////////////////////////////////////////
 
-        [Ignore]
+        [SQLite.Ignore]
         public AddressBook? AddressBook
         {
             get { return AddressBookManager.Get(AddressBookName); }
         }
 
         private Guid _Id = Guid.NewGuid();
-        [PrimaryKey]
+        [SQLite.PrimaryKey]
         public Guid Id
         {
             get => _Id;

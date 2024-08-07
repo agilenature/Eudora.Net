@@ -1,5 +1,6 @@
 ﻿using Eudora.Net.Core;
 using Eudora.Net.Data;
+using SQLite;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -146,18 +147,17 @@ namespace Eudora.Net.EmailSearch
 
         public QueryKey()
         {
-
+            Build();
         }
 
         public QueryKey(string displayName, eQueryKey key)
         {
             DisplayName = displayName;
             Key = key;
+            Build();
         }
 
-        public static Dictionary<eQueryKey, Type> Lookup { get; private set; }
-
-        static QueryKey()
+        private void Build()
         {
             Lookup = [];
             Lookup.Add(eQueryKey.AllAddressees, typeof(string));
@@ -183,6 +183,36 @@ namespace Eudora.Net.EmailSearch
             Lookup.Add(eQueryKey.Subject, typeof(string));
             Lookup.Add(eQueryKey.To, typeof(string));
         }
+
+        [SQLite.Ignore]
+        public static Dictionary<eQueryKey, Type> Lookup { get; private set; }
+
+        //static QueryKey()
+        //{
+        //    Lookup = [];
+        //    Lookup.Add(eQueryKey.AllAddressees, typeof(string));
+        //    Lookup.Add(eQueryKey.BCC, typeof(string));
+        //    Lookup.Add(eQueryKey.Body, typeof(string));
+        //    Lookup.Add(eQueryKey.CC, typeof(string));
+        //    Lookup.Add(eQueryKey.Date, typeof(DateTime));
+        //    Lookup.Add(eQueryKey.From, typeof(string));
+        //    Lookup.Add(eQueryKey.InternalID, typeof(Guid));
+        //    Lookup.Add(eQueryKey.LabelName, typeof(string));
+        //    Lookup.Add(eQueryKey.MailboxName, typeof(string));
+        //    Lookup.Add(eQueryKey.MessageID, typeof(string));
+        //    Lookup.Add(eQueryKey.Origin, typeof(EmailMessage.MessageOrigin));
+        //    Lookup.Add(eQueryKey.PersonalityID, typeof(Guid));
+        //    Lookup.Add(eQueryKey.Priority, typeof(PostOffice.eMailPriority));
+        //    Lookup.Add(eQueryKey.ReadStatus, typeof(EmailMessage.eReadStatus));
+        //    Lookup.Add(eQueryKey.ReferenceIDs, typeof(string));
+        //    Lookup.Add(eQueryKey.ReplyTo, typeof(string));
+        //    Lookup.Add(eQueryKey.ReplyToID, typeof(string));
+        //    Lookup.Add(eQueryKey.SenderAddress, typeof(string));
+        //    Lookup.Add(eQueryKey.SendStatus, typeof(EmailMessage.eSendStatus));
+        //    Lookup.Add(eQueryKey.Status, typeof(EmailMessage.MessageStatus));
+        //    Lookup.Add(eQueryKey.Subject, typeof(string));
+        //    Lookup.Add(eQueryKey.To, typeof(string));
+        //}
     }
 
     /// <summary>
@@ -265,7 +295,7 @@ namespace Eudora.Net.EmailSearch
             set => SetField(ref _DateTimeValue, value, nameof(DateTimeValue));
         }
 
-        private Guid _GuidValue = default;
+        private Guid _GuidValue = Guid.NewGuid();
         public Guid GuidValue
         {
             get => _GuidValue;
@@ -307,7 +337,10 @@ namespace Eudora.Net.EmailSearch
             set => SetField(ref _PriorityValue, value, nameof(PriorityValue));
         }
 
+
+
         private ObservableCollection<MailboxListItem> _MailboxList = [];
+        [SQLite.Ignore]
         public ObservableCollection<MailboxListItem> MailboxList
         {
             get => _MailboxList;
@@ -427,7 +460,7 @@ namespace Eudora.Net.EmailSearch
         /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
-
+         
 
         public MailboxListItem()
         {

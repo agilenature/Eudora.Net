@@ -71,17 +71,26 @@ namespace Eudora.Net.Core
             Queued
         }
 
-        public enum eMailMessageStatus
+        public enum eMailDraftStatus
         {
             Draft,
             Sealed
         }
 
-        public enum eOutgoingType
+        public enum eMailThreadType
         {
             NewThread,
             Reply,
             Forward
+        }
+
+        public enum eMailOrigin
+        {
+            Outgoing,
+            IncomingTo,
+            IncomingCC,
+            IncomingBCC,
+            Default
         }
 
         public SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
@@ -382,7 +391,7 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Address = personality.EmailAddress;
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
-            outMessage.MessageCategory = eOutgoingType.Reply;
+            outMessage.MessageCategory = eMailThreadType.Reply;
             PostOffice.Instance.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             // subject
@@ -442,7 +451,7 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Address = personality.EmailAddress;
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
-            outMessage.MessageCategory = eOutgoingType.Forward;
+            outMessage.MessageCategory = eMailThreadType.Forward;
             PostOffice.Instance.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             outMessage.Body = HtmlDepot.MakeEmailForward(inMessage);
@@ -715,11 +724,11 @@ namespace Eudora.Net.Core
                 EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewAttachmentIn, (uint)message.Attachments.Count);
             }
 
-            if (message.MessageCategory == eOutgoingType.Reply)
+            if (message.MessageCategory == eMailThreadType.Reply)
             {
                 EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewReply);
             }
-            else if (message.MessageCategory == eOutgoingType.Forward)
+            else if (message.MessageCategory == eMailThreadType.Forward)
             {
                 EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewForward);
             }

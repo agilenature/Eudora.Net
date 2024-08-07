@@ -59,7 +59,7 @@ namespace Eudora.Net.Data
         #region Properties
         ////////////////////////////////////////////////////////////////
 
-        [PrimaryKey]
+        [SQLite.PrimaryKey]
         public Guid Id
         {
             get => _Id;
@@ -77,13 +77,15 @@ namespace Eudora.Net.Data
             get => _Priority;
             set => SetField(ref _Priority, value, nameof(Priority));
         }
-        
+
+        [SQLite.Ignore]
         public EmailSearch.EmailSearchAtom Atom
         {
             get => _Atom;
             set => SetField(ref _Atom, value, nameof(Atom));
         }
-        
+
+        [SQLite.Ignore]
         public EmailFilterAction Action
         {
             get => _Action;
