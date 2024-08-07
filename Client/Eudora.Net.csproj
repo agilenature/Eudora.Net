@@ -622,9 +622,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="GUI\res\icons\bigicon.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GUI\res\icons\mboxes.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

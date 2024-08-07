@@ -887,7 +887,49 @@ namespace Eudora.Net.GUI
 
         }
 
-        
+        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            // F1: Help Topics
+            if(e.Key == System.Windows.Input.Key.F1)
+            {
+                Menu_Help_Topics_Click(sender, e);
+            }
+
+            // Ctrl + F4: Close active window
+            else if(e.Key == System.Windows.Input.Key.F4)
+            {
+                if(e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    MDI.ActiveMdiChild?.Close();
+                }
+            }
+
+            // F5: Check Mail
+            else if(e.Key == System.Windows.Input.Key.F5)
+            {
+                btn_CheckMail_Click(sender, e);
+            }
+
+            // Ctrl + TAB: Cycle through open windows
+            else if(e.Key == System.Windows.Input.Key.Tab)
+            {
+                if(e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    int tabIndex = MDI.TabIndex;
+                    if(tabIndex + 1 >= MDI.MdiChildren.Count)
+                    {
+                        tabIndex = 0;
+                    }
+                    else
+                    {
+                        tabIndex++;
+                    }
+                    MDI.TabIndex = tabIndex;
+                }
+            }
+        }
+
+
 
 
 

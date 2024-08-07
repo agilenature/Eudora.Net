@@ -13,7 +13,8 @@
         mc:Ignorable="d"
         Title="Eudora.Net" Width="1024" Height="768" 
         WindowStartupLocation="CenterScreen"
-        BorderThickness="0">
+        BorderThickness="0"
+        KeyUp="Window_KeyUp">
 
     <Window.Resources>
         <ResourceDictionary>
