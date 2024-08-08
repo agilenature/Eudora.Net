@@ -73,7 +73,7 @@ namespace Eudora.Net.GUI
             EmailMessage? message = DataContext as EmailMessage;
             if (message is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
+                Logger.Debug("An EmailMessage was not set as the DataContext");
                 return;
             }
 
@@ -97,7 +97,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Eudora.Net.GUI
             EmailMessage? message = DataContext as EmailMessage;
             if (message is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
+                Logger.Debug("An EmailMessage was not set as the DataContext");
                 return;
             }
 
@@ -137,7 +137,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -359,7 +359,7 @@ namespace Eudora.Net.GUI
                 string tempPath = TempFileManager.CreateTempFileFromStringContent(message.Body);
                 if (string.IsNullOrEmpty(tempPath))
                 {
-                    Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to create temp file from message body");
+                    Logger.Debug("Failed to create temp file from message body");
                     return;
                 }
                 Editor.Navigate(tempPath);

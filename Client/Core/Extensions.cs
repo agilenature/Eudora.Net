@@ -201,7 +201,7 @@ namespace Eudora.Net.ExtensionMethods
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
             }
 
@@ -257,7 +257,7 @@ namespace Eudora.Net.ExtensionMethods
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             grid.Items.Refresh();
@@ -390,7 +390,7 @@ namespace Eudora.Net.ExtensionMethods
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return null;
             }
         }

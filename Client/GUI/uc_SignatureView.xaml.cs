@@ -96,7 +96,7 @@ namespace Eudora.Net.GUI
                 string tempPath = TempFileManager.CreateTempFileFromStringContent(signature.Content);
                 if (string.IsNullOrEmpty(tempPath))
                 {
-                    Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to create temp file from signature content");
+                    Logger.Debug("Failed to create temp file from signature content");
                     return;
                 }
                 Editor.Navigate(tempPath);

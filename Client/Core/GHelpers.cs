@@ -23,7 +23,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return name;
         }
@@ -48,7 +48,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return resource;
@@ -59,7 +59,7 @@ namespace Eudora.Net.Core
             string? extension = Path.GetExtension(fullPath)?.ToLower();
             if (extension == null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "No file extension detected");
+                Logger.Warning("ConvertImageToPng() No file extension detected");
                 return fullPath;
             }
             if (extension == ".png") return fullPath;
@@ -78,7 +78,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return fullPath;
             }
         }
@@ -90,7 +90,7 @@ namespace Eudora.Net.Core
             string? extension = Path.GetExtension(fullPath)?.ToLower();
             if(extension == null) 
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "No file extension detected");
+                Logger.Warning("Base64StringFromImageFile() No file extension detected");
                 return null;
             }
 
@@ -112,7 +112,7 @@ namespace Eudora.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                     return null;
                 }
             }
@@ -124,7 +124,7 @@ namespace Eudora.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                     return null;
                 }
             }
@@ -135,7 +135,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return null;
             }
             

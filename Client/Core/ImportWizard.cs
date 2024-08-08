@@ -73,7 +73,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return false;
             }
 
@@ -147,7 +147,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return false;
             }
 
@@ -191,7 +191,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return null;
             }
         }
@@ -221,7 +221,7 @@ namespace Eudora.Net.Core
 
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return false;
             }
             return true;
@@ -240,7 +240,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -267,7 +267,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -286,7 +286,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return parts;
@@ -318,7 +318,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return address;
@@ -341,7 +341,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return list;
@@ -405,7 +405,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -427,7 +427,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -458,7 +458,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -492,7 +492,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             // Second pass
@@ -549,7 +549,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -568,7 +568,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return book;
         }
@@ -635,7 +635,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -783,7 +783,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
     }

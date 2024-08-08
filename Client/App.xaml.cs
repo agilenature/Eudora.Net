@@ -61,7 +61,7 @@ namespace Eudora.Net
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             try
@@ -88,7 +88,7 @@ namespace Eudora.Net
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

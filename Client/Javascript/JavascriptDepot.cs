@@ -171,7 +171,7 @@ namespace Eudora.Net.Javascript
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return script;
         }

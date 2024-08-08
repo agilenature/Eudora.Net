@@ -233,7 +233,7 @@ namespace Eudora.Net.Data
 
         private void Notify(EmailMessage message)
         {
-            Logger.NewEvent(LogEvent.EventCategory.Notify, Notification);
+            Logger.Notify(Notification);
         }
 
         private void SkipRemainingFilters()

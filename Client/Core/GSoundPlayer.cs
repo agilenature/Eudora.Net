@@ -182,8 +182,7 @@ namespace Eudora.Net.Core
                     SystemSounds.Hand.Play();
                     break;
                 default:
-                    Logger.NewEvent(LogEvent.EventCategory.Warning,
-                        "Unknown system sound requested: " + sound.Name);
+                    Logger.Warning($"Unknown system sound requested: {sound.Name}");
                     break;
             }
         }
@@ -278,7 +277,7 @@ namespace Eudora.Net.Core
                 }
                 catch(Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
             }
         }

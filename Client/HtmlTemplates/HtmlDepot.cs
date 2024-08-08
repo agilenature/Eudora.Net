@@ -96,7 +96,7 @@ namespace Eudora.Net.HtmlTemplates
             Personality? personality = PersonalityManager.FindPersonality(inMessage.PersonalityID);
             if (personality is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to find Personality with id: " + inMessage.PersonalityID);
+                Logger.Debug($"Failed to find Personality with id: {inMessage.PersonalityID}");
                 return email;
             }
 

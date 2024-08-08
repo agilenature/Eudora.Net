@@ -24,7 +24,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return tempPath;
@@ -42,7 +42,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return tempPath;
@@ -59,7 +59,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
     }

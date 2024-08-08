@@ -46,14 +46,14 @@ namespace Eudora.Net.GUI
                     string tempPath = TempFileManager.CreateTempFileFromStringContent(message.Body);
                     if (string.IsNullOrEmpty(tempPath))
                     {
-                        Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to create temp file from message body");
+                        Logger.Debug("Failed to create temp file from message body");
                         return;
                     }
                     Webview.CoreWebView2.Navigate(tempPath);
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
             }
             else

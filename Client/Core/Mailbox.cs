@@ -96,7 +96,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -204,7 +204,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -225,7 +225,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return message;
         }
@@ -238,7 +238,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -263,7 +263,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

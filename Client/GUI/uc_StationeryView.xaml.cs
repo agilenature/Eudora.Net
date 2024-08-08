@@ -105,7 +105,7 @@ namespace Eudora.Net.GUI
                 string tempPath = TempFileManager.CreateTempFileFromStringContent(stationery.Content);
                 if (string.IsNullOrEmpty(tempPath))
                 {
-                    Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to create temp file from stationery content");
+                    Logger.Debug("Failed to create temp file from stationery content");
                     return;
                 }
                 Editor.Navigate(tempPath);

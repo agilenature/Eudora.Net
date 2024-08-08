@@ -162,6 +162,7 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="20"/> <!--spacer-->
                         <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -172,24 +173,35 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontWeight="Bold" FontSize="16">
-                        User Experience Theme
+                        <TextBlock.Text>User Experience and Theme</TextBlock.Text>
                     </TextBlock>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
                                TextWrapping="Wrap">
-                        Options for the application's color scheme and appearance
+                        <TextBlock.Text>Options for the application's GUI and color scheme</TextBlock.Text>
                     </TextBlock>
 
                     <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource BorderNormalBrushKey}"/>
                     
                     <TextBlock  Grid.Row="4" Grid.Column="0"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"
                                 FontWeight="Bold"
                                 Text="Selected Theme:"/>
 
                     <ComboBox   x:Name="cb_ThemeSelect"
-                                Grid.Row="4" Grid.Column="1"
+                                Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Height="20" Margin="5,0,5,0"
                                 SelectionChanged="cb_ThemeSelect_SelectionChanged"/>
+
+                    <TextBlock  Grid.Row="5" Grid.Column="0"
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"
+                                FontWeight="Bold"
+                                Text="Windows:"/>
+
+                    <CheckBox   x:Name="cbx_ReopenWindows"
+                                Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0"
+                                Content="Reopen windows at start"
+                                IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ReopenWindowsAtStart}"/>
+
                 </Grid>
 
             </TabItem>
@@ -231,6 +243,27 @@
 
                 </Grid>
 
+            </TabItem>
+
+            <TabItem Header="Hotkeys" IsEnabled="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="1" Background="{DynamicResource BorderNormalBrushKey}"/>
+                    
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16">
+                        <TextBlock.Text>Hotkeys</TextBlock.Text>
+                    </TextBlock>
+                    
+                    
+                    
+                </Grid>
             </TabItem>
 
             <!--Storage Options tab-->

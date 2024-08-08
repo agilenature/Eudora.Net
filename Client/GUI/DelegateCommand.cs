@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+
 
 namespace Eudora.Net.GUI
 {
@@ -12,14 +8,14 @@ namespace Eudora.Net.GUI
         private readonly Action<object?> _execute;
         private readonly Predicate<object?> _canExecute;
 
+        public DelegateCommand()
+        {
+        }
+
         public DelegateCommand(Action<object?> execute, Predicate<object?> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
-        }
-
-        public DelegateCommand() : base()
-        {
         }
 
         public bool CanExecute(object? parameter)

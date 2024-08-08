@@ -467,7 +467,7 @@ namespace Eudora.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                     return false;
                 }
             }
@@ -698,7 +698,7 @@ namespace Eudora.Net.Core
                 }
                 catch(Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
             }
             await ResampleDocument();
@@ -764,7 +764,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -785,7 +785,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return JsonDocument.Parse(result);
         }
@@ -842,7 +842,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -905,7 +905,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -968,7 +968,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -998,7 +998,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -1049,7 +1049,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

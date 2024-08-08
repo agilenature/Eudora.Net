@@ -14,7 +14,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception e)
             {
-                Logger.LogException(e);
+                Logger.Exception(e);
             }
         }
 
@@ -27,7 +27,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -45,16 +45,16 @@ namespace Eudora.Net.Core
                 if(process.Start())
                 {
                     process.WaitForExit();
-                    Logger.NewEvent(LogEvent.EventCategory.Information, "EudoraReporter.exe exited with code " + process.ExitCode);
+                    Logger.Information($"EudoraReporter.exe exited with code {process.ExitCode}");
                 }
                 else
                 {
-                    Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to start EudoraReporter.exe");
+                    Logger.Warning("Failed to start EudoraReporter.exe");
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
     }

@@ -116,7 +116,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -128,7 +128,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

@@ -243,7 +243,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -255,7 +255,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -267,7 +267,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -362,7 +362,7 @@ namespace Eudora.Net.GUI
             EmailMessage? message = DataContext as EmailMessage;
             if (message is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "An EmailMessage was not set as the DataContext");
+                Logger.Warning("An EmailMessage was not set as the DataContext");
                 return;
             }
 
@@ -395,7 +395,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

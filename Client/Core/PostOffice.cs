@@ -152,19 +152,19 @@ namespace Eudora.Net.Core
             // Default mailboxes
             if (!File.Exists(MailboxFullPathFromName("Inbox")))
             {
-                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/new/newinbox.png", 0));
+                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 0));
             }
             if (!File.Exists(MailboxFullPathFromName("Drafts")))
             {
-                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/new/newdrafts.png", 1));
+                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 1));
             }
             if (!File.Exists(MailboxFullPathFromName("Sent")))
             {
-                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/new/newsent.png", 2));
+                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 2));
             }
             if (!File.Exists(MailboxFullPathFromName("Trash")))
             {
-                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/new/newtrashbox.png", 3));
+                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 3));
             }
 
             LoadMailboxes();
@@ -208,7 +208,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -228,7 +228,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return null;
             }
         }
@@ -267,7 +267,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }            
         }
 
@@ -320,7 +320,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -340,7 +340,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -378,7 +378,7 @@ namespace Eudora.Net.Core
             Personality? personality = PersonalityManager.FindPersonality(inMessage.PersonalityID);
             if(personality is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to find Personality with id: " + inMessage.PersonalityID);
+                Logger.Warning($"Failed to find Personality with id: {inMessage.PersonalityID}");
                 return outMessage;
             }
             
@@ -438,7 +438,7 @@ namespace Eudora.Net.Core
             Personality? personality = PersonalityManager.FindPersonality(inMessage.PersonalityID);
             if (personality is null)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Warning, "Failed to find Personality with id: " + inMessage.PersonalityID);
+                Logger.Warning($"Failed to find Personality with id: {inMessage.PersonalityID}");
                 return outMessage;
             }
 
@@ -522,7 +522,7 @@ namespace Eudora.Net.Core
         {
             foreach (var personality in PersonalityManager.Datastore.Data)
             {
-                Logger.NewEvent(LogEvent.EventCategory.Information, "Checking " + personality.EmailAddress);
+                Logger.Information($"Checking {personality.EmailAddress}");
                 if(personality.UsePop)
                 {
                     RetrieveWithPOP(personality);
@@ -550,9 +550,7 @@ namespace Eudora.Net.Core
                         personality.SocketOptions_Incoming);
 
                     client.Authenticate(personality.EmailAddress, personality.EmailPassword);
-                    Logger.NewEvent(LogEvent.EventCategory.Information, "Retrieving " + client.Count.ToString() + " messages");
-
-                    
+                    Logger.Information( $"Retrieving {client.Count.ToString()} messages");                    
 
                     // Retrieve MIME messages from server & disconnect
                     List<MimeMessage> mimes = [];
@@ -579,14 +577,14 @@ namespace Eudora.Net.Core
                         }
                         catch(Exception ex)
                         {
-                            Logger.LogException(ex);
+                            Logger.Exception(ex);
                         }
                     }
-                    Logger.NewEvent(LogEvent.EventCategory.Information, "Finished");
+                    Logger.Information("Finished");
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
                 finally
                 {
@@ -621,7 +619,7 @@ namespace Eudora.Net.Core
                     if (onlyUnread)
                     {
                         List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
-                        Logger.NewEvent(LogEvent.EventCategory.Information, $"Retrieving {results.Count} unread messages...");
+                        Logger.Information($"Retrieving {results.Count} unread messages...");
                         
                         foreach (var uid in results)
                         {
@@ -632,7 +630,7 @@ namespace Eudora.Net.Core
                     else
                     {
                         int messageCount = remoteInbox.Count;
-                        Logger.NewEvent(LogEvent.EventCategory.Information, $"Retrieving {messageCount} messages...");
+                        Logger.Information($"Retrieving {messageCount} messages...");
                         for(int i = 0; i < messageCount; i++)
                         {
                             mimes.Add(remoteInbox.GetMessage(i));
@@ -656,15 +654,15 @@ namespace Eudora.Net.Core
                         }
                         catch(Exception ex)
                         {
-                            Logger.LogException(ex);
+                            Logger.Exception(ex);
                         }
                     }
 
-                    Logger.NewEvent(LogEvent.EventCategory.Information, "Finished");
+                    Logger.Information("Finished");
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
                 finally
                 {
@@ -677,7 +675,7 @@ namespace Eudora.Net.Core
 
         public async Task SendMessage(EmailMessage message)
         {
-            Logger.NewEvent(LogEvent.EventCategory.Information, "Sending...");
+            Logger.Information("Sending...");
             var mime = PrepareMessage(message);
             if (mime != null)
             {
@@ -687,8 +685,12 @@ namespace Eudora.Net.Core
                     message.Status = EmailMessage.MessageStatus.Sealed;
                     message.SendStatus = EmailMessage.eSendStatus.Sent;
                 }
+                else
+                {
+                    Logger.Warning("Failed to send message");
+                }
             }
-            Logger.NewEvent(LogEvent.EventCategory.Information, "Message sent");
+            Logger.Information("Message sent");
         }        
         
 
@@ -767,7 +769,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             // Return the constructed, transmissable mail item
@@ -798,7 +800,7 @@ namespace Eudora.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex);
+                    Logger.Exception(ex);
                 }
                 finally
                 {
@@ -833,7 +835,7 @@ namespace Eudora.Net.Core
             if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNotAvailable) != 0)
             {
                 message = string.Format("The SSL certificate was not available for {0}", host);
-                Logger.NewEvent(LogEvent.EventCategory.Warning, message);
+                Logger.Warning(message);
                 return false;
             }
 
@@ -842,7 +844,7 @@ namespace Eudora.Net.Core
                 if (certificate is null)
                 {
                     message = string.Format("The Common Name for the SSL certificate did not match");
-                    Logger.NewEvent(LogEvent.EventCategory.Warning, message);
+                    Logger.Warning(message);
                     return false;
                 }
 
@@ -850,12 +852,12 @@ namespace Eudora.Net.Core
                 var cn = certificate2 != null ? certificate2.GetNameInfo(X509NameType.SimpleName, false) : certificate.Subject;
 
                 message = string.Format("The Common Name for the SSL certificate did not match {0}. Instead, it was {1}", host, cn);
-                Logger.NewEvent(LogEvent.EventCategory.Warning, message);
+                Logger.Warning(message);
                 return false;
             }
 
             message = string.Format("The SSL certificate for {0} could not be validated for the following reasons:", host);
-            Logger.NewEvent(LogEvent.EventCategory.Warning, message);
+            Logger.Warning(message);
 
             if (chain is not null)
             {
@@ -869,12 +871,12 @@ namespace Eudora.Net.Core
                     }
 
                     message = string.Format("\u2022 {0}", element.Certificate.Subject);
-                    Logger.NewEvent(LogEvent.EventCategory.Information, message);
+                    Logger.Information(message);
                     foreach (var error in element.ChainElementStatus)
                     {
                         // `error.StatusInformation` contains a human-readable error string while `error.Status` is the corresponding enum value.
                         message = string.Format("\t\u2022 {0}", error.StatusInformation);
-                        Logger.NewEvent(LogEvent.EventCategory.Information, message);
+                        Logger.Information(message);
                     }
                 }
             }

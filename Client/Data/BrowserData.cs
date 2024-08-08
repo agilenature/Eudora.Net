@@ -80,7 +80,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             try
@@ -90,7 +90,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             // Default init
@@ -129,7 +129,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             try
@@ -138,7 +138,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
     }

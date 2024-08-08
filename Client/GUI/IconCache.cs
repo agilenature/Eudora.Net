@@ -45,7 +45,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Eudora.Net.GUI
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
             return source;
         }
@@ -118,7 +118,7 @@ namespace Eudora.Net.GUI
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
 
             return null;
@@ -132,7 +132,7 @@ namespace Eudora.Net.GUI
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 

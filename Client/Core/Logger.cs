@@ -74,7 +74,7 @@ namespace Eudora.Net.Core
             return color;
         }
 
-        public static void NewEvent(LogEvent.EventCategory category, string message)
+        private static void NewEvent(LogEvent.EventCategory category, string message)
         {
             if(!App.Current.Dispatcher.CheckAccess())
             {
@@ -91,7 +91,32 @@ namespace Eudora.Net.Core
             Events.Add(ev);
         }
 
-        public static void LogException(Exception ex)
+        public static void Information(string message)
+        {
+            NewEvent(LogEvent.EventCategory.Information, message);
+        }
+
+        public static void Warning(string message)
+        {
+            NewEvent(LogEvent.EventCategory.Warning, message);
+        }
+
+        public static void Error(string message)
+        {
+            NewEvent(LogEvent.EventCategory.Error, message);
+        }
+
+        public static void Notify(string message)
+        {
+            NewEvent(LogEvent.EventCategory.Notify, message);
+        }
+
+        public static void Debug(string message)
+        {
+            NewEvent(LogEvent.EventCategory.Debug, message);
+        }
+
+        public static void Exception(Exception ex)
         {
             // Show the exception message by default
             string message = ex.Message;
@@ -132,7 +157,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                LogException(ex);
+                Exception(ex);
             }
         }
     }

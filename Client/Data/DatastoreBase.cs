@@ -34,7 +34,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Eudora.Net.Data
             }
             catch(Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return 0;
             }
         }
@@ -104,7 +104,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return default;
             }
         }
@@ -119,7 +119,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -127,11 +127,15 @@ namespace Eudora.Net.Data
         {
             try
             {
-                DB.Close();
+                // This can occur if the user forces the app to exit during the initial setup screen
+                if (DB is not null)
+                {
+                    DB.Close();
+                }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -148,7 +152,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -162,7 +166,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -180,7 +184,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -194,7 +198,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -206,7 +210,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
             }
         }
 
@@ -218,7 +222,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return false;
             }
         }
@@ -231,7 +235,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return false;
             }
         }
@@ -244,7 +248,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return default;
             } 
         }
@@ -257,7 +261,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Logger.Exception(ex);
                 return null;
             }
         }
