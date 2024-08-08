@@ -17,13 +17,13 @@
 
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontWeight="Bold" FontSize="16">
-            Select a theme
+            <TextBlock.Text>Theme and Interface Options</TextBlock.Text>
         </TextBlock>
 
         <Grid Grid.Row="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="48"/>
                 <RowDefinition Height="24"/>
             </Grid.RowDefinitions>
 
@@ -32,14 +32,15 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
-                Select a theme (color scheme) for the application.
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap">
+                <TextBlock.Text>Select a theme (color scheme) for the application. This can be changed at any time from the Options screen.</TextBlock.Text>
             </TextBlock>
 
             <ComboBox Grid.Row="0" Grid.Column="1"
                       x:Name="cb_Themes"  
                       VerticalAlignment="Center"
                       VerticalContentAlignment="Center"
+                      Margin="5,0,5,0"
                       DisplayMemberPath="DisplayName"
                       SelectionChanged="cb_Themes_SelectionChanged">
             </ComboBox>
