@@ -154,5 +154,17 @@ namespace Eudora.Net.Properties {
                 this["EnableErrorReporting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReopenWindowsAtStart {
+            get {
+                return ((bool)(this["ReopenWindowsAtStart"]));
+            }
+            set {
+                this["ReopenWindowsAtStart"] = value;
+            }
+        }
     }
 }

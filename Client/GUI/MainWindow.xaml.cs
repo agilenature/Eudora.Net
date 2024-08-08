@@ -66,6 +66,13 @@ namespace Eudora.Net.GUI
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
+            foreach(var wnd in MDI.Children)
+            {
+                if(wnd.DataContext is ChildWindowBase cwb)
+                {
+                    
+                }
+            }
         }
 
         private void Mailboxes_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -916,7 +923,7 @@ namespace Eudora.Net.GUI
                 if(e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 {
                     int tabIndex = MDI.TabIndex;
-                    if(tabIndex + 1 >= MDI.MdiChildren.Count)
+                    if(tabIndex + 1 >= MDI.Children.Count)
                     {
                         tabIndex = 0;
                     }

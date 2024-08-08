@@ -141,12 +141,13 @@
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                     <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="Margin" Value="2,0,2,0"/>
-                    <Setter Property="Width" Value="32"/>
-                    <Setter Property="Height" Value="32"/>
+                    <Setter Property="Width" Value="34"/>
+                    <Setter Property="Height" Value="34"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                     <Setter Property="Background" Value="Transparent"/>
                 </Style>
                 <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+                    <Setter Property="Width" Value="2"/>
                     <Setter Property="Margin" Value="5,0,5,0"/>
                     <Setter Property="Background" Value="{DynamicResource BorderDarkBrushKey}"/>
                 </Style>
@@ -162,19 +163,37 @@
 
             <Button x:Name="btn_Inbox" ToolTip="Inbox" Click="btn_Inbox_Click">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/newinbox.png"/>
+                    <Grid Width="34">
+                        <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
+                                   Background="White" Foreground="Black"
+                                   FontWeight="Bold" FontSize="9"
+                                   Text="INBOX" />
+                    </Grid>
                 </Button.Content>                
             </Button>
 
             <Button x:Name="btn_Drafts" ToolTip="Drafts" Click="btn_Drafts_Click" Margin="5,0,0,0">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/newdrafts.png"/>
+                    <Grid Width="34">
+                        <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
+                                   Background="White" Foreground="Black"
+                                   FontWeight="Bold" FontSize="9"
+                                   Text="DRAFT" />
+                    </Grid>
                 </Button.Content>                
             </Button>
 
             <Button x:Name="btn_Sent" ToolTip="Sent" Click="btn_Sent_Click" Margin="5,0,0,0">
                 <Button.Content>
-                    <Image Source="pack://application:,,,/GUI/res/images/new/newsent.png"/>
+                    <Grid Width="34">
+                        <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
+                                   Background="White" Foreground="Black"
+                                   FontWeight="Bold" FontSize="9"
+                                   Text="SENT" />
+                    </Grid>
                 </Button.Content>                
             </Button>
 
