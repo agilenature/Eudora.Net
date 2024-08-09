@@ -477,7 +477,7 @@ namespace Eudora.Net.Core
         /// <param name="mailboxName"></param>
         public void MoveMessage(EmailMessage message, string mailboxName)
         {
-            using (var uxLocker = new Core.UXLocker())
+            //using (var uxLocker = new Core.UXLocker())
             {
                 var mailboxTo = GetMailboxByName(mailboxName);
                 var mailboxFrom = GetMailboxByName(message.MailboxName);
