@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
 
     <ControlTemplate x:Key="validationErrorTemplate">
         <DockPanel>
@@ -101,6 +102,12 @@
     feel of Eudora, which differs a bit from the default WpfThemer styling.
 -->
 
+    <Style x:Key="{x:Type wv2:WebView2}" TargetType="{x:Type wv2:WebView2}">
+        <Setter Property="DefaultBackgroundColor" Value="#EEEEEE"/>
+        <Setter Property="DesignModeForegroundColor" Value="#151515"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+    </Style>
+    
     <Style x:Key="{x:Type ToolBarTray}" TargetType="{x:Type ToolBarTray}" BasedOn="{StaticResource {x:Type ToolBarTray}}">
         <Setter Property="Background" Value="{DynamicResource ControlNormalBrushKey}"/>
         <Setter Property="Control.BorderBrush" Value="{DynamicResource ControlNormalBrushKey}"/>
