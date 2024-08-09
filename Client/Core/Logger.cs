@@ -133,7 +133,7 @@ namespace Eudora.Net.Core
                     message = $"{mb.ReflectedType}.{mb.Name}{Environment.NewLine}{ex.Message}";
                 }
             }
-            NewEvent(LogEvent.EventCategory.Warning, message);
+            NewEvent(LogEvent.EventCategory.Error, message);
 
             // If enabled, email the exception to the reporting service
             if(Eudora.Net.Properties.Settings.Default.EnableErrorReporting)
