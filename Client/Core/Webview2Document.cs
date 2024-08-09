@@ -279,7 +279,13 @@ namespace Eudora.Net.Core
         public Color ActiveBackgroundColor
         {
             get => _ActiveBackgroundColor;
-            set => SetField(ref _ActiveBackgroundColor, value, nameof(ActiveBackgroundColor));
+            set
+            {
+                if(SetField(ref _ActiveBackgroundColor, value, nameof(ActiveBackgroundColor)))
+                {
+                    SetBodyStyleProperty(StyleAttribute.property_BackgroundColor, value.ToJavascriptRGB());
+                }
+            }
         }
 
         public string BodyInnerHTML
@@ -402,7 +408,7 @@ namespace Eudora.Net.Core
                         //ActiveAlignmentLeft = true;
                         //ActiveAlignmentCenter = false;
                         //ActiveAlignmentRight = false;
-                        //ActiveFont = BodyStyle.Font;
+                        ActiveFont = BodyStyle.Font;
                         //ActiveFontColor = BodyStyle.FontColor;
                         //ActiveFontSize = BodyStyle.FontSize;
                     }
@@ -578,7 +584,7 @@ namespace Eudora.Net.Core
             }
             else
             {
-                //await ExecuteScriptAsync(JsDepot.js_SetBodyStyleProperty, [StyleAttribute.property_FontColor, newValue]);
+                await ExecuteScriptAsync(JsDepot.js_SetBodyStyleProperty, [StyleAttribute.property_FontColor, newValue]);
             }
             await ResampleDocument();
         }
