@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using Eudora.Net.Javascript;
 using Eudora.Net.ExtensionMethods;
 using System.Diagnostics;
+using WpfThemer;
 
 namespace Eudora.Net.GUI
 {
@@ -141,6 +142,8 @@ namespace Eudora.Net.GUI
         public uc_HtmlEditor()
         {
             Webview = Webview2Allocator.Get();
+            ThemeManager.ThemeChanged += ThemeManager_ThemeChanged;
+            ThemeManager_ThemeChanged(null, null);
             Document = new(Webview);
             DataContext = Document;
 
@@ -181,6 +184,17 @@ namespace Eudora.Net.GUI
             debugGrid.Visibility = Visibility.Collapsed;
             RowDebug.Height = new GridLength(0);
 #endif
+        }
+
+        private void ThemeManager_ThemeChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //var dynamicResourceExtension = new DynamicResourceExtension("ForegroundNormalBrushKey");
+            //var value = dynamicResourceExtension.ProvideValue(null);
+            //Style style = new();
+            //style.Setters.Add(new Setter(ForegroundProperty, dynamicResourceExtension));
+            //style.Setters.Add(new Setter(fore, dynamicResourceExtension));
+            //style.Setters.Add(new Setter(BackgroundProperty, new SolidColorBrush(Colors.Orange)));
+            //Webview.Style = style;
         }
 
         private void Toolbar_Loaded(object sender, RoutedEventArgs e)

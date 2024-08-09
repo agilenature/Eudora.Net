@@ -412,7 +412,7 @@ namespace Eudora.Net.GUI
         /// 
         /// </summary>
         /// <param name="message"></param>
-        public void ShowMailMessage(EmailMessage message)
+        public void ShowMailMessage(EmailMessage message, bool newOutgoing = false)
         {
             // If this message is being viewed already, focus it.
             var window = MDI.FindWindow(typeof(uc_EmailView), message);
@@ -425,7 +425,7 @@ namespace Eudora.Net.GUI
             // A view for this message does not already exist. Create it
             //var view = new uc_EmailView(message);
             //FocusWindow(view.Window);
-            _ = new uc_EmailView(message);
+            _ = new uc_EmailView(message, newOutgoing);
         }
 
         public void CloseMailMessage(EmailMessage message)
@@ -648,11 +648,18 @@ namespace Eudora.Net.GUI
             var defaultPersonality = PersonalityManager.DefaultPersonality();
             if (defaultPersonality is not null)
             {
-                ShowMailMessage(PostOffice.CreateMessage_Outgoing(defaultPersonality));
+                ShowMailMessage(PostOffice.CreateMessage_Outgoing(defaultPersonality), true);
             }
             else
             {
-                // prompt to create an account
+                var dlg = new dlg_PromptCreatePersonality();
+                dlg.Owner = this;
+                if (dlg.ShowDialog() is true)
+                {
+                    ShowPersonalitiesTab();
+                    Personality p = PersonalityManager.New("default");
+                    ShowPersonality(p);
+                }
             }
         }
 
@@ -740,11 +747,18 @@ namespace Eudora.Net.GUI
             var defaultPersonality = PersonalityManager.DefaultPersonality();
             if (defaultPersonality is not null)
             {
-                ShowMailMessage(PostOffice.CreateMessage_Outgoing(defaultPersonality));
+                ShowMailMessage(PostOffice.CreateMessage_Outgoing(defaultPersonality), true);
             }
             else
             {
-                // prompt to create an account
+                var dlg = new dlg_PromptCreatePersonality();
+                dlg.Owner = this;
+                if (dlg.ShowDialog() is true)
+                {
+                    ShowPersonalitiesTab();
+                    Personality p = PersonalityManager.New("default");
+                    ShowPersonality(p);
+                }
             }
         }
 

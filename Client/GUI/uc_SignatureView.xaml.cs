@@ -15,7 +15,7 @@ namespace Eudora.Net.GUI
             InitializeComponent();
             DataContextChanged += Uc_SignatureView_DataContextChanged;
             DataContext = signature;
-            //Editor.Document.PropertyChanged += Document_PropertyChanged;
+            Editor.Document.PropertyChanged += Document_PropertyChanged;
             Editor.EditorIsReady += Editor_EditorIsReady;
             Editor.DocumentLoaded += Editor_DocumentLoaded;
             Editor.ToolbarEmbedEnabled = false;
@@ -77,7 +77,7 @@ namespace Eudora.Net.GUI
         {
             if (e.PropertyName is null) return;
 
-            //if (e.PropertyName.Equals(nameof(Editor.Document.BodyInnerHTML), StringComparison.CurrentCultureIgnoreCase))
+            if (e.PropertyName.Equals(nameof(Editor.Document.BodyInnerHTML), StringComparison.CurrentCultureIgnoreCase))
             {
                 ((Signature)DataContext).Content = Editor.Document.BodyInnerHTML;
             }

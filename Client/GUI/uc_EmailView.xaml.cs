@@ -21,6 +21,7 @@ namespace Eudora.Net.GUI
     public partial class uc_EmailView : ChildWindowBase
     {
         private EmailMessage Message = new();
+        private bool IsNewOutgoing = false;
 
 
         ///////////////////////////////////////////////////////////
@@ -34,6 +35,14 @@ namespace Eudora.Net.GUI
 
         public uc_EmailView(EmailMessage message)
         {
+            CommonCtor();
+            DataContext = message;
+            UpdateDataContext();
+        }
+
+        public uc_EmailView(EmailMessage message, bool newOutgoing = false)
+        {
+            IsNewOutgoing = newOutgoing;
             CommonCtor();
             DataContext = message;
             UpdateDataContext();
@@ -149,6 +158,25 @@ namespace Eudora.Net.GUI
             if (designMode)
             {
                 //Editor.Document.SetInitialCursorPosition();
+                if (IsNewOutgoing)
+                {
+                    IsNewOutgoing = false;
+                    var personality = PersonalityManager.Datastore.Data.Where(p => p.Id == Message.PersonalityID).FirstOrDefault();
+                    if (personality is not null)
+                    {
+                        var signature = SignatureManager.Datastore.Data.Where(s => s.Name == personality.DefaultSignature).FirstOrDefault();
+                        if(signature is not null)
+                        {
+                            cb_Signature.SelectedItem = signature;
+                        }
+
+                        var stationery = StationeryManager.Datastore.Data.Where(s => s.Name == personality.DefaultStationery).FirstOrDefault();
+                        if (stationery is not null)
+                        {
+                            cb_Stationery.SelectedItem = stationery;
+                        }
+                    }
+                }
             }
 
             //Editor.Webview.Focus();
@@ -440,9 +468,9 @@ namespace Eudora.Net.GUI
             Message.Priority = (PostOffice.eMailPriority)cb_Priority.SelectedValue;
         }
 
-        private void btn_Send_Click(object sender, RoutedEventArgs e)
+        private async void btn_Send_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => PostOffice.Instance.SendMessage(Message));
+            await PostOffice.Instance.SendMessage(Message);
             Window.Close();
         }
 
