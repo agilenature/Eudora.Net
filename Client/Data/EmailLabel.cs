@@ -85,6 +85,18 @@ namespace Eudora.Net.Data
             {
                 Datastore.Open();
                 Datastore.Load();
+
+                // Create default labels, if necessary
+                if(Datastore.Data.Count == 0)
+                {
+                    Add(new EmailLabel("Label 1", "pack://application:,,,/GUI/res/images/tb32/tb32_78.png"));
+                    Add(new EmailLabel("Label 2", "pack://application:,,,/GUI/res/images/tb32/tb32_79.png"));
+                    Add(new EmailLabel("Label 3", "pack://application:,,,/GUI/res/images/tb32/tb32_80.png"));
+                    Add(new EmailLabel("Label 4", "pack://application:,,,/GUI/res/images/tb32/tb32_81.png"));
+                    Add(new EmailLabel("Label 5", "pack://application:,,,/GUI/res/images/tb32/tb32_82.png"));
+                    Add(new EmailLabel("Label 6", "pack://application:,,,/GUI/res/images/tb32/tb32_83.png"));
+                    Add(new EmailLabel("Label 7", "pack://application:,,,/GUI/res/images/tb32/tb32_84.png"));
+                }
             }
             catch (Exception ex)
             {
