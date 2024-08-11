@@ -120,7 +120,9 @@ namespace Eudora.Net.GUI
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (sender is DataGridRow row && row.DataContext is EmailMessage message)
+            // Absent this first condition, double right-click would also come through.
+            if (e.ChangedButton == MouseButton.Left &&
+                sender is DataGridRow row && row.DataContext is EmailMessage message)
             {
                 e.Handled = true;
                 MainWindow.Instance?.ShowMailMessage(message);
