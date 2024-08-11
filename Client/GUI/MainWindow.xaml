@@ -165,8 +165,10 @@
                 <Button.Content>
                     <Grid Width="34">
                         <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
-                                   Background="White" Foreground="Black"
+                        <Border Width="30" Height="13" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" CornerRadius="3"
+                                Background="{DynamicResource ControlLightBrushKey}"/>
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="34" Margin="0,5,0,0"
+                                   Background="Transparent" Foreground="{DynamicResource ForegroundNormalBrushKey}"
                                    FontWeight="Bold" FontSize="9"
                                    Text="INBOX" />
                     </Grid>
@@ -177,8 +179,10 @@
                 <Button.Content>
                     <Grid Width="34">
                         <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
-                                   Background="White" Foreground="Black"
+                        <Border Width="30" Height="13" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" CornerRadius="3"
+                                Background="{DynamicResource ControlLightBrushKey}"/>
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="34" Margin="0,5,0,0"
+                                   Background="Transparent" Foreground="{DynamicResource ForegroundNormalBrushKey}"
                                    FontWeight="Bold" FontSize="9"
                                    Text="DRAFT" />
                     </Grid>
@@ -189,8 +193,10 @@
                 <Button.Content>
                     <Grid Width="34">
                         <Image Source="pack://application:,,,/GUI/res/images/new/newmailbox.png"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Width="34"
-                                   Background="White" Foreground="Black"
+                        <Border Width="30" Height="13" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" CornerRadius="3"
+                                Background="{DynamicResource ControlLightBrushKey}"/>
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" Width="34" Margin="0,5,0,0"
+                                   Background="Transparent" Foreground="{DynamicResource ForegroundNormalBrushKey}"
                                    FontWeight="Bold" FontSize="9"
                                    Text="SENT" />
                     </Grid>
