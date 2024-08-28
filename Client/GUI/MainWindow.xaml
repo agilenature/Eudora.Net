@@ -123,6 +123,12 @@
                 <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
             </MenuItem>
             
+            <!--DEBUG / DEV Menu - Not active in release build, disabled by default-->
+            <MenuItem x:Name="Menu_DEV" Header="Dev" IsEnabled="False" Visibility="Collapsed">
+                <MenuItem x:Name="Menu_Dev_Test00" Header="Test 00" Click="Menu_Dev_Test00_Click"/>
+                <MenuItem x:Name="Menu_Dev_Test01" Header="Test 01" Click="Menu_Dev_Test01_Click"/>
+            </MenuItem>
+            
         </Menu>
 
         <!--Main Toolbar-->

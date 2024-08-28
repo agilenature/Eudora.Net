@@ -156,6 +156,12 @@ namespace Eudora.Net.GUI
             MainMenu.DisableAllItems();
             MainToolBar.DisableAllControls();
 
+#if DEBUG
+            Menu_DEV.Visibility = Visibility.Visible;
+            Menu_DEV.IsEnabled = true;
+            Menu_DEV.EnableAllSubitems();
+#endif
+
             // Enable the main menu items that are always active
 
             // File
@@ -948,6 +954,25 @@ namespace Eudora.Net.GUI
                     MDI.TabIndex = tabIndex;
                 }
             }
+        }
+
+        private void Menu_Dev_Test00_Click(object sender, RoutedEventArgs e)
+        {
+#if DEBUG
+            EmailMessage testMsg = new()
+            {
+                Subject = "Test",
+                SenderAddress = new("Test", "test@dev.com")
+            };
+            Notifier.NotifyNewEmail(testMsg);
+#endif
+        }
+
+        private void Menu_Dev_Test01_Click(object sender, RoutedEventArgs e)
+        {
+#if DEBUG
+            Notifier.NotifyGeneral("Test Notification", "This is only a test");
+#endif
         }
 
 
