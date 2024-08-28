@@ -113,7 +113,10 @@ namespace Eudora.Net.Core
 
         public static void Debug(string message)
         {
+#if DEBUG
             NewEvent(LogEvent.EventCategory.Debug, message);
+            System.Diagnostics.Debug.Write($"Logger:\n{message}\n");
+#endif
         }
 
         public static void Exception(Exception ex)
