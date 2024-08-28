@@ -6,7 +6,7 @@
                         xmlns:local="clr-namespace:Eudora.Net.GUI"
                         xmlns:core="clr-namespace:Eudora.Net.Core"
                         xmlns:data="clr-namespace:Eudora.Net.Data"
-                        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+                        xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
                         d:DataContext="{d:DesignInstance Type=data:EmailMessage}"
                         mc:Ignorable="d"
                         d:DesignHeight="450"
@@ -86,7 +86,7 @@
                 <Button x:Name="btn_Send" Click="btn_Send_Click" ToolTip="Send" MinWidth="50" Margin="5,0,5,0">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
-                            <themer:DynamicImage SymbolName="send" Width="16" Height="16"/>
+                            <themer:ThemeSymbol SymbolName="send" Width="16" Height="16"/>
                             <TextBlock Text="Send"/>
                         </StackPanel>
                     </Button.Content>

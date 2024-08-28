@@ -8,7 +8,7 @@
              xmlns:core="clr-namespace:Eudora.Net.Core"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+             xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=core:Webview2Document}"
@@ -39,7 +39,7 @@
                     <Setter Property="MaxWidth" Value="20"/>
                     <Setter Property="MaxHeight" Value="20"/>
                 </Style>
-                <Style TargetType="{x:Type themer:DynamicImage}">
+                <Style TargetType="{x:Type themer:ThemeSymbol}">
                     <Setter Property="Width" Value="20"/>
                     <Setter Property="Height" Value="20"/>
                     <Setter Property="MaxWidth" Value="20"/>
@@ -81,21 +81,21 @@
                 <ToggleButton x:Name="btn_Bold" Margin="5,0,0,0" ToolTip="Bold text"
                               IsChecked="{Binding ActiveFontBold}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_bold"/>
+                        <themer:ThemeSymbol SymbolName="format_bold"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Italic" Margin="5,0,0,0" ToolTip="Italic text" 
                               IsChecked="{Binding ActiveFontItalic}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_italic"/>
+                        <themer:ThemeSymbol SymbolName="format_italic"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_Underlined" Margin="5,0,0,0" ToolTip="Underlined text" 
                               IsChecked="{Binding ActiveFontUnderline}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_underlined"/>
+                        <themer:ThemeSymbol SymbolName="format_underlined"/>
                     </ToggleButton.Content>
                 </ToggleButton>
             </ToolBar>
@@ -108,21 +108,21 @@
                 <ToggleButton x:Name="btn_AlignLeft" ToolTip="Align Left" 
                               IsChecked="{Binding ActiveAlignmentLeft}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_left"/>
+                        <themer:ThemeSymbol SymbolName="format_align_left"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignCenter" Margin="5,0,0,0" ToolTip="Align Center" 
                               IsChecked="{Binding ActiveAlignmentCenter}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_center"/>
+                        <themer:ThemeSymbol SymbolName="format_align_center"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
                 <ToggleButton x:Name="btn_AlignRight" Margin="5,0,0,0" ToolTip="Align Right" 
                               IsChecked="{Binding ActiveAlignmentRight}">
                     <ToggleButton.Content>
-                        <themer:DynamicImage SymbolName="format_align_right"/>
+                        <themer:ThemeSymbol SymbolName="format_align_right"/>
                     </ToggleButton.Content>
                 </ToggleButton>
 
@@ -148,7 +148,7 @@
                         VerticalAlignment="Center">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <themer:DynamicImage SymbolName="add_image" VerticalAlignment="Center" Width="16" Height="16"/>
+                            <themer:ThemeSymbol SymbolName="add_image" VerticalAlignment="Center" Width="16" Height="16"/>
                             <TextBlock Text="Image" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button.Content>
@@ -158,7 +158,7 @@
                         VerticalAlignment="Center">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <themer:DynamicImage SymbolName="add_attachment" VerticalAlignment="Center" Width="16" Height="16"/>
+                            <themer:ThemeSymbol SymbolName="add_attachment" VerticalAlignment="Center" Width="16" Height="16"/>
                             <TextBlock Text="Attachment" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button.Content>

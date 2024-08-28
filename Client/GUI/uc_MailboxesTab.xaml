@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Eudora.Net.GUI"
              xmlns:root="clr-namespace:Eudora.Net"
-             xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+             xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              BorderThickness="0">
@@ -32,7 +32,7 @@
                 ToolTip="New Mailbox"
                 Click="btn_New_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="add"/>
+                <themer:ThemeSymbol SymbolName="add"/>
             </Button.Content>
         </Button>
 
@@ -41,7 +41,7 @@
                 ToolTip="Delete Mailbox"
                 Click="btn_Delete_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="delete"/>
+                <themer:ThemeSymbol SymbolName="delete"/>
             </Button.Content>
         </Button>
 

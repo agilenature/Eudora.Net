@@ -4,7 +4,7 @@ using System.Windows;
 using Eudora.Net.Data;
 using System.Windows.Controls;
 using Eudora.Net.ExtensionMethods;
-using WpfThemer;
+using sbux.wpf.Themer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 

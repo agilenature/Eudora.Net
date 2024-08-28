@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Eudora.Net.GUI"
-        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+        xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
         mc:Ignorable="d"
         Title="Eudora.Net: Enter name" 
         Width="400"
@@ -57,7 +57,7 @@
                     Click="btn_OK_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
+                        <themer:ThemeSymbol Width="22" Height="22" VerticalAlignment="Center"
                                              SymbolName="check"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="OK"/>
                     </StackPanel>
@@ -77,7 +77,7 @@
                     Click="btn_Cancel_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <themer:DynamicImage Width="22" Height="22" VerticalAlignment="Center"
+                        <themer:ThemeSymbol Width="22" Height="22" VerticalAlignment="Center"
                                              SymbolName="cancel"/>
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Cancel"/>
                     </StackPanel>

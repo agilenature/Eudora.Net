@@ -11,7 +11,7 @@ using System.Xml.Linq;
 using Eudora.Net.Javascript;
 using Eudora.Net.ExtensionMethods;
 using System.Diagnostics;
-using WpfThemer;
+using sbux.wpf.Themer;
 
 namespace Eudora.Net.GUI
 {

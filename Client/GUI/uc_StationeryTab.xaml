@@ -6,7 +6,7 @@
                     xmlns:local="clr-namespace:Eudora.Net.GUI"
                     xmlns:core="clr-namespace:Eudora.Net.Core"
                     xmlns:data="clr-namespace:Eudora.Net.Data"
-                    xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+                    xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
                     d:DataContext="{d:DesignInstance Type=data:Signature}"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="400">
@@ -27,32 +27,32 @@
         
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Stationery" VerticalAlignment="Center"/>
 
-            <Button x:Name="btn_New" Grid.Column="1" 
+        <Button x:Name="btn_New" Grid.Column="1" 
                     Style="{DynamicResource SmallPanelButton}"
                     Click="btn_New_Click"
                     ToolTip="New Stationery">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="add"/>
-                </Button.Content>
-            </Button>
+            <Button.Content>
+                <themer:ThemeSymbol SymbolName="add"/>
+            </Button.Content>
+        </Button>
 
-            <Button x:Name="btn_Edit" Grid.Column="2" 
+        <Button x:Name="btn_Edit" Grid.Column="2" 
                     Style="{DynamicResource SmallPanelButton}"
                     Click="btn_Edit_Click"
                     ToolTip="Edit Stationery">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="edit"/>
-                </Button.Content>
-            </Button>
+            <Button.Content>
+                <themer:ThemeSymbol SymbolName="edit"/>
+            </Button.Content>
+        </Button>
 
             <Button x:Name="btn_Delete" Grid.Column="3" 
                     Style="{DynamicResource SmallPanelButton}"
                     Click="btn_Delete_Click"
                     ToolTip="Delete Stationery">
-                <Button.Content>
-                    <themer:DynamicImage SymbolName="delete"/>
-                </Button.Content>
-            </Button>
+            <Button.Content>
+                <themer:ThemeSymbol SymbolName="delete"/>
+            </Button.Content>
+        </Button>
 
         <ListBox Grid.Row="1"
                  Grid.Column="0"

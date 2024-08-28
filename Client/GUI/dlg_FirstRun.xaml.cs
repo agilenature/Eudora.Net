@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.IO;
-using WpfThemer;
+using sbux.wpf.Themer;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 
@@ -50,16 +50,16 @@ namespace Eudora.Net.GUI
         }
 
 
-        public WpfThemer.Theme CurrentTheme
+        public sbux.wpf.Themer.Theme CurrentTheme
         {
-            get { return (WpfThemer.Theme)GetValue(CurrentThemeProperty); }
+            get { return (sbux.wpf.Themer.Theme)GetValue(CurrentThemeProperty); }
             set { SetValue(CurrentThemeProperty, value); }
         }
 
         public static readonly DependencyProperty CurrentThemeProperty =
             DependencyProperty.Register(
                 "CurrentTheme",
-                typeof(WpfThemer.Theme),
+                typeof(sbux.wpf.Themer.Theme),
                 typeof(dlg_FirstRun),
                 new PropertyMetadata(ThemeManager.ActiveTheme));
 

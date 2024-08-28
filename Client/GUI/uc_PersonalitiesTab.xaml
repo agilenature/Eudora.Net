@@ -6,7 +6,7 @@
                     xmlns:local="clr-namespace:Eudora.Net.GUI"
                     xmlns:core="clr-namespace:Eudora.Net.Core"
                     xmlns:data="clr-namespace:Eudora.Net.Data"
-                    xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+                    xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
                     d:DataContext="{d:DesignInstance Type=data:Personality}"
                     mc:Ignorable="d" 
                     d:DesignHeight="450" d:DesignWidth="400">
@@ -33,7 +33,7 @@
                 Click="btn_New_Click"
                 ToolTip="New Personality">
             <Button.Content>
-                <themer:DynamicImage SymbolName="add"/>
+                <themer:ThemeSymbol SymbolName="add"/>
             </Button.Content>
         </Button>
 
@@ -42,7 +42,7 @@
                 Click="btn_Edit_Click"
                 ToolTip="Edit Personality">
             <Button.Content>
-                <themer:DynamicImage SymbolName="edit"/>
+                <themer:ThemeSymbol SymbolName="edit"/>
             </Button.Content>
         </Button>
 
@@ -51,7 +51,7 @@
                 Click="btn_Delete_Click"
                 ToolTip="Delete Personality">
             <Button.Content>
-                <themer:DynamicImage SymbolName="delete"/>
+                <themer:ThemeSymbol SymbolName="delete"/>
             </Button.Content>
         </Button>
 

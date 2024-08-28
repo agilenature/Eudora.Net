@@ -7,7 +7,7 @@
                         xmlns:local="clr-namespace:Eudora.Net.GUI"
                         xmlns:core="clr-namespace:Eudora.Net.Core"
                         xmlns:Properties="clr-namespace:Eudora.Net.Properties"
-                        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+                        xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
                         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
                         d:DataContext="{d:DesignInstance Type=local:uc_BrowserView}"
                         mc:Ignorable="d"
@@ -43,7 +43,7 @@
                     Click="btn_Back_Click"
                     IsEnabled="{Binding CanGoBack, ElementName=Browser}">
             <Button.Content>
-                <themer:DynamicImage SymbolName="arrow_back"/>
+                <themer:ThemeSymbol SymbolName="arrow_back"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -58,7 +58,7 @@
                     Click="btn_Forward_Click"
                     IsEnabled="{Binding CanGoForward, ElementName=Browser}">
             <Button.Content>
-                <themer:DynamicImage SymbolName="arrow_forward"/>
+                <themer:ThemeSymbol SymbolName="arrow_forward"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -72,7 +72,7 @@
                     ToolTip="Refresh"
                     Click="btn_Refresh_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="refresh"/>
+                <themer:ThemeSymbol SymbolName="refresh"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -100,7 +100,7 @@
                     ToolTip="Add Bookmark"
                     Click="btn_Bookmark_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="star"/>
+                <themer:ThemeSymbol SymbolName="star"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -115,7 +115,7 @@
                       Checked="btn_ManageBookmarks_Checked"
                       Unchecked="btn_ManageBookmarks_Unchecked">
             <ToggleButton.Content>
-                <themer:DynamicImage SymbolName="bookmarks"/>
+                <themer:ThemeSymbol SymbolName="bookmarks"/>
             </ToggleButton.Content>
             <ToggleButton.Resources>
                 <Style TargetType="Border">
@@ -129,7 +129,7 @@
                 ToolTip="Settings"
                 Click="btn_Settings_Click">
             <Button.Content>
-                <themer:DynamicImage SymbolName="settings"/>
+                <themer:ThemeSymbol SymbolName="settings"/>
             </Button.Content>
             <Button.Resources>
                 <Style TargetType="Border">
@@ -192,7 +192,7 @@
                                 <Button x:Name="btn_DeleteBookmark" Click="btn_DeleteBookmark_Click">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <themer:DynamicImage SymbolName="delete" 
+                                            <themer:ThemeSymbol SymbolName="delete" 
                                                                  Width="16" Height="16"/>
                                             <TextBlock Text="Delete" Margin="5,0,0,0" VerticalAlignment="Center"/>
                                         </StackPanel>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Eudora.Net.GUI"
         xmlns:core="clr-namespace:Eudora.Net.Core"
         xmlns:extensions="clr-namespace:Eudora.Net.ExtensionMethods"
-        xmlns:themer="clr-namespace:WpfThemer;assembly=WpfThemer"
+        xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         xmlns:mdi="clr-namespace:mdilib;assembly=MdiLib"
         xmlns:Properties="clr-namespace:Eudora.Net.Properties"

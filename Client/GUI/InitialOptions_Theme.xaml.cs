@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfThemer;
+using sbux.wpf.Themer;
 
 namespace Eudora.Net.GUI
 {
@@ -32,7 +32,7 @@ namespace Eudora.Net.GUI
 
         private void cb_Themes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cb_Themes.SelectedItem is WpfThemer.Theme theme)
+            if(cb_Themes.SelectedItem is sbux.wpf.Themer.Theme theme)
             {
                 ThemeManager.SetTheme(theme.DisplayName);
                 Eudora.Net.Properties.Settings.Default.UxTheme = theme.DisplayName;

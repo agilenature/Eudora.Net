@@ -2,7 +2,7 @@
 using Eudora.Net.Data;
 using System.Windows;
 using System.Windows.Controls;
-using WpfThemer;
+using sbux.wpf.Themer;
 
 namespace Eudora.Net
 {
@@ -53,7 +53,7 @@ namespace Eudora.Net
                 
                 // The Eudora theme
                 string uri = "/Eudora.Net;component/GUI/theme/ThemeEudora.xaml";
-                var theme = new WpfThemer.Theme("Eudora Classic", "Eudora Classic", Theme.eSymbolColor.c111111, new ResourceDictionary()
+                var theme = new sbux.wpf.Themer.Theme("Eudora Classic", "Eudora Classic", Theme.eSymbolColor.c111111, new ResourceDictionary()
                 {
                     Source = new Uri(uri, UriKind.RelativeOrAbsolute)
                 });

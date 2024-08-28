@@ -620,8 +620,8 @@
     <Reference Include="MdiLib">
       <HintPath>MdiLib.dll</HintPath>
     </Reference>
-    <Reference Include="WpfThemer">
-      <HintPath>WpfThemer.dll</HintPath>
+    <Reference Include="sbux.wpf.Themer">
+      <HintPath>..\..\libs\sbux.wpf.Themer.dll</HintPath>
     </Reference>
   </ItemGroup>
 

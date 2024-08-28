@@ -2,7 +2,7 @@
 using Eudora.Net.Data;
 using Microsoft.Win32;
 using System.Windows;
-using WpfThemer;
+using sbux.wpf.Themer;
 
 namespace Eudora.Net.GUI
 {
