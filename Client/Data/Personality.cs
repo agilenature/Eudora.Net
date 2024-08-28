@@ -83,6 +83,22 @@ namespace Eudora.Net.Data
             }
         }
 
+        [SQLite.Ignore, JsonIgnore]
+        public bool IsOutlook
+        {
+            get
+            {
+                if( _EmailAddress.Contains("@live.com", StringComparison.CurrentCultureIgnoreCase) ||
+                    _EmailAddress.Contains("@msn.com", StringComparison.CurrentCultureIgnoreCase) ||
+                    _EmailAddress.Contains("@passport.com", StringComparison.CurrentCultureIgnoreCase) ||
+                    _EmailAddress.Contains("@outlook.com", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         [SQLite.PrimaryKey]
         public Guid Id
         {
