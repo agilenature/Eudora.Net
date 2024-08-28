@@ -14,6 +14,13 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using Eudora.Net.Data;
+using Google.Apis.Auth;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Util.Store;
+using MailKit.Security;
+using Windows.Media.Protection.PlayReady;
+
 
 namespace Eudora.Net.Core
 {
@@ -23,6 +30,8 @@ namespace Eudora.Net.Core
     public class PostOffice
     {
         public static PostOffice Instance;
+
+        private static Timer NewMailCheckTimer;
 
         ///////////////////////////////////////////////////////////
         #region Properties
@@ -515,21 +524,29 @@ namespace Eudora.Net.Core
         /// </summary>
         public async void CheckMail()
         {
-            await Task.Run(() => CheckAllAccounts());            
+            await Task.Run(async () => CheckAllAccounts());            
         }
 
-        public void CheckAllAccounts()
+        public async void CheckAllAccounts()
         {
             foreach (var personality in PersonalityManager.Datastore.Data)
             {
                 Logger.Information($"Checking {personality.EmailAddress}");
-                if(personality.UsePop)
+
+                if (personality.IsGmail)
                 {
-                    RetrieveWithPOP(personality);
+                    RetrieveGmail(personality);
                 }
                 else
                 {
-                    RetrieveWithIMAP(personality);
+                    if (personality.UsePop)
+                    {
+                        RetrieveWithPOP(personality);
+                    }
+                    else
+                    {
+                        RetrieveWithIMAP(personality);
+                    }
                 }
             }
         }
@@ -672,6 +689,70 @@ namespace Eudora.Net.Core
             }
         }
 
+        private async void RetrieveGmail(Personality personality, bool onlyUnread = false)
+        {
+            var oauth2 = GmailLogin(personality).Result;
+            if(oauth2 is null)
+            {
+                return;
+            }
+
+            List<MimeMessage> mimes = [];
+
+            using (var client = new ImapClient())
+            {
+                await client.ConnectAsync("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                await client.AuthenticateAsync(oauth2);
+
+                var remoteInbox = client.Inbox;
+                var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
+
+                if (onlyUnread)
+                {
+                    List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
+                    Logger.Information($"Retrieving {results.Count} unread messages...");
+
+                    foreach (var uid in results)
+                    {
+                        remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
+                        mimes.Add(remoteInbox.GetMessage(uid));
+                    }
+                }
+                else
+                {
+                    int messageCount = remoteInbox.Count;
+                    Logger.Information($"Retrieving {messageCount} messages...");
+                    for (int i = 0; i < messageCount; i++)
+                    {
+                        mimes.Add(remoteInbox.GetMessage(i));
+                    }
+                }
+
+                // Done with remote inbox & server connection
+                remoteInbox.Close();
+                await client.DisconnectAsync(true);
+            }
+
+
+            // Iterate the mime list, converting each to a Eudora.EmailMessage and route it appropriately
+            foreach (MimeMessage mime in mimes)
+            {
+                try
+                {
+                    var m = new MimeToMessage(mime);
+                    m.Message.PersonalityID = personality.Id;
+                    m.Convert();
+                    RouteIncomingMessage(m.Message);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Exception(ex);
+                }
+            }
+
+            Logger.Information("Finished");
+        }
+
 
         public async Task SendMessage(EmailMessage message)
         {
@@ -679,7 +760,25 @@ namespace Eudora.Net.Core
             var mime = PrepareMessage(message);
             if (mime != null)
             {
-                if (TransmitMail(mime))
+                bool messageSent = false;
+
+                var personality = PersonalityManager.FindPersonality(message.PersonalityID);
+                if(personality is not null)
+                {
+                    if(personality.IsGmail)
+                    {
+                        if (await TransmitGmail(mime))
+                        {
+                            messageSent = true;
+                        }
+                        else if(await TransmitMail(mime))
+                        {
+                            messageSent = true;
+                        }
+                    }
+                }
+
+                if (messageSent)
                 {
                     MoveMessage(message, Sent?.Name ?? string.Empty);
                     message.Status = EmailMessage.MessageStatus.Sealed;
@@ -691,8 +790,10 @@ namespace Eudora.Net.Core
                 }
             }
             Logger.Information("Message sent");
-        }        
+        }
+
         
+
 
         /////////////////////////////////////////////////////////////////
         #endregion Mail Interface
@@ -780,10 +881,10 @@ namespace Eudora.Net.Core
         /// The actual transmission of a MIME message
         /// </summary>
         /// <param name="mail"></param>
-        private bool TransmitMail(TransmissableMail mail)
+        private async Task<bool> TransmitMail(TransmissableMail mail)
         {
             bool result = false;
-            using (SmtpClient smtpClient = new SmtpClient())
+            using (SmtpClient smtpClient = new())
             {
                 try
                 {
@@ -800,7 +901,7 @@ namespace Eudora.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.Exception(ex);
+                    Logger.Error(ex.Message);
                 }
                 finally
                 {
@@ -811,6 +912,46 @@ namespace Eudora.Net.Core
             return result;
         }
 
+        private async Task<bool> TransmitGmail(TransmissableMail mail)
+        {
+            bool result = false;
+
+            try
+            {
+                var oauth2 = GmailLogin(mail.Personality).Result;
+                if(oauth2 is null)
+                {
+                    return result;
+                }
+
+                using (SmtpClient smtpClient = new())
+                {
+                    try
+                    {
+                        await smtpClient.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                        await smtpClient.AuthenticateAsync(oauth2);
+                        await smtpClient.SendAsync(mail.MimeMessage);
+                        result = true;
+
+                        EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewMessageOut);
+                        if (mail.MimeMessage.Attachments.Any())
+                        {
+                            EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewAttachmentOut, (uint)mail.MimeMessage.Attachments.Count());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+
+            return result;
+        }
 
         /////////////////////////////////////////////////////////////////
         #endregion Mail Internal
@@ -821,6 +962,48 @@ namespace Eudora.Net.Core
         ///////////////////////////////////////////////////////////
         #region Mail Security
         /////////////////////////////
+
+        private async Task<SaslMechanismOAuth2?> GmailLogin(Personality personality)
+        {
+            try
+            {
+                var clientSecrets = new ClientSecrets()
+                {
+                    ClientId = EudoraHelper.IGmailConnection.ClientId,
+                    ClientSecret = EudoraHelper.IGmailConnection.ClientSecret
+                };
+
+                var codeFlow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+                {
+                    DataStore = new FileDataStore("CredentialCacheFolder", false),
+                    Scopes = new[] { "https://mail.google.com/" },
+                    ClientSecrets = clientSecrets,
+                    LoginHint = personality.EmailAddress
+                });
+
+                var codeReceiver = new LocalServerCodeReceiver();
+                var authCode = new AuthorizationCodeInstalledApp(codeFlow, codeReceiver);
+
+                var credential = await authCode.AuthorizeAsync(personality.EmailAddress, CancellationToken.None);
+                if (credential.Token.IsStale)
+                {
+                    await credential.RefreshTokenAsync(CancellationToken.None);
+                }
+
+                var oauth2 = new SaslMechanismOAuth2(credential.UserId, credential.Token.AccessToken);
+                if (oauth2 is null)
+                {
+                    Logger.Warning("Gmail OAuth2 result was null");
+                }
+                return oauth2;
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+
+            return null;
+        }
 
         static bool CertificateValidationCallback(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
         {

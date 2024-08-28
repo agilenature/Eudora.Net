@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Eudora.Net.Core;
 using SQLite;
+using System.Text.Json.Serialization;
 
 namespace Eudora.Net.Data
 {
@@ -72,6 +73,15 @@ namespace Eudora.Net.Data
         ///////////////////////////////////////////////////////////
         #region Properties
         /////////////////////////////
+
+        [SQLite.Ignore, JsonIgnore]
+        public bool IsGmail
+        {
+            get
+            {
+                return _EmailAddress.Contains("@gmail.com", StringComparison.CurrentCultureIgnoreCase);
+            }
+        }
 
         [SQLite.PrimaryKey]
         public Guid Id
