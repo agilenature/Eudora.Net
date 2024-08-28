@@ -1,4 +1,5 @@
-﻿using Eudora.Net.Data;
+﻿using Eudora.Net.Core;
+using Eudora.Net.Data;
 using Microsoft.Win32;
 using System.Windows;
 using WpfThemer;
@@ -82,6 +83,12 @@ namespace Eudora.Net.GUI
                 Properties.Settings.Default.UxTheme = theme.DisplayName;
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void sld_Frequency_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Parallel.Invoke(() => PostOffice.UpdateTimerFrequency());
+            Parallel.Invoke(async () => Properties.Settings.Default.Save());
         }
     }
 }

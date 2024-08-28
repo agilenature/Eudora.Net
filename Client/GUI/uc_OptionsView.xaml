@@ -5,6 +5,7 @@
                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                         xmlns:local="clr-namespace:Eudora.Net.GUI" 
                         xmlns:core="clr-namespace:Eudora.Net.Core"
+                        xmlns:props="clr-namespace:Eudora.Net.Properties"
                         xmlns:properties="clr-namespace:Eudora.Net.Properties"
                         mc:Ignorable="d" 
                         d:DesignHeight="450" d:DesignWidth="800"
@@ -20,6 +21,60 @@
         <!--Option Category Tabs-->
         <TabControl Grid.Row="0" x:Name="SettingsTabs" x:FieldModifier="public" TabStripPlacement="Top">
 
+            <!--Email settings tab-->
+            <TabItem Header="Post Office">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="13"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               FontWeight="Bold" FontSize="16">
+                        <TextBlock.Text>Email Settings</TextBlock.Text>
+                    </TextBlock>
+                    
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="3" VerticalAlignment="Center"
+                            Background="{DynamicResource BorderNormalBrushKey}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock.Text>Email check timer (minutes):</TextBlock.Text>
+                    </TextBlock>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch">
+
+                        <Slider x:Name="sld_Frequency" 
+                                Width="250"
+                                Minimum="3" Maximum="30" SmallChange="1" LargeChange="1"
+                                Value="{Binding Source={x:Static props:Settings.Default}, Path=EmailCheckFrequency, UpdateSourceTrigger=PropertyChanged}"
+                                IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" AutoToolTipPrecision="1"
+                                Ticks="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30"
+                                ValueChanged="sld_Frequency_ValueChanged"/>
+
+                        <Border Width="10" Background="Transparent"/>
+
+                        <TextBox IsEnabled="False" 
+                                 Width="20" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                 Text="{Binding ElementName=sld_Frequency, Path=Value}"/>
+                        
+                    </StackPanel>
+                    
+
+                </Grid>
+
+            </TabItem>
+
             <!--Notifications tab-->
             <TabItem Header="Notifications">
 
@@ -29,7 +84,8 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="5"/>
-                        <RowDefinition Height="20"/> <!--spacer-->
+                        <RowDefinition Height="20"/>
+                        <!--spacer-->
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
@@ -91,7 +147,8 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="5"/>
-                        <RowDefinition Height="20"/> <!--spacer-->
+                        <RowDefinition Height="20"/>
+                        <!--spacer-->
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="100"/>
@@ -160,7 +217,8 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="5"/>
-                        <RowDefinition Height="20"/> <!--spacer-->
+                        <RowDefinition Height="20"/>
+                        <!--spacer-->
                         <RowDefinition Height="24"/>
                         <RowDefinition Height="24"/>
                     </Grid.RowDefinitions>
@@ -182,7 +240,7 @@
                     </TextBlock>
 
                     <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource BorderNormalBrushKey}"/>
-                    
+
                     <TextBlock  Grid.Row="4" Grid.Column="0"
                                 HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"
                                 FontWeight="Bold"
@@ -214,7 +272,8 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="5"/>
-                        <RowDefinition Height="20"/> <!--spacer-->
+                        <RowDefinition Height="20"/>
+                        <!--spacer-->
                         <RowDefinition Height="48"/>
                     </Grid.RowDefinitions>
 
@@ -236,7 +295,7 @@
                     </TextBlock>
 
                     <Border Grid.Row="2" Background="{DynamicResource BorderNormalBrushKey}"/>
-                    
+
                     <CheckBox Grid.Row="4" Content="Enable exception reporting" 
                               HorizontalAlignment="Center" VerticalAlignment="Center"
                               IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=EnableErrorReporting}"/>
@@ -245,7 +304,8 @@
 
             </TabItem>
 
-            <TabItem Header="Hotkeys" IsEnabled="True">
+            <TabItem Header="Hotkeys" IsEnabled="False">
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -256,14 +316,12 @@
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="1" Background="{DynamicResource BorderNormalBrushKey}"/>
-                    
+
                     <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16">
                         <TextBlock.Text>Hotkeys</TextBlock.Text>
                     </TextBlock>
-                    
-                    
-                    
                 </Grid>
+
             </TabItem>
 
             <!--Storage Options tab-->

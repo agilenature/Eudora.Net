@@ -31,7 +31,18 @@ namespace Eudora.Net.Core
     {
         public static PostOffice Instance;
 
-        private static Timer NewMailCheckTimer;
+        private static Timer NewMailCheckTimer = new(
+            EmailCheckTimerCallback,
+            null,
+            Properties.Settings.Default.EmailCheckFrequency * 60000,
+            Properties.Settings.Default.EmailCheckFrequency * 60000);
+
+        public static void UpdateTimerFrequency()
+        {
+            NewMailCheckTimer.Change(
+                Properties.Settings.Default.EmailCheckFrequency * 60000,
+                Properties.Settings.Default.EmailCheckFrequency * 60000);
+        }
 
         ///////////////////////////////////////////////////////////
         #region Properties
@@ -951,6 +962,11 @@ namespace Eudora.Net.Core
             }
 
             return result;
+        }
+
+        public static void EmailCheckTimerCallback(object? state)
+        {
+            Parallel.Invoke(async () => PostOffice.Instance.CheckMail());
         }
 
         /////////////////////////////////////////////////////////////////
