@@ -9,6 +9,7 @@ namespace Eudora.Net.GUI
     {
         private static readonly string GeneralNotificationID = "Eudora.Net.Notify.General";
         private static readonly string EmailNotificationID = "Eudora.Net.Notify.Email";
+        private static ToastNotifierCompat? TN = default;
 
 
         static Notifier()
@@ -19,20 +20,19 @@ namespace Eudora.Net.GUI
         {
             try
             {
+                TN ??= ToastNotificationManagerCompat.CreateToastNotifier();
+
                 var toastContent = new ToastContentBuilder()
                     .AddHeader(GeneralNotificationID, "Eudora.Net", "")
                     .AddText(title)
                     .AddText(message);
 
-                ToastNotification toast = new ToastNotification(toastContent.GetXml())
+                ToastNotification toast = new(toastContent.GetXml())
                 {
                     Tag = GeneralNotificationID
                 };
 
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
-                new ToastContentBuilder()
-                
-                .Show();
+                TN.Show(toast);
             }
             catch(Exception ex)
             {
@@ -44,17 +44,19 @@ namespace Eudora.Net.GUI
         {
             try
             {
+                TN ??= ToastNotificationManagerCompat.CreateToastNotifier();
+
                 var toastContent = new ToastContentBuilder()
-                    .AddHeader(EmailNotificationID, "Eudora.Net - New Email", "")
+                    .AddHeader(EmailNotificationID, "Eudora.Net: New Email", "")
                     .AddText(message.SenderAddress.DisplayString)
                     .AddText(message.Subject);
 
-                ToastNotification toast = new ToastNotification(toastContent.GetXml())
+                ToastNotification toast = new(toastContent.GetXml())
                 {
                     Tag = EmailNotificationID
                 };
 
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
+                TN.Show(toast);
             }
             catch (Exception ex)
             {
