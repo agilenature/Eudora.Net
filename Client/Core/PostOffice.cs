@@ -564,61 +564,68 @@ namespace Eudora.Net.Core
 
         private void RetrieveWithPOP(Personality personality)
         {
-            using (Pop3Client client = new Pop3Client())
+            try
             {
-                client.ServerCertificateValidationCallback = CertificateValidationCallback;
-
-                try
+                using (Pop3Client client = new Pop3Client())
                 {
-                    client.CheckCertificateRevocation = true;
+                    client.ServerCertificateValidationCallback = CertificateValidationCallback;
 
-                    client.Connect(
-                        personality.Server_Incoming,
-                        personality.Port_Incoming,
-                        personality.SocketOptions_Incoming);
-
-                    client.Authenticate(personality.EmailAddress, personality.EmailPassword);
-                    Logger.Information( $"Retrieving {client.Count.ToString()} messages");                    
-
-                    // Retrieve MIME messages from server & disconnect
-                    List<MimeMessage> mimes = [];
-                    for (int i = 0; i < client.Count; i++)
+                    try
                     {
-                        MimeMessage? mime = client.GetMessage(i);
-                        
-                        if (mime is not null)
-                        {
-                            mimes.Add(mime);
-                        }
-                    }
-                    client.Disconnect(true);
+                        client.CheckCertificateRevocation = true;
 
-                    // Iterate the mime list, converting each to a MailMessage and route it appropriately
-                    foreach(MimeMessage mime in mimes)
-                    {
-                        try
+                        client.Connect(
+                            personality.Server_Incoming,
+                            personality.Port_Incoming,
+                            personality.SocketOptions_Incoming);
+
+                        client.Authenticate(personality.EmailAddress, personality.EmailPassword);
+                        Logger.Information($"Retrieving {client.Count.ToString()} messages");
+
+                        // Retrieve MIME messages from server & disconnect
+                        List<MimeMessage> mimes = [];
+                        for (int i = 0; i < client.Count; i++)
                         {
-                            var m = new MimeToMessage(mime);
-                            m.Convert();
-                            m.Message.PersonalityID = personality.Id;
-                            RouteIncomingMessage(m.Message);
+                            MimeMessage? mime = client.GetMessage(i);
+
+                            if (mime is not null)
+                            {
+                                mimes.Add(mime);
+                            }
                         }
-                        catch(Exception ex)
+                        client.Disconnect(true);
+
+                        // Iterate the mime list, converting each to a MailMessage and route it appropriately
+                        foreach (MimeMessage mime in mimes)
                         {
-                            Logger.Exception(ex);
+                            try
+                            {
+                                var m = new MimeToMessage(mime);
+                                m.Convert();
+                                m.Message.PersonalityID = personality.Id;
+                                RouteIncomingMessage(m.Message);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex.Message);
+                            }
                         }
+                        Logger.Information("Finished");
                     }
-                    Logger.Information("Finished");
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.Message);
+                    }
+                    finally
+                    {
+                        client.Disconnect(true);
+                        client.Dispose();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Logger.Exception(ex);
-                }
-                finally
-                {
-                    client.Disconnect(true);
-                    client.Dispose();
-                }
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
             }
         }
 
@@ -626,29 +633,112 @@ namespace Eudora.Net.Core
 
         private void RetrieveWithIMAP(Personality personality, bool onlyUnread = false)
         {
-            using (ImapClient client = new ImapClient())
+            try
             {
-                client.ServerCertificateValidationCallback = CertificateValidationCallback;
-                try
+                using (ImapClient client = new ImapClient())
                 {
-                    client.CheckCertificateRevocation = true;
+                    client.ServerCertificateValidationCallback = CertificateValidationCallback;
+                    try
+                    {
+                        client.CheckCertificateRevocation = true;
 
-                    client.Connect(
-                        personality.Server_Incoming,
-                        personality.Port_Incoming,
-                        personality.SocketOptions_Incoming);
+                        client.Connect(
+                            personality.Server_Incoming,
+                            personality.Port_Incoming,
+                            personality.SocketOptions_Incoming);
 
-                    client.Authenticate(personality.EmailAddress, personality.EmailPassword);
+                        client.Authenticate(personality.EmailAddress, personality.EmailPassword);
+                        var remoteInbox = client.Inbox;
+                        var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
+
+                        List<MimeMessage> mimes = [];
+
+                        if (onlyUnread)
+                        {
+                            List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
+                            Logger.Information($"Retrieving {results.Count} unread messages...");
+
+                            foreach (var uid in results)
+                            {
+                                remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
+                                mimes.Add(remoteInbox.GetMessage(uid));
+                            }
+                        }
+                        else
+                        {
+                            int messageCount = remoteInbox.Count;
+                            Logger.Information($"Retrieving {messageCount} messages...");
+                            for (int i = 0; i < messageCount; i++)
+                            {
+                                mimes.Add(remoteInbox.GetMessage(i));
+                            }
+                        }
+
+                        // Done with remote inbox & server connection
+                        remoteInbox.Close();
+                        client.Disconnect(true);
+
+
+                        // Iterate the mime list, converting each to a MailMessage and route it appropriately
+                        foreach (MimeMessage mime in mimes)
+                        {
+                            try
+                            {
+                                var m = new MimeToMessage(mime);
+                                m.Message.PersonalityID = personality.Id;
+                                m.Convert();
+                                RouteIncomingMessage(m.Message);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex.Message);
+                            }
+                        }
+
+                        Logger.Information("Finished");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.Message);
+                    }
+                    finally
+                    {
+                        client.Disconnect(true);
+                        client.Dispose();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+        }
+
+        private async void RetrieveGmail(Personality personality, bool onlyUnread = false)
+        {
+            try
+            {
+                var oauth2 = GmailLogin(personality).Result;
+                if (oauth2 is null)
+                {
+                    return;
+                }
+
+                List<MimeMessage> mimes = [];
+
+                using (var client = new ImapClient())
+                {
+                    await client.ConnectAsync("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                    await client.AuthenticateAsync(oauth2);
+
                     var remoteInbox = client.Inbox;
                     var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
-
-                    List<MimeMessage> mimes = [];
 
                     if (onlyUnread)
                     {
                         List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
                         Logger.Information($"Retrieving {results.Count} unread messages...");
-                        
+
                         foreach (var uid in results)
                         {
                             remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
@@ -659,7 +749,7 @@ namespace Eudora.Net.Core
                     {
                         int messageCount = remoteInbox.Count;
                         Logger.Information($"Retrieving {messageCount} messages...");
-                        for(int i = 0; i < messageCount; i++)
+                        for (int i = 0; i < messageCount; i++)
                         {
                             mimes.Add(remoteInbox.GetMessage(i));
                         }
@@ -667,98 +757,29 @@ namespace Eudora.Net.Core
 
                     // Done with remote inbox & server connection
                     remoteInbox.Close();
-                    client.Disconnect(true);
+                    await client.DisconnectAsync(true);
+                }
 
 
-                    // Iterate the mime list, converting each to a MailMessage and route it appropriately
-                    foreach (MimeMessage mime in mimes)
+                // Iterate the mime list, converting each to a Eudora.EmailMessage and route it appropriately
+                foreach (MimeMessage mime in mimes)
+                {
+                    try
                     {
-                        try
-                        {
-                            var m = new MimeToMessage(mime);
-                            m.Message.PersonalityID = personality.Id;
-                            m.Convert();
-                            RouteIncomingMessage(m.Message);
-                        }
-                        catch(Exception ex)
-                        {
-                            Logger.Exception(ex);
-                        }
+                        var m = new MimeToMessage(mime);
+                        m.Message.PersonalityID = personality.Id;
+                        m.Convert();
+                        RouteIncomingMessage(m.Message);
                     }
-
-                    Logger.Information("Finished");
-                }
-                catch (Exception ex)
-                {
-                    Logger.Exception(ex);
-                }
-                finally
-                {
-                    client.Disconnect(true);
-                    client.Dispose();
-                }
-            }
-        }
-
-        private async void RetrieveGmail(Personality personality, bool onlyUnread = false)
-        {
-            var oauth2 = GmailLogin(personality).Result;
-            if(oauth2 is null)
-            {
-                return;
-            }
-
-            List<MimeMessage> mimes = [];
-
-            using (var client = new ImapClient())
-            {
-                await client.ConnectAsync("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
-                await client.AuthenticateAsync(oauth2);
-
-                var remoteInbox = client.Inbox;
-                var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
-
-                if (onlyUnread)
-                {
-                    List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
-                    Logger.Information($"Retrieving {results.Count} unread messages...");
-
-                    foreach (var uid in results)
+                    catch (Exception ex)
                     {
-                        remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
-                        mimes.Add(remoteInbox.GetMessage(uid));
+                        Logger.Error(ex.Message);
                     }
                 }
-                else
-                {
-                    int messageCount = remoteInbox.Count;
-                    Logger.Information($"Retrieving {messageCount} messages...");
-                    for (int i = 0; i < messageCount; i++)
-                    {
-                        mimes.Add(remoteInbox.GetMessage(i));
-                    }
-                }
-
-                // Done with remote inbox & server connection
-                remoteInbox.Close();
-                await client.DisconnectAsync(true);
             }
-
-
-            // Iterate the mime list, converting each to a Eudora.EmailMessage and route it appropriately
-            foreach (MimeMessage mime in mimes)
+            catch(Exception ex)
             {
-                try
-                {
-                    var m = new MimeToMessage(mime);
-                    m.Message.PersonalityID = personality.Id;
-                    m.Convert();
-                    RouteIncomingMessage(m.Message);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Exception(ex);
-                }
+                Logger.Error(ex.Message);
             }
 
             Logger.Information("Finished");
@@ -767,40 +788,47 @@ namespace Eudora.Net.Core
 
         public async Task SendMessage(EmailMessage message)
         {
-            Logger.Information("Sending...");
-            var mime = PrepareMessage(message);
-            if (mime != null)
+            try
             {
-                bool messageSent = false;
-
-                var personality = PersonalityManager.FindPersonality(message.PersonalityID);
-                if(personality is not null)
+                Logger.Information("Sending...");
+                var mime = PrepareMessage(message);
+                if (mime != null)
                 {
-                    if(personality.IsGmail)
+                    bool messageSent = false;
+
+                    var personality = PersonalityManager.FindPersonality(message.PersonalityID);
+                    if (personality is not null)
                     {
-                        if (await TransmitGmail(mime))
+                        if (personality.IsGmail)
                         {
-                            messageSent = true;
-                        }
-                        else if(await TransmitMail(mime))
-                        {
-                            messageSent = true;
+                            if (await TransmitGmail(mime))
+                            {
+                                messageSent = true;
+                            }
+                            else if (await TransmitMail(mime))
+                            {
+                                messageSent = true;
+                            }
                         }
                     }
-                }
 
-                if (messageSent)
-                {
-                    MoveMessage(message, Sent?.Name ?? string.Empty);
-                    message.Status = EmailMessage.MessageStatus.Sealed;
-                    message.SendStatus = EmailMessage.eSendStatus.Sent;
+                    if (messageSent)
+                    {
+                        MoveMessage(message, Sent?.Name ?? string.Empty);
+                        message.Status = EmailMessage.MessageStatus.Sealed;
+                        message.SendStatus = EmailMessage.eSendStatus.Sent;
+                    }
+                    else
+                    {
+                        Logger.Warning("Failed to send message");
+                    }
                 }
-                else
-                {
-                    Logger.Warning("Failed to send message");
-                }
+                Logger.Information("Message sent");
             }
-            Logger.Information("Message sent");
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
         }
 
         
