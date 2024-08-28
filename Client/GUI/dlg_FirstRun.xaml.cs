@@ -109,6 +109,17 @@ namespace Eudora.Net.GUI
             if(e.Content is Page page)
             {
                 page.DataContext = this;
+
+                if(page is InitialOptions_Landing landing)
+                {
+                    btn_Back.IsEnabled = false;
+                    btn_Back.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    btn_Back.IsEnabled = true;
+                    btn_Back.Visibility = Visibility.Visible;
+                }
             }
         }
 

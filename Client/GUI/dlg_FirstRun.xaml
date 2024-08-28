@@ -42,7 +42,7 @@
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="btn_Back" Width="60" Height="30" Content="Back" Click="btn_Back_Click"
-                    VerticalAlignment="Center" BorderThickness="3">
+                    VerticalAlignment="Center" BorderThickness="3" IsEnabled="False">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,0,0,20"/>
