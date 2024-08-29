@@ -1,25 +1,22 @@
-﻿using Eudora.Net.GUI;
-using Eudora.Net.HtmlTemplates;
+﻿using Eudora.Net.Data;
 using Eudora.Net.ExtensionMethods;
+using Eudora.Net.GUI;
+using Eudora.Net.HtmlTemplates;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Util.Store;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
 using MailKit.Net.Smtp;
 using MailKit.Search;
+using MailKit.Security;
 using MimeKit;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
-using Eudora.Net.Data;
-using Google.Apis.Auth;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Util.Store;
-using MailKit.Security;
-using Windows.Media.Protection.PlayReady;
 
 
 namespace Eudora.Net.Core
