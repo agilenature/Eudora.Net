@@ -9,7 +9,7 @@ using System.IO;
 namespace Eudora.Net.Data
 {
     /// <summary>
-    /// 
+    /// A utility base for a single-table DB
     /// </summary>
     public class DatastoreBase<T> where T : class, INotifyPropertyChanged, new()
     {

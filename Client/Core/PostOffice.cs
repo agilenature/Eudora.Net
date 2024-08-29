@@ -857,19 +857,19 @@ namespace Eudora.Net.Core
             mailbox.AddMessage(message);
             Notifier.NotifyNewEmail(message);
 
-            EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewMessageIn);
+            EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.EmailIn);
             if(message.Attachments.Any())
             {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewAttachmentIn, (uint)message.Attachments.Count);
+                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.AttachmentIn, (uint)message.Attachments.Count);
             }
 
             if (message.MessageCategory == eMailThreadType.Reply)
             {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewReply);
+                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Reply);
             }
             else if (message.MessageCategory == eMailThreadType.Forward)
             {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewForward);
+                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Forward);
             }
 
             // Check this message against each of the existing filters
@@ -929,10 +929,10 @@ namespace Eudora.Net.Core
                     smtpClient.Send(mail.MimeMessage);
                     result = true;
 
-                    EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewMessageOut);
+                    EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.EmailOut);
                     if(mail.MimeMessage.Attachments.Any())
                     {
-                        EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewAttachmentOut, (uint)mail.MimeMessage.Attachments.Count());
+                        EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.AttachmentOut, (uint)mail.MimeMessage.Attachments.Count());
                     }
                 }
                 catch (Exception ex)
@@ -969,10 +969,10 @@ namespace Eudora.Net.Core
                         await smtpClient.SendAsync(mail.MimeMessage);
                         result = true;
 
-                        EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewMessageOut);
+                        EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.EmailOut);
                         if (mail.MimeMessage.Attachments.Any())
                         {
-                            EudoraStatistics.IncrementCounter(EudoraStatistics.eRowIndex.Mail_NewAttachmentOut, (uint)mail.MimeMessage.Attachments.Count());
+                            EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.AttachmentOut, (uint)mail.MimeMessage.Attachments.Count());
                         }
                     }
                     catch (Exception ex)

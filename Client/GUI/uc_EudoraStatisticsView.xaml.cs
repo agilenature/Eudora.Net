@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Data;
 using Eudora.Net.Core;
+using Eudora.Net.Data;
 
 namespace Eudora.Net.GUI
 {
@@ -162,8 +163,8 @@ namespace Eudora.Net.GUI
         {
             cb_Period.ItemsSource = Enum.GetValues(typeof(eStatPeriod));
             cb_Period.SelectedIndex = 0;
-            dg_Email.DataContext = EudoraStatistics.EmailTable.DefaultView;
-            dg_Eudora.DataContext = EudoraStatistics.EudoraTable.DefaultView;
+            dg_Email.DataContext = EudoraStatistics.Datastore_EmailStats.Data;
+            dg_Eudora.DataContext = EudoraStatistics.Datastore_EudoraStats.Data;
         }
 
         private static void OnStatPeriodChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -215,31 +216,27 @@ namespace Eudora.Net.GUI
                         break;
                 }
 
-                var emailRows = EudoraStatistics.EmailTable.AsEnumerable().Where(i =>
-                (DateTime)i[0] >= StatsBegin && (DateTime)i[0] <= StatsEnd).ToList();
+                var emailRows = EudoraStatistics.Datastore_EmailStats.Data.Where(i =>
+                i.Timestamp.Date >= StatsBegin && i.Timestamp.Date <= StatsEnd).ToList();
 
-                var usageRows = EudoraStatistics.EudoraTable.AsEnumerable().Where(i =>
-                (DateTime)i[0] >= StatsBegin && (DateTime)i[0] <= StatsEnd).ToList();
-
-
-                // This part, on the other hand, illustrates why Entity Framework is desirable.
-                // I sense a disturbance in the Force... as though millions of Pull Requests all cried out at once.
+                var usageRows = EudoraStatistics.Datastore_EudoraStats.Data.Where(i =>
+                i.Timestamp.Date >= StatsBegin && i.Timestamp.Date <= StatsEnd).ToList();
 
                 foreach (var emailRow in emailRows)
                 {
-                    EmailsIn += (UInt32)emailRow[1];
-                    AttachmentsIn += (UInt32)emailRow[2];
-                    EmailsOut += (UInt32)emailRow[3];
-                    AttachmentsOut += (UInt32)emailRow[4];
-                    Replies += (UInt32)emailRow[5];
-                    Forwards += (UInt32)emailRow[6];
+                    EmailsIn += emailRow.EmailsInCount;
+                    AttachmentsIn += emailRow.AttachmentsInCount;
+                    EmailsOut += emailRow.EmailsOutCount;
+                    AttachmentsOut += emailRow.AttachmentsOutCount;
+                    Replies += emailRow.ReplyCount;
+                    Forwards += emailRow.ForwardCount;
                 }
 
                 foreach (var usageRow in usageRows)
                 {
-                    MinutesUsage += (UInt32)usageRow[1];
-                    MinutesReading += (UInt32)usageRow[2];
-                    MinutesWriting += (UInt32)usageRow[3];
+                    MinutesUsage += usageRow.MinutesOverall;
+                    MinutesReading += usageRow.MinutesReading;
+                    MinutesWriting += usageRow.MinutesWriting;
                 }
             }
             catch (Exception ex)
