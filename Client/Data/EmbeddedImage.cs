@@ -1,8 +1,5 @@
-﻿using Eudora.Net.Core;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Eudora.Net.Data
 {
@@ -66,21 +63,7 @@ namespace Eudora.Net.Data
             get => _Alt;
             set => SetField(ref _Alt, value, nameof(Alt));
         }        
-
-        private string _Base64String = string.Empty;
-        public string Base64String
-        {
-            get => _Base64String;
-            set => SetField(ref _Base64String, value, nameof(Base64String));
-        }
-
-        private byte[] _Base64Bytes = [];
-        public byte[] Base64Bytes
-        {
-            get => _Base64Bytes;
-            set => SetField(ref _Base64Bytes, value, nameof(Base64Bytes));
-        }
-
+         
         /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
