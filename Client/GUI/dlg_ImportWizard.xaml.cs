@@ -111,23 +111,26 @@ namespace Eudora.Net.GUI
             ClearStatusText();
 
             AddStatusText("Starting import process...");
-            LocateData();
-            //ImportAccounts();
-            ImportMailboxes();
-            ImportAddressBooks();
+            
+            if (LocateData())
+            {
+                ImportMailboxes();
+                ImportAddressBooks();
+            }
 
             AddStatusText("Import process complete");
             Active = false;
             EnableStart(true);
         }
 
-        private void LocateData()
+        private bool LocateData()
         {
             MarkStepActive(cb_FindData);
             if (TheWiz.LocateEudoraData())
             {
                 AddStatusText("Eudora data found at " + TheWiz.EudoraDataPath);
                 MarkStepCompleted(cb_FindData);
+                return true;
             }
             else
             {
@@ -140,15 +143,17 @@ namespace Eudora.Net.GUI
                 {
                     TheWiz.EudoraDataPath = ofd.FolderName;
                     MarkStepCompleted(cb_FindData);
+                    return true;
                 }
                 else
                 {
                     AddStatusText("Import process cancelled");
                     MarkStepFailed(cb_FindData);
                     Active = false;
-                    return;
+                    return false;
                 }
             }
+            return false;
         }
 
         private void ImportAccounts()

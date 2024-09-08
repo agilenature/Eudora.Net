@@ -203,6 +203,11 @@ namespace Eudora.Net.Core
                 if (Directory.Exists(EudoraDataPath))
                 {
                     var files = Directory.GetFiles(EudoraDataPath, "*" + mailboxExtension, SearchOption.AllDirectories);
+                    if(files is null || files.Length == 0)
+                    {
+                        Logger.Warning("No mailboxes found at import root");
+                        return false;
+                    }
                     foreach (var file in files)
                     {
                         if (File.Exists(file))
@@ -586,15 +591,34 @@ namespace Eudora.Net.Core
 
         public bool ImportContacts()
         {
-            // Step 1: locate all address book files
-            string bookpath = Path.Combine(EudoraDataPath, "nickname");
-            List<string> addressBooks = Directory.GetFiles(bookpath, "*.txt").ToList();
-            addressBooks.Add(Path.Combine(EudoraDataPath, "nndbase.txt"));
-
-            // Step 2: parse each address book file
-            foreach (var book in addressBooks)
+            try
             {
-                ParseAddressBook(book);
+                // Step 1: locate all address book files
+                string bookpath = Path.Combine(EudoraDataPath, "nickname");
+                if (!Directory.Exists(bookpath))
+                {
+                    Logger.Warning("'nickname' folder not found in import target folder. Contacts cannot be imported.");
+                    return false;
+                }
+                List<string> addressBooks = Directory.GetFiles(bookpath, "*.txt").ToList();
+                addressBooks.Add(Path.Combine(EudoraDataPath, "nndbase.txt"));
+
+                // Step 2: parse each address book file
+                foreach (var book in addressBooks)
+                {
+                    try
+                    {
+                        ParseAddressBook(book);
+                    }
+                    catch(Exception ex)
+                    {
+                        Logger.Error(ex.Message);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
             }
 
             return true;
