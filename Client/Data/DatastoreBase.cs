@@ -128,10 +128,7 @@ namespace Eudora.Net.Data
             try
             {
                 // This can occur if the user forces the app to exit during the initial setup screen
-                if (DB is not null)
-                {
-                    DB.Close();
-                }
+                DB?.Close();
             }
             catch (Exception ex)
             {
