@@ -51,13 +51,6 @@ namespace Eudora.Net.Data
             set => SetField(ref _Path, value, nameof(Path));
         }
 
-        private object? _Content = null;
-        public object? Content
-        {
-            get => _Content;
-            set => SetField(ref _Content, value, nameof(Content));
-        }
-
         /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
@@ -72,16 +65,6 @@ namespace Eudora.Net.Data
         {
             Name = name;
             Path = path;
-        }
-
-        public EmailAttachment(string name, object? content, string? path)
-        {
-            Name = name;
-            Content = content;
-            if(path is not null)
-            {
-                Path = path;
-            }
         }
     }
 }
