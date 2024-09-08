@@ -88,65 +88,78 @@ namespace Eudora.Net.Core
 
         private void ParseBody()
         {
-            var visitor = new EmailBodyParser();
-            
-            // Inline message parts
-            _Mime.Accept(visitor);
-            _Message.Body = visitor.HtmlBody;
-
-            // Attachment message parts
-            if (visitor.Attachments.Count == 0) return;
-
-            var mailbox = PostOffice.Instance.GetMailboxByName(Message.MailboxName);
-            if (mailbox == null) return;
-            
-            string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, mailbox.Name, Message.InternalId.ToString());
-            IoUtil.EnsureFolder(attachmentFolder);
-            
-            foreach (var attachment in visitor.Attachments)
+            try
             {
-                string fileName = string.Empty;
-                string fullPath = string.Empty;
+                var visitor = new EmailBodyParser();
 
-                if (attachment is MessagePart rfc822)
+                // Inline message parts
+                _Mime.Accept(visitor);
+                _Message.Body = visitor.HtmlBody;
+
+                // Attachment message parts
+                if (visitor.Attachments.Count == 0) return;
+
+                var mailbox = PostOffice.Instance.GetMailboxByName(Message.MailboxName);
+                if (mailbox == null) return;
+
+                string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, mailbox.Name, Message.InternalId.ToString());
+                IoUtil.EnsureFolder(attachmentFolder);
+
+                foreach (var attachment in visitor.Attachments)
                 {
-                    if (attachment.ContentDisposition is not null)
+                    try
                     {
-                        fileName = attachment.ContentDisposition.FileName;
-                    }
-                    else
-                    {
-                        fileName = "attached-message.eml";
-                    }
+                        string fileName = string.Empty;
+                        string fullPath = string.Empty;
 
-                    fullPath = Path.Combine(attachmentFolder, fileName);
-                    using var stream = File.Create(fullPath);
-                    { 
-                        rfc822.Message.WriteTo(stream); 
+                        if (attachment is MessagePart rfc822)
+                        {
+                            if (attachment.ContentDisposition is not null)
+                            {
+                                fileName = attachment.ContentDisposition.FileName;
+                            }
+                            else
+                            {
+                                fileName = "attached-message.eml";
+                            }
+
+                            fullPath = Path.Combine(attachmentFolder, fileName);
+                            using var stream = File.Create(fullPath);
+                            {
+                                rfc822.Message.WriteTo(stream);
+                            }
+                        }
+                        else if (attachment is MimePart part && !string.IsNullOrEmpty(part.FileName))
+                        {
+                            fileName = part.FileName;
+                            fullPath = Path.Combine(attachmentFolder, fileName);
+                            using var stream = File.Create(fullPath);
+                            {
+                                part.Content.DecodeTo(stream);
+                            }
+                        }
+                        else
+                        {
+                            // Something about this attachment was malformed or missing in the mime
+                            continue;
+                        }
+
+                        var mailAttachment = new EmailAttachment()
+                        {
+                            Name = fileName,
+                            Path = fullPath,
+                        };
+                        Message.Attachments.Add(mailAttachment);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex.Message);
                     }
                 }
-                else if (attachment is MimePart part && !string.IsNullOrEmpty(part.FileName))
-                {
-                    fileName = part.FileName;
-                    fullPath = Path.Combine(attachmentFolder, fileName);
-                    using var stream = File.Create(fullPath);
-                    {
-                        part.Content.DecodeTo(stream);
-                    }
-                }
-                else
-                {
-                    // Something about this attachment was malformed or missing in the mime
-                    continue;
-                }
-
-                var mailAttachment = new EmailAttachment()
-                {
-                    Name = fileName,
-                    Path = fullPath,
-                    Content = fullPath
-                };
-                Message.Attachments.Add(mailAttachment);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
             }
         }
         
