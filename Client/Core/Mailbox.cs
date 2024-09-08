@@ -31,7 +31,7 @@ namespace Eudora.Net.Core
         #region Properties
         /////////////////////////////
 
-        [JsonIgnore]
+        [SQLite.Ignore, JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
 
         public int SortOrder
