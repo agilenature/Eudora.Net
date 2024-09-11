@@ -153,7 +153,6 @@ namespace Eudora.Net.GUI
                     return false;
                 }
             }
-            return false;
         }
 
         private void ImportAccounts()
