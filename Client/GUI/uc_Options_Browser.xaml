@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Eudora.Net.GUI.uc_Options_Browser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eudora.Net.GUI"
+             xmlns:properties="clr-namespace:Eudora.Net.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="20"/>
+            <!--spacer-->
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+           FontWeight="Bold" FontSize="16">
+    Browser Settings
+        </TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+            TextWrapping="Wrap">
+    Options for the internal web browser
+        </TextBlock>
+
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource BorderNormalBrushKey}"/>
+
+        <TextBlock  Grid.Row="4" Grid.Column="0"
+            VerticalAlignment="Top"  HorizontalAlignment="Center"
+            Margin="10,0,10,0"
+            FontWeight="Bold">
+            <TextBlock.Text>Search Engine</TextBlock.Text>
+        </TextBlock>
+
+        <ListBox x:Name="cb_SearchEngine" Grid.Row="4" Grid.Column="1"
+         ItemsSource="{Binding Path=SearchEngines}"
+         SelectionChanged="Cb_SearchEngine_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="18" Height="18" VerticalAlignment="Center" 
+                       Source="{Binding Path=ImagePath}"/>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" 
+                           Text="{Binding Path=Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock Grid.Row="4" Grid.Column="2"
+           VerticalAlignment="Top" HorizontalAlignment="Stretch"
+           TextWrapping="Wrap" Margin="5,0,0,0">
+            <TextBlock.Text>
+                Select the search engine the browser will use when searching from
+        the address bar. You can of course still browse to or bookmark any
+        search engine; this setting affects only address-bar searching.
+            </TextBlock.Text>
+        </TextBlock>
+    </Grid>
+
+</UserControl>
