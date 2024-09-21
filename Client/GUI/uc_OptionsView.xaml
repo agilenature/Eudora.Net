@@ -47,14 +47,15 @@
                 <local:uc_Options_ErrorReporting/>
             </TabItem>
 
+            <!--Hotkeys tab--><!--
             <TabItem Header="Hotkeys" IsEnabled="False">
                 <local:uc_Options_Hotkeys/>
             </TabItem>
 
-            <!--Storage Options tab-->
+            --><!--Storage Options tab--><!--
             <TabItem Header="Storage" IsEnabled="False">
                 <local:uc_Options_Datastore/>
-            </TabItem>
+            </TabItem>-->
 
         </TabControl>
 
