@@ -1,4 +1,5 @@
 ﻿using Eudora.Net.Core;
+using Eudora.Net.Data;
 
 
 namespace Eudora.Net.GUI
@@ -85,14 +86,14 @@ namespace Eudora.Net.GUI
         {
             e.Handled = true;
 
-            //Mailbox? mailbox = Listview.SelectedItem as Mailbox;
-            //if(mailbox == null) 
-            //{
-            //    return;
-            //}
+            Mailbox? mailbox = Listview.SelectedItem as Mailbox;
+            if (mailbox == null)
+            {
+                return;
+            }
 
             IsDeleteEnabled = IsSelectionDeletable();
-            //MainWindow.Instance?.ShowMailbox(mailbox.Name);
+            MainWindow.Instance?.ShowMailbox(mailbox.Name);
         }
 
         private void btn_New_Click(object sender, System.Windows.RoutedEventArgs e)

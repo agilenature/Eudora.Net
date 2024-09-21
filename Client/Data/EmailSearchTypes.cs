@@ -356,7 +356,7 @@ namespace Eudora.Net.EmailSearch
             QueryKey.PropertyChanged += QueryKey_PropertyChanged;
             Operand.PropertyChanged += Operand_PropertyChanged;
             EmailAddressValue.PropertyChanged += EmailAddressValue_PropertyChanged;
-            PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
+            //PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
             RemakeMailboxList();
         }
 

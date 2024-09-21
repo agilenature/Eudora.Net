@@ -110,7 +110,12 @@ namespace Eudora.Net.Core
             Default
         }
 
+        //public virtual ICollection<Mailbox> Mailboxes { get; private set; } = 
+        //    new SortableObservableCollection<Mailbox>();
         public SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
+
+        internal List<MailboxEfContext> MailboxEfContexts { get; private set; } = [];
+
 
         /////////////////////////////
         #endregion Properties
@@ -332,7 +337,7 @@ namespace Eudora.Net.Core
                     }
 
                     // File-on-disk order will differ from the desired order
-                    Mailboxes.Sort(Mailboxes.OrderBy(i => i.SortOrder));
+                    //Mailboxes.Sort(Mailboxes.OrderBy(i => i.SortOrder));
                 }
             }
             catch(Exception ex)
@@ -848,39 +853,46 @@ namespace Eudora.Net.Core
         /// <param name="message"></param>
         private async void RouteIncomingMessage(EmailMessage message)
         {
-            Mailbox? mailbox = Inbox;
-            if (mailbox is null) return;
-            
-            var existing = mailbox.Messages.Where(msg => msg.MessageId.Equals(message.MessageId, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            if (existing is not null) return;
-            
-            mailbox.AddMessage(message);
-            Notifier.NotifyNewEmail(message);
+            try
+            {
+                Mailbox? mailbox = Inbox;
+                if (mailbox is null) return;
 
-            EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.EmailIn);
-            if(message.Attachments.Any())
-            {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.AttachmentIn, (uint)message.Attachments.Count);
-            }
+                var existing = mailbox.Messages.Where(msg => msg.MessageId.Equals(message.MessageId, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                if (existing is not null) return;
 
-            if (message.MessageCategory == eMailThreadType.Reply)
-            {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Reply);
-            }
-            else if (message.MessageCategory == eMailThreadType.Forward)
-            {
-                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Forward);
-            }
+                mailbox.AddMessage(message);
+                Notifier.NotifyNewEmail(message);
 
-            // Check this message against each of the existing filters
-            foreach (EmailFilter filter in FilterManager.Datastore.Data)
-            {
-                var result = await filter.AppliesToMessage(message);
-                if (result)
+                EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.EmailIn);
+                if (message.Attachments.Any())
                 {
-                    filter.Action.Act(message);
-                    EmailFilterReporter.NewReport(message, filter);
+                    EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.AttachmentIn, (uint)message.Attachments.Count);
                 }
+
+                if (message.MessageCategory == eMailThreadType.Reply)
+                {
+                    EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Reply);
+                }
+                else if (message.MessageCategory == eMailThreadType.Forward)
+                {
+                    EudoraStatistics.IncrementCounter(EudoraStatistics.eStat.Forward);
+                }
+
+                // Check this message against each of the existing filters
+                foreach (EmailFilter filter in FilterManager.Datastore.Data)
+                {
+                    var result = await filter.AppliesToMessage(message);
+                    if (result)
+                    {
+                        filter.Action.Act(message);
+                        EmailFilterReporter.NewReport(message, filter);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
             }
         }
 

@@ -38,7 +38,7 @@ namespace Eudora.Net.GUI
             MDI.ActiveChildChangedEvent += MDI_ActiveChildChangedEvent;
             Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
-            PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
+            //PostOffice.Instance.Mailboxes.CollectionChanged += Mailboxes_CollectionChanged;
             PopulateMailboxMenu();
             HandleUxStateOnWindowChange();
         }

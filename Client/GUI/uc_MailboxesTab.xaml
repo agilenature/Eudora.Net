@@ -1,15 +1,21 @@
-﻿<local:uc_TabBase x:Class="Eudora.Net.GUI.uc_MailboxesTab"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Eudora.Net.GUI"
-             xmlns:root="clr-namespace:Eudora.Net"
-             xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             BorderThickness="0">
-    
+﻿<local:uc_TabBase   x:Class="Eudora.Net.GUI.uc_MailboxesTab"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:Eudora.Net.GUI"
+                    xmlns:root="clr-namespace:Eudora.Net"
+                    xmlns:core="clr-namespace:Eudora.Net.Core"
+                    xmlns:data="clr-namespace:Eudora.Net.Data"
+                    xmlns:themer="clr-namespace:sbux.wpf.Themer;assembly=sbux.wpf.Themer"
+                    mc:Ignorable="d"
+                    d:DesignHeight="450" d:DesignWidth="800"
+                    BorderThickness="0">
+
+    <local:uc_TabBase.Resources>
+        <CollectionViewSource x:Key="MailboxesViewSource" Source="{Binding Mailboxes, Source=Eudora.Net.Core.PostOffice.Instance}"/>
+    </local:uc_TabBase.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
@@ -24,7 +30,7 @@
 
 
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource ControlLightBrushKey}"/>
-        
+
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" Text="Mailboxes" VerticalAlignment="Center"/>
 
         <Button x:Name="btn_New" Grid.Row="0" Grid.Column="1"
@@ -53,6 +59,7 @@
                  MouseLeftButtonUp="Listview_MouseLeftButtonUp"
                  BorderThickness="0"
                  Background="{DynamicResource BackgroundNormalBrushKey}">
+            <!--ItemsSource="{Binding Source={StaticResource MailboxesViewSource}}">-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
