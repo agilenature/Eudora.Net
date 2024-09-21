@@ -1,12 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using Eudora.Net.Core;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Eudora.Net.Data;
 
 
-namespace Eudora.Net.Core
+namespace Eudora.Net.Data
 {
     public class Mailbox
     {
@@ -31,21 +31,23 @@ namespace Eudora.Net.Core
         #region Properties
         /////////////////////////////
 
-        [SQLite.Ignore, JsonIgnore]
+        //public virtual ICollection<EmailMessage> Messages { get; private set; } = new ObservableCollection<EmailMessage>();
+        [JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
+
 
         public int SortOrder
         {
             get => _SortOrder;
             set { if (_SortOrder != value) { _SortOrder = value; } }
         }
-        
+
         public string Name
         {
             get => _Name;
             set { if (_Name != value) { _Name = value; InitializeForIO(); } }
         }
-        
+
         public string ImageSource
         {
             get => _ImageSource;
@@ -61,7 +63,7 @@ namespace Eudora.Net.Core
         {
         }
 
-        public Mailbox(string name, string imageSource) 
+        public Mailbox(string name, string imageSource)
         {
             _Name = name;
             _ImageSource = imageSource;
@@ -167,8 +169,8 @@ namespace Eudora.Net.Core
 
         public EmailMessage NewMessage(bool draft = false)
         {
-            EmailMessage message = new() 
-            { 
+            EmailMessage message = new()
+            {
                 MailboxName = Name,
                 Status = draft ? EmailMessage.MessageStatus.Draft : EmailMessage.MessageStatus.Sealed
             };
@@ -180,9 +182,9 @@ namespace Eudora.Net.Core
 
         public void AddMessage(EmailMessage message)
         {
-            if (!App.Current.Dispatcher.CheckAccess())
+            if (!System.Windows.Application.Current.Dispatcher.CheckAccess())
             {
-                App.Current.Dispatcher.BeginInvoke(new Action(() => AddMessage(message)));
+                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => AddMessage(message)));
                 return;
             }
             message.PropertyChanged -= Message_PropertyChanged;
@@ -198,7 +200,7 @@ namespace Eudora.Net.Core
                 lock (FileLocker)
                 {
                     string fullPath = MakeFullPath(message.InternalId.ToString());
-                    string json = JsonSerializer.Serialize<EmailMessage>(message, IoUtil.JsonWriterOptions);
+                    string json = JsonSerializer.Serialize(message, IoUtil.JsonWriterOptions);
                     File.WriteAllText(fullPath, json);
                 }
             }
@@ -247,10 +249,10 @@ namespace Eudora.Net.Core
             try
             {
                 Messages.Remove(message);
-                
+
                 // message
                 string path = MakeFullPath(message.InternalId.ToString());
-                if(File.Exists(path))
+                if (File.Exists(path))
                 {
                     File.Delete(path);
                 }
@@ -261,7 +263,7 @@ namespace Eudora.Net.Core
                     Directory.Delete(path);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Exception(ex);
             }
