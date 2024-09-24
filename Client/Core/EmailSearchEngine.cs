@@ -162,7 +162,7 @@ namespace Eudora.Net.Core
             foreach (var mailboxItem in search.MailboxList)
             {
                 if (!mailboxItem.IsChecked) continue;
-                var mailbox = PostOffice.Instance.GetMailboxByName(mailboxItem.Name);
+                var mailbox = PostOffice.GetMailboxByName(mailboxItem.Name);
                 if (mailbox is null) continue;
                 foreach (EmailMessage message in mailbox.Messages)
                 {

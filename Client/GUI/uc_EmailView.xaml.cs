@@ -426,19 +426,19 @@ namespace Eudora.Net.GUI
 
         private void Btn_Forward_Click(object sender, RoutedEventArgs e)
         {
-            var messageOut = PostOffice.Instance.CreateMessage_Forward(Message);
+            var messageOut = PostOffice.CreateMessage_Forward(Message);
             MainWindow.Instance?.ShowMailMessage(messageOut);
         }
 
         private void Btn_ReplyAll_Click(object sender, RoutedEventArgs e)
         {
-            var messageOut = PostOffice.Instance.CreateMessage_ReplyAll(Message);
+            var messageOut = PostOffice.CreateMessage_ReplyAll(Message);
             MainWindow.Instance?.ShowMailMessage(messageOut);
         }
 
         private void Btn_Reply_Click(object sender, RoutedEventArgs e)
         {
-            var messageOut = PostOffice.Instance.CreateMessage_Reply(Message);
+            var messageOut = PostOffice.CreateMessage_Reply(Message);
             MainWindow.Instance?.ShowMailMessage(messageOut);
         }
 
@@ -470,7 +470,7 @@ namespace Eudora.Net.GUI
 
         private async void btn_Send_Click(object sender, RoutedEventArgs e)
         {
-            await PostOffice.Instance.SendMessage(Message);
+            await PostOffice.SendMessage(Message);
             Window.Close();
         }
 

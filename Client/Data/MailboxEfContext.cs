@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#if OOGA
+using Microsoft.EntityFrameworkCore;
 using System.IO;
 
 
@@ -51,3 +52,5 @@ namespace Eudora.Net.Data
         }
     }
 }
+
+#endif

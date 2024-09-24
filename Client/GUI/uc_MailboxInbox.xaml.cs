@@ -203,7 +203,7 @@ namespace Eudora.Net.GUI
 
                     var window = MainWindow.Instance?.MDI.FindWindow(message);
                     window?.Close();
-                    PostOffice.Instance.MoveMessage(message, "Trash");
+                    PostOffice.MoveMessage(message, "Trash");
                 }
             }
         }
@@ -237,7 +237,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage messageIn)
             {
                 e.Handled = true;
-                var messageOut = PostOffice.Instance.CreateMessage_Forward(messageIn);
+                var messageOut = PostOffice.CreateMessage_Forward(messageIn);
                 MainWindow.Instance?.ShowMailMessage(messageOut);
             }
         }
@@ -247,7 +247,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage messageIn)
             {
                 e.Handled = true;
-                var messageOut = PostOffice.Instance.CreateMessage_ReplyAll(messageIn);
+                var messageOut = PostOffice.CreateMessage_ReplyAll(messageIn);
                 MainWindow.Instance?.ShowMailMessage(messageOut);
             }
         }
@@ -257,7 +257,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage messageIn)
             {
                 e.Handled = true;
-                var messageOut = PostOffice.Instance.CreateMessage_Reply(messageIn);
+                var messageOut = PostOffice.CreateMessage_Reply(messageIn);
                 MainWindow.Instance?.ShowMailMessage(messageOut);
             }
         }
@@ -286,7 +286,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message && e.Source is MenuItem item)
             {
                 e.Handled = true;
-                PostOffice.Instance.MoveMessage(message, (string)item.Tag);
+                PostOffice.MoveMessage(message, (string)item.Tag);
 
                 if (preview.DataContext == message)
                 {

@@ -368,7 +368,7 @@ namespace Eudora.Net.GUI
             {
                 if(ValidateMessage(message))
                 {
-                    await PostOffice.Instance.SendMessage(message);                    
+                    await PostOffice.SendMessage(message);                    
                 }                
             }
         }

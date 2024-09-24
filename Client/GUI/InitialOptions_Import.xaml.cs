@@ -168,7 +168,7 @@ namespace Eudora.Net.GUI
 
         private void btn_Import_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            PostOffice.Instance.Startup();
+            PostOffice.Startup();
             RunImportProcess();
         }
     }

@@ -186,23 +186,23 @@ namespace Eudora.Net.Data
 
         private void MoveMessage(EmailMessage message)
         {
-            PostOffice.Instance.MoveMessage(message, MailboxName);
+            PostOffice.MoveMessage(message, MailboxName);
         }
 
         private void CopyMessage(EmailMessage message)
         {
-            PostOffice.Instance.CopyMessage(message, MailboxName);
+            PostOffice.CopyMessage(message, MailboxName);
         }
 
         private void ForwardMessage(EmailMessage message)
         {
-            var msg = PostOffice.Instance.CreateMessage_Forward(message);
+            var msg = PostOffice.CreateMessage_Forward(message);
             MainWindow.Instance?.ShowMailMessage(msg);
         }
 
         private void ReplyToMessage(EmailMessage message)
         {
-            var msg = PostOffice.Instance.CreateMessage_Reply(message);
+            var msg = PostOffice.CreateMessage_Reply(message);
             MainWindow.Instance?.ShowMailMessage(msg);
         }
 

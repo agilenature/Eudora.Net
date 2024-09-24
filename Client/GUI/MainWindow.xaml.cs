@@ -84,7 +84,7 @@ namespace Eudora.Net.GUI
         {
             Menu_Mailboxes.Items.Clear();
 
-            foreach (var mailbox in PostOffice.Instance.Mailboxes)
+            foreach (var mailbox in PostOffice.Mailboxes)
             {
                 MenuItem item = new();
                 item.Header = mailbox.Name;
@@ -113,7 +113,7 @@ namespace Eudora.Net.GUI
                 return;
             }
 
-            foreach(var mailbox in PostOffice.Instance.Mailboxes)
+            foreach(var mailbox in PostOffice.Mailboxes)
             {
                 if(mailbox != currentMailbox)
                 {
@@ -386,7 +386,7 @@ namespace Eudora.Net.GUI
             }
 
             // Mailbox view not active; create it
-            Mailbox? mailbox = PostOffice.Instance.GetMailboxByName(name);
+            Mailbox? mailbox = PostOffice.GetMailboxByName(name);
             if (mailbox is null)
             {
                 return;
@@ -645,7 +645,7 @@ namespace Eudora.Net.GUI
         private void btn_CheckMail_Click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            PostOffice.Instance.CheckMail();
+            PostOffice.CheckMail();
         }
 
         private void btn_NewMsg_Click(object sender, RoutedEventArgs e)

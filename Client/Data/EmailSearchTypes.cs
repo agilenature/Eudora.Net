@@ -391,7 +391,7 @@ namespace Eudora.Net.EmailSearch
         private void RemakeMailboxList()
         {
             MailboxList.Clear();
-            foreach(Mailbox mailbox in PostOffice.Instance.Mailboxes)
+            foreach(Mailbox mailbox in PostOffice.Mailboxes)
             {
                 MailboxList.Add(new(mailbox.Name, mailbox.ImageSource));
             }

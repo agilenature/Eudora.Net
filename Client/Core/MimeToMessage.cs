@@ -99,7 +99,7 @@ namespace Eudora.Net.Core
                 // Attachment message parts
                 if (visitor.Attachments.Count == 0) return;
 
-                var mailbox = PostOffice.Instance.GetMailboxByName(Message.MailboxName);
+                var mailbox = PostOffice.GetMailboxByName(Message.MailboxName);
                 if (mailbox == null) return;
 
                 string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, mailbox.Name, Message.InternalId.ToString());

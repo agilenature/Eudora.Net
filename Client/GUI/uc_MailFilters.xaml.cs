@@ -95,7 +95,7 @@ namespace Eudora.Net.GUI
 
             apar_LabelParam.ItemsSource = LabelManager.Datastore.Data;
 
-            apar_MailboxParam.ItemsSource = PostOffice.Instance.Mailboxes;
+            apar_MailboxParam.ItemsSource = PostOffice.Mailboxes;
 
             apar_PersonalityParam.ItemsSource = PersonalityManager.Datastore.Data;
 

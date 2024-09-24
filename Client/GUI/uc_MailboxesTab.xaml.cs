@@ -32,10 +32,7 @@ namespace Eudora.Net.GUI
         {
             InitializeComponent();
 
-            if (PostOffice.Instance != null)
-            {
-                Listview.ItemsSource = PostOffice.Instance.Mailboxes;
-            }
+            Listview.ItemsSource = PostOffice.Mailboxes;
             IsDeleteEnabled = false;
         }
 
@@ -116,7 +113,7 @@ namespace Eudora.Net.GUI
             var dlg = new dlg_Confirmation(prompt);
             if (dlg.ShowDialog() == false) return;
 
-            PostOffice.Instance.RemoveUserMailbox(mailbox.Name);
+            PostOffice.RemoveUserMailbox(mailbox.Name);
         }
     }
 }

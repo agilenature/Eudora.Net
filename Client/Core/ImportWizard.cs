@@ -187,7 +187,7 @@ namespace Eudora.Net.Core
                 }
 
                 // CreateImportedMailbox handles the case where the mailbox already exists
-                return PostOffice.Instance.CreateImportedMailbox(name);
+                return PostOffice.CreateImportedMailbox(name);
             }
             catch (Exception ex)
             {

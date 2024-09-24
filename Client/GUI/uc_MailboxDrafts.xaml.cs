@@ -152,7 +152,7 @@ namespace Eudora.Net.GUI
 
                     var window = MainWindow.Instance?.MDI.FindWindow(message);
                     window?.Close();
-                    PostOffice.Instance.MoveMessage(message, "Trash");
+                    PostOffice.MoveMessage(message, "Trash");
                 }
             }
         }

@@ -29,7 +29,7 @@ namespace Eudora.Net.GUI
 
             // Must not exist already
             //if (PostOffice.Instance.Mailboxes.Contains(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
-            if(PostOffice.Instance.Mailboxes.Any(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
+            if(PostOffice.Mailboxes.Any(m => m.Name.Equals(mailbox, StringComparison.CurrentCultureIgnoreCase)))
             {
                 return new ValidationResult(false, "That Mailbox already exists");
             }
@@ -100,7 +100,7 @@ namespace Eudora.Net.GUI
             }
 
             string name = tb_Mailbox.Text;
-            PostOffice.Instance.AddUserMailbox(tb_Mailbox.Text, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png");
+            PostOffice.AddUserMailbox(tb_Mailbox.Text, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png");
             Close();
         }
 

@@ -26,8 +26,6 @@ namespace Eudora.Net.Core
     /// </summary>
     public class PostOffice
     {
-        public static PostOffice Instance;
-
         private static Timer NewMailCheckTimer = new(
             EmailCheckTimerCallback,
             null,
@@ -47,22 +45,22 @@ namespace Eudora.Net.Core
 
         public static Mailbox? Inbox
         {
-            get => PostOffice.Instance.GetMailboxByName("Inbox");
+            get => PostOffice.GetMailboxByName("Inbox");
         }
 
         public static Mailbox? Drafts
         {
-            get => PostOffice.Instance.GetMailboxByName("Drafts");
+            get => PostOffice.GetMailboxByName("Drafts");
         }
 
         public static Mailbox? Sent
         {
-            get => PostOffice.Instance.GetMailboxByName("Sent");
+            get => PostOffice.GetMailboxByName("Sent");
         }
 
         public static Mailbox? Trash
         {
-            get => PostOffice.Instance.GetMailboxByName("Trash");
+            get => PostOffice.GetMailboxByName("Trash");
         }
 
         private static string _MailboxesPath = string.Empty;
@@ -112,9 +110,9 @@ namespace Eudora.Net.Core
 
         //public virtual ICollection<Mailbox> Mailboxes { get; private set; } = 
         //    new SortableObservableCollection<Mailbox>();
-        public SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
+        public static SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
 
-        internal List<MailboxEfContext> MailboxEfContexts { get; private set; } = [];
+        //internal List<MailboxEfContext> MailboxEfContexts { get; private set; } = [];
 
 
         /////////////////////////////
@@ -152,8 +150,6 @@ namespace Eudora.Net.Core
 
         static PostOffice()
         {
-            Instance = new PostOffice();
-
             MailboxSerializationLocker = new();
         }
 
@@ -162,7 +158,7 @@ namespace Eudora.Net.Core
             //MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
         }
 
-        public void Startup()
+        public static void Startup()
         {
             MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
 
@@ -192,7 +188,7 @@ namespace Eudora.Net.Core
             LoadMailboxes();
         }
 
-        public void Shutdown()
+        public static void Shutdown()
         {
             SaveMailboxes();
         }
@@ -212,7 +208,7 @@ namespace Eudora.Net.Core
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Mailbox? GetMailboxByName(string name)
+        public static Mailbox? GetMailboxByName(string name)
         {
             return Mailboxes.Where(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
         }
@@ -221,7 +217,7 @@ namespace Eudora.Net.Core
         /// 
         /// </summary>
         /// <param name="name"></param>
-        public void AddUserMailbox(string name, string imageSource)
+        public static void AddUserMailbox(string name, string imageSource)
         {
             try
             {
@@ -234,7 +230,7 @@ namespace Eudora.Net.Core
             }
         }
 
-        public Mailbox? CreateImportedMailbox(string name)
+        public static Mailbox? CreateImportedMailbox(string name)
         {
             try
             {
@@ -260,7 +256,7 @@ namespace Eudora.Net.Core
         /// </summary>
         /// <param name="name"></param>
         /// <param name="deleteMessages"></param>
-        public void RemoveUserMailbox(string name, bool deleteMessages = true)
+        public static void RemoveUserMailbox(string name, bool deleteMessages = true)
         {
             // Just in case...
             string nameCheck = name.ToLower();
@@ -303,14 +299,14 @@ namespace Eudora.Net.Core
         #region Mailbox Internal
         /////////////////////////////////////////////////////////////////
 
-        private string MailboxFullPathFromName(string name)
+        private static string MailboxFullPathFromName(string name)
         {
             //string filename = string.Format("{0}{1}", name, Mailbox.extension);
             string filename = $@"{name}{Mailbox.extension}";
             return Path.Combine(_MailboxesPath, filename);
         }
 
-        private void LoadMailboxes()
+        private static void LoadMailboxes()
         {
             try
             {
@@ -346,7 +342,7 @@ namespace Eudora.Net.Core
             }
         }
 
-        private void SaveMailboxes()
+        private static void SaveMailboxes()
         {
             try
             {
@@ -387,13 +383,13 @@ namespace Eudora.Net.Core
             message.SenderAddress.Name = personality.EmailName;
             message.ReplyTo = personality.ToEmailAddress();
             message.MailboxName = Drafts?.Name ?? string.Empty;
-            PostOffice.Instance.GetMailboxByName(message.MailboxName)?.AddMessage(message);
+            PostOffice.GetMailboxByName(message.MailboxName)?.AddMessage(message);
 
             message.Body = HtmlDepot.MakeBlankEmail(message);
             return message;
         }
 
-        public EmailMessage CreateMessage_Reply(EmailMessage inMessage)
+        public static EmailMessage CreateMessage_Reply(EmailMessage inMessage)
         {
             EmailMessage outMessage = new();
 
@@ -414,7 +410,7 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
             outMessage.MessageCategory = eMailThreadType.Reply;
-            PostOffice.Instance.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
+            PostOffice.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             // subject
             if(inMessage.Subject.Contains("re:", StringComparison.CurrentCultureIgnoreCase))
@@ -440,7 +436,7 @@ namespace Eudora.Net.Core
             return outMessage;
         }
 
-        public EmailMessage CreateMessage_ReplyAll(EmailMessage inMessage)
+        public static EmailMessage CreateMessage_ReplyAll(EmailMessage inMessage)
         {
             // Begin by creating a reply to the sender
             EmailMessage outMessage = CreateMessage_Reply(inMessage);
@@ -454,7 +450,7 @@ namespace Eudora.Net.Core
             return outMessage;
         }
 
-        public EmailMessage CreateMessage_Forward(EmailMessage inMessage)
+        public static EmailMessage CreateMessage_Forward(EmailMessage inMessage)
         {
             EmailMessage outMessage = new();
             Personality? personality = PersonalityManager.FindPersonality(inMessage.PersonalityID);
@@ -474,7 +470,7 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
             outMessage.MessageCategory = eMailThreadType.Forward;
-            PostOffice.Instance.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
+            PostOffice.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             outMessage.Body = HtmlDepot.MakeEmailForward(inMessage);
             return outMessage;
@@ -497,7 +493,7 @@ namespace Eudora.Net.Core
         /// </summary>
         /// <param name="message"></param>
         /// <param name="mailboxName"></param>
-        public void MoveMessage(EmailMessage message, string mailboxName)
+        public static void MoveMessage(EmailMessage message, string mailboxName)
         {
             //using (var uxLocker = new Core.UXLocker())
             {
@@ -517,7 +513,7 @@ namespace Eudora.Net.Core
         /// </summary>
         /// <param name="message"></param>
         /// <param name="mailboxName"></param>
-        public void CopyMessage(EmailMessage message, string mailboxName)
+        public static void CopyMessage(EmailMessage message, string mailboxName)
         {
             using (var uxLocker = new Core.UXLocker())
             {
@@ -535,12 +531,12 @@ namespace Eudora.Net.Core
         /// <summary>
         /// Check all accounts that exist
         /// </summary>
-        public async void CheckMail()
+        public static async void CheckMail()
         {
             await Task.Run(async () => CheckAllAccounts());            
         }
 
-        public async void CheckAllAccounts()
+        public static async void CheckAllAccounts()
         {
             foreach (var personality in PersonalityManager.Datastore.Data)
             {
@@ -564,7 +560,7 @@ namespace Eudora.Net.Core
             }
         }
 
-        private void RetrieveWithPOP(Personality personality)
+        private static void RetrieveWithPOP(Personality personality)
         {
             try
             {
@@ -633,7 +629,7 @@ namespace Eudora.Net.Core
 
         
 
-        private void RetrieveWithIMAP(Personality personality, bool onlyUnread = false)
+        private static void RetrieveWithIMAP(Personality personality, bool onlyUnread = false)
         {
             try
             {
@@ -716,7 +712,7 @@ namespace Eudora.Net.Core
             }
         }
 
-        private async void RetrieveGmail(Personality personality, bool onlyUnread = false)
+        private static async void RetrieveGmail(Personality personality, bool onlyUnread = false)
         {
             try
             {
@@ -788,7 +784,7 @@ namespace Eudora.Net.Core
         }
 
 
-        public async Task SendMessage(EmailMessage message)
+        public static async Task SendMessage(EmailMessage message)
         {
             try
             {
@@ -851,7 +847,7 @@ namespace Eudora.Net.Core
         /// Inbox unless the application of one or more filters decides otherwise.
         /// </summary>
         /// <param name="message"></param>
-        private async void RouteIncomingMessage(EmailMessage message)
+        private static async void RouteIncomingMessage(EmailMessage message)
         {
             try
             {
@@ -901,7 +897,7 @@ namespace Eudora.Net.Core
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private TransmissableMail? PrepareMessage(EmailMessage message)
+        private static TransmissableMail? PrepareMessage(EmailMessage message)
         {
             // Retrieve personality based on the key the message was created with
             Personality? personality = PersonalityManager.FindPersonality(message.PersonalityID);
@@ -929,7 +925,7 @@ namespace Eudora.Net.Core
         /// The actual transmission of a MIME message
         /// </summary>
         /// <param name="mail"></param>
-        private async Task<bool> TransmitMail(TransmissableMail mail)
+        private static async Task<bool> TransmitMail(TransmissableMail mail)
         {
             bool result = false;
             using (SmtpClient smtpClient = new())
@@ -960,7 +956,7 @@ namespace Eudora.Net.Core
             return result;
         }
 
-        private async Task<bool> TransmitGmail(TransmissableMail mail)
+        private static async Task<bool> TransmitGmail(TransmissableMail mail)
         {
             bool result = false;
 
@@ -1003,7 +999,7 @@ namespace Eudora.Net.Core
 
         public static void EmailCheckTimerCallback(object? state)
         {
-            Parallel.Invoke(async () => PostOffice.Instance.CheckMail());
+            Parallel.Invoke(async () => PostOffice.CheckMail());
         }
 
         /////////////////////////////////////////////////////////////////
@@ -1016,7 +1012,7 @@ namespace Eudora.Net.Core
         #region Mail Security
         /////////////////////////////
 
-        private async Task<SaslMechanismOAuth2?> GmailLogin(Personality personality)
+        private static async Task<SaslMechanismOAuth2?> GmailLogin(Personality personality)
         {
             try
             {
@@ -1058,7 +1054,7 @@ namespace Eudora.Net.Core
             return null;
         }
 
-        static bool CertificateValidationCallback(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
+        private static bool CertificateValidationCallback(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
         {
             if (sslPolicyErrors == SslPolicyErrors.None)
             {

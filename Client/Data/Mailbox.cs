@@ -32,7 +32,7 @@ namespace Eudora.Net.Data
         /////////////////////////////
 
         //public virtual ICollection<EmailMessage> Messages { get; private set; } = new ObservableCollection<EmailMessage>();
-        [JsonIgnore]
+        [SQLite.Ignore, JsonIgnore]
         public ObservableCollection<EmailMessage> Messages { get; set; } = [];
 
 

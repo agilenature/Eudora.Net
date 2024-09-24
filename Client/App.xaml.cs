@@ -156,7 +156,7 @@ namespace Eudora.Net
             LabelManager.Startup();
             PersonalityManager.Startup();
             AddressBookManager.Startup();
-            PostOffice.Instance.Startup();
+            PostOffice.Startup();
             EmailSearchEngine.Startup();
             FilterManager.Startup();
             BrowserData.Instance.Startup();
@@ -189,7 +189,7 @@ namespace Eudora.Net
             LabelManager.Shutdown();
             PersonalityManager.Shutdown();
             AddressBookManager.Shutdown();
-            PostOffice.Instance.Shutdown();
+            PostOffice.Shutdown();
             EmailSearchEngine.Shutdown();
             FilterManager.Shutdown();
             BrowserData.Instance.Shutdown();
