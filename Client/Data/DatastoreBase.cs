@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 
+
 namespace Eudora.Net.Data
 {
     /// <summary>
@@ -114,7 +115,9 @@ namespace Eudora.Net.Data
             try
             {
                 IoUtil.EnsureFolder(DbFolder);
-                DB = new SQLiteConnection(DbPath);
+
+                var dboptions = new SQLiteConnectionString(DbPath, true, key:EudoraHelper.IDatastore.LocalKey);
+                DB = new SQLiteConnection(dboptions);
                 DB.CreateTable<T>();
             }
             catch (Exception ex)
