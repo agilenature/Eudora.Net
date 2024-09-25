@@ -1,5 +1,5 @@
 # Eudora.Net
-## A brand new email client inspired by the once-dominant Qualcomm Eudora^1^
+## A brand new email client inspired by the once-dominant Qualcomm Eudora <sup>1</sup>
 
 Eudora.Net is built from scratch with the goal of providing the look and feel of classic Eudora in an email client that is new and modern inside.
 
