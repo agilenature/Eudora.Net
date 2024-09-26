@@ -1,5 +1,6 @@
 ﻿using Eudora.Net.Core;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -8,11 +9,12 @@ using System.Text.Json.Serialization;
 
 namespace Eudora.Net.Data
 {
-    public class Mailbox
+    public class Mailbox: INotifyPropertyChanged
     {
         ///////////////////////////////////////////////////////////
         #region Fields
-        /////////////////////////////
+
+        private Guid _Id = Guid.NewGuid();
 
         public static readonly string extension = ".mbx";
         private string DataRoot = string.Empty;
@@ -21,20 +23,34 @@ namespace Eudora.Net.Data
         private string _Name = string.Empty;
         private string _ImageSource = string.Empty;
         private int _SortOrder = 999;
+        private DatastoreBase<EmailMessage> Datastore;
 
-        /////////////////////////////
+        // INotifyPropertyChanged isn't used in this class but its presence
+        // is necessary for the unified database format.
+        // See: Data/DatastoreBase.cs
+#pragma warning disable 0067
+        public event PropertyChangedEventHandler? PropertyChanged;
+#pragma warning restore 0067
+
         #endregion Fields
         ///////////////////////////////////////////////////////////
 
 
         ///////////////////////////////////////////////////////////
         #region Properties
-        /////////////////////////////
 
-        //public virtual ICollection<EmailMessage> Messages { get; private set; } = new ObservableCollection<EmailMessage>();
-        [SQLite.Ignore, JsonIgnore]
-        public ObservableCollection<EmailMessage> Messages { get; set; } = [];
+        [SQLite.Ignore]
+        public ObservableCollection<EmailMessage> Messages
+        {
+            get => Datastore.Data;
+        }
 
+        [SQLite.PrimaryKey]
+        public Guid Id
+        {
+            get => _Id;
+            set => _Id = value;
+        }
 
         public int SortOrder
         {
@@ -54,20 +70,24 @@ namespace Eudora.Net.Data
             set { if (_ImageSource != value) { _ImageSource = value; } }
         }
 
-        /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
 
+
+        ///////////////////////////////////////////////////////////
+        #region Mailbox Interface
+
         public Mailbox()
         {
+            CommonCtor();
         }
 
         public Mailbox(string name, string imageSource)
         {
             _Name = name;
             _ImageSource = imageSource;
-            InitializeForIO();
+            CommonCtor();
         }
 
         public Mailbox(string name, string imageSource, int sortOrder)
@@ -75,8 +95,37 @@ namespace Eudora.Net.Data
             _Name = name;
             _ImageSource = imageSource;
             _SortOrder = sortOrder;
-            InitializeForIO();
+            CommonCtor();
         }
+
+        ~Mailbox()
+        {
+            try
+            {
+                Datastore.Close();
+            }
+            catch(Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+        }
+
+        private void CommonCtor()
+        {
+            try
+            {
+                Datastore = new("Data", "Mailboxes", _Name);
+                Datastore.Open();
+                Datastore.Load();
+            }
+            catch(Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+        }
+
+        #endregion Mailbox Interface
+        ///////////////////////////////////////////////////////////
 
         private void InitializeForIO()
         {

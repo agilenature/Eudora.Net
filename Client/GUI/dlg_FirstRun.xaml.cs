@@ -20,6 +20,7 @@ namespace Eudora.Net.GUI
         private static readonly List<Uri> Pages =
         [
             new Uri("InitialOptions_Landing.xaml", UriKind.Relative),
+            new Uri("InitialOptions_Security.xaml", UriKind.Relative),
             new Uri("InitialOptions_Theme.xaml", UriKind.Relative),
             new Uri("InitialOptions_Storage.xaml", UriKind.Relative),
             //new Uri("InitialOptions_Import.xaml", UriKind.Relative),

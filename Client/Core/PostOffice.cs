@@ -16,7 +16,7 @@ using System.Data;
 using System.IO;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
+using static MailKit.Net.Imap.ImapMailboxFilter;
 
 
 namespace Eudora.Net.Core
@@ -26,41 +26,55 @@ namespace Eudora.Net.Core
     /// </summary>
     public class PostOffice
     {
+        /// <summary>
+        /// A helper struct to contain MIME message & account data.
+        /// Defined internally to PostOffice because it's not used elsewhere.
+        /// </summary>
+        /// <param name="mime"></param>
+        /// <param name="personality"></param>
+        class TransmissableMail(MimeMessage mime, Personality personality)
+        {
+            public MimeMessage MimeMessage { get; set; } = mime;
+            public Personality Personality { get; set; } = personality;
+        }
+
+
+        ///////////////////////////////////////////////////////////
+        #region Fields
+
+        private static DatastoreBase<Mailbox> Datastore;
+
         private static Timer NewMailCheckTimer = new(
             EmailCheckTimerCallback,
             null,
             Properties.Settings.Default.EmailCheckFrequency * 60000,
             Properties.Settings.Default.EmailCheckFrequency * 60000);
 
-        public static void UpdateTimerFrequency()
-        {
-            NewMailCheckTimer.Change(
-                Properties.Settings.Default.EmailCheckFrequency * 60000,
-                Properties.Settings.Default.EmailCheckFrequency * 60000);
-        }
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
 
         ///////////////////////////////////////////////////////////
         #region Properties
-        /////////////////////////////
 
         public static Mailbox? Inbox
         {
-            get => PostOffice.GetMailboxByName("Inbox");
+            get => GetMailboxByName("Inbox");
         }
 
         public static Mailbox? Drafts
         {
-            get => PostOffice.GetMailboxByName("Drafts");
+            get => GetMailboxByName("Drafts");
         }
 
         public static Mailbox? Sent
         {
-            get => PostOffice.GetMailboxByName("Sent");
+            get => GetMailboxByName("Sent");
         }
 
         public static Mailbox? Trash
         {
-            get => PostOffice.GetMailboxByName("Trash");
+            get => GetMailboxByName("Trash");
         }
 
         private static string _MailboxesPath = string.Empty;
@@ -108,126 +122,136 @@ namespace Eudora.Net.Core
             Default
         }
 
-        //public virtual ICollection<Mailbox> Mailboxes { get; private set; } = 
-        //    new SortableObservableCollection<Mailbox>();
-        public static SortableObservableCollection<Mailbox> Mailboxes { get; set; } = [];
+        public static SortableObservableCollection<Mailbox> Mailboxes
+        {
+            get => Datastore.Data;
+        }
 
-        //internal List<MailboxEfContext> MailboxEfContexts { get; private set; } = [];
-
-
-        /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
 
-        ///////////////////////////////////////////////////////////
-        #region Fields
-        /////////////////////////////
-
-        private static object MailboxSerializationLocker = new();
-        
-        /////////////////////////////
-        #endregion Fields
-        ///////////////////////////////////////////////////////////
-
-
-        /// <summary>
-        /// A helper struct to contain MIME message & account data
-        /// </summary>
-        /// <param name="mime"></param>
-        /// <param name="personality"></param>
-        class TransmissableMail(MimeMessage mime, Personality personality)
-        {
-            public MimeMessage MimeMessage { get; set; } = mime;
-            public Personality Personality { get; set; } = personality;
-        }
-
-
 
         /////////////////////////////////////////////////////////////////
-        #region Construction & Initialization
-        /////////////////////////////////////////////////////////////////
+        #region PostOffice Interface
 
         static PostOffice()
         {
-            MailboxSerializationLocker = new();
+            Datastore = new("Data", "Mailboxes", "Mailboxes");
         }
 
-        public PostOffice()
+        public static void UpdateTimerFrequency()
         {
-            //MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
+            // EmailCheckFrequency is expressed in minutes, hence the * 60000
+            NewMailCheckTimer.Change(
+                Properties.Settings.Default.EmailCheckFrequency * 60000,
+                Properties.Settings.Default.EmailCheckFrequency * 60000);
+        }
+
+        /// <summary>
+        /// case-insensitive
+        /// </summary>
+        /// <param name="mailbox"></param>
+        /// <returns></returns>
+        public static bool IsDefaultMailbox(Mailbox mailbox)
+        {
+            return IsDefaultMailbox(mailbox.Name);
+        }
+
+        /// <summary>
+        /// case-insensitive
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsDefaultMailbox(string name)
+        {
+            string mbname = name.ToLower();
+            if (mbname.Equals("inbox") || mbname.Equals("drafts") || mbname.Equals("sent") || mbname.Equals("trash"))
+            {
+                return true;
+            }
+            return false;
         }
 
         public static void Startup()
         {
-            MailboxesPath = Path.Combine(Eudora.Net.Properties.Settings.Default.DataStoreRoot, @"Mailboxes");
+            try
+            {
+                Datastore.Open();
+                Datastore.Load();
 
-            if (!Path.Exists(MailboxesPath))
-            {
-                Directory.CreateDirectory(MailboxesPath);
+                // Create default mailboxes, if necessary
+                if (Datastore.Data.Count == 0)
+                {
+                    AddMailbox(new("Inbox", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 0));
+                    AddMailbox(new("Drafts", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 1));
+                    AddMailbox(new("Sent", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 2));
+                    AddMailbox(new("Trash", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 3));
+                }
             }
-
-            // Default mailboxes
-            if (!File.Exists(MailboxFullPathFromName("Inbox")))
+            catch (Exception ex)
             {
-                Mailboxes.Add(new("Inbox", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 0));
+                Logger.Exception(ex);
             }
-            if (!File.Exists(MailboxFullPathFromName("Drafts")))
-            {
-                Mailboxes.Add(new("Drafts", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 1));
-            }
-            if (!File.Exists(MailboxFullPathFromName("Sent")))
-            {
-                Mailboxes.Add(new("Sent", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 2));
-            }
-            if (!File.Exists(MailboxFullPathFromName("Trash")))
-            {
-                Mailboxes.Add(new("Trash", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 3));
-            }
-
-            LoadMailboxes();
         }
 
         public static void Shutdown()
         {
-            SaveMailboxes();
+            try
+            {
+                Datastore.Close();
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
         }
 
-        /////////////////////////////////////////////////////////////////
-        #endregion Construction & Initialization
-        /////////////////////////////////////////////////////////////////
+        public static void AddMailbox(Mailbox mailbox)
+        {
+            try
+            {
+                Datastore.Add(mailbox);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+        }
 
+        public static void RemoveMailbox(Mailbox mailbox)
+        {
+            // Sanity check -- no removing the default mailboxes
+            if(IsDefaultMailbox(mailbox))
+            {
+                Logger.Warning($"Default mailbox {mailbox.Name} cannot be removed");
+                return;
+            }
 
+            try
+            {
+                Datastore.Data.Remove(mailbox);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+        }
 
-        /////////////////////////////////////////////////////////////////
-        #region Mailbox Interface
-        /////////////////////////////////////////////////////////////////
+        public static bool ContainsMailbox(string name)
+        {
+            if (Datastore.Data.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))) return true;
+            return false;
+        }
 
         /// <summary>
-        /// 
+        /// case-insensitive
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         public static Mailbox? GetMailboxByName(string name)
         {
             return Mailboxes.Where(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        public static void AddUserMailbox(string name, string imageSource)
-        {
-            try
-            {
-                Mailbox mailbox = new Mailbox(name, imageSource);
-                Mailboxes.Add(mailbox);
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
         }
 
         public static Mailbox? CreateImportedMailbox(string name)
@@ -258,13 +282,10 @@ namespace Eudora.Net.Core
         /// <param name="deleteMessages"></param>
         public static void RemoveUserMailbox(string name, bool deleteMessages = true)
         {
-            // Just in case...
-            string nameCheck = name.ToLower();
-            if (nameCheck.Equals("inbox", StringComparison.CurrentCultureIgnoreCase) ||
-                nameCheck.Equals("drafts", StringComparison.CurrentCultureIgnoreCase) ||
-                nameCheck.Equals("sent", StringComparison.CurrentCultureIgnoreCase) ||
-                nameCheck.Equals("trash", StringComparison.CurrentCultureIgnoreCase))
+            // Sanity check -- no removing the default mailboxes
+            if (IsDefaultMailbox(name))
             {
+                Logger.Warning($"Default mailbox {name} cannot be removed");
                 return;
             }
 
@@ -289,90 +310,6 @@ namespace Eudora.Net.Core
             }            
         }
 
-        /////////////////////////////////////////////////////////////////
-        #endregion Mailbox Interface
-        /////////////////////////////////////////////////////////////////
-
-
-
-        /////////////////////////////////////////////////////////////////
-        #region Mailbox Internal
-        /////////////////////////////////////////////////////////////////
-
-        private static string MailboxFullPathFromName(string name)
-        {
-            //string filename = string.Format("{0}{1}", name, Mailbox.extension);
-            string filename = $@"{name}{Mailbox.extension}";
-            return Path.Combine(_MailboxesPath, filename);
-        }
-
-        private static void LoadMailboxes()
-        {
-            try
-            {
-                lock(MailboxSerializationLocker)
-                {
-                    DirectoryInfo di = new(MailboxesPath);
-                    //string searchQuery = string.Format("*{0}", Mailbox.extension);
-                    string searchQuery = $@"*{Mailbox.extension}";
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var mailbox = JsonSerializer.Deserialize<Mailbox>(raw);
-                        if (mailbox is not null)
-                        {
-                            mailbox.Load();
-                            Mailboxes.Add(mailbox);
-                        }
-                    }
-
-                    // File-on-disk order will differ from the desired order
-                    //Mailboxes.Sort(Mailboxes.OrderBy(i => i.SortOrder));
-                }
-            }
-            catch(Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
-        private static void SaveMailboxes()
-        {
-            try
-            {
-                lock(MailboxSerializationLocker)
-                {
-                    foreach(Mailbox mailbox in Mailboxes)
-                    {
-                        string path = MailboxFullPathFromName(mailbox.Name);
-                        string json = JsonSerializer.Serialize<Mailbox>(mailbox);
-                        File.WriteAllText(path, json);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////
-        #endregion Mailbox Internal
-        /////////////////////////////////////////////////////////////////
-
-
-
-        /////////////////////////////////////////////////////////////////
-        #region Mail Interface
-        /////////////////////////////////////////////////////////////////
-
-
         public static EmailMessage CreateMessage_Outgoing(Personality personality)
         {
             EmailMessage message = new();
@@ -383,7 +320,7 @@ namespace Eudora.Net.Core
             message.SenderAddress.Name = personality.EmailName;
             message.ReplyTo = personality.ToEmailAddress();
             message.MailboxName = Drafts?.Name ?? string.Empty;
-            PostOffice.GetMailboxByName(message.MailboxName)?.AddMessage(message);
+            GetMailboxByName(message.MailboxName)?.AddMessage(message);
 
             message.Body = HtmlDepot.MakeBlankEmail(message);
             return message;
@@ -394,12 +331,12 @@ namespace Eudora.Net.Core
             EmailMessage outMessage = new();
 
             Personality? personality = PersonalityManager.FindPersonality(inMessage.PersonalityID);
-            if(personality is null)
+            if (personality is null)
             {
                 Logger.Warning($"Failed to find Personality with id: {inMessage.PersonalityID}");
                 return outMessage;
             }
-            
+
             outMessage.MailboxName = Drafts?.Name ?? string.Empty;
             outMessage.Status = EmailMessage.MessageStatus.Draft;
             outMessage.Origin = EmailMessage.MessageOrigin.Outgoing;
@@ -410,10 +347,10 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
             outMessage.MessageCategory = eMailThreadType.Reply;
-            PostOffice.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
+            GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             // subject
-            if(inMessage.Subject.Contains("re:", StringComparison.CurrentCultureIgnoreCase))
+            if (inMessage.Subject.Contains("re:", StringComparison.CurrentCultureIgnoreCase))
             {
                 outMessage.Subject = inMessage.Subject;
             }
@@ -470,7 +407,7 @@ namespace Eudora.Net.Core
             outMessage.SenderAddress.Name = personality.EmailName;
             outMessage.ReplyTo = personality.ToEmailAddress();
             outMessage.MessageCategory = eMailThreadType.Forward;
-            PostOffice.GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
+            GetMailboxByName(outMessage.MailboxName)?.AddMessage(outMessage);
 
             outMessage.Body = HtmlDepot.MakeEmailForward(inMessage);
             return outMessage;
@@ -485,14 +422,6 @@ namespace Eudora.Net.Core
             return message;
         }
 
-        
-
-
-        /// <summary>
-        /// TODO: MoveMessage must also move attachments folder
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="mailboxName"></param>
         public static void MoveMessage(EmailMessage message, string mailboxName)
         {
             //using (var uxLocker = new Core.UXLocker())
@@ -508,11 +437,6 @@ namespace Eudora.Net.Core
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="mailboxName"></param>
         public static void CopyMessage(EmailMessage message, string mailboxName)
         {
             using (var uxLocker = new Core.UXLocker())
@@ -533,10 +457,63 @@ namespace Eudora.Net.Core
         /// </summary>
         public static async void CheckMail()
         {
-            await Task.Run(async () => CheckAllAccounts());            
+            await Task.Run(async () => CheckAllAccounts());
         }
 
-        public static async void CheckAllAccounts()
+        public static async Task SendMessage(EmailMessage message)
+        {
+            try
+            {
+                Logger.Information("Sending...");
+                var mime = PrepareMessage(message);
+                if (mime != null)
+                {
+                    bool messageSent = false;
+
+                    var personality = PersonalityManager.FindPersonality(message.PersonalityID);
+                    if (personality is not null)
+                    {
+                        if (personality.IsGmail)
+                        {
+                            if (await TransmitGmail(mime))
+                            {
+                                messageSent = true;
+                            }
+                            else if (await TransmitMail(mime))
+                            {
+                                messageSent = true;
+                            }
+                        }
+                    }
+
+                    if (messageSent)
+                    {
+                        MoveMessage(message, Sent?.Name ?? string.Empty);
+                        message.Status = EmailMessage.MessageStatus.Sealed;
+                        message.SendStatus = EmailMessage.eSendStatus.Sent;
+                    }
+                    else
+                    {
+                        Logger.Warning("Failed to send message");
+                    }
+                }
+                Logger.Information("Message sent");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+        }
+
+        #endregion PostOffice Interface
+        /////////////////////////////////////////////////////////////////
+
+
+
+        /////////////////////////////////////////////////////////////////
+        #region PostOffice Internal
+
+        private static async void CheckAllAccounts()
         {
             foreach (var personality in PersonalityManager.Datastore.Data)
             {
@@ -625,9 +602,7 @@ namespace Eudora.Net.Core
             {
                 Logger.Error(ex.Message);
             }
-        }
-
-        
+        }        
 
         private static void RetrieveWithIMAP(Personality personality, bool onlyUnread = false)
         {
@@ -783,65 +758,7 @@ namespace Eudora.Net.Core
             Logger.Information("Finished");
         }
 
-
-        public static async Task SendMessage(EmailMessage message)
-        {
-            try
-            {
-                Logger.Information("Sending...");
-                var mime = PrepareMessage(message);
-                if (mime != null)
-                {
-                    bool messageSent = false;
-
-                    var personality = PersonalityManager.FindPersonality(message.PersonalityID);
-                    if (personality is not null)
-                    {
-                        if (personality.IsGmail)
-                        {
-                            if (await TransmitGmail(mime))
-                            {
-                                messageSent = true;
-                            }
-                            else if (await TransmitMail(mime))
-                            {
-                                messageSent = true;
-                            }
-                        }
-                    }
-
-                    if (messageSent)
-                    {
-                        MoveMessage(message, Sent?.Name ?? string.Empty);
-                        message.Status = EmailMessage.MessageStatus.Sealed;
-                        message.SendStatus = EmailMessage.eSendStatus.Sent;
-                    }
-                    else
-                    {
-                        Logger.Warning("Failed to send message");
-                    }
-                }
-                Logger.Information("Message sent");
-            }
-            catch(Exception ex)
-            {
-                Logger.Error(ex.Message);
-            }
-        }
-
         
-
-
-        /////////////////////////////////////////////////////////////////
-        #endregion Mail Interface
-        /////////////////////////////////////////////////////////////////
-
-
-
-        /////////////////////////////////////////////////////////////////
-        #region Mail Internal
-        /////////////////////////////////////////////////////////////////
-
         /// <summary>
         /// Decide what to do with this message. By default it will go to the
         /// Inbox unless the application of one or more filters decides otherwise.
@@ -1002,16 +919,6 @@ namespace Eudora.Net.Core
             Parallel.Invoke(async () => PostOffice.CheckMail());
         }
 
-        /////////////////////////////////////////////////////////////////
-        #endregion Mail Internal
-        /////////////////////////////////////////////////////////////////
-
-
-
-        ///////////////////////////////////////////////////////////
-        #region Mail Security
-        /////////////////////////////
-
         private static async Task<SaslMechanismOAuth2?> GmailLogin(Personality personality)
         {
             try
@@ -1116,9 +1023,8 @@ namespace Eudora.Net.Core
             return false;
         }
 
-        /////////////////////////////
-        #endregion Mail Security
-        ///////////////////////////////////////////////////////////
+        #endregion PostOffice Internal
+        ////////////////////////////////////////////////////////////
 
 
     }
