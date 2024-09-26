@@ -100,7 +100,7 @@ namespace Eudora.Net.GUI
             }
 
             string name = tb_Mailbox.Text;
-            PostOffice.AddUserMailbox(tb_Mailbox.Text, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png");
+            PostOffice.AddMailbox(new(tb_Mailbox.Text, "pack://application:,,,/GUI/res/images/tb32/tb32_51.png"));
             Close();
         }
 
