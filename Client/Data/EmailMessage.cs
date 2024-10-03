@@ -11,15 +11,9 @@ namespace Eudora.Net.Data
 
         ///////////////////////////////////////////////////////////
         #region Interfaces
-        /////////////////////////////
 
-        /// <summary>
-        /// INotifyPropertyChanged
-        /// In this context, the INotify interface allows a message to autosave itself
-        /// when its properties, bound to the UX for display and edit, are changed.
-        /// It also facilitates the aforementioned databinding.
-        /// Modern .Net is pretty awesome.
-        /// </summary>
+        // INotifyPropertyChanged
+
         public event PropertyChangedEventHandler? PropertyChanged;
         
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -38,11 +32,9 @@ namespace Eudora.Net.Data
             OnPropertyChanged(propertyName);
         }
 
-        /// <summary>
-        /// IEquatable
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
+
+        // IEquatable
+
         public bool Equals(EmailMessage? other)
         {
             if(other == null)
@@ -71,29 +63,58 @@ namespace Eudora.Net.Data
             return false;
         }
 
-        /// <summary>
-        /// IClonable
-        /// </summary>
-        /// <returns></returns>
+
+        // ICloneable
+
         public object Clone()
         {
             return this.MemberwiseClone();
         }
 
-        /////////////////////////////
         #endregion Interfaces
         ///////////////////////////////////////////////////////////
 
 
 
         ///////////////////////////////////////////////////////////
+        #region Fields
+
+        private Guid _InternalId = Guid.NewGuid();
+        private string _MessageId = string.Empty;
+        private string _InReplyToId = string.Empty;
+        private ObservableCollection<string> _ReferenceIDs = [];
+        private EmailAddress _ReplyTo = new();
+        private string _MailboxName = string.Empty;
+        private Guid _PersonalityId;
+        private string _LabelName = string.Empty;
+        private EmailEnums.MessageStatus _Status = EmailEnums.MessageStatus.Default;
+        private EmailEnums.eReadStatus _ReadStatus = EmailEnums.eReadStatus.Unread;
+        private EmailEnums.eSendStatus _SendStatus = EmailEnums.eSendStatus.Unsent;
+        private EmailEnums.MessageOrigin _Origin = EmailEnums.MessageOrigin.Default;
+        private PostOffice.eMailPriority _Priority = PostOffice.eMailPriority.Normal;
+        private DateTime _Date = DateTime.Now;
+        private EmailAddress _SenderAddress = new();
+        private ObservableCollection<EmailAddress> _Addresses_From = [];
+        private ObservableCollection<EmailAddress> _Addresses_To = [];
+        private ObservableCollection<EmailAddress> _Addresses_CC = [];
+        private ObservableCollection<EmailAddress> _Addresses_BCC = [];
+        private string _Subject = string.Empty;
+        private string _Body = string.Empty;
+        private ObservableCollection<EmailAttachment> _Attachments = [];
+        private ObservableCollection<EmbeddedImage> _InlineImages = [];
+        private PostOffice.eMailThreadType _MessageCategory = PostOffice.eMailThreadType.NewThread;
+
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
+
+
+        ///////////////////////////////////////////////////////////
         #region Properties
-        /////////////////////////////
 
         /// <summary>
         /// A unique ID for all messages, independent of server tags or variable field values
         /// </summary>
-        private Guid _InternalId = Guid.NewGuid();
         public Guid InternalId
         {
             get => _InternalId;
@@ -103,7 +124,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// The message ID that comes from the server/service
         /// </summary>
-        private string _MessageId = string.Empty;
         public string MessageId
         {
             get => _MessageId;
@@ -113,7 +133,7 @@ namespace Eudora.Net.Data
         /// <summary>
         /// A reference to MessageID for replies
         /// </summary>
-        private string _InReplyToId = string.Empty;
+        
         public string InReplyToId
         {
             get => _InReplyToId;
@@ -123,7 +143,7 @@ namespace Eudora.Net.Data
         /// <summary>
         /// A list of id references
         /// </summary>
-        private ObservableCollection<string> _ReferenceIDs = [];
+        
         public ObservableCollection<string> ReferenceIDs
         {
             get => _ReferenceIDs;
@@ -133,7 +153,7 @@ namespace Eudora.Net.Data
         /// <summary>
         /// An email's reply-to address is not necessarily the same as the sender address
         /// </summary>
-        private EmailAddress _ReplyTo = new();
+        
         public EmailAddress ReplyTo
         {
             get => _ReplyTo;
@@ -143,18 +163,17 @@ namespace Eudora.Net.Data
         /// <summary>
         /// 
         /// </summary>
-        private string _MailboxName = string.Empty;
+        
         public string MailboxName
         {
             get => _MailboxName;
             set => SetField(ref _MailboxName, value, nameof(MailboxName));
         }
 
-
         /// <summary>
         /// Eudora's concept of a sender's address/account
         /// </summary>
-        private Guid _PersonalityId;
+        
         public Guid PersonalityID
         {
             get => _PersonalityId;
@@ -164,72 +183,32 @@ namespace Eudora.Net.Data
         /// <summary>
         /// 
         /// </summary>
-        private string _LabelName = string.Empty;
+        
         public string LabelName
         {
             get => _LabelName;
             set => SetField(ref _LabelName, value, nameof(LabelName));
         }
 
-        /// <summary>
-        /// Edit status of message
-        /// </summary>
-        public enum MessageStatus
-        {
-            Draft,
-            Sealed,
-            Default
-        }
-        private MessageStatus _Status = MessageStatus.Default;
-        public MessageStatus Status
+        public EmailEnums.MessageStatus Status
         {
             get => _Status;
             set => SetField(ref _Status, value, nameof(Status));
         }
 
-        /// <summary>
-        /// Message is read or unread
-        /// </summary>
-        public enum eReadStatus
-        {
-            Read,
-            Unread
-        }
-        private eReadStatus _ReadStatus = eReadStatus.Unread;
-        public eReadStatus ReadStatus
+        public EmailEnums.eReadStatus ReadStatus
         {
             get => _ReadStatus;
             set => SetField(ref _ReadStatus, value, nameof(ReadStatus));
         }
 
-        /// <summary>
-        /// Message is sent or not sent
-        /// </summary>
-        public enum eSendStatus
-        {
-            Sent,
-            Unsent
-        }
-        private eSendStatus _SendStatus = eSendStatus.Unsent;
-        public eSendStatus SendStatus
+        public EmailEnums.eSendStatus SendStatus
         {
             get => _SendStatus;
             set => SetField(ref _SendStatus, value, nameof(SendStatus));
         }
 
-        /// <summary>
-        /// Where did this message come from
-        /// </summary>
-        public enum MessageOrigin
-        {
-            Outgoing,
-            IncomingTo,
-            IncomingCC,
-            IncomingBCC,
-            Default
-        }
-        private MessageOrigin _Origin = MessageOrigin.Default;
-        public MessageOrigin Origin
+        public EmailEnums.MessageOrigin Origin
         {
             get => _Origin;
             set => SetField(ref _Origin, value, nameof(Origin));
@@ -238,7 +217,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// 
         /// </summary>
-        private PostOffice.eMailPriority _Priority = PostOffice.eMailPriority.Normal;
         public PostOffice.eMailPriority Priority
         {
             get => _Priority;
@@ -249,22 +227,18 @@ namespace Eudora.Net.Data
         /// Date sent
         /// TODO: Initially date created, will update upon sending
         /// </summary>
-        private DateTime _Date = DateTime.Now;
         public DateTime Date
         {
             get => _Date;
             set => SetField(ref _Date, value, nameof(Date));
         }
 
-
-        private EmailAddress _SenderAddress = new();
         public EmailAddress SenderAddress
         {
             get => _SenderAddress;
             set => SetField(ref _SenderAddress, value, nameof(SenderAddress));
         }
 
-        private ObservableCollection<EmailAddress> _Addresses_From = [];
         public ObservableCollection<EmailAddress> Addresses_From
         {
             get => _Addresses_From;
@@ -274,7 +248,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// The top-tier addressees, differentiating from CC's
         /// </summary>
-        private ObservableCollection<EmailAddress> _Addresses_To = [];
         public ObservableCollection<EmailAddress> Addresses_To
         {
             get => _Addresses_To;
@@ -284,7 +257,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// List of CC addresses
         /// </summary>
-        private ObservableCollection<EmailAddress> _Addresses_CC = [];
         public ObservableCollection<EmailAddress> Addresses_CC
         {
             get => _Addresses_CC;
@@ -294,7 +266,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// List of BCC addresses
         /// </summary>
-        private ObservableCollection<EmailAddress> _Addresses_BCC = [];
         public ObservableCollection<EmailAddress> Addresses_BCC
         {
             get => _Addresses_BCC;
@@ -304,7 +275,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// Email subject line
         /// </summary>
-        private string _Subject = string.Empty;
         public string Subject
         {
             get => _Subject;
@@ -314,7 +284,6 @@ namespace Eudora.Net.Data
         /// <summary>
         /// Email body content
         /// </summary>
-        private string _Body = string.Empty;
         public string Body
         {
             get => _Body;
@@ -324,38 +293,34 @@ namespace Eudora.Net.Data
         /// <summary>
         /// Attchments to the email
         /// </summary>
-        private ObservableCollection<EmailAttachment> _Attachments = [];
         public ObservableCollection<EmailAttachment> Attachments
         {
             get => _Attachments;
             set => SetField(ref _Attachments, value, nameof(Attachments));
         }
-
-        private ObservableCollection<EmbeddedImage> _InlineImages = [];
+        
         public ObservableCollection<EmbeddedImage> InlineImages
         {
             get => _InlineImages;
             set => SetField(ref _InlineImages, value, nameof(InlineImages));
         }
-
-        private PostOffice.eMailThreadType _MessageCategory = PostOffice.eMailThreadType.NewThread;
+        
         public PostOffice.eMailThreadType MessageCategory
         {
             get => _MessageCategory;
             set => SetField(ref _MessageCategory, value, nameof(MessageCategory));
         }
 
-        /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
 
 
-        ///////////////////////////////////////////////////////////
-        #region Construction
-        /////////////////////////////
 
-        public EmailMessage() 
+        ///////////////////////////////////////////////////////////
+        #region Interface
+
+        public EmailMessage()
         {
             ConnectCollectionsToChangeEvents();
         }
@@ -369,21 +334,6 @@ namespace Eudora.Net.Data
             InlineImages.CollectionChanged += InlineImages_CollectionChanged;
         }
 
-        /////////////////////////////
-        #endregion Construction
-        ///////////////////////////////////////////////////////////
-
-
-
-        ///////////////////////////////////////////////////////////
-        #region Operations
-        /////////////////////////////        
-
-        /// <summary>
-        /// The ObservableCollection Changed event has its own delegate/prototype
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Addresses_BCC_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Addresses_BCC));
@@ -409,8 +359,7 @@ namespace Eudora.Net.Data
             OnPropertyChanged(nameof(InlineImages));
         }
 
-        /////////////////////////////
-        #endregion Operations
+        #endregion Interface
         ///////////////////////////////////////////////////////////
     }
 }

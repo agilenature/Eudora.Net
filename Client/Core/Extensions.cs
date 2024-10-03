@@ -3,6 +3,7 @@ using Microsoft.Web.WebView2.Wpf;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -47,6 +48,10 @@ namespace Eudora.Net.ExtensionMethods
     /// </summary>
     public static class Extensions
     {
+
+        ///////////////////////////////////////////////////////////
+        #region Data, Defines, Consts
+
         public const uint GW_CHILD = 5;
 
         [DllImport("user32.dll")]
@@ -54,6 +59,41 @@ namespace Eudora.Net.ExtensionMethods
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetFocus(IntPtr hWnd);
+
+        #endregion Data, Defines, Consts
+        ///////////////////////////////////////////////////////////
+
+ 
+        public static string ToJsonString<T>(this ObservableCollection<T> collection)
+        {
+            try
+            {
+                string jsonString = JsonSerializer.Serialize(collection);
+                return jsonString;
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+            return string.Empty;
+        }
+
+        public static ObservableCollection<T> FromJsonString<T>(this string jsonString)
+        {
+            try
+            {
+                ObservableCollection<T>? collection = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString);
+                if (collection is not null)
+                {
+                    return collection;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+            return [];
+        }
 
 
         /// <summary>

@@ -18,14 +18,14 @@ namespace Eudora.Net.GUI
         private void btn_GenKey_Click(object sender, RoutedEventArgs e)
         {
             string key = GCrypto.GenerateMasterKey();
-            GCrypto.StoreMasterKey(key);
+            GCrypto.SetMasterKey(key);
             tb_Key.Text = key;
         }
 
         private void RetrieveExistingCredential()
         {
             var key = GCrypto.GetMasterKey();
-            if(key is not null)
+            if(key is not null && !string.IsNullOrWhiteSpace(key))
             {
                 tb_Key.Text = key;
                 tb_Key.IsEnabled = false;

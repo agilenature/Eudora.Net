@@ -90,19 +90,19 @@ namespace Eudora.Net.GUI
             {
 
             }
-            else if (T == typeof(EmailMessage.eReadStatus))
+            else if (T == typeof(EmailEnums.eReadStatus))
             {
 
             }
-            else if (T == typeof(EmailMessage.eSendStatus))
+            else if (T == typeof(EmailEnums.eSendStatus))
             {
 
             }
-            else if (T == typeof(EmailMessage.MessageOrigin))
+            else if (T == typeof(EmailEnums.MessageOrigin))
             {
 
             }
-            else if (T == typeof(EmailMessage.MessageStatus))
+            else if (T == typeof(EmailEnums.MessageStatus))
             {
 
             }

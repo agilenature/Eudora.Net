@@ -384,7 +384,7 @@ namespace Eudora.Net.Core
             return false;
         }
 
-        private static async Task<bool> SearchMessageStatus(EmailMessage message, EmailMessage.MessageStatus value, EmailSearch.eSearchOperand operand)
+        private static async Task<bool> SearchMessageStatus(EmailMessage message, EmailEnums.MessageStatus value, EmailSearch.eSearchOperand operand)
         {
             if (!ValidateOperand<Enum>(operand)) return false;
 
@@ -402,7 +402,7 @@ namespace Eudora.Net.Core
             return false;
         }
 
-        private static async Task<bool> SearchReadStatus(EmailMessage message, EmailMessage.eReadStatus value, EmailSearch.eSearchOperand operand)
+        private static async Task<bool> SearchReadStatus(EmailMessage message, EmailEnums.eReadStatus value, EmailSearch.eSearchOperand operand)
         {
             if (!ValidateOperand<Enum>(operand)) return false;
 
@@ -420,7 +420,7 @@ namespace Eudora.Net.Core
             return false;
         }
 
-        private static async Task<bool> SearchSendStatus(EmailMessage message, EmailMessage.eSendStatus value, EmailSearch.eSearchOperand operand)
+        private static async Task<bool> SearchSendStatus(EmailMessage message, EmailEnums.eSendStatus value, EmailSearch.eSearchOperand operand)
         {
             if (!ValidateOperand<Enum>(operand)) return false;
 
@@ -438,7 +438,7 @@ namespace Eudora.Net.Core
             return false;
         }
 
-        private static async Task<bool> SearchMessageOrigin(EmailMessage message, EmailMessage.MessageOrigin value, EmailSearch.eSearchOperand operand)
+        private static async Task<bool> SearchMessageOrigin(EmailMessage message, EmailEnums.MessageOrigin value, EmailSearch.eSearchOperand operand)
         {
             if (!ValidateOperand<Enum>(operand)) return false;
 

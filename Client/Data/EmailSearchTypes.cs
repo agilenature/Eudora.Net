@@ -170,16 +170,16 @@ namespace Eudora.Net.EmailSearch
             Lookup.Add(eQueryKey.LabelName, typeof(string));
             Lookup.Add(eQueryKey.MailboxName, typeof(string));
             Lookup.Add(eQueryKey.MessageID, typeof(string));
-            Lookup.Add(eQueryKey.Origin, typeof(EmailMessage.MessageOrigin));
+            Lookup.Add(eQueryKey.Origin, typeof(EmailEnums.MessageOrigin));
             Lookup.Add(eQueryKey.PersonalityID, typeof(Guid));
             Lookup.Add(eQueryKey.Priority, typeof(PostOffice.eMailPriority));
-            Lookup.Add(eQueryKey.ReadStatus, typeof(EmailMessage.eReadStatus));
+            Lookup.Add(eQueryKey.ReadStatus, typeof(EmailEnums.eReadStatus));
             Lookup.Add(eQueryKey.ReferenceIDs, typeof(string));
             Lookup.Add(eQueryKey.ReplyTo, typeof(string));
             Lookup.Add(eQueryKey.ReplyToID, typeof(string));
             Lookup.Add(eQueryKey.SenderAddress, typeof(string));
-            Lookup.Add(eQueryKey.SendStatus, typeof(EmailMessage.eSendStatus));
-            Lookup.Add(eQueryKey.Status, typeof(EmailMessage.MessageStatus));
+            Lookup.Add(eQueryKey.SendStatus, typeof(EmailEnums.eSendStatus));
+            Lookup.Add(eQueryKey.Status, typeof(EmailEnums.MessageStatus));
             Lookup.Add(eQueryKey.Subject, typeof(string));
             Lookup.Add(eQueryKey.To, typeof(string));
         }
@@ -302,29 +302,29 @@ namespace Eudora.Net.EmailSearch
             set => SetField(ref _GuidValue, value, nameof(GuidValue));
         }
 
-        private EmailMessage.MessageOrigin _OriginValue = default;
-        public EmailMessage.MessageOrigin OriginValue
+        private EmailEnums.MessageOrigin _OriginValue = default;
+        public EmailEnums.MessageOrigin OriginValue
         {
             get => _OriginValue;
             set => SetField(ref _OriginValue, value, nameof(OriginValue));
         }
         
-        private EmailMessage.MessageStatus _MessageStatusValue = default;
-        public EmailMessage.MessageStatus MessageStatusValue
+        private EmailEnums.MessageStatus _MessageStatusValue = default;
+        public EmailEnums.MessageStatus MessageStatusValue
         {
             get => _MessageStatusValue;
             set => SetField(ref _MessageStatusValue, value, nameof(MessageStatusValue));
         }
 
-        private EmailMessage.eReadStatus _ReadStatusValue = default;
-        public EmailMessage.eReadStatus ReadStatusValue
+        private EmailEnums.eReadStatus _ReadStatusValue = default;
+        public EmailEnums.eReadStatus ReadStatusValue
         {
             get => _ReadStatusValue;
             set => SetField(ref _ReadStatusValue, value, nameof(ReadStatusValue));
         }
 
-        private EmailMessage.eSendStatus _SendStatusValue = default;
-        public EmailMessage.eSendStatus SendStatusValue
+        private EmailEnums.eSendStatus _SendStatusValue = default;
+        public EmailEnums.eSendStatus SendStatusValue
         {
             get => _SendStatusValue;
             set => SetField(ref _SendStatusValue, value, nameof(SendStatusValue));

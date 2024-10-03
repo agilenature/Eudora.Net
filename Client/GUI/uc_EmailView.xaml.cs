@@ -153,7 +153,7 @@ namespace Eudora.Net.GUI
         private void Webview_NavigationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
         {
             //Logger.NewEvent(LogEvent.EventCategory.Debug, "Webview_NavigationCompleted");
-            bool designMode = (Message.Status == EmailMessage.MessageStatus.Draft);
+            bool designMode = (Message.Status == EmailEnums.MessageStatus.Draft);
             Editor.Document.DesignMode = designMode;
             if (designMode)
             {
@@ -205,7 +205,7 @@ namespace Eudora.Net.GUI
 
         public bool IsEditable()
         {
-            return (Message.Status == EmailMessage.MessageStatus.Draft);
+            return (Message.Status == EmailEnums.MessageStatus.Draft);
         }
 
         public override void MdiActivated()
@@ -214,7 +214,7 @@ namespace Eudora.Net.GUI
 
             if (Message is not null)
             {
-                if (Message.Status == EmailMessage.MessageStatus.Draft)
+                if (Message.Status == EmailEnums.MessageStatus.Draft)
                 {
                     EudoraStatistics.UserIsWritingEmail(true);
                 }
@@ -256,7 +256,7 @@ namespace Eudora.Net.GUI
 
             if (Message is not null)
             {
-                if (Message.Status == EmailMessage.MessageStatus.Draft)
+                if (Message.Status == EmailEnums.MessageStatus.Draft)
                 {
                     EudoraStatistics.UserIsWritingEmail(false);
                 }
@@ -370,7 +370,7 @@ namespace Eudora.Net.GUI
 
         private void Editor_DocumentLoaded(object? sender, EventArgs e)
         {
-            bool messageIsEditable = (Message.Status == EmailMessage.MessageStatus.Draft);
+            bool messageIsEditable = (Message.Status == EmailEnums.MessageStatus.Draft);
 
             if (messageIsEditable)
             {
@@ -392,7 +392,7 @@ namespace Eudora.Net.GUI
                 }
                 Editor.Navigate(tempPath);
 
-                bool messageIsEditable = (Message.Status == EmailMessage.MessageStatus.Draft);
+                bool messageIsEditable = (Message.Status == EmailEnums.MessageStatus.Draft);
                 MainToolbar.IsEnabled = messageIsEditable;
                 HeaderPanel.IsEnabled = messageIsEditable;
                 Editor.ToolbarsVisible = messageIsEditable;

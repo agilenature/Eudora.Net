@@ -227,7 +227,7 @@ namespace Eudora.Net.GUI
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 preview.DataContext = message;
-                message.ReadStatus = EmailMessage.eReadStatus.Read;
+                message.ReadStatus = EmailEnums.eReadStatus.Read;
                 IsPrintEnabled = true;
                 UpdateMainWndUX(true);
             }

@@ -84,7 +84,7 @@ namespace Eudora.Net.GUI
             }
 
             Editor.DataContext = message.Body;
-            bool isDraft = (message.Status == EmailMessage.MessageStatus.Draft);
+            bool isDraft = (message.Status == EmailEnums.MessageStatus.Draft);
             EnableEdit(isDraft);
         }
 

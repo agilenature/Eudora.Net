@@ -9,21 +9,10 @@ using System.Text.Json.Serialization;
 
 namespace Eudora.Net.Data
 {
-    public class Mailbox: INotifyPropertyChanged
+    public class Mailbox : INotifyPropertyChanged
     {
         ///////////////////////////////////////////////////////////
         #region Fields
-
-        private Guid _Id = Guid.NewGuid();
-
-        public static readonly string extension = ".mbx";
-        private string DataRoot = string.Empty;
-        private object FileLocker = new();
-        private object CollectionLocker = new();
-        private string _Name = string.Empty;
-        private string _ImageSource = string.Empty;
-        private int _SortOrder = 999;
-        private DatastoreBase<EmailMessage> Datastore;
 
         // INotifyPropertyChanged isn't used in this class but its presence
         // is necessary for the unified database format.
@@ -31,6 +20,13 @@ namespace Eudora.Net.Data
 #pragma warning disable 0067
         public event PropertyChangedEventHandler? PropertyChanged;
 #pragma warning restore 0067
+
+
+        private Guid _Id = Guid.NewGuid();
+        private string _Name = string.Empty;
+        private string _ImageSource = string.Empty;
+        private int _SortOrder = 999;
+        private DatastoreConversion<EmailMessage, EmailMessage_DB, DbConverter_EmailMessage> Datastore;
 
         #endregion Fields
         ///////////////////////////////////////////////////////////
@@ -40,7 +36,7 @@ namespace Eudora.Net.Data
         #region Properties
 
         [SQLite.Ignore]
-        public ObservableCollection<EmailMessage> Messages
+        public SortableObservableCollection<EmailMessage> Messages
         {
             get => Datastore.Data;
         }
@@ -61,7 +57,7 @@ namespace Eudora.Net.Data
         public string Name
         {
             get => _Name;
-            set { if (_Name != value) { _Name = value; InitializeForIO(); } }
+            set { if (_Name != value) { _Name = value; } }
         }
 
         public string ImageSource
@@ -98,39 +94,16 @@ namespace Eudora.Net.Data
             CommonCtor();
         }
 
-        ~Mailbox()
+        public void Close()
         {
             try
             {
                 Datastore.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Exception(ex);
             }
-        }
-
-        private void CommonCtor()
-        {
-            try
-            {
-                Datastore = new("Data", "Mailboxes", _Name);
-                Datastore.Open();
-                Datastore.Load();
-            }
-            catch(Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
-        #endregion Mailbox Interface
-        ///////////////////////////////////////////////////////////
-
-        private void InitializeForIO()
-        {
-            DataRoot = Path.Combine(PostOffice.MailboxesPath, Name);
-            IoUtil.EnsureFolder(DataRoot);
         }
 
         public bool Contains(EmailMessage message)
@@ -138,94 +111,14 @@ namespace Eudora.Net.Data
             return Messages.Contains(message);
         }
 
-        public void Delete()
-        {
-            try
-            {
-                DirectoryInfo di = new(DataRoot);
-                di.Delete(true);
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
-        ///////////////////////////////////////////////////////////
-        #region File handling
-        /////////////////////////////
-
-        private string MakeFilename(string name)
-        {
-            return string.Format("{0}{1}", name, EmailMessage.extension);
-        }
-
-        private string MakeFullPath(string name)
-        {
-            return Path.Combine(DataRoot, MakeFilename(name));
-        }
-
-        private string MakeAttachmentsFolder(string name)
-        {
-            return Path.Combine(DataRoot, name);
-        }
-
-        private void Message_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(EmailMessage.Attachments))
-            {
-                Debug.WriteLine("Attachments changed");
-            }
-            if (sender is EmailMessage message)
-            {
-                Debug.WriteLine("Message saved");
-                SaveMessage(message);
-            }
-        }
-
-        public void Load()
-        {
-            try
-            {
-                lock (FileLocker)
-                {
-                    DirectoryInfo di = new(DataRoot);
-                    string searchQuery = string.Format("*{0}", EmailMessage.extension);
-                    var files = di.GetFiles(searchQuery);
-                    foreach (var file in files)
-                    {
-                        if (file.DirectoryName == null)
-                        {
-                            continue;
-                        }
-
-                        string raw = File.ReadAllText(file.FullName);
-                        var message = JsonSerializer.Deserialize<EmailMessage>(raw);
-                        if (message is not null)
-                        {
-                            message.PropertyChanged += Message_PropertyChanged;
-                            message.ConnectCollectionsToChangeEvents();
-                            Messages.Add(message);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
         public EmailMessage NewMessage(bool draft = false)
         {
             EmailMessage message = new()
             {
                 MailboxName = Name,
-                Status = draft ? EmailMessage.MessageStatus.Draft : EmailMessage.MessageStatus.Sealed
+                Status = draft ? EmailEnums.MessageStatus.Draft : EmailEnums.MessageStatus.Sealed
             };
-            message.PropertyChanged += Message_PropertyChanged;
             Messages.Add(message);
-            SaveMessage(message);
             return message;
         }
 
@@ -236,81 +129,48 @@ namespace Eudora.Net.Data
                 System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => AddMessage(message)));
                 return;
             }
-            message.PropertyChanged -= Message_PropertyChanged;
-            message.PropertyChanged += Message_PropertyChanged;
             Messages.Add(message);
-            SaveMessage(message);
-        }
-
-        public void SaveMessage(EmailMessage message)
-        {
-            try
-            {
-                lock (FileLocker)
-                {
-                    string fullPath = MakeFullPath(message.InternalId.ToString());
-                    string json = JsonSerializer.Serialize(message, IoUtil.JsonWriterOptions);
-                    File.WriteAllText(fullPath, json);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
-
-        public EmailMessage? LoadMessage(string fullPath)
-        {
-            EmailMessage? message = null;
-            try
-            {
-                lock (FileLocker)
-                {
-                    string raw = File.ReadAllText(fullPath);
-                    message = JsonSerializer.Deserialize<EmailMessage>(raw);
-                    if (message is not null)
-                    {
-                        message.PropertyChanged += Message_PropertyChanged;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-            return message;
-        }
-
-        public void UnloadMessage(EmailMessage message)
-        {
-            try
-            {
-                Messages.Remove(message);
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
         }
 
         public void DeleteMessage(EmailMessage message)
         {
+            if (!System.Windows.Application.Current.Dispatcher.CheckAccess())
+            {
+                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => DeleteMessage(message)));
+                return;
+            }
+            Messages.Remove(message);
+        }
+
+        public async Task TransferMessage(EmailMessage message, Mailbox mailboxDest)
+        {
+            EmailMessage? msgClone = message.Clone() as EmailMessage;
+            if(msgClone is null)
+            {
+                Logger.Error($"TransferMessage(): Message failed to clone.");
+                return;
+            }
+            msgClone.MailboxName = Name;
+            mailboxDest.AddMessage(msgClone);
+            DeleteMessage(message);
+        }
+
+
+        #endregion Mailbox Interface
+        ///////////////////////////////////////////////////////////
+        
+
+
+        ///////////////////////////////////////////////////////////
+        #region Mailbox Internal
+
+        private void CommonCtor()
+        {
             try
             {
-                Messages.Remove(message);
-
-                // message
-                string path = MakeFullPath(message.InternalId.ToString());
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
-                }
-                // attachments
-                path = MakeAttachmentsFolder(message.InternalId.ToString());
-                if (Directory.Exists(path))
-                {
-                    Directory.Delete(path);
-                }
+                Datastore = new("Data", "Mailboxes", _Name);
+                Datastore.Open();
+                Datastore.Load();
             }
             catch (Exception ex)
             {
@@ -318,8 +178,8 @@ namespace Eudora.Net.Data
             }
         }
 
-        /////////////////////////////
-        #endregion File handling
+
+        #endregion Mailbox Internal
         ///////////////////////////////////////////////////////////
     }
 }

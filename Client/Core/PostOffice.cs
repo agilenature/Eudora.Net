@@ -4,7 +4,6 @@ using Eudora.Net.GUI;
 using Eudora.Net.HtmlTemplates;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Util.Store;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
@@ -13,10 +12,8 @@ using MailKit.Search;
 using MailKit.Security;
 using MimeKit;
 using System.Data;
-using System.IO;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using static MailKit.Net.Imap.ImapMailboxFilter;
 
 
 namespace Eudora.Net.Core
@@ -199,6 +196,10 @@ namespace Eudora.Net.Core
         {
             try
             {
+                foreach (Mailbox mailbox in Mailboxes)
+                {
+                    mailbox.Close();
+                }
                 Datastore.Close();
             }
             catch (Exception ex)
@@ -282,39 +283,39 @@ namespace Eudora.Net.Core
         /// <param name="deleteMessages"></param>
         public static void RemoveUserMailbox(string name, bool deleteMessages = true)
         {
-            // Sanity check -- no removing the default mailboxes
-            if (IsDefaultMailbox(name))
-            {
-                Logger.Warning($"Default mailbox {name} cannot be removed");
-                return;
-            }
+            //// Sanity check -- no removing the default mailboxes
+            //if (IsDefaultMailbox(name))
+            //{
+            //    Logger.Warning($"Default mailbox {name} cannot be removed");
+            //    return;
+            //}
 
-            try
-            {
-                var mailbox = GetMailboxByName(name);
-                if (mailbox is null) return;
+            //try
+            //{
+            //    var mailbox = GetMailboxByName(name);
+            //    if (mailbox is null) return;
 
-                mailbox.Delete();
-                Mailboxes.Remove(mailbox);
-                string mailboxFile = $@"{name}{Mailbox.extension}";
-                File.Delete(Path.Combine(MailboxesPath, mailboxFile));
+            //    mailbox.Delete();
+            //    Mailboxes.Remove(mailbox);
+            //    string mailboxFile = $@"{name}{Mailbox.extension}";
+            //    File.Delete(Path.Combine(MailboxesPath, mailboxFile));
 
-                var mainWnd = MainWindow.Instance;
-                if (mainWnd is null) return;
-                var wnd = mainWnd.MDI.FindWindow(mailbox);
-                wnd?.Close();
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }            
+            //    var mainWnd = MainWindow.Instance;
+            //    if (mainWnd is null) return;
+            //    var wnd = mainWnd.MDI.FindWindow(mailbox);
+            //    wnd?.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger.Exception(ex);
+            //}            
         }
 
         public static EmailMessage CreateMessage_Outgoing(Personality personality)
         {
             EmailMessage message = new();
-            message.Status = EmailMessage.MessageStatus.Draft;
-            message.Origin = EmailMessage.MessageOrigin.Outgoing;
+            message.Status = EmailEnums.MessageStatus.Draft;
+            message.Origin = EmailEnums.MessageOrigin.Outgoing;
             message.PersonalityID = personality.Id;
             message.SenderAddress.Address = personality.EmailAddress;
             message.SenderAddress.Name = personality.EmailName;
@@ -338,8 +339,8 @@ namespace Eudora.Net.Core
             }
 
             outMessage.MailboxName = Drafts?.Name ?? string.Empty;
-            outMessage.Status = EmailMessage.MessageStatus.Draft;
-            outMessage.Origin = EmailMessage.MessageOrigin.Outgoing;
+            outMessage.Status = EmailEnums.MessageStatus.Draft;
+            outMessage.Origin = EmailEnums.MessageOrigin.Outgoing;
             outMessage.InReplyToId = inMessage.MessageId;
             outMessage.ReferenceIDs = inMessage.ReferenceIDs;
             outMessage.PersonalityID = inMessage.PersonalityID;
@@ -398,8 +399,8 @@ namespace Eudora.Net.Core
             }
 
             outMessage.MailboxName = Drafts?.Name ?? string.Empty;
-            outMessage.Status = EmailMessage.MessageStatus.Draft;
-            outMessage.Origin = EmailMessage.MessageOrigin.Outgoing;
+            outMessage.Status = EmailEnums.MessageStatus.Draft;
+            outMessage.Origin = EmailEnums.MessageOrigin.Outgoing;
             outMessage.InReplyToId = inMessage.MessageId;
             outMessage.ReferenceIDs = inMessage.ReferenceIDs;
             outMessage.PersonalityID = inMessage.PersonalityID;
@@ -416,8 +417,8 @@ namespace Eudora.Net.Core
         public static EmailMessage CreateMessage_Incoming()
         {
             EmailMessage message = new();
-            message.Status = EmailMessage.MessageStatus.Sealed;
-            message.Origin = EmailMessage.MessageOrigin.IncomingTo;
+            message.Status = EmailEnums.MessageStatus.Sealed;
+            message.Origin = EmailEnums.MessageOrigin.IncomingTo;
             message.MailboxName = Inbox?.Name ?? string.Empty;
             return message;
         }
@@ -489,8 +490,8 @@ namespace Eudora.Net.Core
                     if (messageSent)
                     {
                         MoveMessage(message, Sent?.Name ?? string.Empty);
-                        message.Status = EmailMessage.MessageStatus.Sealed;
-                        message.SendStatus = EmailMessage.eSendStatus.Sent;
+                        message.Status = EmailEnums.MessageStatus.Sealed;
+                        message.SendStatus = EmailEnums.eSendStatus.Sent;
                     }
                     else
                     {
@@ -925,14 +926,15 @@ namespace Eudora.Net.Core
             {
                 var clientSecrets = new ClientSecrets()
                 {
+
                     ClientId = EudoraHelper.IGmailConnection.ClientId,
                     ClientSecret = EudoraHelper.IGmailConnection.ClientSecret
                 };
 
                 var codeFlow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
                 {
-                    DataStore = new FileDataStore("CredentialCacheFolder", false),
-                    Scopes = new[] { "https://mail.google.com/" },
+                    DataStore = new EncryptedFileDataStore("CredentialCacheFolder", false),
+                    Scopes = ["https://mail.google.com/"],
                     ClientSecrets = clientSecrets,
                     LoginHint = personality.EmailAddress
                 });
@@ -987,8 +989,7 @@ namespace Eudora.Net.Core
                     return false;
                 }
 
-                var certificate2 = certificate as X509Certificate2;
-                var cn = certificate2 != null ? certificate2.GetNameInfo(X509NameType.SimpleName, false) : certificate.Subject;
+                var cn = certificate is X509Certificate2 certificate2 ? certificate2.GetNameInfo(X509NameType.SimpleName, false) : certificate.Subject;
 
                 message = string.Format("The Common Name for the SSL certificate did not match {0}. Instead, it was {1}", host, cn);
                 Logger.Warning(message);
