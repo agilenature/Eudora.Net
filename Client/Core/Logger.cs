@@ -106,6 +106,11 @@ namespace Eudora.Net.Core
             NewEvent(LogEvent.EventCategory.Error, message);
         }
 
+        public static void Error(string message, string funcName)
+        {
+            NewEvent(LogEvent.EventCategory.Error, $"{funcName}: {message}");
+        }
+
         public static void Notify(string message)
         {
             NewEvent(LogEvent.EventCategory.Notify, message);
