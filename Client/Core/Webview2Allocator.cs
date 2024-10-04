@@ -74,7 +74,14 @@ namespace Eudora.Net.Core
         /// <param name="e"></param>
         private void Webview_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-            Webview.CoreWebView2.Navigate(InitialContent.OriginalString);
+            try
+            {
+                Webview.CoreWebView2.Navigate(InitialContent.OriginalString);
+            }
+            catch(Exception ex)
+            {
+                FaultReporter.Error(ex);
+            }
         }
 
         /// <summary>
