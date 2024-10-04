@@ -35,7 +35,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 

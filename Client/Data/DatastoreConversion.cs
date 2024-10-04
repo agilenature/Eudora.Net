@@ -48,7 +48,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -94,8 +94,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Debug("T_PropertyChanged");
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -107,7 +106,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return 0;
             }
         }
@@ -120,7 +119,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return default;
             }
         }
@@ -137,8 +136,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Debug("Open()");
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -151,8 +149,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Debug("Close()");
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -177,7 +174,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -185,17 +182,19 @@ namespace Eudora.Net.Data
         {
             try
             {
-                item.PropertyChanged += T_PropertyChanged;
                 TDatabaseClass? itemDb = Converter.Convert(item);
-                if (itemDb is not null)
+                if (itemDb is null)
                 {
-                    DB.InsertOrReplace(itemDb);
-                    Data.Add(item);
+                    Logger.Error("Datastore::Add : Failed to convert message");
+                    return;
                 }
+                DB.InsertOrReplace(itemDb);
+                item.PropertyChanged += T_PropertyChanged;
+                Data.Add(item);
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -207,13 +206,13 @@ namespace Eudora.Net.Data
                 {
                     return;
                 }
-                item.PropertyChanged += T_PropertyChanged;
                 DB.Insert(item);
+                item.PropertyChanged += T_PropertyChanged;
                 Data.AddUnique(item);
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -231,7 +230,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -247,7 +246,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -259,7 +258,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return false;
             }
         }
@@ -275,7 +274,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return false;
             }
         }
@@ -288,7 +287,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return default;
             }
         }
@@ -301,7 +300,7 @@ namespace Eudora.Net.Data
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return null;
             }
         }

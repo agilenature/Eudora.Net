@@ -1,10 +1,5 @@
 ﻿using Eudora.Net.Core;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 
 namespace Eudora.Net.Data
@@ -76,14 +71,12 @@ namespace Eudora.Net.Data
 
         public Mailbox()
         {
-            CommonCtor();
         }
 
         public Mailbox(string name, string imageSource)
         {
             _Name = name;
             _ImageSource = imageSource;
-            CommonCtor();
         }
 
         public Mailbox(string name, string imageSource, int sortOrder)
@@ -91,7 +84,20 @@ namespace Eudora.Net.Data
             _Name = name;
             _ImageSource = imageSource;
             _SortOrder = sortOrder;
-            CommonCtor();
+        }
+
+        public void Open()
+        {
+            try
+            {
+                Datastore = new("Data", "Mailboxes", _Name);
+                Datastore.Open();
+                Datastore.Load();
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
         }
 
         public void Close()
@@ -118,7 +124,7 @@ namespace Eudora.Net.Data
                 MailboxName = Name,
                 Status = draft ? EmailEnums.MessageStatus.Draft : EmailEnums.MessageStatus.Sealed
             };
-            Messages.Add(message);
+            Datastore.Add(message);
             return message;
         }
 
@@ -129,7 +135,7 @@ namespace Eudora.Net.Data
                 System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => AddMessage(message)));
                 return;
             }
-            Messages.Add(message);
+            Datastore.Add(message);
         }
 
         public void DeleteMessage(EmailMessage message)
@@ -139,11 +145,18 @@ namespace Eudora.Net.Data
                 System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => DeleteMessage(message)));
                 return;
             }
-            Messages.Remove(message);
+            Datastore.Delete(message);
         }
 
         public async Task TransferMessage(EmailMessage message, Mailbox mailboxDest)
         {
+            if (!System.Windows.Application.Current.Dispatcher.CheckAccess())
+            {
+                // TODO: Look at the invocation again later. The double waits are unsettling to me for some reason.
+                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => TransferMessage(message, mailboxDest).Wait())).Wait();
+                return;
+            }
+
             EmailMessage? msgClone = message.Clone() as EmailMessage;
             if(msgClone is null)
             {
@@ -164,19 +177,7 @@ namespace Eudora.Net.Data
         ///////////////////////////////////////////////////////////
         #region Mailbox Internal
 
-        private void CommonCtor()
-        {
-            try
-            {
-                Datastore = new("Data", "Mailboxes", _Name);
-                Datastore.Open();
-                Datastore.Load();
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex);
-            }
-        }
+        
 
 
         #endregion Mailbox Internal

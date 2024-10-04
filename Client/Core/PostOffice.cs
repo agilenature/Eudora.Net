@@ -185,10 +185,15 @@ namespace Eudora.Net.Core
                     AddMailbox(new("Sent", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 2));
                     AddMailbox(new("Trash", "pack://application:,,,/GUI/res/images/new/newmailbox.png", 3));
                 }
+
+                foreach (Mailbox mailbox in Mailboxes)
+                {
+                    mailbox.Open();
+                }
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -204,7 +209,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -216,7 +221,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -235,7 +240,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
@@ -271,7 +276,7 @@ namespace Eudora.Net.Core
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
                 return null;
             }
         }

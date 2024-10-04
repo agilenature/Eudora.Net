@@ -6,14 +6,19 @@ namespace Eudora.Net.Core
 {
     public static class GCrypto
     {
+        private static Encoding encoding = Encoding.UTF8;
         private static readonly string ResourceName = "Eudora.Net";
 
         private static readonly byte[] IV =
         {
-            0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+            0x01, 0x02, 0x03, 0x04, 0x05,
+            0x01, 0x02, 0x03, 0x04, 0x05,
+            0x01
         };
+
         private static byte[] GetIV()
         {
+            //return encoding.GetBytes(GetMasterKey());
             return IV;
         }
 
@@ -24,14 +29,13 @@ namespace Eudora.Net.Core
             try
             {
                 using Aes aes = Aes.Create();
-                aes.Key = GetIV();// Encoding.Unicode.GetBytes(GetMasterKey());
-                var encryptedBytes = aes.EncryptCbc(Encoding.Unicode.GetBytes(plainText), GetIV(), PaddingMode.None);
-                encrypted = Encoding.Unicode.GetString(encryptedBytes);
+                aes.Key = GetIV();
+                var encryptedBytes = aes.EncryptCbc(encoding.GetBytes(plainText), GetIV(), PaddingMode.Zeros);
+                encrypted = encoding.GetString(encryptedBytes);
             }
             catch(Exception ex)
             {
-                Logger.Debug("GCrypto::EncryptString");
-                Logger.Error(ex.Message);
+                FaultReporter.Error(ex);
             }
 
             return encrypted;
@@ -44,14 +48,13 @@ namespace Eudora.Net.Core
             try
             {
                 using Aes aes = Aes.Create();
-                aes.Key = GetIV();// Encoding.Unicode.GetBytes(GetMasterKey());
-                var decryptedBytes = aes.DecryptCbc(Encoding.Unicode.GetBytes(encrypted), GetIV(), PaddingMode.None);
-                decrypted = Encoding.Unicode.GetString(decryptedBytes);
+                aes.Key = GetIV();
+                var decryptedBytes = aes.DecryptCbc(encoding.GetBytes(encrypted), GetIV(), PaddingMode.Zeros);
+                decrypted = encoding.GetString(decryptedBytes);
             }
             catch(Exception ex)
             {
-                Logger.Debug("GCrypto::DecryptString");
-                Logger.Error(ex.Message);
+                FaultReporter.Error(ex);
             }
 
             return decrypted;
@@ -59,7 +62,10 @@ namespace Eudora.Net.Core
 
         public static string GenerateMasterKey()
         {
-            return $"{Guid.NewGuid()}{Guid.NewGuid()}";
+            string key = $"{Guid.NewGuid()}";
+            key = key.Replace("-", "").Trim();
+            key = key.Substring(0, 16);
+            return key;
         }
 
         public static void SetMasterKey(string key)
@@ -78,9 +84,9 @@ namespace Eudora.Net.Core
                     vault.Remove(credential);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                Logger.Debug("SetMasterKey() : Credential not found");
+                FaultReporter.Warning(ex);
             }
             
             vault.Add(new PasswordCredential(ResourceName, Environment.UserName, key));
@@ -99,9 +105,9 @@ namespace Eudora.Net.Core
                 }
                 return credential.Password;
             }
-            catch 
+            catch(Exception ex)
             {
-                Logger.Debug("GetMasterKey(): Credential not found");
+                FaultReporter.Warning(ex);
                 return string.Empty; 
             }
         }

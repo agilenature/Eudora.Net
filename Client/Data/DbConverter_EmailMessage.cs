@@ -99,7 +99,7 @@ namespace Eudora.Net.Data
 
             msg.InlineImages = JsonSerializer.Serialize<ObservableCollection<EmbeddedImage>>(msgIn.InlineImages);
 
-            return null;
+            return msg;
         }
     }
 }
