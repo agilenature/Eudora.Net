@@ -58,8 +58,8 @@
                   Background="{DynamicResource BackgroundNormalBrushKey}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Path=Timestamp}"/>
-                    <GridViewColumn Header="Category">
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Path=Timestamp}" Width="Auto"/>
+                    <GridViewColumn Header="Category" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Category}">
