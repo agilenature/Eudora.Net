@@ -10,19 +10,19 @@ namespace Eudora.Net.Core
     {
         /// <summary>
         /// Offset is from the end of the stack, not the beginning.
-        /// 0 will get the caller of GetCallAtOffset.
-        /// 1 will get the function in which the Exception or Error was handled
+        /// offset = 0: the last thing on the stack
+        /// offset = 1: stack.last - 1
         /// </summary>
         /// <param name="stack"></param>
-        /// <param name="index"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
-        private static string GetCallAtOffset(string stack, int index)
+        private static string GetCallAtOffset(string stack, int offset = 2)
         {
             string line = string.Empty;
             try
             {
                 string[] lines = stack.Split($@"{Environment.NewLine}");
-                line = lines[^index];
+                line = lines[^offset];
             }
             catch
             {
@@ -34,7 +34,7 @@ namespace Eudora.Net.Core
         public static void Exception(Exception ex)
         {
             string stack = Environment.StackTrace;
-            string line = GetCallAtOffset(stack, 1);
+            string line = GetCallAtOffset(stack);
             Logger.Error(line);
             Logger.Exception(ex);
         }
@@ -42,14 +42,14 @@ namespace Eudora.Net.Core
         public static void Error(Exception ex)
         {
             string stack = Environment.StackTrace;
-            string line = GetCallAtOffset(stack, 1);
+            string line = GetCallAtOffset(stack);
             Logger.Error($"{line} : {ex.Message}");
         }
 
         public static void Warning(Exception ex)
         {
             string stack = Environment.StackTrace;
-            string line = GetCallAtOffset(stack, 1);
+            string line = GetCallAtOffset(stack);
             Logger.Warning($"{line} : {ex.Message}");
         }
     }

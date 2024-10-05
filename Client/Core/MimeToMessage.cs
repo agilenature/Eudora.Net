@@ -86,7 +86,7 @@ namespace Eudora.Net.Core
             parser.Parse();
         }
 
-        private void ParseBody()
+        private async void ParseBody()
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Eudora.Net.Core
                 var mailbox = PostOffice.GetMailboxByName(Message.MailboxName);
                 if (mailbox == null) return;
 
-                string attachmentFolder = Path.Combine(PostOffice.MailboxesPath, mailbox.Name, Message.InternalId.ToString());
+                string attachmentFolder = Path.Combine(Properties.Settings.Default.DataStoreRoot, @"Data/Attachments", Message.InternalId.ToString());
                 IoUtil.EnsureFolder(attachmentFolder);
 
                 foreach (var attachment in visitor.Attachments)
@@ -150,6 +150,9 @@ namespace Eudora.Net.Core
                             Path = fullPath,
                         };
                         Message.Attachments.Add(mailAttachment);
+
+                        // Invoke Microsoft Defender to scan the file
+                        await GVirusScanner.ScanFile(fullPath);
                     }
                     catch (Exception ex)
                     {

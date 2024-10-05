@@ -82,7 +82,7 @@ namespace Eudora.Net.Core
             var serialized = JsonSerializer.Serialize(value);
             var encrypted = GCrypto.EncryptString(serialized);
             var filePath = Path.Combine(folderPath, GenerateStoredKey(key, typeof(T)));
-            File.WriteAllText(filePath, serialized);
+            File.WriteAllText(filePath, encrypted);
             return CompletedTask;
         }
 
@@ -128,9 +128,10 @@ namespace Eudora.Net.Core
                 {
                     var obj = File.ReadAllText(filePath);
                     var decrypted = GCrypto.DecryptString(obj);
+                    Logger.Debug($"Decrypted: {decrypted}");
                     try
                     {
-                        var deserialized = JsonSerializer.Deserialize<T>(obj);
+                        var deserialized = JsonSerializer.Deserialize<T>(decrypted);
                         tcs.SetResult(deserialized);
                     }
                     catch(Exception ex)

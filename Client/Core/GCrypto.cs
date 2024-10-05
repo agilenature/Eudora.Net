@@ -9,29 +9,15 @@ namespace Eudora.Net.Core
         private static Encoding encoding = Encoding.UTF8;
         private static readonly string ResourceName = "Eudora.Net";
 
-        private static readonly byte[] IV =
-        {
-            0x01, 0x02, 0x03, 0x04, 0x05,
-            0x01, 0x02, 0x03, 0x04, 0x05,
-            0x01
-        };
-
-        private static byte[] GetIV()
-        {
-            //return encoding.GetBytes(GetMasterKey());
-            return IV;
-        }
-
         public static string EncryptString(string plainText)
         {
             string encrypted = string.Empty;
 
             try
             {
-                using Aes aes = Aes.Create();
-                aes.Key = GetIV();
-                var encryptedBytes = aes.EncryptCbc(encoding.GetBytes(plainText), GetIV(), PaddingMode.Zeros);
-                encrypted = encoding.GetString(encryptedBytes);
+                var plainBytes = encoding.GetBytes(plainText);
+                var encryptedBytes = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
+                encrypted = Convert.ToBase64String(encryptedBytes);
             }
             catch(Exception ex)
             {
@@ -47,9 +33,8 @@ namespace Eudora.Net.Core
 
             try
             {
-                using Aes aes = Aes.Create();
-                aes.Key = GetIV();
-                var decryptedBytes = aes.DecryptCbc(encoding.GetBytes(encrypted), GetIV(), PaddingMode.Zeros);
+                var encryptedBytes = Convert.FromBase64String(encrypted);
+                var decryptedBytes = ProtectedData.Unprotect(encryptedBytes, null, DataProtectionScope.CurrentUser);
                 decrypted = encoding.GetString(decryptedBytes);
             }
             catch(Exception ex)
