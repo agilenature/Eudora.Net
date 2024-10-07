@@ -11,20 +11,26 @@ namespace Eudora.Net.Core
     /// </summary>
     public class MimeToMessage
     {
+        ///////////////////////////////////////////////////////////
+        #region Fields
+
+        private MimeMessage _Mime;
+        private EmailMessage _Message;
+
+        #endregion Fields
+        ///////////////////////////////////////////////////////////
+
 
         ///////////////////////////////////////////////////////////
         #region Properties
-        /////////////////////////////
 
-        // These are accessible but read-only from the outside
 
-        private MimeMessage _Mime;
         public MimeMessage Mime
         {
             get => _Mime;
         }
 
-        private EmailMessage _Message;
+        
         public EmailMessage Message
         {
             get => _Message;
@@ -36,27 +42,14 @@ namespace Eudora.Net.Core
 
 
 
-
         ///////////////////////////////////////////////////////////
-        #region Construction / Init
-        /////////////////////////////
+        #region Interface
 
         public MimeToMessage(MimeMessage mime)
         {
             _Mime = mime;
             _Message = PostOffice.CreateMessage_Incoming();
         }
-
-        /////////////////////////////
-        #endregion Construction / Init
-        ///////////////////////////////////////////////////////////
-
-
-
-
-        ///////////////////////////////////////////////////////////
-        #region Interface
-        /////////////////////////////
 
         /// <summary>
         /// Execute the parsing andconversion process, step by step.
@@ -69,16 +62,13 @@ namespace Eudora.Net.Core
         }
 
 
-        /////////////////////////////
         #endregion Interface
         ///////////////////////////////////////////////////////////
 
 
 
-
         ///////////////////////////////////////////////////////////
-        #region Operations
-        /////////////////////////////
+        #region Internal
 
         private void ParseHeaders()
         {
@@ -165,12 +155,8 @@ namespace Eudora.Net.Core
                 Logger.Error(ex.Message);
             }
         }
-        
 
-        /////////////////////////////
-        #endregion Operations
+        #endregion Internal
         ///////////////////////////////////////////////////////////
-
-
     }
 }
