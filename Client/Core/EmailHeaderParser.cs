@@ -4,7 +4,7 @@ using Eudora.Net.Data;
 namespace Eudora.Net.Core
 {
     /// <summary>
-    /// A helper & parser for turning MIME message headers into Core.MailMessage headers
+    /// A helper & parser for turning MIME message headers into Data.MailMessage headers
     /// </summary>
     public class EmailHeaderParser
     {
