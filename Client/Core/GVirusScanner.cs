@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Eudora.Net.Core
 {
+    /// <summary>
+    /// A wrapper for the invocation of Microsoft Defender for scanning email attachments
+    /// </summary>
     internal class GVirusScanner
     {
         private static string wdPath = string.Empty;
@@ -19,8 +22,21 @@ namespace Eudora.Net.Core
         {
             try
             {
-                using (var process = Process.Start(wdPath, $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation"))
+                ProcessStartInfo psi = new()
                 {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    ArgumentList = { $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation" }
+                };
+
+                using (var process = Process.Start(wdPath, $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation"))
+                //using(var process = Process.Start(psi))
+                {
+                    if (process is null)
+                    {
+                        Logger.Warning("Failed to start Windows Defender");
+                        return false;
+                    }
                     try
                     {
                         await process.WaitForExitAsync().WaitAsync(TimeSpan.FromMilliseconds(20000));
@@ -31,7 +47,7 @@ namespace Eudora.Net.Core
                     }
                     finally
                     {
-                        process.Kill(); //always kill the process, it's fine if it's already exited, but if we were timed out or cancelled via token - let's kill it
+                        process.Kill();
                     }
                 }
             }
@@ -39,7 +55,7 @@ namespace Eudora.Net.Core
             {
                 FaultReporter.Error(ex);
             }
-            return false;
+            return true;
         }
     }
 }
