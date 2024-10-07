@@ -48,8 +48,8 @@ namespace Eudora.Net.Core
         public static string GenerateMasterKey()
         {
             string key = $"{Guid.NewGuid()}";
-            key = key.Replace("-", "").Trim();
-            key = key.Substring(0, 16);
+            //key = key.Replace("-", "").Trim();
+            //key = key.Substring(0, 16);
             return key;
         }
 
