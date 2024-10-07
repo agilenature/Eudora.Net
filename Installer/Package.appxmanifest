@@ -9,7 +9,7 @@
   <Identity
     Name="988f6b12-7d97-4ce8-b37b-9d9c9d20e484"
     Publisher="CN=Eudora.Net"
-    Version="1.0.20.0" />
+    Version="1.0.21.0" />
 
   <Properties>
     <DisplayName>Eudora.Net</DisplayName>
