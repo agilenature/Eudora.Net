@@ -12,26 +12,33 @@ namespace Eudora.Net.GUI
         public InitialOptions_Security()
         {
             InitializeComponent();
-            RetrieveExistingCredential();
+            
+            if(!RetrieveExistingCredential())
+            {
+                CreateNewCredential();
+            }
         }
 
-        private void btn_GenKey_Click(object sender, RoutedEventArgs e)
+        private void CreateNewCredential()
         {
             string key = GCrypto.GenerateMasterKey();
             GCrypto.SetMasterKey(key);
             tb_Key.Text = key;
         }
 
-        private void RetrieveExistingCredential()
+        private bool RetrieveExistingCredential()
         {
             var key = GCrypto.GetMasterKey();
             if(key is not null && !string.IsNullOrWhiteSpace(key))
             {
                 tb_Key.Text = key;
                 tb_Key.IsEnabled = false;
-                btn_GenKey.IsEnabled = false;
+                //btn_GenKey.IsEnabled = false;
                 tbx_Instructions.IsEnabled = false;
+
+                return true;
             }
+            return false;
         }
     }
 }

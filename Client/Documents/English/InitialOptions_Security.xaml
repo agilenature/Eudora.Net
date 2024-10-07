@@ -1,5 +1,5 @@
 ﻿<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-              ColumnWidth="400" FontSize="12" FontFamily="Georgia">
+              ColumnWidth="400">
 
     <Paragraph>
         Eudora.Net encrypts its local data. Your email account details, email,
@@ -15,14 +15,17 @@
     <Paragraph>
         The benefits are as follows:
         <LineBreak/>
+        <LineBreak/>
         1. You won't have to type in your key to use the software.
+        <LineBreak/>
         <LineBreak/>
         2. Your key will roam with your Microsoft account, meaning that if you use Eudora.Net
         on multiple PCs, your key will travel with you to whichever machine you're logged into.
     </Paragraph>
 
     <Paragraph>
-        You can use a key of your own choosing, or you can click the Generate button to create one for you.
+        <LineBreak/>
+        <LineBreak/>
     </Paragraph>
 
 </FlowDocument>

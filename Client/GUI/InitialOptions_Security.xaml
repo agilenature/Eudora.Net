@@ -20,7 +20,41 @@
         <TextBlock  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
             FontWeight="Bold" FontSize="16">Security Setup</TextBlock>
 
-        <FlowDocumentScrollViewer Grid.Row="1" Margin="20"/>
+        <FlowDocumentScrollViewer Grid.Row="1" Margin="20">
+            <FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              ColumnWidth="400">
+
+                <Paragraph>
+                    Eudora.Net encrypts its local data. Your email, email account details,
+                    and even non-critical data such as your signatures and stationery are all encrypted.
+                </Paragraph>
+
+                <Paragraph>
+                    In order to achieve this, at this step an encryption key is created. Although this
+                    key is effectively your password, it's more useful than that. Your key will be stored
+                    in the Windows Credential Manager -- the operating system's secure storage for such things.
+                </Paragraph>
+
+                <Paragraph>
+                    The benefits are as follows:
+                    <LineBreak/>
+                    <LineBreak/>
+                    1. You won't have to type in your key to use the software; it is retrieved automatically
+                    from the Credential Manager.
+                    <LineBreak/>
+                    <LineBreak/>
+                    2. Your key will roam with your Microsoft account. If you use Eudora.Net
+                    on multiple PCs, your key will automatically travel with you to whichever machine you're logged into
+                    with the same Windows account.
+                </Paragraph>
+
+                <Paragraph>
+                    Although it's not necessary to copy the key, you may do so below. If you do make a copy,
+                    keep it secret. Keep it safe.
+                </Paragraph>
+
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
 
 
         <Grid Grid.Row="2">
@@ -37,13 +71,15 @@
             <TextBlock x:Name="tbx_Instructions"
                        Grid.Row="0" Grid.Column="0"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Text="Type or generate your encryption key:"/>
+                       Text="Your encryption key:"/>
 
             <TextBox x:Name="tb_Key" 
-                     Grid.Row="0" Grid.Column="1"
-                     HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                     Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                     Margin="10,0,20,0"
+                     IsReadOnly="True"/>
 
-            <Button x:Name="btn_GenKey"
+            <!--<Button x:Name="btn_GenKey"
                     Grid.Row="0" Grid.Column="2"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Click="btn_GenKey_Click">
@@ -54,7 +90,7 @@
                         <TextBlock Text="Generate"/>
                     </StackPanel>
                 </Button.Content>
-            </Button>
+            </Button>-->
 
         </Grid>
         
