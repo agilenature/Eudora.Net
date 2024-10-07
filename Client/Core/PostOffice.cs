@@ -11,6 +11,7 @@ using MailKit.Net.Smtp;
 using MailKit.Search;
 using MailKit.Security;
 using MimeKit;
+using System.Collections.Generic;
 using System.Data;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -543,40 +544,77 @@ namespace Eudora.Net.Core
             }
         }
 
+        private static bool IsNewMessage(string messageID)
+        {
+            // conduct search of local cache to filter out existing messages
+            foreach (Mailbox mailbox in Mailboxes)
+            {
+                var matchingMessage = mailbox.Messages.Where(
+                    m => m.MessageId.Equals(messageID, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                if (matchingMessage is not null)
+                {
+                    return false;
+                }
+            }
+
+            // a message with this ID was not found
+            return true;
+        }
+
         private static void RetrieveWithPOP(Personality personality)
         {
             try
             {
-                using (Pop3Client client = new Pop3Client())
+                using (Pop3Client client = new())
                 {
-                    client.ServerCertificateValidationCallback = CertificateValidationCallback;
-
                     try
                     {
-                        client.CheckCertificateRevocation = true;
+                        try // Server connection
+                        {
+                            client.ServerCertificateValidationCallback = CertificateValidationCallback;
+                            client.CheckCertificateRevocation = true;
 
-                        client.Connect(
-                            personality.Server_Incoming,
-                            personality.Port_Incoming,
-                            personality.SocketOptions_Incoming);
+                            client.Connect(
+                                personality.Server_Incoming,
+                                personality.Port_Incoming,
+                                personality.SocketOptions_Incoming);
+                        }
+                        catch(Exception ex)
+                        {
+                            Logger.Warning("Failed to connect to server.");
+                            FaultReporter.Error(ex);
+                            return;
+                        }
 
                         client.Authenticate(personality.EmailAddress, personality.EmailPassword);
-                        Logger.Information($"Retrieving {client.Count.ToString()} messages");
+                        Logger.Information($"Checking {client.Count} messages...");
 
-                        // Retrieve MIME messages from server & disconnect
                         List<MimeMessage> mimes = [];
                         for (int i = 0; i < client.Count; i++)
                         {
-                            MimeMessage? mime = client.GetMessage(i);
-
-                            if (mime is not null)
+                            try // Message check & download loop
                             {
-                                mimes.Add(mime);
+                                HeaderList headers = client.GetMessageHeaders(i);
+                                var messageId = headers[HeaderId.MessageId];
+                                if (messageId is null)
+                                {
+                                    continue;
+                                }
+
+                                if (IsNewMessage(messageId))
+                                {
+                                    mimes.Add(client.GetMessage(i));
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                FaultReporter.Warning(ex);
                             }
                         }
                         client.Disconnect(true);
 
-                        // Iterate the mime list, converting each to a MailMessage and route it appropriately
+                        // Iterate the mime list, convert each to a MailMessage and route it appropriately
+                        Logger.Information($"Downloading {mimes.Count} new messages...");
                         foreach (MimeMessage mime in mimes)
                         {
                             try
@@ -616,40 +654,54 @@ namespace Eudora.Net.Core
             {
                 using (ImapClient client = new ImapClient())
                 {
-                    client.ServerCertificateValidationCallback = CertificateValidationCallback;
+                    IMailFolder? remoteInbox = null;
+
                     try
                     {
-                        client.CheckCertificateRevocation = true;
+                        try // server connection
+                        {
+                            client.ServerCertificateValidationCallback = CertificateValidationCallback;
+                            client.CheckCertificateRevocation = true;
 
-                        client.Connect(
-                            personality.Server_Incoming,
-                            personality.Port_Incoming,
-                            personality.SocketOptions_Incoming);
+                            client.Connect(
+                                personality.Server_Incoming,
+                                personality.Port_Incoming,
+                                personality.SocketOptions_Incoming);
 
-                        client.Authenticate(personality.EmailAddress, personality.EmailPassword);
-                        var remoteInbox = client.Inbox;
-                        var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
+                            client.Authenticate(personality.EmailAddress, personality.EmailPassword);
+                            remoteInbox = client.Inbox;
+                            var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
+                        }
+                        catch(Exception ex)
+                        {
+                            Logger.Warning("Failed to connect to server.");
+                            FaultReporter.Error(ex);
+                            return;
+                        }
 
                         List<MimeMessage> mimes = [];
 
-                        if (onlyUnread)
+                        // Message check & download loop
+                        Logger.Information($"Checking {remoteInbox.Count} messages...");
+                        for (int i = 0; i < remoteInbox.Count; i++)
                         {
-                            List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
-                            Logger.Information($"Retrieving {results.Count} unread messages...");
+                            try
+                            {
+                                HeaderList headers = remoteInbox.GetHeaders(i);
+                                var messageId = headers[HeaderId.MessageId];
+                                if (messageId is null || string.IsNullOrWhiteSpace(messageId))
+                                {
+                                    continue;
+                                }
 
-                            foreach (var uid in results)
-                            {
-                                remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
-                                mimes.Add(remoteInbox.GetMessage(uid));
+                                if (IsNewMessage(messageId))
+                                {
+                                    mimes.Add(remoteInbox.GetMessage(i));
+                                }
                             }
-                        }
-                        else
-                        {
-                            int messageCount = remoteInbox.Count;
-                            Logger.Information($"Retrieving {messageCount} messages...");
-                            for (int i = 0; i < messageCount; i++)
+                            catch (Exception ex)
                             {
-                                mimes.Add(remoteInbox.GetMessage(i));
+                                FaultReporter.Error(ex);
                             }
                         }
 
@@ -659,6 +711,7 @@ namespace Eudora.Net.Core
 
 
                         // Iterate the mime list, converting each to a MailMessage and route it appropriately
+                        Logger.Information($"Processing {mimes.Count} new messages...");
                         foreach (MimeMessage mime in mimes)
                         {
                             try
@@ -670,7 +723,7 @@ namespace Eudora.Net.Core
                             }
                             catch (Exception ex)
                             {
-                                Logger.Error(ex.Message);
+                                FaultReporter.Error(ex);
                             }
                         }
 
@@ -678,7 +731,7 @@ namespace Eudora.Net.Core
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex.Message);
+                        FaultReporter.Error(ex);
                     }
                     finally
                     {
@@ -689,12 +742,16 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.Error(ex.Message);
+                FaultReporter.Error(ex);
             }
         }
 
+        
+
         private static async void RetrieveGmail(Personality personality, bool onlyUnread = false)
         {
+            List<MimeMessage> mimes = [];
+
             try
             {
                 var oauth2 = GmailLogin(personality).Result;
@@ -703,8 +760,6 @@ namespace Eudora.Net.Core
                     return;
                 }
 
-                List<MimeMessage> mimes = [];
-
                 using (var client = new ImapClient())
                 {
                     await client.ConnectAsync("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
@@ -712,27 +767,32 @@ namespace Eudora.Net.Core
 
                     var remoteInbox = client.Inbox;
                     var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
+                    
 
-                    if (onlyUnread)
+                    // Message check & download loop
+                    Logger.Information($"Checking {remoteInbox.Count} messages...");
+                    for (int i = 0; i < remoteInbox.Count; i++)
                     {
-                        List<MailKit.UniqueId> results = [.. remoteInbox.Search(SearchQuery.NotSeen)];
-                        Logger.Information($"Retrieving {results.Count} unread messages...");
-
-                        foreach (var uid in results)
+                        try
                         {
-                            remoteInbox.SetFlags(uid, MessageFlags.Seen, false);
-                            mimes.Add(remoteInbox.GetMessage(uid));
+                            HeaderList headers = remoteInbox.GetHeaders(i);
+                            var messageId = headers[HeaderId.MessageId];
+                            if (messageId is null || string.IsNullOrWhiteSpace(messageId))
+                            {
+                                continue;
+                            }
+
+                            if (IsNewMessage(messageId))
+                            {
+                                mimes.Add(remoteInbox.GetMessage(i));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            FaultReporter.Error(ex);
                         }
                     }
-                    else
-                    {
-                        int messageCount = remoteInbox.Count;
-                        Logger.Information($"Retrieving {messageCount} messages...");
-                        for (int i = 0; i < messageCount; i++)
-                        {
-                            mimes.Add(remoteInbox.GetMessage(i));
-                        }
-                    }
+
 
                     // Done with remote inbox & server connection
                     remoteInbox.Close();
@@ -741,6 +801,7 @@ namespace Eudora.Net.Core
 
 
                 // Iterate the mime list, converting each to a Eudora.EmailMessage and route it appropriately
+                Logger.Information($"Processing {mimes.Count} new messages...");
                 foreach (MimeMessage mime in mimes)
                 {
                     try
@@ -752,13 +813,13 @@ namespace Eudora.Net.Core
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex.Message);
+                        FaultReporter.Error(ex);
                     }
                 }
             }
             catch(Exception ex)
             {
-                Logger.Error(ex.Message);
+                FaultReporter.Error(ex);
             }
 
             Logger.Information("Finished");
