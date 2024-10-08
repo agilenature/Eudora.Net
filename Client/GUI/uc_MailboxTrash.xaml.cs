@@ -149,9 +149,8 @@ namespace Eudora.Net.GUI
                         preview.DataContext = null;
                     }
 
-                    var window = MainWindow.Instance?.MDI.FindWindow(message);
-                    window?.Close();
-                    PostOffice.MoveMessage(message, "Trash");
+                    MainWindow.Instance?.CloseMailMessage(message);
+                    Mailbox.DeleteMessage(message);
                 }
             }
         }
