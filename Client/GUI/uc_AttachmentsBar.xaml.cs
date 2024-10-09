@@ -59,10 +59,13 @@ namespace Eudora.Net.GUI
             {
                 if (sender is AttachmentButton button)
                 {
+                    // Fix for microsoft \/ nonsense
+                    button.Attachment.Path = button.Attachment.Path.Replace("/", "\\");
+
                     // shell execute the attachment file path
                     using Process fileopener = new Process();
                     fileopener.StartInfo.FileName = "explorer";
-                    fileopener.StartInfo.Arguments = "\"" + button.Attachment.Path + "\"";
+                    fileopener.StartInfo.Arguments = $"{button.Attachment.Path}";
                     fileopener.Start();
                 }
             }

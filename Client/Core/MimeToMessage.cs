@@ -24,19 +24,16 @@ namespace Eudora.Net.Core
         ///////////////////////////////////////////////////////////
         #region Properties
 
-
         public MimeMessage Mime
         {
             get => _Mime;
         }
-
         
         public EmailMessage Message
         {
             get => _Message;
         }
 
-        /////////////////////////////
         #endregion Properties
         ///////////////////////////////////////////////////////////
 
@@ -60,7 +57,6 @@ namespace Eudora.Net.Core
             ParseHeaders();
             ParseBody();
         }
-
 
         #endregion Interface
         ///////////////////////////////////////////////////////////
@@ -92,7 +88,7 @@ namespace Eudora.Net.Core
                 var mailbox = PostOffice.GetMailboxByName(Message.MailboxName);
                 if (mailbox == null) return;
 
-                string attachmentFolder = Path.Combine(Properties.Settings.Default.DataStoreRoot, @"Data/Attachments", Message.InternalId.ToString());
+                string attachmentFolder = Path.Combine(Properties.Settings.Default.DataStoreRoot, @"Data\Attachments", Message.InternalId.ToString());
                 IoUtil.EnsureFolder(attachmentFolder);
 
                 foreach (var attachment in visitor.Attachments)
