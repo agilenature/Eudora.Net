@@ -46,6 +46,7 @@
                         <RowDefinition Height="24"/>
                         <RowDefinition Height="24"/>
                         <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -56,14 +57,15 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="Personality Name" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Email Name" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Email Address" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Password" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tblk_Password" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Password" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="Signature" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Text="Stationery" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     
                     <!--Data-entry Block-->
                     <TextBox x:Name="tb_DisplayName" Grid.Row="0" Grid.Column="1" Text="{Binding PersonalityName}" Margin="5,0,5,0" VerticalAlignment="Center"/>
                     <TextBox x:Name="tb_RealName" Grid.Row="1" Grid.Column="1" Text="{Binding EmailName}" Margin="5,0,5,0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="tb_Address" Grid.Row="2" Grid.Column="1" Text="{Binding EmailAddress}" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_Address" Grid.Row="2" Grid.Column="1" Text="{Binding EmailAddress}" Margin="5,0,5,0" VerticalAlignment="Center"
+                             TextChanged="tb_Address_TextChanged"/>
                     <TextBox x:Name="tb_Password" Grid.Row="3" Grid.Column="1" Text="{Binding EmailPassword}" Margin="5,0,5,0" VerticalAlignment="Center"/>
                     <ComboBox x:Name="cb_Signature"
                               Grid.Row="4" Grid.Column="1" SelectionChanged="cb_Signature_SelectionChanged"
@@ -75,11 +77,21 @@
                               SelectedValue="{Binding DefaultStationery}"/>
                     <CheckBox x:Name="cbx_Default" Grid.Row="6" Grid.Column="0" IsChecked="{Binding IsDefault}" Margin="5,5,5,0"
                               Content="Make Default" HorizontalAlignment="Right" Checked="cbx_Default_Checked"/>
+
+                    <TextBlock x:Name="tblk_Oauth" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               TextWrapping="Wrap" MaxWidth="400"
+                               Visibility="Collapsed">
+                        <TextBlock.Text>
+                            This account will authorize with OAuth2 rather than username and password. That being true,
+                            some account settings options are not used and are therefore disabled.
+                        </TextBlock.Text>
+                    </TextBlock>
                 </Grid>
             </TabItem>
 
             <!--Outgoing Account Settings-->
-            <TabItem Header="Outgoing">
+            <TabItem x:Name="TabOutgoing" Header="Outgoing">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"/>
@@ -110,7 +122,7 @@
             </TabItem>
 
             <!--Incoming Account Settings-->
-            <TabItem Header="Incoming">
+            <TabItem x:Name="TabIncoming" Header="Incoming">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"/>

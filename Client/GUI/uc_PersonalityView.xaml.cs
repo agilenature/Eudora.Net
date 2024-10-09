@@ -106,6 +106,9 @@ namespace Eudora.Net.GUI
                         rb_in_trytls.IsChecked = true;
                         break;
                 }
+
+                // Hide or show UX elements based on account type
+                AdjustUXForEmailAddress(personality.EmailAddress);
             }
         }
 
@@ -187,6 +190,31 @@ namespace Eudora.Net.GUI
             if(cbx_Default.IsChecked == true)
             {
                 ((Personality)DataContext).MakeDefault();
+            }
+        }
+
+        private void tb_Address_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AdjustUXForEmailAddress(tb_Address.Text);
+        }
+
+        private void AdjustUXForEmailAddress(string address)
+        {
+            if (address.Contains("@gmail.com", StringComparison.CurrentCultureIgnoreCase))
+            {
+                tblk_Password.IsEnabled = false;
+                tb_Password.IsEnabled = false;
+                TabOutgoing.IsEnabled = false;
+                TabIncoming.IsEnabled = false;
+                tblk_Oauth.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                tblk_Password.IsEnabled = true;
+                tb_Password.IsEnabled = true;
+                TabOutgoing.IsEnabled = true;
+                TabIncoming.IsEnabled = true;
+                tblk_Oauth.Visibility = Visibility.Collapsed;
             }
         }
     }
