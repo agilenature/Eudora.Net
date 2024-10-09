@@ -24,13 +24,15 @@ namespace Eudora.Net.Core
             {
                 ProcessStartInfo psi = new()
                 {
+                    FileName = wdPath,
                     UseShellExecute = false,
                     CreateNoWindow = true,
-                    ArgumentList = { $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation" }
+                    Arguments = $"-Scan -ScanType 3 -File {fileFullPath} -DisableRemediation",
+                    WindowStyle = ProcessWindowStyle.Hidden,
                 };
 
-                using (var process = Process.Start(wdPath, $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation"))
-                //using(var process = Process.Start(psi))
+                //using (var process = Process.Start(wdPath, $"-Scan -ScanType 3 -File \"{fileFullPath}\" -DisableRemediation"))
+                using(var process = Process.Start(psi))
                 {
                     if (process is null)
                     {
