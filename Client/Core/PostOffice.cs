@@ -8,10 +8,8 @@ using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
 using MailKit.Net.Smtp;
-using MailKit.Search;
 using MailKit.Security;
 using MimeKit;
-using System.Collections.Generic;
 using System.Data;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -480,7 +478,7 @@ namespace Eudora.Net.Core
                     var personality = PersonalityManager.FindPersonality(message.PersonalityID);
                     if (personality is not null)
                     {
-                        if (personality.IsGmail)
+                        if (false && personality.IsGmail)
                         {
                             if (await TransmitGmail(mime))
                             {
@@ -490,6 +488,10 @@ namespace Eudora.Net.Core
                             {
                                 messageSent = true;
                             }
+                        }
+                        else if(await TransmitMail(mime))
+                        {
+                            messageSent = true;
                         }
                     }
 
@@ -526,7 +528,7 @@ namespace Eudora.Net.Core
             {
                 Logger.Information($"Checking {personality.EmailAddress}");
 
-                if (personality.IsGmail)
+                if (false && personality.IsGmail)
                 {
                     RetrieveGmail(personality);
                 }

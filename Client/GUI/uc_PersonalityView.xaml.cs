@@ -200,7 +200,7 @@ namespace Eudora.Net.GUI
 
         private void AdjustUXForEmailAddress(string address)
         {
-            if (address.Contains("@gmail.com", StringComparison.CurrentCultureIgnoreCase))
+            if (false && address.Contains("@gmail.com", StringComparison.CurrentCultureIgnoreCase))
             {
                 tblk_Password.IsEnabled = false;
                 tb_Password.IsEnabled = false;
