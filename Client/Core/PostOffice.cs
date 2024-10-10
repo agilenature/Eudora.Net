@@ -589,7 +589,7 @@ namespace Eudora.Net.Core
                         }
 
                         client.Authenticate(personality.EmailAddress, personality.EmailPassword);
-                        Logger.Information($"Checking {client.Count} messages...");
+                        //Logger.Information($"Checking {client.Count} messages...");
 
                         List<MimeMessage> mimes = [];
                         for (int i = 0; i < client.Count; i++)
@@ -681,29 +681,15 @@ namespace Eudora.Net.Core
                             return;
                         }
 
-                        List<MimeMessage> mimes = [];
 
                         // Message check & download loop
-                        Logger.Information($"Checking {remoteInbox.Count} messages...");
-                        for (int i = 0; i < remoteInbox.Count; i++)
+                        List<MimeMessage> mimes = [];
+                        var it = remoteInbox.GetEnumerator();
+                        while(it.MoveNext())
                         {
-                            try
+                            if(IsNewMessage(it.Current.MessageId))
                             {
-                                HeaderList headers = remoteInbox.GetHeaders(i);
-                                var messageId = headers[HeaderId.MessageId];
-                                if (messageId is null || string.IsNullOrWhiteSpace(messageId))
-                                {
-                                    continue;
-                                }
-
-                                if (IsNewMessage(messageId))
-                                {
-                                    mimes.Add(remoteInbox.GetMessage(i));
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                FaultReporter.Error(ex);
+                                mimes.Add(it.Current);
                             }
                         }
 
@@ -713,19 +699,22 @@ namespace Eudora.Net.Core
 
 
                         // Iterate the mime list, converting each to a MailMessage and route it appropriately
-                        Logger.Information($"Processing {mimes.Count} new messages...");
-                        foreach (MimeMessage mime in mimes)
+                        if (mimes.Count > 0)
                         {
-                            try
+                            Logger.Information($"Processing {mimes.Count} new messages...");
+                            foreach (MimeMessage mime in mimes)
                             {
-                                var m = new MimeToMessage(mime);
-                                m.Message.PersonalityID = personality.Id;
-                                m.Convert();
-                                RouteIncomingMessage(m.Message);
-                            }
-                            catch (Exception ex)
-                            {
-                                FaultReporter.Error(ex);
+                                try
+                                {
+                                    var m = new MimeToMessage(mime);
+                                    m.Message.PersonalityID = personality.Id;
+                                    m.Convert();
+                                    RouteIncomingMessage(m.Message);
+                                }
+                                catch (Exception ex)
+                                {
+                                    FaultReporter.Error(ex);
+                                }
                             }
                         }
 
@@ -769,29 +758,15 @@ namespace Eudora.Net.Core
 
                     var remoteInbox = client.Inbox;
                     var result = remoteInbox.Open(MailKit.FolderAccess.ReadWrite);
-                    
+
 
                     // Message check & download loop
-                    Logger.Information($"Checking {remoteInbox.Count} messages...");
-                    for (int i = 0; i < remoteInbox.Count; i++)
+                    var it = remoteInbox.GetEnumerator();
+                    while (it.MoveNext())
                     {
-                        try
+                        if (IsNewMessage(it.Current.MessageId))
                         {
-                            HeaderList headers = remoteInbox.GetHeaders(i);
-                            var messageId = headers[HeaderId.MessageId];
-                            if (messageId is null || string.IsNullOrWhiteSpace(messageId))
-                            {
-                                continue;
-                            }
-
-                            if (IsNewMessage(messageId))
-                            {
-                                mimes.Add(remoteInbox.GetMessage(i));
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            FaultReporter.Error(ex);
+                            mimes.Add(it.Current);
                         }
                     }
 
@@ -803,19 +778,22 @@ namespace Eudora.Net.Core
 
 
                 // Iterate the mime list, converting each to a Eudora.EmailMessage and route it appropriately
-                Logger.Information($"Processing {mimes.Count} new messages...");
-                foreach (MimeMessage mime in mimes)
+                if (mimes.Count > 0)
                 {
-                    try
+                    Logger.Information($"Processing {mimes.Count} new messages...");
+                    foreach (MimeMessage mime in mimes)
                     {
-                        var m = new MimeToMessage(mime);
-                        m.Message.PersonalityID = personality.Id;
-                        m.Convert();
-                        RouteIncomingMessage(m.Message);
-                    }
-                    catch (Exception ex)
-                    {
-                        FaultReporter.Error(ex);
+                        try
+                        {
+                            var m = new MimeToMessage(mime);
+                            m.Message.PersonalityID = personality.Id;
+                            m.Convert();
+                            RouteIncomingMessage(m.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            FaultReporter.Error(ex);
+                        }
                     }
                 }
             }
