@@ -963,7 +963,9 @@ namespace Eudora.Net.Core
 
         public static void EmailCheckTimerCallback(object? state)
         {
-            Parallel.Invoke(async () => PostOffice.CheckMail());
+            NewMailCheckTimer.Pause();
+            Parallel.Invoke(async () => CheckMail());
+            UpdateTimerFrequency();
         }
 
         private static async Task<SaslMechanismOAuth2?> GmailLogin(Personality personality)

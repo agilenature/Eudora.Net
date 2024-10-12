@@ -63,6 +63,10 @@ namespace Eudora.Net.ExtensionMethods
         #endregion Data, Defines, Consts
         ///////////////////////////////////////////////////////////
 
+        public static void Pause(this System.Threading.Timer timer)
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
  
         public static string ToJsonString<T>(this ObservableCollection<T> collection)
         {
@@ -77,24 +81,6 @@ namespace Eudora.Net.ExtensionMethods
             }
             return string.Empty;
         }
-
-        public static ObservableCollection<T> FromJsonString<T>(this string jsonString)
-        {
-            try
-            {
-                ObservableCollection<T>? collection = JsonSerializer.Deserialize<ObservableCollection<T>>(jsonString);
-                if (collection is not null)
-                {
-                    return collection;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.Message);
-            }
-            return [];
-        }
-
 
         /// <summary>
         /// Enable & Disable UIElements in a Grid (i.e the Eudora main toolbar)
