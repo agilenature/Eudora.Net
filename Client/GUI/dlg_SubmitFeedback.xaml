@@ -77,10 +77,17 @@
 
         <Border Grid.Row="3" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>
 
-        <TextBox x:Name="tb_Feedback" Grid.Row="4" Grid.ColumnSpan="5" Margin="10"
+        <TextBox x:Name="tb_Feedback" Grid.Row="4" Grid.ColumnSpan="5" Margin="10, 20, 10, 10"
                  TextWrapping="Wrap" AcceptsReturn="True" SpellCheck.IsEnabled="True"
-                 BorderThickness="0"
-                 Text="{Binding Feedback}">
+                 BorderThickness="1"
+                 Validation.ErrorTemplate="{DynamicResource validationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Feedback" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:FeedbackValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
 
         <Border Grid.Row="5" Grid.ColumnSpan="5" Background="{DynamicResource BorderNormalBrushKey}"/>

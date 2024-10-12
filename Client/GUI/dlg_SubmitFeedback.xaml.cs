@@ -1,25 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Eudora.Net.GUI
 {
+    public class FeedbackValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            string? feedback = value as string;
+            if (feedback is null) 
+                return new ValidationResult(false, "Text cannot be empty");
+            if(string.IsNullOrEmpty(feedback) || string.IsNullOrWhiteSpace(feedback)) 
+                return new ValidationResult(false, "Text cannot be empty");
+
+            return ValidationResult.ValidResult;
+        }
+    }
+
+
     /// <summary>
     /// Interaction logic for dlg_SubmitFeedback.xaml
     /// </summary>
     public partial class dlg_SubmitFeedback : Window
     {
-
+        public static readonly DependencyProperty FeedbackProperty =
+            DependencyProperty.Register(
+                "Feedback",
+                typeof(string),
+                typeof(dlg_SubmitFeedback),
+                new PropertyMetadata(string.Empty));
 
         public string Feedback
         {
@@ -27,12 +38,7 @@ namespace Eudora.Net.GUI
             set { SetValue(FeedbackProperty, value); }
         }
 
-        public static readonly DependencyProperty FeedbackProperty =
-            DependencyProperty.Register(
-                "Feedback", 
-                typeof(string), 
-                typeof(dlg_SubmitFeedback), 
-                new PropertyMetadata(string.Empty));
+        
 
 
 
@@ -52,8 +58,16 @@ namespace Eudora.Net.GUI
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            var result = new FeedbackValidation().Validate(tb_Feedback.Text, CultureInfo.CurrentCulture);
+            if (result == ValidationResult.ValidResult)
+            {
+                DialogResult = true;
+                Close();
+            }
+            else
+            {
+                tb_Feedback.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
         }
     }
 }
