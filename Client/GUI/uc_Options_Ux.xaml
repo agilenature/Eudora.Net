@@ -46,10 +46,10 @@
                 Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Height="20" Margin="5,0,5,0"
                 SelectionChanged="cb_ThemeSelect_SelectionChanged"/>
 
-        <TextBlock  Grid.Row="5" Grid.Column="0"
+        <!--<TextBlock  Grid.Row="5" Grid.Column="0"
                 HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"
                 FontWeight="Bold"
-                Text="Windows:"/>
+                Text="Windows:"/>-->
 
         
         <!--<CheckBox   x:Name="cbx_ReopenWindows"
