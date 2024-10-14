@@ -38,6 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Documents\HelpOverview.pdf" />
     <None Remove="GUI\res\icons\bigicon.ico" />
     <None Remove="GUI\res\icons\mboxes.ico" />
     <None Remove="GUI\res\icons\persona.ico" />
@@ -610,7 +611,7 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
     <PackageReference Include="sqlite-net-sqlcipher" Version="1.9.172" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.8" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -626,6 +627,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Documents\HelpOverview.pdf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="GUI\res\icons\mboxes.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
