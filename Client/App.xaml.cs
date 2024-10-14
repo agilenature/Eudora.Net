@@ -132,23 +132,22 @@ namespace Eudora.Net
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            InstallTextboxBehaviors();
-
             base.OnStartup(e);
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+            // Get the WebView2 cache going
+            InitWebviewOptionsAndQueue();
+
             InstallThemes();
             InstallStyles();
+            InstallTextboxBehaviors();
 
             // Inital options upon first run
-            if(HandleFirstRun() == false)
+            if (HandleFirstRun() == false)
             {
                 Shutdown();
                 return;
             }
-
-            // Get the WebView2 cache going
-            InitWebviewOptionsAndQueue();
 
             // The rest of early startup & init
             SignatureManager.Startup();

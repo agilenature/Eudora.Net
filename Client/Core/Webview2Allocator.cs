@@ -76,6 +76,11 @@ namespace Eudora.Net.Core
         {
             try
             {
+                ContainerGrid.Children.Remove(Webview);
+                Container.Close();
+                Webview.NavigationCompleted -= Webview_NavigationCompleted;
+                Webview.CoreWebView2InitializationCompleted -= Webview_CoreWebView2InitializationCompleted;
+                RaiseWebviewReadyEvent();
                 Webview.CoreWebView2.Navigate(InitialContent.OriginalString);
             }
             catch(Exception ex)
@@ -145,16 +150,24 @@ namespace Eudora.Net.Core
             }
         }
 
-        public static WebView2 Get()
+        public static WebView2? Get()
         {
             lock (Locker)
             {
-                var wv2 = Webviews.Dequeue();
-                if (Webviews.Count <= AllocationThreshold)
+                try
                 {
-                    AllocateNewWebview();
+                    var wv2 = Webviews.Dequeue();
+                    if (Webviews.Count <= AllocationThreshold)
+                    {
+                        AllocateNewWebview();
+                    }
+                    return wv2.Webview;
                 }
-                return wv2.Webview;
+                catch (Exception ex)
+                {
+                    Logger.Error($"Webview2Allocator::Get() - {ex.Message}");
+                    return null;
+                }
             }
         }
     }
