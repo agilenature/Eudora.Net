@@ -20,6 +20,7 @@ namespace Eudora.Net.GUI
         /////////////////////////////
 
         public static MainWindow? Instance { get; set; } = null;
+        private HelpViewer HelpWindow { get; set; } = new();
 
         /////////////////////////////
         #endregion Properties
@@ -911,7 +912,8 @@ namespace Eudora.Net.GUI
 
         private void Menu_Help_Contents_Click(object sender, RoutedEventArgs e)
         {
-
+            var wnd = new HelpViewer();
+            wnd.Show();
         }
 
         private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -988,6 +990,12 @@ namespace Eudora.Net.GUI
         /////////////////////////////
         #endregion Main Menu
         //////////////////////////////////////////////////////////
+        
+
+        public void EnableHelpMenu(bool enable)
+        {
+            Menu_Help_Contents.IsEnabled = enable;
+        }
 
     }
 }

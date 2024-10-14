@@ -119,8 +119,6 @@
                 <MenuItem x:Name="Menu_Help_Contents" Header="Contents" Click="Menu_Help_Contents_Click"/>
                 <Separator/>
                 <MenuItem x:Name="Menu_Help_Feedback" Header="Submit feedback about Eudora.Net" Click="Menu_Help_Feedback_Click"/>
-                <Separator/>
-                <MenuItem x:Name="Menu_Help_About" Header="About Eudora.Net" Click="Menu_Help_About_Click"/>
             </MenuItem>
             
             <!--DEBUG / DEV Menu - Not active in release build, disabled by default-->
