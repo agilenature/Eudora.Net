@@ -384,7 +384,7 @@ namespace Eudora.Net.GUI
             if (message is not null)
             {
                 Message = message;
-                string tempPath = TempFileManager.CreateTempFileFromStringContent(message.Body);
+                string tempPath = TempFileManager.CreateHtmlFileFromStringContent(message.Body);
                 if (string.IsNullOrEmpty(tempPath))
                 {
                     Logger.Debug("Failed to create temp file from message body");

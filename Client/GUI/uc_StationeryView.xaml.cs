@@ -102,7 +102,7 @@ namespace Eudora.Net.GUI
                 stationery.PropertyChanged += Stationery_PropertyChanged;
 
                 Title = stationery.Name;
-                string tempPath = TempFileManager.CreateTempFileFromStringContent(stationery.Content);
+                string tempPath = TempFileManager.CreateHtmlFileFromStringContent(stationery.Content);
                 if (string.IsNullOrEmpty(tempPath))
                 {
                     Logger.Debug("Failed to create temp file from stationery content");

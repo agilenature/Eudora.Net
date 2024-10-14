@@ -93,7 +93,7 @@ namespace Eudora.Net.GUI
             if (DataContext is Signature signature)
             {
                 Title = signature.Name;
-                string tempPath = TempFileManager.CreateTempFileFromStringContent(signature.Content);
+                string tempPath = TempFileManager.CreateHtmlFileFromStringContent(signature.Content);
                 if (string.IsNullOrEmpty(tempPath))
                 {
                     Logger.Debug("Failed to create temp file from signature content");

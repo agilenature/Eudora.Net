@@ -15,8 +15,14 @@ namespace Eudora.Net.GUI
 
         public uc_MessagePreview()
         {
+            var wv = Webview2Allocator.Get();
+            if (wv is not null)
+            {
+                Webview = wv;
+            }
+            
             InitializeComponent();
-            Webview = Webview2Allocator.Get();
+            
             MainGrid.Children.Add(Webview);
             Grid.SetRow(Webview, 1);
             DataContextChanged += Uc_MessagePreview_DataContextChanged;
@@ -43,7 +49,7 @@ namespace Eudora.Net.GUI
 
                 try
                 {
-                    string tempPath = TempFileManager.CreateTempFileFromStringContent(message.Body);
+                    string tempPath = TempFileManager.CreateHtmlFileFromStringContent(message.Body);
                     if (string.IsNullOrEmpty(tempPath))
                     {
                         Logger.Debug("Failed to create temp file from message body");

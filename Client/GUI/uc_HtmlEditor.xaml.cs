@@ -141,7 +141,17 @@ namespace Eudora.Net.GUI
 
         public uc_HtmlEditor()
         {
-            Webview = Webview2Allocator.Get();
+            var wv = Webview2Allocator.Get();
+            if (wv is not null)
+            {
+                Webview = wv;
+            }
+            else
+            {
+                Logger.Error("WebView2 allocation for uc_HtmlEditor has failed");
+                return;
+            }
+
             ThemeManager.ThemeChanged += ThemeManager_ThemeChanged;
             ThemeManager_ThemeChanged(null, null);
             Document = new(Webview);
