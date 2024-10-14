@@ -1,4 +1,5 @@
 ﻿using Google.Apis.Json;
+using System.Data;
 using System.IO;
 using System.Text.Json;
 
@@ -132,7 +133,10 @@ namespace Eudora.Net.Core
                     try
                     {
                         var deserialized = JsonSerializer.Deserialize<T>(decrypted);
-                        tcs.SetResult(deserialized);
+                        if (deserialized is not null)
+                        {
+                            tcs.SetResult(deserialized);
+                        }
                     }
                     catch(Exception ex)
                     {
@@ -147,7 +151,7 @@ namespace Eudora.Net.Core
             }
             else
             {
-                tcs.SetResult(default);
+                //tcs.SetResult(default);
             }
             return tcs.Task;
         }
