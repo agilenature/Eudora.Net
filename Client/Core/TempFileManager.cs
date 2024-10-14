@@ -12,7 +12,7 @@ namespace Eudora.Net.Core
     {
         public static List<string> TempFilesThisSession = [];
 
-        public static string CreateTempFileFromStringContent(string content)
+        public static string CreateHtmlFileFromStringContent(string content)
         {
             string tempPath = Path.GetTempFileName();
             tempPath = $@"{tempPath}.html";
@@ -30,7 +30,7 @@ namespace Eudora.Net.Core
             return tempPath;
         }
 
-        public static string CreateTempFileFromStringContent2(string content)
+        public static string CreateTempFileFromStringContent(string content)
         {
             string tempPath = Path.GetTempFileName();
             tempPath = $@"{tempPath}.tmp";
@@ -39,6 +39,42 @@ namespace Eudora.Net.Core
             try
             {
                 File.WriteAllText(tempPath, content);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+
+            return tempPath;
+        }
+
+        public static string CreatePdfFileFromStringContent(string content)
+        {
+            string tempPath = Path.GetTempFileName();
+            tempPath = $@"{tempPath}.pdf";
+            TempFilesThisSession.Add(tempPath);
+
+            try
+            {
+                File.WriteAllBytes(tempPath, Encoding.UTF8.GetBytes( content));
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
+            }
+
+            return tempPath;
+        }
+
+        public static string CreatePdfFromStream(Stream stream)
+        {
+            string tempPath = Path.GetTempFileName();
+            tempPath = $@"{tempPath}.pdf";
+            TempFilesThisSession.Add(tempPath);
+
+            try
+            {
+                stream.CopyTo(new FileStream(tempPath, FileMode.Create, FileAccess.Write));                
             }
             catch (Exception ex)
             {

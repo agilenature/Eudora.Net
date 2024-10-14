@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Runtime.InteropServices.Marshalling;
+using System.Reflection;
 using System.Text.Json;
 
 namespace Eudora.Net.Core
@@ -10,6 +10,49 @@ namespace Eudora.Net.Core
         {
             get { return new() { WriteIndented = true }; }
         }
+
+        public static string LoadResourceString(string resourceName)
+        {
+            try
+            {
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+                {
+                    if (stream is not null)
+                    {
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            return reader.ReadToEnd();                            
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                FaultReporter.Error(ex);
+            }
+            Logger.Warning($"Failed to load resource stream {resourceName}");
+            return string.Empty;
+        }
+
+        public static Stream? LoadResourceStream(string resourceName)
+        {
+            Stream? stream = null;
+
+            try
+            {
+                stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+                {
+                    return stream;
+                }
+            }
+            catch (Exception ex)
+            {
+                FaultReporter.Error(ex);
+            }
+            Logger.Warning($"Failed to load resource stream {resourceName}");
+            return stream;
+        }
+
 
         public static void EnsureFilePath(string fullPath)
         {
@@ -23,7 +66,7 @@ namespace Eudora.Net.Core
             }
             catch(Exception ex)
             {
-                Logger.Exception(ex);
+                FaultReporter.Error(ex);
             }
         }
 
