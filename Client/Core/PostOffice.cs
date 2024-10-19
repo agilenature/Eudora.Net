@@ -217,6 +217,7 @@ namespace Eudora.Net.Core
             try
             {
                 Datastore.Add(mailbox);
+                mailbox.Open();
             }
             catch (Exception ex)
             {
@@ -235,7 +236,9 @@ namespace Eudora.Net.Core
 
             try
             {
-                Datastore.Data.Remove(mailbox);
+                MainWindow.Instance?.CloseMailbox(mailbox);
+                mailbox.Close();
+                Datastore.Delete(mailbox);
             }
             catch (Exception ex)
             {
@@ -278,41 +281,6 @@ namespace Eudora.Net.Core
                 FaultReporter.Error(ex);
                 return null;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="deleteMessages"></param>
-        public static void RemoveUserMailbox(string name, bool deleteMessages = true)
-        {
-            //// Sanity check -- no removing the default mailboxes
-            //if (IsDefaultMailbox(name))
-            //{
-            //    Logger.Warning($"Default mailbox {name} cannot be removed");
-            //    return;
-            //}
-
-            //try
-            //{
-            //    var mailbox = GetMailboxByName(name);
-            //    if (mailbox is null) return;
-
-            //    mailbox.Delete();
-            //    Mailboxes.Remove(mailbox);
-            //    string mailboxFile = $@"{name}{Mailbox.extension}";
-            //    File.Delete(Path.Combine(MailboxesPath, mailboxFile));
-
-            //    var mainWnd = MainWindow.Instance;
-            //    if (mainWnd is null) return;
-            //    var wnd = mainWnd.MDI.FindWindow(mailbox);
-            //    wnd?.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logger.Exception(ex);
-            //}            
         }
 
         public static EmailMessage CreateMessage_Outgoing(Personality personality)

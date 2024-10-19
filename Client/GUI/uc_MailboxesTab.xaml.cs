@@ -113,7 +113,7 @@ namespace Eudora.Net.GUI
             var dlg = new dlg_Confirmation(prompt);
             if (dlg.ShowDialog() == false) return;
 
-            PostOffice.RemoveUserMailbox(mailbox.Name);
+            PostOffice.RemoveMailbox(mailbox);
         }
     }
 }

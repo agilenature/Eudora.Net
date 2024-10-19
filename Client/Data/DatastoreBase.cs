@@ -162,7 +162,7 @@ namespace Eudora.Net.Data
             {
                 item.PropertyChanged += T_PropertyChanged;
                 DB.InsertOrReplace(item);
-                Data.Add(item);                
+                Data.Add(item);   
             }
             catch (Exception ex)
             {

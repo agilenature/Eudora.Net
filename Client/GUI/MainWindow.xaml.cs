@@ -415,6 +415,12 @@ namespace Eudora.Net.GUI
             }
         }
 
+        public void CloseMailbox(Mailbox mailbox)
+        {
+            var window = MDI.FindWindow(typeof(uc_CombinedMailboxView), mailbox);
+            window?.Close();
+        }
+
         /// <summary>
         /// 
         /// </summary>
