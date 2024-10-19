@@ -18,5 +18,11 @@ Fans of the original will find that the bulk of the UX is exactly where they exp
 
 ---
 
-Notes:
+### To do:
+- Localization
+- 
+
+---
+
+### Notes:
 1. Qualcomm is in no way responsible for this software. Please don't contact that company with feedback about Eudora.Net, lest they become angry and hurl rocks upon us.
