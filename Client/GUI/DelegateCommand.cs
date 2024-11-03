@@ -5,8 +5,8 @@ namespace Eudora.Net.GUI
 {
     public class DelegateCommand : ICommand
     {
-        private readonly Action<object?> _execute;
-        private readonly Predicate<object?> _canExecute;
+        public Action<object?> _execute;
+        public Predicate<object?> _canExecute;
 
         public DelegateCommand()
         {
@@ -20,12 +20,15 @@ namespace Eudora.Net.GUI
 
         public bool CanExecute(object? parameter)
         {
-            return _canExecute == null || _canExecute(parameter);
+            return _canExecute is not null && _canExecute(parameter);
         }
 
         public void Execute(object? parameter)
         {
-            _execute(parameter);
+            if(_execute is not null)
+            {
+                _execute(parameter);
+            }            
         }
 
         public event EventHandler? CanExecuteChanged

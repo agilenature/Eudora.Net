@@ -7,6 +7,9 @@ using Eudora.Net.ExtensionMethods;
 using sbux.wpf.Themer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters;
+using System.ComponentModel;
 
 namespace Eudora.Net.GUI
 {
@@ -131,7 +134,7 @@ namespace Eudora.Net.GUI
 
         private void MDI_ActiveChildChangedEvent(MdiChild newWindow, MdiChild oldWindow)
         {
-            HandleUxStateOnWindowChange();
+            //HandleUxStateOnWindowChange();
 
             if (oldWindow is not null && oldWindow.Content is ChildWindowBase windowO)
             {
@@ -152,6 +155,8 @@ namespace Eudora.Net.GUI
         /// </summary>
         private void HandleUxStateOnWindowChange()
         {
+            return;
+
             // A sanity measure: begin by disabling everything
 
             MainMenu.DisableAllItems();

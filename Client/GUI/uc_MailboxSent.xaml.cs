@@ -43,6 +43,7 @@ namespace Eudora.Net.GUI
 
         private void UpdateMainWndUX(bool enable)
         {
+            Logger.Debug($"Sent: UpdateMainWndUX({enable})");
             var wnd = MainWindow.Instance;
             if (wnd is null) return;
 
@@ -61,8 +62,11 @@ namespace Eudora.Net.GUI
                 wnd.btn_Prev.Click += Btn_Prev_Click;
 
                 // Mail Transfer menu
-                wnd.Menu_Transfer.IsEnabled = false;
-                wnd.Menu_Transfer.DisableAllSubitems();
+                wnd.PopulateMailTransferMenu(Mailbox);
+                foreach (MenuItem item in wnd.Menu_Transfer.Items)
+                {
+                    item.Click += Menu_Transfer_Click;
+                }
 
                 // Print support
                 wnd.Menu_File_Print.IsEnabled = true;
@@ -70,22 +74,47 @@ namespace Eudora.Net.GUI
             }
             else
             {
+                // Mail Transfer menu
+                foreach (MenuItem item in wnd.Menu_Transfer.Items)
+                {
+                    item.Click -= Menu_Transfer_Click;
+                }
+                wnd.PopulateMailTransferMenu(null);
+
                 // Message menu
                 wnd.Menu_Message.IsEnabled = false;
                 wnd.Menu_Message.DisableAllSubitems();
 
                 // MainUX buttons
-                wnd.btn_Delete.IsEnabled = false;
                 wnd.btn_Delete.Click -= Btn_Delete_Click;
-                wnd.btn_Next.IsEnabled = false;
                 wnd.btn_Next.Click -= Btn_Next_Click;
-                wnd.btn_Prev.IsEnabled = false;
                 wnd.btn_Prev.Click -= Btn_Prev_Click;
+                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
+
+                wnd.btn_Delete.IsEnabled = false;
+                wnd.btn_Next.IsEnabled = false;
+                wnd.btn_Prev.IsEnabled = false;
                 wnd.btn_Reply.IsEnabled = false;
 
                 // Print support
                 wnd.Menu_File_Print.IsEnabled = false;
-                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
+            }
+        }
+
+        private void Menu_Transfer_Click(object sender, RoutedEventArgs e)
+        {
+            if (datagrid.SelectedItem is EmailMessage message && e.Source is MenuItem item)
+            {
+                e.Handled = true;
+                PostOffice.MoveMessage(message, (string)item.Tag);
+
+                if (preview.DataContext == message)
+                {
+                    preview.DataContext = null;
+                }
+
+                var window = MainWindow.Instance?.MDI.FindWindow(message);
+                window?.Close();
             }
         }
 

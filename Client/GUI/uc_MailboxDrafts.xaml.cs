@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-
-
 namespace Eudora.Net.GUI
 {
     /// <summary>
@@ -45,6 +43,7 @@ namespace Eudora.Net.GUI
 
         private void UpdateMainWndUX(bool enable)
         {
+            Logger.Debug($"Drafts: UpdateMainWndUX({enable})");
             var wnd = MainWindow.Instance;
             if (wnd is null) return;
 
@@ -77,17 +76,18 @@ namespace Eudora.Net.GUI
                 wnd.Menu_Message.DisableAllSubitems();
 
                 // MainUX buttons
-                wnd.btn_Delete.IsEnabled = false;
                 wnd.btn_Delete.Click -= Btn_Delete_Click;
-                wnd.btn_Next.IsEnabled = false;
                 wnd.btn_Next.Click -= Btn_Next_Click;
-                wnd.btn_Prev.IsEnabled = false;
                 wnd.btn_Prev.Click -= Btn_Prev_Click;
+                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
+
+                wnd.btn_Delete.IsEnabled = false;
+                wnd.btn_Next.IsEnabled = false;
+                wnd.btn_Prev.IsEnabled = false;
                 wnd.btn_Reply.IsEnabled = false;
 
                 // Print support
                 wnd.Menu_File_Print.IsEnabled = false;
-                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
             }
         }
 

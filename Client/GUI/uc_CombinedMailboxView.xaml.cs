@@ -186,56 +186,44 @@ namespace Eudora.Net.GUI
             }
             else
             {
-                // Message menu
-                wnd.Menu_Message.IsEnabled = false;
-                wnd.Menu_Message.DisableAllSubitems();
-                wnd.Menu_Message_Reply.Click -= Btn_Reply_Click;
-                wnd.Menu_Message_ReplyAll.Click -= Btn_ReplyAll_Click;
-                wnd.Menu_Message_Forward.Click -= Btn_Forward_Click;
-
-                // MainUX buttons
-                wnd.btn_Delete.IsEnabled = false;
-                wnd.btn_Delete.Click -= Btn_Delete_Click;
-                wnd.btn_Next.IsEnabled = false;
-                wnd.btn_Next.Click -= Btn_Next_Click;
-                wnd.btn_Prev.IsEnabled = false;
-                wnd.btn_Prev.Click -= Btn_Prev_Click;
-                wnd.btn_Reply.IsEnabled = false;
-                wnd.btn_Reply.Click -= Btn_Reply_Click;
-                wnd.btn_ReplyAll.IsEnabled = false;
-                wnd.btn_ReplyAll.Click -= Btn_ReplyAll_Click;
-                wnd.btn_Forward.IsEnabled = false;
-                wnd.btn_Forward.Click -= Btn_Forward_Click;
-                //wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
-
                 // Mail Transfer menu
-                wnd.PopulateMailTransferMenu(null);
                 foreach (MenuItem item in wnd.Menu_Transfer.Items)
                 {
                     item.Click -= Menu_Transfer_Click;
                 }
+                wnd.PopulateMailTransferMenu(null);
+
+                // Message menu
+                wnd.Menu_Message.IsEnabled = false;
+                wnd.Menu_Message.DisableAllSubitems();
+
+                // MainUX buttons
+                wnd.btn_Delete.Click -= Btn_Delete_Click;
+                wnd.btn_Next.Click -= Btn_Next_Click;
+                wnd.btn_Prev.Click -= Btn_Prev_Click;
+                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
+
+                wnd.btn_Delete.IsEnabled = false;
+                wnd.btn_Next.IsEnabled = false;
+                wnd.btn_Prev.IsEnabled = false;
+                wnd.btn_Reply.IsEnabled = false;
 
                 // Print support
                 wnd.Menu_File_Print.IsEnabled = false;
-                wnd.Menu_File_Print.Click -= Menu_File_Print_Click;
             }
         }
 
         private void datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
+
+            preview.DataContext = null;
+            IsPrintEnabled = false;
             if (datagrid.SelectedItem is EmailMessage message)
             {
                 preview.DataContext = message;
-                message.ReadStatus = EmailEnums.eReadStatus.Read;
                 IsPrintEnabled = true;
-                UpdateMainWndUX(true);
-            }
-            else
-            {
-                preview.DataContext = null;
-                IsPrintEnabled = false;
-                UpdateMainWndUX(false);
+                message.ReadStatus = EmailEnums.eReadStatus.Read;
             }
         }
 

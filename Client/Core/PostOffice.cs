@@ -403,9 +403,15 @@ namespace Eudora.Net.Core
                 var mailboxFrom = GetMailboxByName(message.MailboxName);
                 if (mailboxTo is not null && mailboxFrom is not null)
                 {
-                    message.MailboxName = mailboxName;
+                    EmailMessage? msg = message.Clone() as EmailMessage;
+                    if(msg is null)
+                    {
+                        Logger.Debug("MoveMessage: Failed to clone");
+                        return;
+                    }
+                    msg.MailboxName = mailboxName;
                     mailboxFrom.DeleteMessage(message);
-                    mailboxTo.AddMessage(message);
+                    mailboxTo.AddMessage(msg);
                 }
             }
         }
