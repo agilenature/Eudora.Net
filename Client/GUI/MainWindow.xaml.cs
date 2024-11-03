@@ -112,12 +112,14 @@ namespace Eudora.Net.GUI
         public void PopulateMailTransferMenu(Mailbox? currentMailbox)
         {
             Menu_Transfer.Items.Clear();
+            Menu_Transfer.IsEnabled = false;
             if (currentMailbox is null)
             {
                 return;
             }
 
-            foreach(var mailbox in PostOffice.Mailboxes)
+            Menu_Transfer.IsEnabled = true;
+            foreach (var mailbox in PostOffice.Mailboxes)
             {
                 if(mailbox != currentMailbox)
                 {
@@ -155,8 +157,6 @@ namespace Eudora.Net.GUI
         /// </summary>
         private void HandleUxStateOnWindowChange()
         {
-            return;
-
             // A sanity measure: begin by disabling everything
 
             MainMenu.DisableAllItems();
